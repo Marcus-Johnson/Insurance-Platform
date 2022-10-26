@@ -25,8 +25,10 @@ namespace NJInsurancePlatform.Models
 
         [Required(ErrorMessage = "Missing - Minimum Payment")]
         public double PolicyPaidOffAmount { get; set; }
+
         [Required(ErrorMessage = "Missing - Policy Due Date")]
         public DateTime PolicyStart_Date { get; set; }
+
         [Required(ErrorMessage = "Missing - Policy End Date")]
         public DateTime PolicyEnd_Date { get; set; }
 
