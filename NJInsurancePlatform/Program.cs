@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using NJInsurancePlatform.Data;
+using NJInsurancePlatform.Models;
+using System.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<InsuranceCorpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InsureConnect")));
+
 
 var app = builder.Build();
 
@@ -25,3 +32,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

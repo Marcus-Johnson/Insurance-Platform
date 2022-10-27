@@ -75,7 +75,7 @@ namespace NJInsurancePlatform.Models
 
         [Required(ErrorMessage = "Missing - Check Image")]
         [DisplayName("Account Number")]
-        public IFormFile? CheckImage { get; set; }
+        public string? CheckImage { get; set; }
 
         [Required(ErrorMessage = "Additional Info is required.")]
         [DisplayName("Additional Info")]
