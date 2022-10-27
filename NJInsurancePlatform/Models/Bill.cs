@@ -6,6 +6,7 @@ namespace NJInsurancePlatform.Models
     public partial class Bill
     {
         [Key]
+        [ScaffoldColumn(false)]
         public int BillMUID { get; set; }
 
         [ForeignKey("PolicyMUID")]
