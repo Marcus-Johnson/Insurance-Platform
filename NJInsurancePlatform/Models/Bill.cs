@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NJInsurancePlatform.Models
 {
-    public partial class Bill
+    public class Bill
     {
         [Key]
         [ScaffoldColumn(false)]
