@@ -1,0 +1,60 @@
+﻿<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Policy Payment Details</MudText>
+    <MudGrid Spacing="6" Class="mt-16">
+        <MudItem xs="7">
+            <MudText Typo="Typo.h5" GutterBottom="true">Add a payment method</MudText>
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Name On Card" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="int" Label="Card Number" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Street Address" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Apt Suite etc" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Country" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="State" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="City" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="Postal Code" />
+                </MudItem>
+                <MudItem xs="12" Class="d-flex justify-center">
+                    <MudButton Variant="Variant.Filled" DisableElevation="true" Color="Color.Primary" Size="Size.Large" Class="mt-8">Continue to Payment</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+        <MudItem xs="5">
+            <MudText Typo="Typo.h5" GutterBottom="true">My Payment Methods</MudText>
+            <MudPaper Class="d-flex flex-column" Style="height:100%;" Outlined="true">
+                <MudList Clickable="true">
+
+                    @*Here is where we would have a foreach statement to go through stored payments from the payment model*@
+                    <MudListItem>
+                        <div class="d-flex">
+                            <MudText>0000</MudText>
+                            <MudText Inline="true" Class="ml-auto">0000</MudText>
+                            <MudLink Href="#" Typo="Typo.body2">View</MudLink>
+                        </div>
+                    </MudListItem>
+                    <MudListItem>
+                        <div class="d-flex">
+                            <MudText>0099</MudText>
+                            <MudText Inline="true" Class="ml-auto">0099</MudText>
+                            <MudLink Href="#" Typo="Typo.body2">View</MudLink>
+                        </div>
+                    </MudListItem>
+                </MudList>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
