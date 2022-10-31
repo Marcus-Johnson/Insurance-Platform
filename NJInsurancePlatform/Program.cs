@@ -2,14 +2,12 @@ using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.Models;
 using System.Configuration;
-using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<InsuranceCorpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InsureConnect")));
-builder.Services.AddMudServices();
 
 var app = builder.Build();
 
