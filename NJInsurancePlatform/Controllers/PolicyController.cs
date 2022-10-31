@@ -14,5 +14,17 @@ namespace NJInsurancePlatform.Controllers
 		{
 			this.InsuranceCorpDbContext = InsuranceCorpDbContext;
 		}
+		
+		//private readonly ILogger<PolicyController> _logger;
+
+		//public PolicyController(ILogger<PolicyController> logger)
+		//{
+		//	_logger = logger;
+		//}
+
+		public IActionResult PolicyDetails()
+		{
+			return View();
+		}
 	}
 }
