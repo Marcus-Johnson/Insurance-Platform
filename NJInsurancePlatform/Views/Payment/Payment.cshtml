@@ -1,7 +1,7 @@
-﻿@model NJInsurancePlatform.Models.Payment
+﻿@model NJInsurancePlatform.Models.PaymentModel
 @{
 }
-<form method="post">
+<form method="post" asp-action="Payment">
 <ul class="collapsible" style="width: 60%;">
   <li>
     <div class="collapsible-header" >
@@ -99,6 +99,11 @@
   <li>
     <div class="collapsible-header">
       <input type="text" asp-for="AdditionalInfo" placeholder="@Html.DisplayNameFor(model => model.AdditionalInfo)" style="border-bottom: none"/>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+        <a type="submit" class="waves-effect waves-light btn">Submit Payment</a>
     </div>
   </li>
 </ul>

@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace NJInsurancePlatform.Models
 {
-    public class Payment
+    public class PaymentModel
     {
         [Key]
         [ScaffoldColumn(false)]
