@@ -16,7 +16,7 @@ namespace NJInsurancePlatform.Data
         }
 
         public DbSet<Policy> Policies { get; set; }
-        public DbSet<PaymentModel> Payments { get; set; }
+        public DbSet<Payment> Payments { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Customer> Customers { get; set; }
 

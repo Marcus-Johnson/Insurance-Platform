@@ -11,13 +11,13 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpGet]
-        public IActionResult Payment()
+        public IActionResult MakePayment()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Payment(PaymentModel model)
+        public IActionResult MakePayment(Payment model)
         {
             return View();
         }
