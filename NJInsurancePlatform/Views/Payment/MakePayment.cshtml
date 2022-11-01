@@ -1,0 +1,110 @@
+﻿@model NJInsurancePlatform.Models.Payment
+@{
+}
+<form method="post" asp-action="Payment">
+<ul class="collapsible" style="width: 60%;">
+  <li>
+    <div class="collapsible-header" >
+      <h3>Credit Card Payment </h3>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header" >
+      <input type="date" asp-for="PaidDate" placeholder="Enter DAte" style="border-bottom: none"/>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="number" asp-for="Amount" placeholder="@Html.DisplayNameFor(model => model.Amount)" style="border-bottom: none"/>
+      </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="PaymentMethod" placeholder="@Html.DisplayNameFor(model => model.PaymentMethod)" style="border-bottom: none"/>
+    </div>
+
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="PayerFirstName" placeholder="@Html.DisplayNameFor(model => model.PayerFirstName)" style="border-bottom: none"/>
+    </div>
+
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="PayerLastName" placeholder="@Html.DisplayNameFor(model => model.PayerLastName)" style="border-bottom: none"/>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="CardNumber" placeholder="@Html.DisplayNameFor(model => model.CardNumber)" style="border-bottom: none"/>
+    </div>
+
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="CardExpireDate" placeholder="@Html.DisplayNameFor(model => model.CardExpireDate)" style="border-bottom: none"/>
+    </div>
+  
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="ZipCode" placeholder="@Html.DisplayNameFor(model => model.ZipCode)" style="border-bottom: none"/>
+    </div>
+  </li>
+   <li>
+      <div class="collapsible-header">
+        <p>
+          <label>
+            <input name="group1" type="radio" />
+            <span>Credit</span>
+          </label>
+          <label>
+            <input name="group1" type="radio" />
+            <span>Debit</span>
+          </label>
+        </p>
+      </div>
+  </li>
+</ul>
+
+<ul class="collapsible" style="width: 60%;">
+  <li>
+    <div class="collapsible-header" >
+      <h3>Bank Payment</h3>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header" >
+      <input type="text" asp-for="BankName" placeholder="@Html.DisplayNameFor(model => model.BankName)" style="border-bottom: none"/>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="number" asp-for="AccountNumber" placeholder="@Html.DisplayNameFor(model => model.AccountNumber)" style="border-bottom: none"/>
+      </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="RoutingNumber" placeholder="@Html.DisplayNameFor(model => model.RoutingNumber)" style="border-bottom: none"/>
+    </div>
+
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="CheckImage" placeholder="@Html.DisplayNameFor(model => model.CheckImage)" style="border-bottom: none"/>
+    </div>
+
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <input type="text" asp-for="AdditionalInfo" placeholder="@Html.DisplayNameFor(model => model.AdditionalInfo)" style="border-bottom: none"/>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+        <a type="submit" class="waves-effect waves-light btn">Submit Payment</a>
+    </div>
+  </li>
+</ul>
+</form>
