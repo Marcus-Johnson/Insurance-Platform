@@ -4,29 +4,39 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Insurance</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
     <header>
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
+            <li>
+                <a href="/Payment/Details">Policy Payment Details</a>
+            </li>
+
+            <li class="divider"></li>
+            <li>
+                <a href="/Policy/PolicyRequest">Policy Request</a>
+            </li>
+        </ul>
+
         <nav>
-    <div class="nav-wrapper">
-              <a href="#" class="brand-logo">Logo</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo">Logo</a>
+                <ul class="right hide-on-med-and-down">
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li>
-                        <a href="/Home/Privacy">Privacy</a>
-                    </li>
-                    <li>
-                        <a href="/Payment/Details">Policy Payment Details</a>
-                    </li>
-                     <li>
-                        <a href="/Policy/PolicyDetails">Policy Details</a>
-                    </li>
-      </ul>
-    </div>
-  </nav>
+                    <!-- Dropdown Trigger -->
+                    @section scripts{<script>
+                    $(".dropdown-trigger").dropdown();
+</script>}
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -42,6 +52,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

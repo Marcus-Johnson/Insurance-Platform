@@ -26,5 +26,9 @@ namespace NJInsurancePlatform.Controllers
 		{
 			return View();
 		}
-	}
+        public IActionResult PolicyRequest()
+        {
+            return View();
+        }
+    }
 }
