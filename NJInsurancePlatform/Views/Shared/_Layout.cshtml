@@ -1,4 +1,5 @@
-﻿
+@using Microsoft.AspNetCore.Identity
+
 @*TESTING FUNCTIONALIY OF ROLE CREATION AND FUNCTION*@
 
 @inject SignInManager<ApplicationUser> signInManager;
@@ -71,6 +72,24 @@
       </ul>
     </div>
   </nav>
+<ul id="dropdown1" class="dropdown-content">
+            <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
+            <li><a href="/Payment/Details">Policy Payment Details</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Sample w/ Line Divider</a></li>
+        </ul>
+        <nav class="blue darken-4">
+            <div class="nav-wrapper">
+                <a href="/Home/Index" class="brand-logo">NJ Insurance</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/Home/Index">Home</a></li>
+                    
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            </div>
+        </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -86,6 +105,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false);
 </body>
 </html>
