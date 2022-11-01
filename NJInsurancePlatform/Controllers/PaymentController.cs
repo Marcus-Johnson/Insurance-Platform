@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -13,6 +14,19 @@ namespace NJInsurancePlatform.Controllers
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult MakePayment()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult MakePayment(Payment model)
         {
             return View();
         }
