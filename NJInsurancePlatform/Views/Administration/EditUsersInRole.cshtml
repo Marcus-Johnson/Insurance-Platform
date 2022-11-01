@@ -1,0 +1,32 @@
+﻿@model List<NJInsurancePlatform.Models.UserRoleViewModel>
+@{
+    var roleId = ViewBag.roleId;  
+    @*Use View Bag To Get Id Number*@
+}
+
+<form class="col s12" method="post">
+    <div >
+        <div>
+            <h5>You Can Add or Remove Users In This Role</h5>
+        </div>
+        <div>
+            @for(int i = 0; i < Model.Count; i++)
+            {
+                <div>
+                    <input type="hidden" asp-for="@Model[i].Userid">
+                    <input type="hidden" asp-for="@Model[i].userName">
+                    <input  type="checkbox"  asp-for="@Model[i].IsSelected" />   
+                    <label class="" asp-for="@Model[i].IsSelected" style="font-size: 15px;">@Model[i].userName</label>
+                    <span>Click User and Click update to Add To List</span>
+                </div>
+            }
+        </div>
+        <div>
+            <input type="submit" value="Update" style="width:auto;">
+            <a asp-action="EditRole" asp-route-Id="@roleId" class="" style="width:auto">Cancel</a>
+        </div>
+
+    </div>
+
+</form>
+@*JUST PAGE CREATE JUST TO TEST FUNCTIONALITY OF CODE*@

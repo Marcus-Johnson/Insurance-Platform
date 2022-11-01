@@ -1,9 +1,18 @@
-﻿<!DOCTYPE html>
+﻿
+@*TESTING FUNCTIONALIY OF ROLE CREATION AND FUNCTION*@
+
+@inject SignInManager<ApplicationUser> signInManager;
+
+@*TESTING FUNCTIONALIY OF ROLE CREATION AND FUNCTION*@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Insurance</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -25,6 +34,40 @@
                      <li>
                         <a href="/Policy/PolicyDetails">Policy Details</a>
                     </li>
+
+                    @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                        <li>
+                            <form method="post" asp-controller="Home" asp-action="Logout">
+                                <li>
+                                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
+                                </li>
+
+                                @if(User.IsInRole("Admin"))
+                                {
+                                  <li>
+                                      <a href="/Administration/CreateRole" >ADMIN CreateRole</a>
+                                  </li>
+                                  <li>
+                                      <a href="/Administration/GetRoles" >ADMIN GetRoles</a>
+                                  </li>
+                                  @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
+                                }
+                            </form>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a>
+                        </li>
+                        }
+                     @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION ABOVE*@
+
       </ul>
     </div>
   </nav>
