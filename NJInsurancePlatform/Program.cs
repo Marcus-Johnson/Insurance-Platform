@@ -2,12 +2,24 @@ using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.Models;
 using System.Configuration;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<InsuranceCorpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InsureConnect")));
+// Application user Dependency Injection
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<InsuranceCorpDbContext>().AddDefaultTokenProviders();  //Change To IDENTITY CONTEXT
+
+// Create Global Authorization. State Authorization Status in Controllers
+builder.Services.AddMvc(options =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    options.Filters.Add(new AuthorizeFilter(policy));
+}).AddXmlSerializerFormatters();
 
 var app = builder.Build();
 
@@ -23,7 +35,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Data
 {
-    public class InsuranceCorpDbContext : DbContext
+    public class InsuranceCorpDbContext : IdentityDbContext
     {
         public InsuranceCorpDbContext()
         {
@@ -19,6 +20,8 @@ namespace NJInsurancePlatform.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;  // For the purpos of Migration
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

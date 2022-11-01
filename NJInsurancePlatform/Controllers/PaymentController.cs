@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class PaymentController : Controller
     {
 
