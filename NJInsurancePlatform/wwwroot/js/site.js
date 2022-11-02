@@ -15,8 +15,10 @@ $('.dark-toggle').on('click', function () {
 	}
 });
 
+
 // Dark Mode Function
 function DarkMode() {
 	var element = document.body;
 	element.classList.toggle("dark-mode");
+	console.log(element.classList.contains("dark-mode"));
 }

@@ -13,11 +13,22 @@ html {
   min-height: 100%;
 }
 
+nav {
+    background-color: #3E66FB;
+}
+
 body {
+  font-family:Outfit;
   margin-bottom: 60px;
+
 }
 
 .dark-mode {
-    background-color: #58585b;
+    background-color: #110040;
     color: white;
+    /* Created with https://www.css-gradient.com */
+    background: #42464B;
+    background: -webkit-radial-gradient(bottom right, #42464B, #110040);
+    background: -moz-radial-gradient(bottom left, #42464B, #110040);
+    background: radial-gradient(to top right, #42464B, #110040);
 }
