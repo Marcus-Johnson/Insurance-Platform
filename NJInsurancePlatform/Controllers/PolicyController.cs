@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NJInsurancePlatform.Controllers
 {
+    [AllowAnonymous]
 
     //[Authorize(Roles = "Customer")]
-    [AllowAnnonymous] // WHILE DEVELOPING
 
 	public class PolicyController : Controller
 	{
