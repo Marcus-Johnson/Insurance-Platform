@@ -3,9 +3,11 @@ using NJInsurancePlatform.Models;
 using NJInsurancePlatform.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NJInsurancePlatform.Controllers
 {
+	[AllowAnonymous]
 	public class PolicyController : Controller
 	{
 		private readonly InsuranceCorpDbContext InsuranceCorpDbContext;
