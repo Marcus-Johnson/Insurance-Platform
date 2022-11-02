@@ -120,6 +120,35 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with id of {id} NOT FOUND";
+                return View("NotFound");
+            }
+
+            else
+            {
+                var result = await roleManager.DeleteAsync(role);
+
+                if (result.Succeeded) return RedirectToAction("GetRoles");
+
+                foreach (var error in result.Errors)
+                {
+
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+                return View("GetRoles");
+
+            }
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
