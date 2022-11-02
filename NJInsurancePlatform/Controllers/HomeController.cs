@@ -100,7 +100,7 @@ namespace NJInsurancePlatform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // ACESS DENIED
+        // ACCESS DENIED
         public IActionResult AccessDenied()
         {
             return View();

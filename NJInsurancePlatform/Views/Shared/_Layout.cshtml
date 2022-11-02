@@ -11,7 +11,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Insurance</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -39,9 +38,9 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                         <li>
-                            <form method="post" asp-controller="Home" asp-action="Logout">
+                            <form method="post">
                                 <li>
-                                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
+                                    <button type="submit" asp-controller="Home" asp-action="Logout" style="background-color:transparent; color: white; border: none">Test Logout @User.Identity.Name</button>
                                 </li>
 
                                 @if(User.IsInRole("Admin"))

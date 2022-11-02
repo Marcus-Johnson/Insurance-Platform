@@ -16,17 +16,17 @@
                     <input type="hidden" asp-for="@Model[i].Userid">
                     <input type="hidden" asp-for="@Model[i].userName">
                     <input  type="checkbox"  asp-for="@Model[i].IsSelected" />   
-                    <label class="" asp-for="@Model[i].IsSelected" style="font-size: 15px;">@Model[i].userName</label>
-                    <span>Click User and Click update to Add To List</span>
+                    <label class="" asp-for="@Model[i].IsSelected" style="font-size: 20px">@Model[i].userName</label>
+                    <span style="font-size: 11px">Click User and Click update to Add To List</span>
                 </div>
             }
         </div>
         <div>
-            <input type="submit" value="Update" style="width:auto;">
+            <input type="submit" value="Update" style="width:auto">
             <a asp-action="EditRole" asp-route-Id="@roleId" class="" style="width:auto">Cancel</a>
         </div>
 
     </div>
 
 </form>
-@*JUST PAGE CREATE JUST TO TEST FUNCTIONALITY OF CODE*@
+    @*Use View Bag To Get Id Number From URL*@

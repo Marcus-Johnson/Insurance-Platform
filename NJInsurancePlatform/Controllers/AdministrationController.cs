@@ -5,7 +5,7 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [Authorize(Roles = "Admin")] // NEED TO CREAT ROLE THEN RENABLE
+    [Authorize(Roles = "Admin")] 
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -19,33 +19,33 @@ namespace NJInsurancePlatform.Controllers
             this.userManager = userManager;
         }
 
-        [HttpGet]                                                                        // Routes user to create Role login (If Authorized)
+        [HttpGet]                                       // Routes user to create Role login (If Authorized)
         public IActionResult CreateRole()
         {
             return View();
         }
 
 
-        [HttpPost]                                                                        // Post to database
+        [HttpPost]                                 // Post to database
         public async Task <IActionResult> CreateRole(CreateRoleViewModel model)          // Binding did not work in this context
         {
             if (ModelState.IsValid)
             {
-                IdentityRole identityRole = new IdentityRole()                              // create a new instance of identity
+                IdentityRole identityRole = new IdentityRole()          // create a new instance of identity
                 {
-                    Name = model.RoleName,                                                  // pass "RoleName" from input field in the View
+                    Name = model.RoleName,                     // pass "RoleName" from input field in the View
                 };
 
                 IdentityResult result = await roleManager.CreateAsync(identityRole);       // add new role to database
 
                 if (result.Succeeded)                                 
                 {
-                    return RedirectToAction("GetRoles", "Administration");                      // Reroute to (Action, Controller)
+                    return RedirectToAction("GetRoles", "Administration");        // Reroute to (Action, Controller)
                 }
 
-                foreach (var error in result.Errors)                                            // if there is an error loop through Errors stored in "result"
+                foreach (var error in result.Errors)                 // if there is an error loop through Errors stored in "result"
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);               //  utilize "asp-validate-summary" in View to show errors
+                    ModelState.AddModelError(string.Empty, error.Description);        //  utilize "asp-validate-summary" in View to show errors
                 }
             }
             return View(model);
@@ -54,10 +54,10 @@ namespace NJInsurancePlatform.Controllers
         
         [HttpGet]
         [Authorize(Roles = "Admin")]
-        public IActionResult GetRoles()                                                          // Method to get all roles
+        public IActionResult GetRoles()              // Method to get all roles
         {
-            var roles = roleManager.Roles;                                                        // Assign Roles to a variable
-            return View(roles);                                                                    // Pass value as "IEnumberable<IdentityRole>" To The View
+            var roles = roleManager.Roles;                   // Assign Roles to a variable
+            return View(roles);                     // Pass value as "IEnumberable<IdentityRole>" To The View
         }
 
 
@@ -84,7 +84,7 @@ namespace NJInsurancePlatform.Controllers
 
                 if (await userManager.IsInRoleAsync(user, role.Name))           //  Check if 'user' is assigned to given 'role'
                 {
-                    model.Users.Add(user.UserName);                             // Add user to the "EditRoleModel.Users" collection
+                    model.Users.Add(user.UserName);                    // Add user to the "EditRoleModel.Users" collection
                 }   
             }
             return View(model);
@@ -117,6 +117,29 @@ namespace NJInsurancePlatform.Controllers
                 }
             }
             return View(model);                                                     // Default to "Edit Role" To See Validation Errors
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role With ID of {id} NOT FOUND";
+                return View("NotFound");
+            }
+            else
+            {
+                var result = await roleManager.DeleteAsync(role);
+
+                if (result.Succeeded) return RedirectToAction("GetRoles");
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(String.Empty, error.Description);
+                }
+                return View("GetRoles");
+            }
         }
 
 
@@ -171,15 +194,15 @@ namespace NJInsurancePlatform.Controllers
             for (int i = 0; i < model.Count; i++)
             {
                 var user = await userManager.FindByIdAsync(model[i].Userid);
-                IdentityResult result = null;                                                                   // Initialize null variable for result
+                IdentityResult result = null;                                              // Initialize null variable for result
 
-                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))                 // If User is Selected, And NOT already in this role
+                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))        // If User is Selected, And NOT already in this role
                 {
-                    result = await userManager.AddToRoleAsync(user, role.Name);                                 // Add User To this Role
+                    result = await userManager.AddToRoleAsync(user, role.Name);                  // Add User To this Role
                 }
-                else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))              // If The user is not Selected and is already in the Role
+                else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))       // If The user is not Selected and is already in the Role
                 {
-                    result = await userManager.RemoveFromRoleAsync(user, role.Name);                            // Remove User From the role
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);            // Remove User From the role
                 }
                 else
                 {
@@ -188,13 +211,13 @@ namespace NJInsurancePlatform.Controllers
                     continue;       
                 }
 
-                if (result.Succeeded)                                                                           // If Added or Deleted Successfully
+                if (result.Succeeded)                                    // If Added or Deleted Successfully
                 {
-                    if (i < (model.Count - 1)) continue;                                                        // AND iteration is NOT complete, continue to next iteration
-                    else return RedirectToAction("EditRole", new {id = role.Id});                               // If iteration is complete redirect to Current Role using "role.Id"
+                    if (i < (model.Count - 1)) continue;                                  // AND iteration is NOT complete, continue to next iteration
+                    else return RedirectToAction("EditRole", new {id = role.Id});               // If iteration is complete redirect to Current Role using "role.Id"
                 }
             }   
-            return RedirectToAction("EditRole", new { id = role.Id });                                          //If Nothing is selected, redirect to Edit Role View
+            return RedirectToAction("EditRole", new { id = role.Id });         //If Nothing is selected, redirect to Edit Role View
         }
 
     }

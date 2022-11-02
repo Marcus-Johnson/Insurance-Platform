@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<InsuranceCorpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InsureConnect")));
 // Application user Dependency Injection
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<InsuranceCorpDbContext>().AddDefaultTokenProviders();  //Change To IDENTITY CONTEXT
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<InsuranceCorpDbContext>().AddDefaultTokenProviders();  
 
 // Create Global Authorization. State Authorization Status in Controllers
 builder.Services.AddMvc(options =>
