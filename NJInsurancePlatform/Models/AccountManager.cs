@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -29,7 +31,7 @@ namespace NJInsurancePlatform.Models
 
         [DisplayName("List of Customer MUIDs")]
         [Required(ErrorMessage = "Missing - List of Customer MUIDs")]
-        public string? ListOfCustomerMUIDs { get; set; }
+        public IEnumerable? ListOfCustomerMUIDs { get; set; }
 
         [DisplayName("Active")]
         [Required(ErrorMessage = "Missing - Active")]
