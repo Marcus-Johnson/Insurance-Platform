@@ -4,7 +4,8 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    //[Authorize(Roles = "Customer")]
+    [AllowAnonymous]
     public class PaymentController : Controller
     {
 
