@@ -31,7 +31,7 @@ namespace NJInsurancePlatform.Models
 
         [DisplayName("List of Customer MUIDs")]
         [Required(ErrorMessage = "Missing - List of Customer MUIDs")]
-        public IEnumerable? ListOfCustomerMUIDs { get; set; }
+        public List<string>? CustomerMUIDs { get; set; }
 
         [DisplayName("Active")]
         [Required(ErrorMessage = "Missing - Active")]
