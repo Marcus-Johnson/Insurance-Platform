@@ -14,11 +14,13 @@ namespace NJInsurancePlatform.Controllers
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
@@ -49,6 +51,11 @@ namespace NJInsurancePlatform.Controllers
                 {
                     // Sign allow access. in "(isPersistent: false)" Means remove Cookie On sign out
                     await signInManager.SignInAsync(user, isPersistent: false);
+
+                    if (!User.IsInRole("Customer")){
+                        await userManager.AddToRoleAsync(user, "Customer");
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -78,12 +85,14 @@ namespace NJInsurancePlatform.Controllers
                 // is Persistent will be false. (We don't want to save Cookie)
                 // last false is to prevent lockout if credentials are incorrect.
                 var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, false);
+                var user = await userManager.FindByNameAsync(model.UserName);           // Assign UserName to a variable for the purpose Of checking Role Status Later
+
+                // If Admin Signs In, Redirect To Roles Page
+                if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
 
                 // If Login is Successful
                 if (result.Succeeded)
                 {
-                    //var tempObject = new { UserName = model.UserName, Password = model.Password };
-                    //TempData["mydata"] = JsonConvert.SerializeObject(tempObject);  // <------ NOT NEEDED! JUST A TEST TO PASS TO "MyPage VIEW in Customer Controller"
                     return RedirectToAction("MyPage", "Customer");
                 }
 
@@ -100,11 +109,6 @@ namespace NJInsurancePlatform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // ACESS DENIED
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
 
         public IActionResult Privacy()
         {
