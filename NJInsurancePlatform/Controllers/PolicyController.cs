@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [Authorize(Roles = "Customer")]
-    //[AllowAnonymous] // WHILE DEVELOPING
+    //[Authorize(Roles = "Customer")]
+    [AllowAnnonymous] // WHILE DEVELOPING
 	public class PolicyController : Controller
 	{
 		private readonly InsuranceCorpDbContext InsuranceCorpDbContext;
