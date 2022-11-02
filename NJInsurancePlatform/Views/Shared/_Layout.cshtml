@@ -13,71 +13,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Insurance</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <header>
-        <nav>
-    <div class="nav-wrapper">
-              <a href="#" class="brand-logo">Logo</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="/Home/Privacy">Privacy</a>
-                    </li>
-                    <li>
-                        <a href="/Payment/Details">Policy Payment Details</a>
-                    </li>
-                     <li>
-                        <a href="/Policy/PolicyDetails">Policy Details</a>
-                    </li>
-
-                    @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
-                        @if (signInManager.IsSignedIn(User))
-                        {
-                        <li>
-                            <form method="post" asp-controller="Home" asp-action="Logout">
-                                <li>
-                                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
-                                </li>
-
-                                @if(User.IsInRole("Admin"))
-                                {
-                                  <li>
-                                      <a href="/Administration/CreateRole" >ADMIN CreateRole</a>
-                                  </li>
-                                  <li>
-                                      <a href="/Administration/GetRoles" >ADMIN GetRoles</a>
-                                  </li>
-                                  @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
-                                }
-                            </form>
-                        </li>
-                        }
-                        else
-                        {
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a>
-                        </li>
-                        }
-                     @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION ABOVE*@
-
-      </ul>
-    </div>
-  </nav>
+        <!-- Drop Down for Policies-->
 <ul id="dropdown1" class="dropdown-content">
             <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
             <li><a href="/Payment/Details">Policy Payment Details</a></li>
             <li class="divider"></li>
             <li><a href="#!">Sample w/ Line Divider</a></li>
         </ul>
+
+        <!-- Drop Down for Access-->
+        <ul id="dropdown2" class="dropdown-content">
+            @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
+            @if (signInManager.IsSignedIn(User))
+            {
+                <li>
+                    <form method="post" asp-controller="Home" asp-action="Logout">
+                <li>
+                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
+                </li>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                    <li>
+                        <a href="/Administration/CreateRole">ADMIN CreateRole</a>
+                    </li>
+                    <li>
+                        <a href="/Administration/GetRoles">ADMIN GetRoles</a>
+                    </li>
+                            @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
+                        }
+                </form>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a>
+                </li>
+            }
+            @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION ABOVE*@
+        </ul>
+
         <nav class="blue darken-4">
             <div class="nav-wrapper">
                 <a href="/Home/Index" class="brand-logo">NJ Insurance</a>
@@ -86,6 +71,16 @@
                     
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Access<i class="material-icons right">arrow_drop_down</i></a></li>
+                    
+                    <!-- Dark Mode -->
+                    <li>
+                    <a class="dark-toggle" href="#" 
+                    onclick="DarkMode()" title="Dark/light">
+                    <i class="material-icons left">brightness_4</i>
+                    </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -105,6 +100,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false);
 </body>
 </html>

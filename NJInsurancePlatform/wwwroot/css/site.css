@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.dark-mode {
+    background-color: #58585b;
+    color: white;
+}
