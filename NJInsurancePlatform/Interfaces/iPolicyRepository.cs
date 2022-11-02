@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IPolicyRepository : IDisposable
+    public interface IPolicyRepository
     {
         IEnumerable<Policy> GetPolicies();
 
