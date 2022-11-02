@@ -23,6 +23,18 @@ namespace NJInsurancePlatform.Models
         [StringLength(50)]
         public string? PolicyOwner { get; set; }
 
+        [DisplayName("Deductible ")]
+        [Required(ErrorMessage = "Missing - Deductible ")]
+        public double? Deductible { get; set; }
+
+        [DisplayName("Out Of Pocket Limit")]
+        [Required(ErrorMessage = "Missing - Out Of Pocket Limit")]
+        public double? OutOfPocketLimit { get; set; }
+
+        [DisplayName("Annual Limit Of Coverage")]
+        [Required(ErrorMessage = "Missing - Annual Limit Of Coverage")]
+        public double? AnnualLimitOfCoverage { get; set; }
+
         [DisplayName("Policy Payment is Due")]
         public Boolean PolicyPaymentisDue { get; set; }
 
