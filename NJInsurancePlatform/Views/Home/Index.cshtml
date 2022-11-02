@@ -2,11 +2,16 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #PolicyList {
+        border: 3px solid;
+    }
+</style>
 
 <div class="row" style="margin-top: 100px">
-    <div class="col s4">
+    <div class="col s4 center-align">
         <h4>Policy List</h4>
-        <table class="highlight centered responsive-table" style="border: 5px solid black">
+        <table class="highlight centered responsive-table" id="PolicyList">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -37,13 +42,13 @@
     </div>
     <div class="col s4 right">
         <div class="row">
-            <h4><i class="material-icons small" style="color: red">priority_high</i>Policy Payment Due</h4>
+            <h5 class="center-align"><i class="material-icons small" style="color: red">priority_high</i>Policy Payment Due</h5>
             <div class="divider"></div>
             <h6>Policy 1</h6>
 
         </div>
         <div class="row" style="margin-top: 100px">
-            <h4>Upcoming Policy Payments</h4>
+            <h5 class="center-align">Upcoming Policy Payments</h5>
             <div class="divider"></div>
             <h6>Policy 1</h6>
             <h6>Policy 3</h6>
