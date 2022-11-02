@@ -42,5 +42,17 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Policy End Date")]
         public DateTime PolicyEnd_Date { get; set; }
 
+        [DisplayName("Deductible")]
+        [Required(ErrorMessage = "Missing - Deductible")]
+        public double Deductible { get; set; }
+
+        [DisplayName("Out of Pocket Limit")]
+        [Required(ErrorMessage = "Missing - Out of Pocket Limit")]
+        public double OutOfPocketLimit { get; set; }
+
+        [DisplayName("Annual Limit of Coverage")]
+        [Required(ErrorMessage = "Missing - Annual Limit of Coverage")]
+        public double AnnualLimitOfCoverage { get; set; }
+
     }
 }
