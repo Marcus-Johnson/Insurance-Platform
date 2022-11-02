@@ -6,6 +6,7 @@ using NJInsurancePlatform.Models;
 namespace NJInsurancePlatform.Controllers
 {
     [Authorize(Roles = "Admin")] // NEED TO CREAT ROLE THEN RENABLE
+    //[AllowAnonymous]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
