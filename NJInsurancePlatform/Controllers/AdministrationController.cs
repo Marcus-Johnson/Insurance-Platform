@@ -119,7 +119,7 @@ namespace NJInsurancePlatform.Controllers
             return View(model);                                                     // Default to "Edit Role" To See Validation Errors
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> DeleteRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
