@@ -16,7 +16,7 @@
             </div>
             <div class="card-footer">
                 <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
-                <a href="" class="btn btn-danger">Delete</a>
+                <a class="btn btn-primary" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id">DELETE</a>
             </div>
         </div>
     }
@@ -35,4 +35,4 @@ else{
     </div>
 }
 
-  @*JUST PAGE CREATE JUST TO TEST FUNCTIONALITY OF CODE*@
+@*CREATED JUST TO TEST FUNCTIONALITY OF CODE*@
