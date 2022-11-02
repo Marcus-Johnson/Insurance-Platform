@@ -13,7 +13,6 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Group Room Message MUID")]
         public Guid GroupRoomMessageMUID { get; set; }
 
-
         [ForeignKey("GroupRoom")]
         [ScaffoldColumn(false)]
         [DisplayName("GroupMUID")]
