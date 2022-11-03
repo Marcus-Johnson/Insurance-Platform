@@ -33,24 +33,36 @@
             @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
             @if (signInManager.IsSignedIn(User))
             {
-                <li>
-                    <form method="post" asp-controller="Home" asp-action="Logout">
-                <li>
-                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
-                </li>
+            <li>
+                  <form method="post" asp-controller="Home" asp-action="Logout">
+                    <li>
+                        <button type="submit" class="">Test Logout @User.Identity.Name</button>
+                    </li>
 
                         @if (User.IsInRole("Admin"))
                         {
-                    <li>
-                        <a href="/Administration/CreateRole">ADMIN CreateRole</a>
-                    </li>
-                    <li>
-                        <a href="/Administration/GetRoles">ADMIN GetRoles</a>
-                    </li>
+                            <li>
+                                <a href="/Administration/CreateRole">ADMIN CreateRole</a>
+                            </li>
+                        <li>
+                            <a href="/Administration/GetRoles">ADMIN GetRoles</a>
+                        </li>
+                         <li>
+                            <a href="/Policy/PolicyDetails">Policy Details</a>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a>
+                        </li>
                             @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
                         }
                 </form>
-                </li>
+              </li>
             }
             else
             {
