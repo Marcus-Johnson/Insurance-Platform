@@ -4,7 +4,7 @@ using NJInsurancePlatform.Data;
 
 namespace NJInsurancePlatform.Repositories
 {
-    public class CustomerRepository : ICustomerRepository<Customer, Guid>
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly InsuranceCorpDbContext _dbContext;
         public CustomerRepository(InsuranceCorpDbContext dbContext)
@@ -13,41 +13,39 @@ namespace NJInsurancePlatform.Repositories
         }
 
         // GET ALL ACTION
-        public async Task<IEnumerable<Customer>> GetCustomers()
+        public async Task<IEnumerable<Customer>> GetCustomer()
         {
             return await _dbContext.Customers.ToListAsync();
         }
+
         // GET BY ID ACTION
-        public async Task<Customer> GetCustomer(Guid id)
+        public async Task<Customer> GetCustomerById(Guid CustomerMUID)
         {
-            var customer = await _dbContext.Customers.FindAsync(id);
+            var customer = await _dbContext.Customers.FindAsync(CustomerMUID);
             return customer;
         }
         // ADD ACTION
-        public async Task<Customer> InsertCustomer(Customer entity)
+        public async void InsertCustomer(Customer customer)
         {
-            await _dbContext.Customers.AddAsync(entity);
-            return entity;
+            await _dbContext.Customers.AddAsync(customer);
         }
         // DELETE ACTION
-        public async Task<Customer> DeleteCustomer(Guid id)
+        public async void DeleteCustomer(Guid CustomerMUID)
         {
-            var customer = await _dbContext.Customers.FirstOrDefaultAsync(p => p.CustomerMUID == id);
+            var customer = await _dbContext.Customers.FirstOrDefaultAsync(p => p.CustomerMUID == CustomerMUID);
             _dbContext.Customers.Remove(customer);
-            return customer;
         } 
         // UPDATE ACTION
-        public async Task<Customer> UpdateCustomer(Customer entity)
+        public async void UpdateCustomer(Customer customer)
         {
             try
             {
-                _dbContext.Update(entity);
+                _dbContext.Update(customer);
             }
             catch
             {
                 throw;
             }
-            return entity;
         }
         // SAVE ACTION
         public async void Save()
