@@ -1,8 +1,9 @@
-﻿using NJInsurancePlatform.Models;
+using NJInsurancePlatform.Models;
+using System;
 
 namespace NJInsurancePlatform.Repositories
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IDisposable
     {
         Task <IEnumerable<Customer>> GetCustomer();
         Task<Customer> GetCustomerById(Guid CustomerMUID);
