@@ -2,7 +2,7 @@
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IDisposable
     {
         IEnumerable<Payment> GetPayment();
 
