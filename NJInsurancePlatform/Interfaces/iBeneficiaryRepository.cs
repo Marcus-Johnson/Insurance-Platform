@@ -3,11 +3,11 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IBeneficiaryRepository : IDisposable
+    public interface iBeneficiaryRepository 
     {
-        IEnumerable<Beneficiary> GetBeneficiaries();
+        Task<IEnumerable<Beneficiary>> GetBeneficiaries();
 
-        Customer GetBeneficiariesByID(Guid CustomerMUID);
+        Task<Customer> GetBeneficiariesByID(Guid CustomerMUID);
 
         void InsertBeneficiary(Beneficiary beneficiary);
 
