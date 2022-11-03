@@ -16,7 +16,7 @@
             </div>
             <div class="card-footer">
                 <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
-                <a class="btn btn-primary" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id">DELETE</a>
+                <button class="btn waves-effect waves-light red" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id">DELETE</button>
             </div>
         </div>
     }
