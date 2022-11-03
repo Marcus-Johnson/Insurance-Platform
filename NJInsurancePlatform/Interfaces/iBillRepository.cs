@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IBillRepository
+    public interface IBillRepository : IDisposable
     {
         IEnumerable<Bill> GetBills();
 
