@@ -5,7 +5,9 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [Authorize(Roles = "Admin")] // NEED TO CREAT ROLE THEN RENABLE
+
+    //[Authorize(Roles = "Admin")] // NEED TO CREAT ROLE THEN RENABLE
+    [AllowAnonymous]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -53,7 +55,7 @@ namespace NJInsurancePlatform.Controllers
 
         
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult GetRoles()                                                          // Method to get all roles
         {
             var roles = roleManager.Roles;                                                        // Assign Roles to a variable
@@ -78,7 +80,7 @@ namespace NJInsurancePlatform.Controllers
                 RoleName = role.Name,
             };
 
-            // Because we iterating Registerd Users As Well As Well As Roles, We Need To enable "Multiple Results" ---> Add "MultipleActiveResultSets=true" To Connect String
+            // Because we iterating Registerd Users As Well As Roles, We Need To enable "Multiple Results" ---> Add "MultipleActiveResultSets=true" To Connect String
             foreach (var user in userManager.Users)                             // Loop through Registered "Users"
             {
 
@@ -225,6 +227,15 @@ namespace NJInsurancePlatform.Controllers
             }   
             return RedirectToAction("EditRole", new { id = role.Id });                                          //If Nothing is selected, redirect to Edit Role View
         }
+
+        // ACCESS DENIED
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
 
     }
 }
