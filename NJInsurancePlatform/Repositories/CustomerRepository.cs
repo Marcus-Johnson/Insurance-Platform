@@ -1,10 +1,11 @@
-﻿using NJInsurancePlatform.Models;
+using NJInsurancePlatform.Models;
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
+using System;
 
 namespace NJInsurancePlatform.Repositories
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _dbContext;
         public CustomerRepository(InsuranceCorpDbContext dbContext)
@@ -51,6 +52,11 @@ namespace NJInsurancePlatform.Repositories
         public async void Save()
         {
             await _dbContext.SaveChangesAsync();
+        }
+        // DISPOSE NOT IN USE
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
