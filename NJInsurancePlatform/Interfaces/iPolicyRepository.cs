@@ -2,11 +2,11 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IPolicyRepository
+    public interface iPolicyRepository
     {
-        IEnumerable<Policy> GetPolicies();
+        Task<IEnumerable<Policy>> GetPolicies();
 
-        Customer GetPoliciesByID(Guid PolicyMUID);
+        Task<Customer> GetPoliciesByID(Guid PolicyMUID);
 
         void InsertPolicy(Policy policy);
 
