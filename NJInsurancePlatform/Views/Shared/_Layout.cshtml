@@ -33,44 +33,22 @@
             @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
             @if (signInManager.IsSignedIn(User))
             {
-                <li>
-                    <form method="post" asp-controller="Home" asp-action="Logout">
-                <li>
-                    <button type="submit" class="">Test Logout @User.Identity.Name</button>
-                </li>
+            <li>
+                  <form method="post" asp-controller="Home" asp-action="Logout">
+                    <li>
+                        <button type="submit" class="">Test Logout @User.Identity.Name</button>
+                    </li>
 
                         @if (User.IsInRole("Admin"))
                         {
-                    <li>
-                        <a href="/Administration/CreateRole">ADMIN CreateRole</a>
-                    </li>
-                    <li>
-                        <a href="/Administration/GetRoles">ADMIN GetRoles</a>
-                    </li>
-                     <li>
-                        <a href="/Policy/PolicyDetails">Policy Details</a>
-                    </li>
-
-                    @*TESTING FOR CODE FUNCTIONALITY OF ROLE CREATION BELOW*@
-                        @if (signInManager.IsSignedIn(User))
-                        {
+                            <li>
+                                <a href="/Administration/CreateRole">ADMIN CreateRole</a>
+                            </li>
                         <li>
-                            <form method="post" asp-controller="Home" asp-action="Logout">
-                                <li>
-                                    <button type="submit" class="" style="background-color:transparent;color:white;border:none">Test Logout @User.Identity.Name</button>
-                                </li>
-
-                                @if(User.IsInRole("Admin"))
-                                {
-                                  <li>
-                                      <a href="/Administration/CreateRole" >ADMIN CreateRole</a>
-                                  </li>
-                                  <li>
-                                      <a href="/Administration/GetRoles" >ADMIN GetRoles</a>
-                                  </li>
-                                  @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
-                                }
-                            </form>
+                            <a href="/Administration/GetRoles">ADMIN GetRoles</a>
+                        </li>
+                         <li>
+                            <a href="/Policy/PolicyDetails">Policy Details</a>
                         </li>
                         }
                         else
@@ -84,7 +62,7 @@
                             @*IF IS ADMIN, THIS BUTTON IS VISIBLE TO CREATE, ADD, EDIT OR DELET ROLE*@
                         }
                 </form>
-                </li>
+              </li>
             }
             else
             {

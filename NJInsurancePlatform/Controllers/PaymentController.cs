@@ -6,7 +6,7 @@ namespace NJInsurancePlatform.Controllers
 {
 
     [Authorize(Roles = "Customer")]
-    //[AllowAnonymous] //WHILE DEVELOPING
+
     public class PaymentController : Controller
     {
 
