@@ -1,31 +1,33 @@
 ﻿@model List<NJInsurancePlatform.Models.UserRoleViewModel>
 @{
-    var roleId = ViewBag.roleId;  
+    var roleId = ViewBag.roleId;
     @*Use View Bag To Get Id Number*@
 }
 
-<form class="col s12" method="post">
-    <div >
+<form class="col s12" method="post" action="#">
+    <div>
         <div>
             <h5>You Can Add or Remove Users In This Role</h5>
         </div>
         <div>
-            @for(int i = 0; i < Model.Count; i++)
+            @for (int i = 0; i < Model.Count; i++)
             {
-                <div>
-                    <input type="hidden" asp-for="@Model[i].Userid">
-                    <input type="hidden" asp-for="@Model[i].userName">
-                    <input  type="checkbox"  asp-for="@Model[i].IsSelected" />   
-                    <label class="" asp-for="@Model[i].IsSelected" style="font-size: 20px;">@Model[i].userName</label>
-                    <span style="font-size: 11px;">Click User and Click update to Add To List</span>
-                </div>
+                <p>
+                    <label>
+                        <input type="checkbox" asp-for="@Model[i].IsSelected" checked="@Model[i].IsSelected" />
+                        <span>
+                            <input type="hidden" asp-for="@Model[i].Userid">
+                            <input type="hidden" asp-for="@Model[i].userName">
+                            <label asp-for="@Model[i].IsSelected" style="font-size: 20px;">@Model[i].userName</label>
+                        </span>
+                    </label>
+                </p>
             }
         </div>
         <div>
-            <input type="submit" value="Update" style="width:auto;">
-            <a asp-action="EditRole" asp-route-Id="@roleId" class="" style="width:auto">Cancel</a>
+            <button class="btn waves-effect waves-light" type="submit">Update</button>
+            <button class="btn waves-effect waves-light red" asp-action="EditRole" asp-route-Id="@roleId">Cancel</button>
         </div>
-
     </div>
 
 </form>
