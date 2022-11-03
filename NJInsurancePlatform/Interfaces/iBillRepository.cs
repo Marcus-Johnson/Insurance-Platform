@@ -3,11 +3,11 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IBillRepository : IDisposable
+    public interface iBillRepository
     {
-        IEnumerable<Bill> GetBills();
+        Task<IEnumerable<Bill>> GetBills();
 
-        Bill GetBillsByID(Guid BillMUID);
+        Task<Bill> GetBillsByID(Guid BillMUID);
 
         void InsertBill(Bill bill);
 
