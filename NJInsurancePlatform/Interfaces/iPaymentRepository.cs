@@ -1,6 +1,19 @@
-﻿namespace NJInsurancePlatform.Interfaces
+﻿using NJInsurancePlatform.Models;
+
+namespace NJInsurancePlatform.Interfaces
 {
-    public class Class
+    public interface IPaymentRepository
     {
+        IEnumerable<Payment> GetPayment();
+
+        Payment GetPaymentsByID(Guid PaymentMUID);
+
+        void InsertPayment(Payment payment);
+
+        void DeletePayment(Guid PaymentMUID);
+
+        void UpdatePayment(Payment payment);
+
+        void Save();
     }
 }
