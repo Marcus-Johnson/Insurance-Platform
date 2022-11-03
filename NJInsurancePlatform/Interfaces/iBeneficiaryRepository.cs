@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface IBeneficiaryRepository
+    public interface IBeneficiaryRepository: IDisposable
     {
         IEnumerable<Beneficiary> GetBeneficiaries();
 
