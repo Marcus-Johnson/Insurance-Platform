@@ -5,9 +5,9 @@ namespace NJInsurancePlatform.Interfaces
 {
     public interface IPaymentRepository : IDisposable
     {
-        IEnumerable<Payment> GetPayment();
+        Task<IEnumerable<Payment>> GetPayment();
 
-        Payment GetPaymentsByID(Guid PaymentMUID);
+        Task<Payment> GetPaymentsByID(Guid PaymentMUID);
 
         void InsertPayment(Payment payment);
 
