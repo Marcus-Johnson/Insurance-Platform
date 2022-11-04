@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Models;
 
@@ -27,5 +28,27 @@ namespace NJInsurancePlatform.Data
         {
             //optionsBuilder.UseSqlServer("Server=GFTHF-PF12QJ7D;Initial Catalog=InsuranceCorp;MultipleActiveResultSets=True;User Id=sa;Password=Galaxy@123");
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Add User Roles And Admin upon Migration
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "Admin",
+                NormalizedName = "ADMIN"
+            });
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "Customer",
+                NormalizedName = "CUSTOMER"
+            });
+            builder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Name = "Beneficiary",
+                NormalizedName = "BENEFICIARY"
+            });
+        }
     }
 }
+
