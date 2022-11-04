@@ -1,8 +1,9 @@
 using NJInsurancePlatform.Models;
+using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public interface iPolicyRepository
+    public interface iPolicyRepository : IDisposable
     {
         Task<IEnumerable<Policy>> GetPolicies();
 

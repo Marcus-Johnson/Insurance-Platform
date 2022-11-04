@@ -1,11 +1,11 @@
 using NJInsurancePlatform.Models;
 using System;
 
-namespace NJInsurancePlatform.Repositories
+namespace NJInsurancePlatform.Interfaces
 {
     public interface ICustomerRepository : IDisposable
     {
-        Task <IEnumerable<Customer>> GetCustomer();
+        Task<IEnumerable<Customer>> GetCustomer();
         Task<Customer> GetCustomerById(Guid CustomerMUID);
         void InsertCustomer(Customer customer);
         void DeleteCustomer(Guid CustomerMUID);
