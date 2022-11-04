@@ -8,7 +8,7 @@ namespace NJInsurancePlatform.Models
     {
         [Key]
         [ScaffoldColumn(false)]
-        public int PaymentMUID { get; set; }
+        public Guid PaymentMUID { get; set; }
 
         [ForeignKey("BillMUID")]
         [ScaffoldColumn(false)]
