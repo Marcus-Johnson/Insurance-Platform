@@ -51,24 +51,24 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a4cc2699-9355-41fa-83b9-c63b5009e6b9",
-                            ConcurrencyStamp = "32aae793-9b04-4e25-9cbc-b271bb5060cd",
+                            Id = "5a3b12bb-f0db-4b5e-9ff9-ac316d47db37",
+                            ConcurrencyStamp = "187139ad-e952-47c3-824f-bd7bae7b48e2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "eabe1465-2187-46d0-b889-324c819f28a6",
-                            ConcurrencyStamp = "0c356124-a6d3-412d-8f9b-f51319adffff",
+                            Id = "087585ea-43de-4542-89ed-82bddd9643e5",
+                            ConcurrencyStamp = "608758df-ffdf-4407-aa40-24429c47ccbf",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "85c28966-42a5-49c1-8791-ae8db606d83e",
-                            ConcurrencyStamp = "5957cbdf-c9df-4732-9649-bf5b5e61a56c",
-                            Name = "Guest",
-                            NormalizedName = "GUEST"
+                            Id = "75091156-1c2b-4b00-acab-defb55035eee",
+                            ConcurrencyStamp = "0ec19765-bdce-43af-abaa-a700deae3736",
+                            Name = "Beneficiary",
+                            NormalizedName = "BENEFICIARY"
                         });
                 });
 
@@ -247,6 +247,57 @@ namespace NJInsurancePlatform.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("NJInsurancePlatform.Models.Beneficiary", b =>
+                {
+                    b.Property<Guid>("BeneficiaryMUID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("LicenseNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("SSN")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.HasKey("BeneficiaryMUID");
+
+                    b.ToTable("Beneficiaries");
                 });
 
             modelBuilder.Entity("NJInsurancePlatform.Models.Bill", b =>

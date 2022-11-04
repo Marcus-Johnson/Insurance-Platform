@@ -33,7 +33,7 @@ namespace NJInsurancePlatform.Data
         {
             base.OnModelCreating(builder);
 
-            // Add User Roles upon Migration
+            // Add User Roles And Admin upon Migration
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
                 Name = "Admin",
@@ -46,10 +46,9 @@ namespace NJInsurancePlatform.Data
             });
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
-                Name = "Guest",
-                NormalizedName = "GUEST"
+                Name = "Beneficiary",
+                NormalizedName = "BENEFICIARY"
             });
         }
-
     }
 }

@@ -51,6 +51,26 @@ namespace NJInsurancePlatform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Beneficiaries",
+                columns: table => new
+                {
+                    BeneficiaryMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    SSN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beneficiaries", x => x.BeneficiaryMUID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bills",
                 columns: table => new
                 {
@@ -249,17 +269,17 @@ namespace NJInsurancePlatform.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "85c28966-42a5-49c1-8791-ae8db606d83e", "5957cbdf-c9df-4732-9649-bf5b5e61a56c", "Guest", "GUEST" });
+                values: new object[] { "087585ea-43de-4542-89ed-82bddd9643e5", "608758df-ffdf-4407-aa40-24429c47ccbf", "Customer", "CUSTOMER" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "a4cc2699-9355-41fa-83b9-c63b5009e6b9", "32aae793-9b04-4e25-9cbc-b271bb5060cd", "Admin", "ADMIN" });
+                values: new object[] { "5a3b12bb-f0db-4b5e-9ff9-ac316d47db37", "187139ad-e952-47c3-824f-bd7bae7b48e2", "Admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "eabe1465-2187-46d0-b889-324c819f28a6", "0c356124-a6d3-412d-8f9b-f51319adffff", "Customer", "CUSTOMER" });
+                values: new object[] { "75091156-1c2b-4b00-acab-defb55035eee", "0ec19765-bdce-43af-abaa-a700deae3736", "Beneficiary", "BENEFICIARY" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -317,6 +337,9 @@ namespace NJInsurancePlatform.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Beneficiaries");
 
             migrationBuilder.DropTable(
                 name: "Bills");
