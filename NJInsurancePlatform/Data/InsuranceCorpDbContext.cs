@@ -22,7 +22,7 @@ namespace NJInsurancePlatform.Data
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;  // For the purpos of Migration
-
+        public DbSet<Beneficiary> Beneficiaries { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

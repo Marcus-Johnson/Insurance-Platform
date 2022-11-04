@@ -86,6 +86,7 @@ namespace NJInsurancePlatform.Controllers
                 // last false is to prevent lockout if credentials are incorrect.
                 var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, false);
 
+
                 // If Login is Successful
                 if (result.Succeeded)
                 {
