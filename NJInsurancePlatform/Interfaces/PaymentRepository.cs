@@ -4,7 +4,7 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class PaymentRepository : iPaymentRepository
+    public class PaymentRepository : IPaymentRepository
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         public PaymentRepository(InsuranceCorpDbContext databaseContext)
