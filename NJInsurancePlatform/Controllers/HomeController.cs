@@ -35,7 +35,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> Register(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
@@ -85,14 +85,14 @@ namespace NJInsurancePlatform.Controllers
                 // is Persistent will be false. (We don't want to save Cookie)
                 // last false is to prevent lockout if credentials are incorrect.
                 var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, false);
-                var user = await userManager.FindByNameAsync(model.UserName);           // Assign UserName to a variable for the purpose Of checking Role Status Later
-
-                // If Admin Signs In, Redirect To Roles Page
-                if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
 
                 // If Login is Successful
                 if (result.Succeeded)
                 {
+                    var user = await userManager.FindByNameAsync(model.UserName);           // Assign UserName to a variable for the purpose Of checking Role Status Later
+
+                    // If Admin Signs In, Redirect To Roles Page
+                    if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
                     return RedirectToAction("MyPage", "Customer");
                 }
 
