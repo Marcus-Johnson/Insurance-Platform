@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NJInsurancePlatform.Models
 {
@@ -9,6 +10,11 @@ namespace NJInsurancePlatform.Models
         [ScaffoldColumn(false)]
         [DisplayName("Beneficiary ID")]
         public Guid BeneficiaryMUID { get; set; }
+
+        [ForeignKey("CustomerMUID")]
+        [ScaffoldColumn(false)]
+        [DisplayName("Customer ID")]
+        public Guid CustomerMUID { get; set; }
 
         [Required(ErrorMessage = "Missing field: First Name")]
         [StringLength(25)]
