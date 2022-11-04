@@ -10,6 +10,11 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Beneficiary ID")]
         public Guid BeneficiaryMUID { get; set; }
 
+        [Key]
+        [ScaffoldColumn(false)]
+        [DisplayName("Customer ID")]
+        public Guid CustomerMUID { get; set; }
+
         [Required(ErrorMessage = "Missing field: First Name")]
         [StringLength(25)]
         [DisplayName("First Name")]
