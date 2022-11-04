@@ -4,7 +4,7 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class BillRepository : iBillRepository
+    public class BillRepository : iBillRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         public BillRepository(InsuranceCorpDbContext databaseContext)
@@ -49,6 +49,11 @@ namespace NJInsurancePlatform.Interfaces
         public async void Save()
         {
             await _databaseContext.SaveChangesAsync();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

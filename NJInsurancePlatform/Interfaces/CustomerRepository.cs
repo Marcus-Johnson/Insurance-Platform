@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using System;
 
-namespace NJInsurancePlatform.Repositories
+namespace NJInsurancePlatform.Interfaces
 {
     public class CustomerRepository : ICustomerRepository, IDisposable
     {
@@ -35,7 +35,7 @@ namespace NJInsurancePlatform.Repositories
         {
             var customer = await _dbContext.Customers.FirstOrDefaultAsync(p => p.CustomerMUID == CustomerMUID);
             _dbContext.Customers.Remove(customer);
-        } 
+        }
         // UPDATE ACTION
         public async void UpdateCustomer(Customer customer)
         {

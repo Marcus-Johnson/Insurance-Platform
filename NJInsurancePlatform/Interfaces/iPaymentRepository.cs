@@ -1,4 +1,5 @@
 ﻿using NJInsurancePlatform.Models;
+using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
