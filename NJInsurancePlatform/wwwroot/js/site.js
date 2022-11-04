@@ -5,6 +5,12 @@
 
 // Navbar Drop Dopwn Trigger
 $(".dropdown-trigger").dropdown();
+
+//SideNav Trigger
+document.addEventListener('DOMContentLoaded', function () {
+	var elems = document.querySelectorAll('.sidenav');
+	var instances = M.Sidenav.init(elems, options);
+});
 	
 // Dark Mode Icon Toggle
 $('.dark-toggle').on('click', function () {
@@ -14,7 +20,6 @@ $('.dark-toggle').on('click', function () {
 		$(this).find('i').text('brightness_4');
 	}
 });
-
 
 // Dark Mode Function
 function DarkMode() {
