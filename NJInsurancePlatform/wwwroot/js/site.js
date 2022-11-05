@@ -5,12 +5,6 @@
 
 // Navbar Drop Dopwn Trigger
 $(".dropdown-trigger").dropdown();
-
-//SideNav Trigger
-document.addEventListener('DOMContentLoaded', function () {
-	var elems = document.querySelectorAll('.sidenav');
-	var instances = M.Sidenav.init(elems, options);
-});
 	
 // Dark Mode Icon Toggle
 $('.dark-toggle').on('click', function () {

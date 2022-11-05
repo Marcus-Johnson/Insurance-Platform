@@ -24,15 +24,14 @@
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
             <li><a href="/Payment/Details">Policy Payment Details</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Sample w/ Line Divider</a></li>
         </ul>
 
         <!--Main Navbar-->
         <nav class="indigo darken-3">
             <div class="nav-wrapper">
                 <a href="/Home/Index" class="brand-logo">Gx Insurance<i class="material-icons left">domain</i></a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" data-target="main-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/Home/Index">Home</a></li>
 
@@ -42,8 +41,9 @@
 
                     @if (signInManager.IsSignedIn(User))
                     {
-                        @if (User.IsInRole("Admin")) {
-                        <!--Drop Down for Roles-->
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <!--Drop Down for Roles-->
                             <li><a href="/Administration/GetRoles">Roles<i class="material-icons left">assignment_ind</i></a></li>
                         }
                         <!-- Logout Icon-->
@@ -53,7 +53,8 @@
                             </form>
                         </li>
                     }
-                    else {
+                    else
+                    {
                         <!-- Drop Down for My Profile-->
                         <ul id="dropdown2" class="dropdown-content">
                             <li>
@@ -71,17 +72,78 @@
                             <i class="material-icons left">brightness_4</i>
                         </a>
                     </li>
-
+                </ul>
+                <ul class="right hide-on-large-only">
+                    <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+                    <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                    <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+                    <li><a data-target="profile-sidenav" class="sidenav-trigger"><i class="material-icons">more_vert</i></a></li>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <!--Drop Down for Roles-->
+                            <li><a href="/Administration/GetRoles"><i class="material-icons left">assignment_ind</i></a></li>
+                        }
+                        <!-- Logout Icon-->
+                        <li>
+                            <form id="user-logout" method="post" asp-controller="Home" asp-action="Logout">
+                                <button class="logout logout-hover" type="submit"><i class="material-icons center">logout</i></button>
+                            </form>
+                        </li>
+                    }
+                    </a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+        <!-- Sidenav Components-->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const MainSidenav = document.querySelectorAll('.sidenav');
+                const ProfileSidenav = document.getElementById('profile-sidenav')
+                const RightEdge = {
+                    'edge' : 'right'
+                };
+                M.Sidenav.init(MainSidenav);
+                M.Sidenav.init(ProfileSidenav, RightEdge);
+            });
+        </script>
+
+        <ul class="sidenav" id="main-sidenav">
+            <li><a href="/Home/Index">Home</a></li>
+            <ul class="collapsible">
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">filter_drama</i>
+                    First
+                    <span class="new badge">4</span>
+                </div>
+                <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
+            </li>
+            </ul>
+            <li class="divider"></li>
+            <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
+            <li><a href="/Payment/Details">Policy Payment Details</a></li>
+
+            <li class="divider"></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a></li>
+            <li class="divider"></li>
+        </ul> 
+
+        <ul class="sidenav" id="profile-sidenav">
+            <li><a href="/Home/Index">Home</a></li>
+            <li class="divider"></li>
+            <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
+            <li><a href="/Payment/Details">Policy Payment Details</a></li>
+            <li class="divider"></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a></li>
+            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a></li>
+            <li class="divider"></li>
         </ul>
+
 
     </header>
 
@@ -120,13 +182,14 @@
 
     <footer class="page-footer footer-fixed indigo darken-3">
         <div class="container">
-            © 2022 Gx Insurance
+            2022 Gx Insurance
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <scipt src="~/js/materialize.js"</scipt>
     <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false);
 </body>
