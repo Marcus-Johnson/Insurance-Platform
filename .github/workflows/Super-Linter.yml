@@ -1,2 +1,42 @@
-- name: Super-Linter
-  uses: github/super-linter@v4.9.7
+name: "Super-Linter"
+
+on:
+  push:
+    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+  pull_request:
+
+    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+  schedule:
+    - cron: '41 11 * * 5'
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Initialize Super Linter
+      uses: github/super-linter@v4.9.7
+      with:
+        languages: ${{ matrix.language }}
+
+    - name: Autobuild
+      uses: github/super-linter@v4.9.7
+
+
+    - name: Super Lint Performannce
+      uses: github/super-linter@v4.9.7
+      with:
+        category: "/language:${{matrix.language}}"
