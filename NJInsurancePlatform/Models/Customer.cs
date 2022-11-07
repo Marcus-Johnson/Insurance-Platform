@@ -36,6 +36,31 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Phone Number")]
         public string? PhoneNumber { get; set; }
 
+        [Required(ErrorMessage = "Missing field: Current Address")]
+        [StringLength(50)]
+        [DisplayName("Current Address")]
+        public string? CurrentAddress { get; set; }
+
+        [Required(ErrorMessage = "Missing field: Current City")]
+        [StringLength(50)]
+        [DisplayName("Current City")]
+        public string? CurrentCity { get; set; }
+
+        [Required(ErrorMessage = "Missing field: Current Zipcode")]
+        [StringLength(20)]
+        [DisplayName("Current Zipcode")]
+        public string? CurrentZipcode { get; set; }
+
+        [Required(ErrorMessage = "Missing field: Current State")]
+        [StringLength(10)]
+        [DisplayName("Current State")]
+        public string? CurrentState { get; set; }
+
+        [Required(ErrorMessage = "Missing field: Current Employer")]
+        [StringLength(50)]
+        [DisplayName("Current Employer")]
+        public string? CurrentEmployer { get; set; }
+
         [Required(ErrorMessage = "Missing field: SSN")]
         [StringLength(9)]
         [DisplayName("SSN")]
@@ -61,6 +86,5 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing field: Is this policy active?")]
         [DisplayName("Is this policy active?")]
         public bool Active { get; set; }
-
     }
 }
