@@ -6,15 +6,15 @@ namespace NJInsurancePlatform.Interfaces
 {
     public interface iMessageRepository : IDisposable
     {
-        Task<IEnumerable<Transaction>>GetMessages();
+        Task<IEnumerable<GroupRoomMessage>>GetMessages();
 
-        Task<Message>GetMessagesByID(Guid MessageMUID);
+        Task<GroupRoomMessage> GetMessagesByID(Guid MessageMUID);
 
-        void InsertMessage(Message message);
+        void InsertMessage(GroupRoomMessage message);
 
-        void DeleteMessage(Guid message);
+        void DeleteMessage(Guid MessageMUID);
 
-        void UpdateMessage(Message message);
+        void UpdateMessage(GroupRoomMessage message);
 
         void Save();
     }
