@@ -31,7 +31,7 @@ namespace NJInsurancePlatform.Interfaces
 
         public async void DeleteTransaction(Guid TransactionMUID)
         {
-            var removeTransaction = await _databaseContext.Transactions.FirstOrDefault(p => p.TransactionMUID == TransactionMUID);
+            var removeTransaction = await _databaseContext.Transactions.FirstOrDefaultAsync(p => p.TransactionMUID == TransactionMUID);
             _databaseContext.Transactions.Remove(removeTransaction);
         }
 
