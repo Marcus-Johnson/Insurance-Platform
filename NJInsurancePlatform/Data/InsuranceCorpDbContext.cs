@@ -17,6 +17,7 @@ namespace NJInsurancePlatform.Data
 
         }
 
+        public DbSet<GroupRoomMessage> GroupRoomMessages { get; set; }
         public DbSet<Policy> Policies { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Bill> Bills { get; set; }
