@@ -6,36 +6,36 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class MessageRepository : iMessageRepository,IDisposable
+    public class GroupRoomMessageRepository : iGroupRoomMessageRepository,IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         public async Task<IEnumerable<GroupRoomMessage>> GetMessages()
         {
-            return _databaseContext.Messages.ToList();
+            return _databaseContext.GroupRoomMessages.ToList();
         }
 
-        public async Task<GroupRoomMessage> GetMessagesByID(Guid MessageMUID)
+        public async Task<GroupRoomMessage> GetMessagesByID(Guid GroupRoomMessageMUID)
         {
-            var message = await _databaseContext.Messages.FindAsync(MessageMUID);
+            var message = await _databaseContext.GroupRoomMessages.FindAsync(GroupRoomMessageMUID);
             return message;
         }
 
-        public async void InsertMessage(GroupRoomMessage message)
+        public async void InsertMessage(GroupRoomMessage groupRoomMessages)
         {
-            await _databaseContext.Messages.AddAsync(message);
+            await _databaseContext.GroupRoomMessages.AddAsync(groupRoomMessages);
         }
 
         public async void DeleteMessage(Guid MessageMUID)
         {
-            var messageRemove = _databaseContext.Messages.FirstOrDefault(m => m.GroupRoomMessageMUID == MessageMUID);
-            _databaseContext.Messages.Remove(messageRemove);
+            var messageRemove = _databaseContext.GroupRoomMessages.FirstOrDefault(m => m.GroupRoomMessageMUID == MessageMUID);
+            _databaseContext.GroupRoomMessages.Remove(messageRemove);
         }
 
-        public async void UpdateMessage(GroupRoomMessage message)
+        public async void UpdateMessage(GroupRoomMessage groupRoomMessages)
         {
             try
             {
-                _databaseContext.Update(message);
+                _databaseContext.Update(groupRoomMessages);
             }
             catch (DbUpdateConcurrencyException)
             {
