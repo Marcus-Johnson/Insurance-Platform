@@ -34,6 +34,11 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(User model)
         {
