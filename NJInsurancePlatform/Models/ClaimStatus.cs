@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NJInsurancePlatform.Models
 {
-    public class ClaimStatusModel
+    public class ClaimStatus
     {
         [Key]
         [ScaffoldColumn(false)]
