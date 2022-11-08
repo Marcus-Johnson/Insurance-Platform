@@ -23,7 +23,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         // JUST FOR THE PURPOSE OF TESTING ROLE MANAGEMENT
-        public IActionResult Claim()
+        public IActionResult MyPage()
         {
             return View();
         }
