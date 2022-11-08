@@ -35,7 +35,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> Register(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace NJInsurancePlatform.Controllers
                 var user = new ApplicationUser { UserName = model.UserName };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
-                var result = await userManager.CreateAsync(user, model.Password);
+                var result = await userManager.CreateAsync(user, model.PasswordHash);
 
                 // If Creation is Successful
                 if (result.Succeeded)
@@ -84,7 +84,7 @@ namespace NJInsurancePlatform.Controllers
                 // Get UserName and Password from View Input fields
                 // is Persistent will be false. (We don't want to save Cookie)
                 // last false is to prevent lockout if credentials are incorrect.
-                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, false);
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.PasswordHash, isPersistent: false, false);
 
 
                 // If Login is Successful
