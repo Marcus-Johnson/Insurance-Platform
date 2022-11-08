@@ -89,7 +89,7 @@ namespace NJInsurancePlatform.Controllers
                 // Get UserName and Password from View Input fields
                 // is Persistent will be false. (We don't want to save Cookie)
                 // last false is to prevent lockout if credentials are incorrect.
-                var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, false);
+                var result = await signInManager.PasswordSignInAsync(model.UserName, model.PasswordHash, isPersistent: false, false);
 
 
                 // If Login is Successful
