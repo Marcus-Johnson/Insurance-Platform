@@ -66,6 +66,10 @@
                 <input style="border:none;height:100%; width:50%;text-align:left;padding: 0px 0px 0px 60px" type="password" placeholder="Password" asp-for="Password" />
                 </div>
             </div>
+            <div class="form-group">
+                <input  type="submit" value="Login" class="btn btn-primary" />
+@*Added "Forgot Password" btn*@
+                <input  type="submit" value="Forgot Password?" class="btn btn-Primary" />
             <span asp-validation-for="Password" class="text-danger"></span>
             <br/>
             <div class="login-submit-button-container">
