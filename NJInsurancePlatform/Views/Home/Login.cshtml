@@ -61,16 +61,16 @@
 
             <div class="login-input-row">
                 <i class="material-icons left" style="color:purple">enhanced_encryption</i>
-                <label asp-for="Password" hidden></label>
+                <label asp-for="PasswordHash" hidden></label>
                 <div class="login-input-box">
-                <input style="border:none;height:100%; width:50%;text-align:left;padding: 0px 0px 0px 60px" type="password" placeholder="Password" asp-for="Password" />
+                <input style="border:none;height:100%; width:50%;text-align:left;padding: 0px 0px 0px 60px" type="password" placeholder="Password" asp-for="PasswordHash" />
                 </div>
             </div>
             <div class="form-group">
                 <input  type="submit" value="Login" class="btn btn-primary" />
 @*Added "Forgot Password" btn*@
                 <input  type="submit" value="Forgot Password?" class="btn btn-Primary" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            <span asp-validation-for="PasswordHash" class="text-danger"></span>
             <br/>
             <div class="login-submit-button-container">
                <!-- <input  type="submit" value="Submit" class="btn btn-primary" /> -->
