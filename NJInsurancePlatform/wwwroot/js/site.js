@@ -5,7 +5,7 @@
 
 // Navbar Drop Dopwn Trigger
 $(".dropdown-trigger").dropdown();
-	
+
 // Dark Mode Icon Toggle
 $('.dark-toggle').on('click', function () {
 	if ($(this).find('i').text() == 'brightness_4') {
@@ -21,3 +21,17 @@ function DarkMode() {
 	element.classList.toggle("dark-mode");
 	console.log(element.classList.contains("dark-mode"));
 }
+
+// Sidenav functionality
+document.addEventListener('DOMContentLoaded', function () {
+    const MainSidenav = document.querySelectorAll('.sidenav');
+    const ProfileSidenav = document.getElementById('profile-sidenav')
+    const RightEdge = {
+        'edge': 'right'
+    };
+    M.Sidenav.init(MainSidenav);
+    M.Sidenav.init(ProfileSidenav, RightEdge);
+
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+});
