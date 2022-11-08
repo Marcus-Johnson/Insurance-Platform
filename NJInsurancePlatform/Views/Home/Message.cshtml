@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "My Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    #groupNameDiv {
+        background-color: #5938dc;
+        display: flex;
+    }
+
+    #groupRoomCollection {
+        background-color: #6663fb;
+        height: 100%;
+        display: flex;
+        padding-bottom: 50vh;
+    }
+
+    #collection li {
+        font-size: 20px;
+        background-color: #6663fb
+    }
+
+    #senderNameDiv {
+        background-color: #798be9;
+        display: flex;
+    }
+
+    #messageDescDiv {
+        background-color: #acc8ff;
+    }
+
+    .senderName li {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    .messageDesc li {
+        font-size: 20px;
+        font-display: center;
+        padding: 10px;
+        border: solid black 2px;
+        background-color: #dde0ff;
+    }
+
+    #content {
+        display: flex;
+    }
+
+    .messageBox {
+        width: 100%;
+        height: 70px;
+        border: solid 2px black;
+        background-color: #dde0ff;
+        margin-top: 200px;
+    }
+
+
+    .sendBtn {
+        border-radius: 10px;
+        background-color: #6d6bfb;
+        color: white;
+        font-size: 20px;
+        padding: 10px;
+        margin-left: 90%;
+
+    }
+</style>
+
+<div class="col s12" id="groupNameDiv">
+    <h2>$GroupRoomName</h2>
+</div>
+<div class="row" id="content">
+    <div class="col s2" id="groupRoomCollection">
+        <ul id="collection">
+            <li>GroupRoomName 1</li>
+            <li>GroupRoomName 2</li>
+            <li>GroupRoomName 3</li>
+        </ul>
+    </div>
+    <div class="col s2" id="senderNameDiv">
+            <ul class="senderName">
+                <li>Sender A: </li>
+            <li>Sender B: </li>
+            <li>Sender A: </li>
+            <li>Sender C: </li>
+            </ul>
+    </div>
+    <div class="col s8" id="messageDescDiv">
+        <ul class="messageDesc">
+            <li>This is a message. </li>
+            <li>This is also a message. </li>
+            <li>Is this also a message? </li>
+            <li>It is also a message. </li>
+        </ul>
+        <div class="messageBox">
+            <p>Your Message Here</p>
+        </div>
+        <button class="sendBtn">Send</button>
+    </div>
+</div>
