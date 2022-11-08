@@ -26,12 +26,18 @@ function DarkMode() {
 document.addEventListener('DOMContentLoaded', function () {
     const MainSidenav = document.querySelectorAll('.sidenav');
     const ProfileSidenav = document.getElementById('profile-sidenav')
-    const RightEdge = {
-        'edge': 'right'
-    };
-    M.Sidenav.init(MainSidenav);
-    M.Sidenav.init(ProfileSidenav, RightEdge);
 
-    var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems);
+    M.Sidenav.init(MainSidenav);
+    M.Sidenav.init(ProfileSidenav, {'edge':'right'});
+
+    const collapsible = document.querySelectorAll('.collapsible');
+    M.Collapsible.init(collapsible);
+
+    // Date Picker
+    const date = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(date, {
+        autoClose: true,
+        format: 'mmmm dd, yyyy',
+        disableWeekends: true
+    });
 });
