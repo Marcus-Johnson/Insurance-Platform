@@ -99,8 +99,18 @@ namespace NJInsurancePlatform.Controllers
 
                 // If Model is not valid
                 ModelState.AddModelError(String.Empty, "Invalid Login Attempt");
+
+
             }
+                //// If user forgot password
+                //if()
             return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
         }
 
         [HttpPost]
