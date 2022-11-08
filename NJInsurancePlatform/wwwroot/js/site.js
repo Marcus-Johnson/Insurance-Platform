@@ -32,6 +32,15 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Sidenav.init(MainSidenav);
     M.Sidenav.init(ProfileSidenav, RightEdge);
 
+   // Collapsible
     var elems = document.querySelectorAll('.collapsible');
-    var instances = M.Collapsible.init(elems);
+    M.Collapsible.init(elems);
+
+    // Date Picker
+    var date = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(date, {
+        autoClose: true,
+        format: 'mmmm dd, yyyy',
+        disableWeekends: true
+    });
 });
