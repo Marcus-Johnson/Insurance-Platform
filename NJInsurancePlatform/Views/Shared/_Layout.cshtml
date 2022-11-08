@@ -15,35 +15,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/site.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <!-- Drop Down for Policies-->
-        <ul id="dropdown1" class="dropdown-content">
+        <ul id="PoliciesDropdown" class="dropdown-content">
             <li><a href="/Policy/PolicyDetails">Policy Details</a></li>
             <li><a href="/Payment/Details">Policy Payment Details</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Sample w/ Line Divider</a></li>
         </ul>
 
         <!--Main Navbar-->
         <nav class="indigo darken-3">
             <div class="nav-wrapper">
-                <a href="/Home/Index" class="brand-logo">Gx Insurance<i class="material-icons left">domain</i></a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="/Home/Index" class="brand-logo push-l1">Gx Insurance<i class="material-icons left">business</i></a>
+                <a href="#" data-target="main-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/Home/Index">Home</a></li>
 
                     <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">My Profile<i class="material-icons left">account_circle</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
+                    <li><a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">My Profile<i class="material-icons left">account_circle</i></a></li>
 
                     @if (signInManager.IsSignedIn(User))
                     {
-                        @if (User.IsInRole("Admin")) {
-                        <!--Drop Down for Roles-->
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <!--Roles-->
                             <li><a href="/Administration/GetRoles">Roles<i class="material-icons left">assignment_ind</i></a></li>
                         }
                         <!-- Logout Icon-->
@@ -53,9 +52,10 @@
                             </form>
                         </li>
                     }
-                    else {
+                    else
+                    {
                         <!-- Drop Down for My Profile-->
-                        <ul id="dropdown2" class="dropdown-content">
+                        <ul id="MyProfileDropdown" class="dropdown-content">
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
                             </li>
@@ -71,17 +71,55 @@
                             <i class="material-icons left">brightness_4</i>
                         </a>
                     </li>
-
+                </ul>
+                <ul class="right hide-on-large-only">
+                    <li><a data-target="profile-sidenav" class="sidenav-trigger"><i class="material-icons">account_circle</i></a></li>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <!--Roles-->
+                            <li><a href="/Administration/GetRoles"><i class="material-icons left">assignment_ind</i></a></li>
+                        }
+                        <!-- Logout Icon-->
+                        <li>
+                            <form id="user-logout" method="post" asp-controller="Home" asp-action="Logout">
+                                <button class="logout logout-hover" type="submit"><i class="material-icons center">logout</i></button>
+                            </form>
+                        </li>
+                    }
+                    </a>
+                    </li>
                 </ul>
             </div>
         </nav>
 
-        <ul class="sidenav" id="mobile-demo">
-            <li><a href="sass.html">Sass</a></li>
-            <li><a href="badges.html">Components</a></li>
-            <li><a href="collapsible.html">Javascript</a></li>
-            <li><a href="mobile.html">Mobile</a></li>
+        <!-- MOBILE Main Sidenav-->
+        <ul class="sidenav" id="main-sidenav">
+            <li><a class="subheader"><i class="material-icons">policy</i>Policies</a></li>
+            <li class="divider"></li>
+            <li><a class="black-text" asp-controller="Policy" asp-action="PolicyDetails">Policy Details</a></li>
+            <li><a class="black-text" asp-controller="Payment" asp-action="Details">Policy Payment Details</a></li>
+            <li class="divider"></li>
+
         </ul>
+
+        <!-- MOBILE Profile Sidenav-->
+        <ul class="sidenav" id="profile-sidenav">
+            <li class="divider"></li>
+            <ul class="collapsible side-nav">
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">account_circle</i>My Profile</div>
+                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a></div>
+                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a></div>
+                </li>
+            </ul>
+            <li class="divider"></li>
+            <li>
+                <a class="dark-toggle" href="#" onclick="DarkMode()" title="Dark/light"><i class="material-icons right">brightness_4</i> Toggle Dark Mode</a>
+            </li>
+        </ul>
+
 
     </header>
 
@@ -98,7 +136,7 @@
         </div>
     </main>
 
-    <!--Footer Content/Styling & Logout Styling-->
+    <!--Footer Styling & Logout Styling-->
     <style>
         .logout {
             background-color: transparent;
@@ -118,15 +156,16 @@
         }
     </style>
 
+    <!-- Footer Content-->
     <footer class="page-footer footer-fixed indigo darken-3">
         <div class="container">
-            © 2022 Gx Insurance
+            2022 Gx Insurance
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
     <script src="~/js/site.js"></script>
     @await RenderSectionAsync("Scripts", required: false);
 </body>
