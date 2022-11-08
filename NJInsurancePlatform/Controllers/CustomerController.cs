@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [Authorize(Roles = "Customer")]
-    //[AllowAnonymous] // WHILE DEVELOPING
+    //[Authorize(Roles = "Customer")]
+    [AllowAnonymous] // WHILE DEVELOPING
     public class CustomerController : Controller
     {
         public IActionResult Index()
@@ -13,6 +13,11 @@ namespace NJInsurancePlatform.Controllers
         }
 
         public IActionResult Details()
+        {
+            return View();
+        }
+
+        public IActionResult Claim()
         {
             return View();
         }
