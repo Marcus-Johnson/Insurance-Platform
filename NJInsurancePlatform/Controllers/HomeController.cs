@@ -40,7 +40,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(User model)
+        public async Task<IActionResult> Register(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
@@ -49,7 +49,7 @@ namespace NJInsurancePlatform.Controllers
                 var user = new ApplicationUser { UserName = model.UserName };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
-                var result = await userManager.CreateAsync(user, model.Password);
+                var result = await userManager.CreateAsync(user, model.PasswordHash);
 
                 // If Creation is Successful
                 if (result.Succeeded)
