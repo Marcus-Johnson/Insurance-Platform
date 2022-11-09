@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+    branches: [ "Main" ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+    branches: [ "Main" ]
   schedule:
     - cron: '41 11 * * 5'
 
