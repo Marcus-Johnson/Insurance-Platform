@@ -12,8 +12,8 @@ using NJInsurancePlatform.Data;
 namespace NJInsurancePlatform.Migrations
 {
     [DbContext(typeof(InsuranceCorpDbContext))]
-    [Migration("20221104203348_initial")]
-    partial class initial
+    [Migration("20221108223419_migration2")]
+    partial class migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "10253d33-44ec-40a0-8592-a52c0d65fbc5",
-                            ConcurrencyStamp = "832da457-38f6-49b7-ae6c-9bb46b8a62b5",
+                            Id = "7f416a94-ae45-419c-85e3-341d80e67b7f",
+                            ConcurrencyStamp = "343f2388-5fc2-4faf-b65a-bca90970221a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "fd51d332-4810-47c8-a5b8-33ac9c52fca7",
-                            ConcurrencyStamp = "f5fefe44-15d8-424f-877d-cd342a0a0e32",
+                            Id = "eb408119-362f-4873-abe8-ca9b41e326f4",
+                            ConcurrencyStamp = "60366701-b432-4c78-b901-a4e502e5e01f",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "e4d9b3d9-716c-474e-943b-c423e2b9a45b",
-                            ConcurrencyStamp = "939cd639-9f1e-4011-a39b-cb4a867e61f9",
+                            Id = "183da404-2d6f-4c83-91de-af4cf69ccf0f",
+                            ConcurrencyStamp = "2882b99c-47a0-4c85-87d9-363001f466f0",
                             Name = "Beneficiary",
                             NormalizedName = "BENEFICIARY"
                         });
@@ -263,6 +263,9 @@ namespace NJInsurancePlatform.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("CustomerMUID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -297,7 +300,12 @@ namespace NJInsurancePlatform.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
+                    b.Property<Guid?>("TransactionMUID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("BeneficiaryMUID");
+
+                    b.HasIndex("TransactionMUID");
 
                     b.ToTable("Beneficiaries");
                 });
@@ -346,6 +354,31 @@ namespace NJInsurancePlatform.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CurrentAddress")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CurrentCity")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CurrentEmployer")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CurrentState")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("CurrentZipcode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -390,13 +423,33 @@ namespace NJInsurancePlatform.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("NJInsurancePlatform.Models.GroupRoomMessage", b =>
+                {
+                    b.Property<Guid>("GroupRoomMessageMUID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("GroupRoomMUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(140)
+                        .HasColumnType("nvarchar(140)");
+
+                    b.Property<Guid>("SenderMUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("GroupRoomMessageMUID");
+
+                    b.ToTable("GroupRoomMessages");
+                });
+
             modelBuilder.Entity("NJInsurancePlatform.Models.Payment", b =>
                 {
-                    b.Property<int>("PaymentMUID")
+                    b.Property<Guid>("PaymentMUID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentMUID"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AccountNumber")
                         .IsRequired()
@@ -519,13 +572,35 @@ namespace NJInsurancePlatform.Migrations
                     b.ToTable("Policies");
                 });
 
+            modelBuilder.Entity("NJInsurancePlatform.Models.Transaction", b =>
+                {
+                    b.Property<Guid>("TransactionMUID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerMUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("PaymentAmount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PolicyMUID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("isPaymentComplete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("TransactionMUID");
+
+                    b.ToTable("Transactions");
+                });
+
             modelBuilder.Entity("NJInsurancePlatform.Models.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<string>("ExtendedAttribueExample")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -579,6 +654,18 @@ namespace NJInsurancePlatform.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NJInsurancePlatform.Models.Beneficiary", b =>
+                {
+                    b.HasOne("NJInsurancePlatform.Models.Transaction", null)
+                        .WithMany("ListOfPolicyBeneficiariesMUIDs")
+                        .HasForeignKey("TransactionMUID");
+                });
+
+            modelBuilder.Entity("NJInsurancePlatform.Models.Transaction", b =>
+                {
+                    b.Navigation("ListOfPolicyBeneficiariesMUIDs");
                 });
 #pragma warning restore 612, 618
         }

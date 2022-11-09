@@ -1,7 +1,7 @@
 ﻿
 
 
-@model NJInsurancePlatform.Models.User
+@model NJInsurancePlatform.Models.ApplicationUser
 
 @{
     ViewData["Title"] = "Register";
@@ -24,9 +24,9 @@
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="PasswordHash" class="control-label"></label>
+                <input asp-for="PasswordHash" class="form-control" />
+                <span asp-validation-for="PasswordHash" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input  type="submit" value="Create" class="btn btn-primary" />

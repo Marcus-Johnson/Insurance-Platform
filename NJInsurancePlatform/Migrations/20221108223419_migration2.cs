@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NJInsurancePlatform.Migrations
 {
-    public partial class initial : Migration
+    public partial class migration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,6 @@ namespace NJInsurancePlatform.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ExtendedAttribueExample = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -48,26 +47,6 @@ namespace NJInsurancePlatform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Beneficiaries",
-                columns: table => new
-                {
-                    BeneficiaryMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    SSN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    LicenseNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Beneficiaries", x => x.BeneficiaryMUID);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,6 +76,11 @@ namespace NJInsurancePlatform.Migrations
                     LastName = table.Column<string>(type: "nvarchar(140)", maxLength: 140, nullable: false),
                     EmailAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CurrentAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CurrentCity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    CurrentZipcode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    CurrentState = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CurrentEmployer = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SSN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
                     LicenseNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     IsPrimaryPolicyHolder = table.Column<bool>(type: "bit", nullable: false),
@@ -110,11 +94,24 @@ namespace NJInsurancePlatform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "GroupRoomMessages",
+                columns: table => new
+                {
+                    GroupRoomMessageMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    GroupRoomMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SenderMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(140)", maxLength: 140, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupRoomMessages", x => x.GroupRoomMessageMUID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Payments",
                 columns: table => new
                 {
-                    PaymentMUID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PaymentMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BillMUID = table.Column<int>(type: "int", nullable: false),
                     PaidDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Amount = table.Column<double>(type: "float", nullable: false),
@@ -158,6 +155,22 @@ namespace NJInsurancePlatform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Policies", x => x.PolicyMUID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transactions",
+                columns: table => new
+                {
+                    TransactionMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PolicyMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    isPaymentComplete = table.Column<bool>(type: "bit", nullable: false),
+                    PaymentAmount = table.Column<double>(type: "float", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transactions", x => x.TransactionMUID);
                 });
 
             migrationBuilder.CreateTable(
@@ -266,20 +279,47 @@ namespace NJInsurancePlatform.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "10253d33-44ec-40a0-8592-a52c0d65fbc5", "832da457-38f6-49b7-ae6c-9bb46b8a62b5", "Admin", "ADMIN" });
+            migrationBuilder.CreateTable(
+                name: "Beneficiaries",
+                columns: table => new
+                {
+                    BeneficiaryMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    SSN = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
+                    LicenseNumber = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    TransactionMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Beneficiaries", x => x.BeneficiaryMUID);
+                    table.ForeignKey(
+                        name: "FK_Beneficiaries_Transactions_TransactionMUID",
+                        column: x => x.TransactionMUID,
+                        principalTable: "Transactions",
+                        principalColumn: "TransactionMUID");
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "e4d9b3d9-716c-474e-943b-c423e2b9a45b", "939cd639-9f1e-4011-a39b-cb4a867e61f9", "Beneficiary", "BENEFICIARY" });
+                values: new object[] { "183da404-2d6f-4c83-91de-af4cf69ccf0f", "2882b99c-47a0-4c85-87d9-363001f466f0", "Beneficiary", "BENEFICIARY" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "fd51d332-4810-47c8-a5b8-33ac9c52fca7", "f5fefe44-15d8-424f-877d-cd342a0a0e32", "Customer", "CUSTOMER" });
+                values: new object[] { "7f416a94-ae45-419c-85e3-341d80e67b7f", "343f2388-5fc2-4faf-b65a-bca90970221a", "Admin", "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "eb408119-362f-4873-abe8-ca9b41e326f4", "60366701-b432-4c78-b901-a4e502e5e01f", "Customer", "CUSTOMER" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -319,6 +359,11 @@ namespace NJInsurancePlatform.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Beneficiaries_TransactionMUID",
+                table: "Beneficiaries",
+                column: "TransactionMUID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -348,6 +393,9 @@ namespace NJInsurancePlatform.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
+                name: "GroupRoomMessages");
+
+            migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
@@ -358,6 +406,9 @@ namespace NJInsurancePlatform.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Transactions");
         }
     }
 }
