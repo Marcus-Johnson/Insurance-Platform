@@ -70,16 +70,13 @@
                 <span asp-validation-for="PasswordHash" class="text-danger"></span>    
             </div>
             </div>
-            <div class="form-group">
-                <input  type="submit" value="Login" class="btn btn-primary" />
-@*Added "Forgot Password" btn*@
-                <input  type="submit" value="Forgot Password?" class="btn btn-Primary" />
             <br/>
             <div class="login-submit-button-container">
                <!-- <input  type="submit" value="Submit" class="btn btn-primary" /> -->
-                <a>Forgot Password</a><br/><br/>
+                <a href="/Home/ForgotPassword">Forgot Password</a><br/><br/>
                 <button type="submit" class="waves-effect waves-light btn-large white" style="border-radius: 40px;width:100%;color:purple; font-weight:600">Submit<i class="material-icons right">keyboard_arrow_right</i></button>
                 <br/><br/>
             </div>
         </form>
+    </div>
 </div>
