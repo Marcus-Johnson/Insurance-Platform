@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "My Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    #groupNameDiv {
+        text-align: center;
+    }
+
+    #groupRoomCollection {
+        height: 100%;
+        display: flex;
+        padding-bottom: 50vh;
+    }
+
+    #collection li {
+        font-size: 20px;
+    }
+
+    #senderNameDiv {
+        display: flex;
+    }
+
+    .senderName li {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    .speech-bubble {
+        position: relative;
+        background: #ffffff;
+        color: #000000;
+        font-family: Arial;
+        font-size: 20px;
+        line-height: 58px;
+        text-align: center;
+        width: 100%;
+        height: 62px;
+        border-radius: 10px;
+        padding: 0px;
+        border: #000000 solid 2px;
+    }
+
+        .speech-bubble:after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 0;
+            z-index: 1;
+            border-style: solid;
+            border-width: 0 0 20px 20px;
+            border-color: transparent transparent #ffffff transparent;
+            top: 50%;
+            left: -20px;
+            margin-top: -10px;
+        }
+
+        .speech-bubble:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            z-index: 0;
+            border-style: solid;
+            border-width: 0 0 22px 22px;
+            border-color: transparent transparent #000000 transparent;
+            top: 50%;
+            left: -24px;
+            margin-top: -10px;
+            display: block;
+        }
+
+
+    #content {
+        display: flex;
+    }
+
+    .messageBox {
+        width: 100%;
+        height: 70px;
+        border: solid 2px black;
+        margin-top: 200px;
+        border-radius: 40px;
+        background: #ecf0f3;
+        box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
+    }
+
+
+    .sendBtn {
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 10px;
+        margin-left: 80%;
+        margin-top: 20px;
+        width: 120px;
+        display: flex;
+
+    }
+
+    .sendBtn i {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="col s12" id="groupNameDiv">
+    <h2>$GroupRoomName</h2>
+</div>
+<div class="row" id="content">
+    <div class="col s2" id="groupRoomCollection">
+        <ul id="collection">
+            <li>GroupRoomName 1</li>
+            <li>GroupRoomName 2</li>
+            <li>GroupRoomName 3</li>
+        </ul>
+    </div>
+    <div class="col s2" id="senderNameDiv">
+            <ul class="senderName">
+            <li><p>Sender A:</p></li>
+            <li><p>Sender B:</p></li>
+            <li><p>Sender A:</p></li>
+            <li><p>Sender C:</p></li>
+            </ul>
+    </div>
+    <div class="col s8" id="messageDescDiv">
+        <ul class="messageDiv">
+            <li><p class="speech-bubble">This is a message.</p></li>
+            <li><p class="speech-bubble">This is also a message.</p></li>
+            <li><p class="speech-bubble">Is this also a message?</p></li>
+            <li><p class="speech-bubble">It is also a message.</p></li>
+        </ul>
+        <div class="messageBox">
+            <p>Your Message Here</p>
+        </div>
+        <button class="sendBtn">Submit <i class="material-icons">send</i></button>
+    </div>
+</div>
