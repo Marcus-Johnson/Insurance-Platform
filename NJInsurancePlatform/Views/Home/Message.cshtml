@@ -5,12 +5,16 @@
 
 <style>
 
+    body {
+        overflow: hidden;
+    }
+
     #messageContainer {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-template-rows: 100px 300px 200px 150px;
-        grid-auto-rows: auto;
-        grid-auto-columns: auto;
+        grid-template-rows: 100px 300px 200px 250px;
+        width: 100vw;
+        height: 100vh;
         grid-auto-flow: row;
         gap: 0px 0px;
         grid-template-areas:
@@ -19,6 +23,7 @@
          "groupRoomList chatBox chatBox"
          "groupRoomList messageBoxContainer messageBoxContainer";
          border: solid 1px black;
+         margin-left: -300px;
       }
 
     .groupRoomName {
@@ -36,6 +41,7 @@
     .groupRoomList {
         grid-area: groupRoomList;
         background-color: #FFF;
+        border-bottom: solid 1px black;
     }
 
     .groupRoomNameList {
@@ -43,13 +49,13 @@
     }
 
     .groupRoomNameList h2  {
-        font-size:20px;
+        font-size:25px;
         font-weight:normal;
         margin-left: 10px;
     }
 
     .groupRoomNameList h3 {
-        font-size:16px;
+        font-size:20px;
         font-weight:normal;
         margin-top: -10px;
         margin-left: 10px;
@@ -76,16 +82,19 @@
         grid-area: messageBoxContainer;
         background-color: #FFF;
         border-left: solid 1px black;
+        border-bottom: solid 1px black;
     }
 
     .groupChat .message {
-        padding:20px;
+        padding:5px;
         color:#fff;
-        line-height:25px;
+        line-height:20px;
         max-width:90%;
         display:inline-block;
         text-align:left;
         border-radius:5px;
+        font-size: 25px;
+        max-height: 70px;
     }
 
     .groupChat .senderA {
@@ -113,7 +122,7 @@
 
     .groupChat .senderA .triangle {
         border-color: #6fbced transparent transparent transparent;
-        margin-left:780px;
+        margin-left:1170px;
     }
 
     .groupChat .senderB .triangle {
@@ -156,7 +165,7 @@
         border-radius: 10px;
         font-size: 20px;
         padding: 10px;
-        margin-left: 37vw;
+        margin-left: 60vw;
         margin-top: 10px;
         width: 120px;
         display: flex;
