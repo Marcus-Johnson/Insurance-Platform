@@ -1,157 +1,4 @@
-﻿@*@model NJInsurancePlatform.Models.Claim
-@{
-
-}
-<style>
-    .make-claim-title{
-        display: flex;
-        justify-content: center;
-        font-family: sans-serif;
-        border: 1px solid black;
-        border-bottom:none;
-        color:white;
-        background-color:#2D70B7;
-    }
-    .make-claim-main{
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 50px;
-
-    }    
-    .make-claim-container{
-        display:flex;
-        flex-direction: column;
-        width: 500px;
-        height: 570px;
-    }
-    .make-claim-details-row{
-        display: flex;
-        flex-direction: row;
-    }    
-    .make-claim-details-names{
-        display: flex;
-        flex-direction: column;
-        border-top:none;
-        border-left:none;
-    }    
-    .make-claim-details-values{
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-    .make-claim-name{
-        display:flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        height: 50px;
-        width: 150px;
-        font-weight: 700;
-        padding: 10px 10px 30px 15px;
-    }    
-    .make-claim-value{
-        display:flex;
-        justify-content: flex-start;
-        align-items: flex-start;
-        align-items: center;
-        height: 50px;
-        width: 100%;
-        padding: 10px 10px 30px 15px;
-    }          
-    .make-claim-value-description{
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        height: 100%;
-        width: 150px;
-        padding: 10px 10px 30px 15px;
-    }   
-    .make-claim-textarea-description{
-        height: 240px;
-        width: 300px;
-        resize: none;
-        background-color: white;
-        box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
-    }
-    .make-claim-value-date{
-        display:flex;
-        justify-content: center;
-        align-items: flex-start;
-        align-items: center;
-        height: 50px;
-        width: 200px;
-        padding: 0px 0px 0px 15px;
-    }   
-    .make-claim-submit{
-        display:flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        padding-right:20px;
-    }
-    .make-claim-details-side-bar{
-        background-color: #daddfa;
-
-    }     
-    .make-claim-details-side-bar-container{
-        display:flex;
-        border: 1px solid;
-        border-top:none;
-        width: 100%;
-    }    
-    .make-claim-details-values-bar{
-        width:100%;
-        background-color:#fcecee;
-    }
-
-</style>
-
-<div class="make-claim-main">
-    <form method="post">
-    <div class="make-claim-container">
-        <div class="make-claim-title">
-            <h4>Make a Policy Claim </h4>
-        </div>
-        <div class="make-claim-details-row">
-            <div class="make-claim-details-side-bar-container">
-                <div class="make-claim-details-side-bar">
-                    <div class="make-claim-details-names">
-                        <div class="make-claim-name"></div>
-                        <div class="make-claim-name" >PolicyID:</div>
-                        <div class="make-claim-name">Todays Date:</div>
-                        <div class="make-claim-name">Claim Description:</div>
-                    </div>
-                    </div>
-                    <div class="make-claim-details-values-bar">
-                    <div class="make-claim-details-values">
-                        <div class="make-claim-value"></div>
-                        <div class="make-claim-value" style="font-weight:700;font-size:15px">367657847</div>
-                        <div class="make-claim-value-date">
-                        <input type="date" style="padding:0px 15px 0px 15px;border:none;background-color:white;border:1px solid; box-shadow: 3px 3px 3px rgba(0, 0, 0, .3)" />
-                    </div>
-                    <div class="make-claim-value-description">
-                        <div>
-                           <label></label>
-                           <textarea placeholder="Enter Policy Details" class="make-claim-textarea-description" rows="20" cols="50">
-                           </textarea>
-                        </div>
-                        <br/>
-                        <div class="make-claim-submit">
-                           <button class="waves-effect waves-light btn blue" style=" border:1px solid; border-radius:20px">Submit Claim</button>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    </form>
-</div>
-*@
-
+﻿
 <style>
     .make-claim-container{
         display:grid;
@@ -161,9 +8,10 @@
         grid-auto-rows: minmax(70px, auto);
         justify-content: center;
         align-content:center;
-        padding-top: 7%;
+        padding-top: 2%;
         grid-template-areas: 
         "header header"
+        "sidebar content"
         "sidebar content"
         "sidebar content"
         "sidebar content"
@@ -268,31 +116,39 @@
 @{
 
 }
-<div class="make-claim-container">
-    <div class="make-claim-title">Make a Policy Claim</div>
-    <div class="make-claim-side-bar">
-        <div class="make-claim-name">PolicyID:</div>
-        <div class="make-claim-name">Claim Date:</div>
-        <div class="make-claim-name">Claim Description:</div>
+<form method="post" asp-controller="Customer">
+    <div class="make-claim-container">
+        <div class="make-claim-title">Make a Policy Claim</div>
+        <div class="make-claim-side-bar">
+            <div class="make-claim-name">PolicyID:</div>
+            <div class="make-claim-name">Claim Date:</div>
+            <div class="make-claim-name">Claim Description:</div>
+        </div>
+        <div class="make-claim-content">
+            <div class="make-claim-value policyId">
+                <label hidden asp-for="PolicyMUID"></label>
+                <input readonly asp-for="PolicyMUID" 
+                 style="border: none;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:#ffe7e5;box-shadow:4px 4px rgba(5, 5, 5, .1);"/>
+                 <br />
+                 <span asp-validation-for="PolicyMUID"></span>
+            </div>
+            <div class="make-claim-value date">
+                <label hidden asp-for="DateOfClaim"></label>
+                <input type="date" asp-for="DateOfClaim" 
+                style="border:1px solid;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:white;box-shadow:4px 4px rgba(5, 5, 5, .1)"/>
+                <br />
+                <span asp-validation-for="DateOfClaim"></span>
+            </div>
+            <div class="make-claim-value description">
+                <label hidden asp-for="ClaimUserDescription"></label>
+                <textarea asp-for="ClaimUserDescription" class="claim-textarea">
+                </textarea>
+                <br/>
+                <span asp-validation-for="ClaimUserDescription" class="text-danger"></span>
+            </div>        
+            <div class="make-claim-submit">
+                <input asp-action="Claim" class="make-claim-submit-button" type="submit" value="Submit Claim"/>
+            </div>
+        </div> 
     </div>
-    <div class="make-claim-content">
-        <div class="make-claim-value policyId">
-            <label hidden asp-for="PolicyMUID"></label>
-            <input readonly asp-for="PolicyMUID" 
-             style="border: none;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:#ffe7e5;box-shadow:4px 4px rgba(5, 5, 5, .1);"/>
-        </div>
-        <div class="make-claim-value date">
-            <label hidden asp-for="DateOfClaim"></label>
-            <input type="date" asp-for="DateOfClaim" 
-            style="border:1px solid;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:white;box-shadow:4px 4px rgba(5, 5, 5, .1)"/>
-        </div>
-        <div class="make-claim-value description">
-            <label hidden asp-for="ClaimUserDescription"></label>
-            <textarea asp-for="ClaimUserDescription" class="claim-textarea">
-            </textarea>
-        </div>        
-        <div class="make-claim-submit">
-            <input class="make-claim-submit-button" type="submit" value="Submit Claim"/>
-        </div>
-    </div>    
-</div>
+</form>
