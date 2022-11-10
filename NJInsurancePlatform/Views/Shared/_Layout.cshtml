@@ -28,7 +28,7 @@
         <!--Main Navbar-->
         <nav class="indigo darken-3">
             <div class="nav-wrapper">
-                <a href="/Home/Index" class="brand-logo push-l1">Gx Insurance<i class="material-icons left">business</i></a>
+                <a href="/Home/Index" class="brand-logo">Gx Insurance<i class="material-icons left">business</i></a>
                 <a href="#" data-target="main-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
                 <ul class="right hide-on-med-and-down">
@@ -48,7 +48,7 @@
                         <!-- Logout Icon-->
                         <li>
                             <form id="user-logout" method="post" asp-controller="Home" asp-action="Logout">
-                                <button class="logout logout-hover" type="submit"><i class="material-icons center">logout</i></button>
+                                <button class="logout logout-hover" type="submit"><i class="material-icons center" title="Logout">logout</i></button>
                             </form>
                         </li>
                     }
@@ -67,24 +67,26 @@
                     <!-- Dark Mode -->
                     <li>
                         <a class="dark-toggle"
-                           onclick="DarkMode()" title="Dark/light">
+                           onclick="DarkMode()" title="Dark Mode">
                             <i class="material-icons left">brightness_4</i>
                         </a>
                     </li>
                 </ul>
+
+                <!-- MOBILE Navbar-->
                 <ul class="right hide-on-large-only">
-                    <li><a data-target="profile-sidenav" class="sidenav-trigger"><i class="material-icons">account_circle</i></a></li>
+                    <li><a data-target="profile-sidenav" class="sidenav-trigger" title="My Profile"><i class="material-icons">account_circle</i></a></li>
                     @if (signInManager.IsSignedIn(User))
                     {
                         @if (User.IsInRole("Admin"))
                         {
                             <!--Roles-->
-                            <li><a href="/Administration/GetRoles"><i class="material-icons left">assignment_ind</i></a></li>
+                            <li><a href="/Administration/GetRoles" title="Roles"><i class="material-icons left">assignment_ind</i></a></li>
                         }
                         <!-- Logout Icon-->
                         <li>
                             <form id="user-logout" method="post" asp-controller="Home" asp-action="Logout">
-                                <button class="logout logout-hover" type="submit"><i class="material-icons center">logout</i></button>
+                                <button class="logout logout-hover" type="submit" title="Logout"><i class="material-icons center">logout</i></button>
                             </form>
                         </li>
                     }
@@ -116,14 +118,14 @@
             </ul>
             <li class="divider"></li>
             <li>
-                <a class="dark-toggle" href="#" onclick="DarkMode()" title="Dark/light"><i class="material-icons right">brightness_4</i> Toggle Dark Mode</a>
+                <a class="dark-toggle" href="#" onclick="DarkMode()"><i class="material-icons right">brightness_4</i> Toggle Dark Mode</a>
             </li>
         </ul>
 
 
     </header>
 
-    <main role="main" class="pb-3">
+    <main>
         <div class="container">
             @RenderBody()
 
@@ -136,30 +138,10 @@
         </div>
     </main>
 
-    <!--Footer Styling & Logout Styling-->
-    <style>
-        .logout {
-            background-color: transparent;
-            color: white;
-            border: none;
-        }
-
-        .logout-hover:hover {
-            background-color: rgba(0, 0, 0, 0.1);
-        }
-
-        .footer-fixed {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-        }
-    </style>
-
     <!-- Footer Content-->
-    <footer class="page-footer footer-fixed indigo darken-3">
+    <footer class="page-footer indigo darken-3">
         <div class="container">
-            2022 Gx Insurance
+            &copy; 2022 Gx Insurance
             <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </footer>

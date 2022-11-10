@@ -13,14 +13,9 @@ html {
   min-height: 100%;
 }
 
-nav {
-    background-color: #3E66FB;
-}
-
 body {
   font-family:Outfit;
   margin-bottom: 60px;
-
 }
 
 .dark-mode {
@@ -31,4 +26,26 @@ body {
     background: -webkit-radial-gradient(bottom right, #42464B, #110040);
     background: -moz-radial-gradient(bottom left, #42464B, #110040);
     background: radial-gradient(to top right, #42464B, #110040);
+}
+
+main {
+    padding-bottom: 50px;
+}
+
+footer {
+    padding-top: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+.logout {
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+.logout-hover:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
