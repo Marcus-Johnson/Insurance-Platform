@@ -5,7 +5,7 @@
 
 <style>
 
-    #groupNameDiv {
+    /*#groupNameDiv {
         text-align: center;
     }
 
@@ -100,10 +100,250 @@
 
     .sendBtn i {
         margin-left: 10px;
+    }*/
+
+    #messageContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-rows: 100px 300px 200px 150px;
+        grid-auto-rows: auto;
+        grid-auto-columns: auto;
+        grid-auto-flow: row;
+        gap: 0px 0px;
+        grid-template-areas:
+         "groupRoomList groupRoomName groupRoomName"
+         "groupRoomList chatBox chatBox"
+         "groupRoomList chatBox chatBox"
+         "groupRoomList messageBoxContainer messageBoxContainer";
+         border: solid 1px black;
+      }
+
+    .groupRoomName {
+        grid-area: groupRoomName;
+        background-color: lightgray;
+        text-align: center;
+        border-bottom: solid 1px black;
+        border-left: solid 1px black;
     }
+
+    .groupRoomName h2 {
+        font-size: 2.7vw;
+    }
+
+    .groupRoomList {
+        grid-area: groupRoomList;
+        background-color: #FFF;
+    }
+
+    .groupRoomNameList {
+        margin-top: 0px;
+    }
+
+    .groupRoomNameList h2  {
+        font-size:20px;
+        font-weight:normal;
+        margin-left: 10px;
+    }
+
+    .groupRoomNameList h3 {
+        font-size:16px;
+        font-weight:normal;
+        margin-top: -10px;
+        margin-left: 10px;
+    }
+
+    .groupRoomNameList li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 10px;
+        border-bottom: solid 1px black;
+    }
+
+    .chatBox {
+        grid-area: chatBox;
+        background-color: #FFF;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding: 10px;
+        border-left: solid 1px black;
+    }
+
+    .messageBoxContainer {
+        grid-area: messageBoxContainer;
+        background-color: #FFF;
+        border-left: solid 1px black;
+    }
+
+    .groupChat .message {
+        padding:20px;
+        color:#fff;
+        line-height:25px;
+        max-width:90%;
+        display:inline-block;
+        text-align:left;
+        border-radius:5px;
+    }
+
+    .groupChat .senderA {
+        text-align: right;
+    }
+
+    .groupChat .senderA .message {
+        background-color:#6fbced;
+    }
+
+    .groupChat .senderB .message {
+        background-color:#58b666;
+    }
+
+    .groupChat .senderC .message {
+        background-color: #fa9696;
+    }
+
+    .groupChat .triangle {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 10px 0 10px;
+    }
+
+    .groupChat .senderA .triangle {
+        border-color: #6fbced transparent transparent transparent;
+        margin-left:780px;
+    }
+
+    .groupChat .senderB .triangle {
+        border-color: #58b666 transparent transparent transparent;
+        margin-left:15px;
+    }
+
+    .groupChat .senderC .triangle {
+        border-color: #fa9696 transparent transparent transparent;
+        margin-left:15px;
+    }
+
+    .groupChat h2, .groupChat h3 {
+        display:inline-block;
+        font-size:13px;
+        font-weight:normal;
+        margin-top: -50px
+    }
+
+    #messageBox {
+        width: 100%;
+        height: 70px;
+        border: solid 2px black;
+        border-radius: 10px;
+        background: #ecf0f3;
+        box-shadow: /*13px 13px 20px #cbced1,*/ -13px -13px 20px #ffffff;
+
+    }
+
+    ::-webkit-input-placeholder {
+      text-align: center;
+    }
+
+    :-moz-placeholder {
+      text-align: center;
+    }
+
+
+    .sendBtn {
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 10px;
+        margin-left: 37vw;
+        margin-top: 10px;
+        width: 120px;
+        display: flex;
+
+    }
+
+    .sendBtn i {
+        margin-left: 10px;
+    }
+
 </style>
 
-<div class="col s12" id="groupNameDiv">
+<div id="messageContainer">
+    <div class="groupRoomName"><h2>Group One</h2></div>
+    <div class="groupRoomList">
+        <ul class="groupRoomNameList">
+            <li>
+                <i class="small material-icons">people</i>
+                <span>
+                    <h2>Group Four</h2>
+                    <h3>Last Message Sent at 2:49PM, Today</h3>
+                </span>
+            </li>
+            <li>
+                <i class="small material-icons">people</i>
+                <span>
+                    <h2>Group Two</h2>
+                    <h3>Last Message Sent at 2:13PM, Yesterday</h3>
+                </span>
+            </li>
+            <li>
+                <i class="small material-icons">people</i>
+                <span>
+                    <h2>Group Three</h2>
+                    <h3>Last Message Sent at 5:15AM, Nov 09</h3>
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="chatBox">
+        <ul class="groupChat">
+            <li class="senderA">
+                <div class="message">
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</p>
+                </div>
+                <div class="triangle"></div>
+                <div class="senderInfo">
+                    <h2>Sender A</h2>
+                    <h3>1:34PM, Today</h3>
+                </div>
+            </li>
+            <li class="senderB">
+                <div class="message">
+                    <p>What does that mean?</p>
+                </div>
+                <div class="triangle"></div>
+                <div class="senderInfo">
+                    <h2>Sender B</h2>
+                    <h3>1:35PM, Today</h3>
+                </div>
+            </li>
+            <li class="senderA">
+                <div class="message">
+                    <p>It's just placeholder text.</p>
+                </div>
+                <div class="triangle"></div>
+                <div class="senderInfo">
+                    <h2>Sender A</h2>
+                    <h3>1:37PM, Today</h3>
+                </div>
+            </li>
+            <li class="senderC">
+                <div class="message">
+                    <p>OK.</p>
+                </div>
+                <div class="triangle"></div>
+                <div class="senderInfo">
+                    <h2>Sender C</h2>
+                    <h3>1:40PM, Today</h3>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="messageBoxContainer">
+        <input type="text" id="messageBox" placeholder="Your message here."/>
+        <button type="submit" class="sendBtn">Submit <i class="material-icons">send</i></button>
+    </div>
+</div>
+
+@*<div class="col s12" id="groupNameDiv">
     <h2>$GroupRoomName</h2>
 </div>
 <div class="row" id="content">
@@ -134,4 +374,7 @@
         </div>
         <button class="sendBtn">Submit <i class="material-icons">send</i></button>
     </div>
-</div>
+</div>*@
+
+<div
+
