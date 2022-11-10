@@ -170,6 +170,7 @@
         "sidebar content"
         "sidebar content"
         "sidebar content"
+        "sidebar content"
     }
     .make-claim-name{
         font-family: sans-serif;
@@ -242,6 +243,25 @@
         box-shadow:4px 4px rgba(5, 5, 5, .1);
         border-left: 1px solid silver;
     }
+    .make-claim-submit{
+        display:flex;
+        justify-content: flex-end;
+        padding-right: 60px;
+        width: 100%;
+    }
+    .make-claim-submit-button:hover{
+         background-color: blue;
+
+    }
+    .make-claim-submit-button{
+        background-color: royalblue;
+        color: white;
+        font-size: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 50px;
+        border-radius: 20px;
+    }
 </style>
 
 @model NJInsurancePlatform.Models.Claim
@@ -270,6 +290,9 @@
             <label hidden asp-for="ClaimUserDescription"></label>
             <textarea asp-for="ClaimUserDescription" class="claim-textarea">
             </textarea>
+        </div>        
+        <div class="make-claim-submit">
+            <input class="make-claim-submit-button" type="submit" value="Submit Claim"/>
         </div>
     </div>    
 </div>
