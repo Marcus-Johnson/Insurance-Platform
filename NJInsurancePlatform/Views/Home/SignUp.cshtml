@@ -4,6 +4,11 @@
     ViewData["Title"] = "SignUp";
 }
 <style>
+ 
+    .input-field label {
+     color: #616161;
+     font-size: 17px;
+   }
 
 </style>
 
@@ -26,9 +31,19 @@
                     <label for="last_name">Last Name</label>
                 </div>
 
+                 <div class="input-field col s12">
+                    <input placeholder="" id="dob" type="text" class="validate">
+                    <label for="dob">Date of Birth</label>
+                </div>
+
                 <div class="input-field col s12">
                     <input placeholder="" id="email" type="email" class="validate">
                     <label for="email">Email</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input placeholder="" id="password" type="text" class="validate">
+                    <label for="password">Password</label>
                 </div>
 
                 <div class="input-field col s12">
@@ -47,14 +62,29 @@
                     <label for="license_number">License Number</label>
                 </div>
 
-                <label>Gender</label>
                 <div class="input-field col s12">
-                    <select class="browser-default">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
-                    </select>
+                    <input placeholder="" id="gender" type="text" class="validate">
+                    <label for="gender">Gender</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input placeholder="" id="current_address" type="text" class="validate">
+                    <label for="current_address">Address</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input placeholder="" id="current_city" type="text" class="validate">
+                    <label for="current_city">City</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input placeholder="" id="current_state" type="text" class="validate">
+                    <label for="current_state">State</label>
+                </div>
+
+                <div class="input-field col s12">
+                    <input placeholder="" id="current_employer" type="text" class="validate">
+                    <label for="current_employer">Current Employer</label>
                 </div>
 
                 <div>
@@ -72,8 +102,8 @@
                 </div>
 
                 <div class="row">
-                    <div class="col s12 m6 l3"><a class="waves-effect waves-light btn">Sign Up</a></div>
-                    <div class="col s12 m6 l3"><a>or Login</a></div>
+                    <div class="col s2"><a class="waves-effect waves-light btn">Sign Up</a></div>
+                    <div class="col s2"><h6>or Login</h6></div>
                 </div>
             </div>
         </form>
