@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -17,7 +18,14 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Claim()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Claim(Claim model)
         {
             return View();
         }
@@ -28,6 +36,4 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
     }
-
-
 }
