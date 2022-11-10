@@ -19,7 +19,6 @@ $('.dark-toggle').on('click', function () {
 function DarkMode() {
 	var element = document.body;
 	element.classList.toggle("dark-mode");
-	console.log(element.classList.contains("dark-mode"));
 }
 
 // Sidenav functionality
