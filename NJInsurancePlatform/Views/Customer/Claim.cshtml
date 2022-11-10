@@ -1,4 +1,4 @@
-﻿@model NJInsurancePlatform.Models.Claim
+﻿@*@model NJInsurancePlatform.Models.Claim
 @{
 
 }
@@ -42,8 +42,8 @@
         width: 100%;
     }
     .make-claim-name{
-        dispaly:flex;
-        justify-content: center;
+        display:flex;
+        justify-content: flex-start;
         align-items: flex-start;
         height: 50px;
         width: 150px;
@@ -51,8 +51,8 @@
         padding: 10px 10px 30px 15px;
     }    
     .make-claim-value{
-        dispaly:flex;
-        justify-content: center;
+        display:flex;
+        justify-content: flex-start;
         align-items: flex-start;
         align-items: center;
         height: 50px;
@@ -60,7 +60,8 @@
         padding: 10px 10px 30px 15px;
     }          
     .make-claim-value-description{
-        dispaly:flex;
+        display:flex;
+        flex-direction: column;
         justify-content: center;
         align-items: flex-start;
         height: 100%;
@@ -75,7 +76,7 @@
         box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
     }
     .make-claim-value-date{
-        dispaly:flex;
+        display:flex;
         justify-content: center;
         align-items: flex-start;
         align-items: center;
@@ -148,4 +149,150 @@
 
     </div>
     </form>
+</div>
+*@
+
+<style>
+    .make-claim-container{
+        display:grid;
+/*        grid-template-columns: 20% 40%;
+*/        
+        grid-template-columns: 30% 50%;
+        grid-auto-rows: minmax(70px, auto);
+        justify-content: center;
+        align-content:center;
+        padding-top: 7%;
+        grid-template-areas: 
+        "header header"
+        "sidebar content"
+        "sidebar content"
+        "sidebar content"
+        "sidebar content"
+        "sidebar content"
+        "sidebar content"
+        "sidebar content"
+    }
+    .make-claim-name{
+        font-family: sans-serif;
+        font-size: 17px;
+        font-weight: 100;
+        padding: 30px 15% 0px 15%; 
+        border-bottom: 1px solid #908eb2;
+    }       
+    .make-claim-value{
+        padding: 10px 0px 0px 10px; 
+    }
+    .make-claim-title{
+        display:flex;
+        grid-area: header;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+        color:white;
+        font-size: 30px;
+        font-weight: 700;
+        background-color: #3229ac;
+        border: 2px solid black;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom:none;
+    }
+    .make-claim-side-bar{
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        background-color:#dad7fd;
+        grid-area: sidebar;
+        font-family: sans-serif;
+        font-size: 17px;
+        font-weight: 100;
+        padding-top: 20px; 
+        border: 1px solid black;
+        border-right: none;
+        border-top: none;
+        border-bottom-left-radius: 10px;
+        box-shadow:4px 4px 4px rgba(5, 5, 5, .2);
+
+    }    
+    .make-claim-content{
+        grid-area: content;
+        padding: 30px 0px 0px 10px; 
+        background-color:#ffebea;
+        border: 2px solid black;
+        border-top:none;
+        border-left: none;
+        border-bottom-right-radius:10px;
+        box-shadow:5px 5px 5px rgba(5, 5, 5, .2);
+    }
+    .policyId{
+        width:70%;
+    }
+    .date{
+        width:70%;
+    }
+    .description{
+        padding-top: 15px;
+        height:60%;
+    }
+    .claim-textarea{
+        width: 90%;
+        height: 90%;
+        resize: none;
+        padding:10px 0px 0px 10px;
+        background-color:white;
+        box-shadow:4px 4px rgba(5, 5, 5, .1);
+        border-left: 1px solid silver;
+    }
+    .make-claim-submit{
+        display:flex;
+        justify-content: flex-end;
+        padding-right: 60px;
+        width: 100%;
+    }
+    .make-claim-submit-button:hover{
+         background-color: blue;
+
+    }
+    .make-claim-submit-button{
+        background-color: royalblue;
+        color: white;
+        font-size: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 50px;
+        border-radius: 20px;
+    }
+</style>
+
+@model NJInsurancePlatform.Models.Claim
+@{
+
+}
+<div class="make-claim-container">
+    <div class="make-claim-title">Make a Policy Claim</div>
+    <div class="make-claim-side-bar">
+        <div class="make-claim-name">PolicyID:</div>
+        <div class="make-claim-name">Claim Date:</div>
+        <div class="make-claim-name">Claim Description:</div>
+    </div>
+    <div class="make-claim-content">
+        <div class="make-claim-value policyId">
+            <label hidden asp-for="PolicyMUID"></label>
+            <input readonly asp-for="PolicyMUID" 
+             style="border: none;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:#ffe7e5;box-shadow:4px 4px rgba(5, 5, 5, .1);"/>
+        </div>
+        <div class="make-claim-value date">
+            <label hidden asp-for="DateOfClaim"></label>
+            <input type="date" asp-for="DateOfClaim" 
+            style="border:1px solid;margin:0px 0px 0px 0px;padding:0px 10px 0px 10px;background-color:white;box-shadow:4px 4px rgba(5, 5, 5, .1)"/>
+        </div>
+        <div class="make-claim-value description">
+            <label hidden asp-for="ClaimUserDescription"></label>
+            <textarea asp-for="ClaimUserDescription" class="claim-textarea">
+            </textarea>
+        </div>        
+        <div class="make-claim-submit">
+            <input class="make-claim-submit-button" type="submit" value="Submit Claim"/>
+        </div>
+    </div>    
 </div>
