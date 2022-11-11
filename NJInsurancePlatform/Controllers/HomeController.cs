@@ -46,7 +46,10 @@ namespace NJInsurancePlatform.Controllers
             {
                 // assign new record to "user" 
                 // assign value from input field
-                var user = new ApplicationUser { UserName = model.UserName };
+                var user = new ApplicationUser 
+                { 
+                    UserName = model.UserName, 
+                };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
                 var result = await userManager.CreateAsync(user, model.PasswordHash);

@@ -36,5 +36,8 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Active")]
         [Required(ErrorMessage = "Missing - Active")]
         public bool Active { get; set; }
+
+        [DisplayName("Unpaid Transaction")]
+        public IEnumerable<Transaction>? Transactions { get; set; }
     }
 }

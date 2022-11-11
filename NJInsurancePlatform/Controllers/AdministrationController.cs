@@ -21,13 +21,14 @@ namespace NJInsurancePlatform.Controllers
             this.userManager = userManager;
         }
 
+        // CREATE ROLES "GET REQUEST"
         [HttpGet]                                                                        // Routes user to create Role login (If Authorized)
         public IActionResult CreateRole()
         {
             return View();
         }
 
-
+        // GET ROLES "POST REQUEST" ---------------------------------------------------
         [HttpPost]                                                                        // Post to database
         public async Task <IActionResult> CreateRole(CreateRoleViewModel model)          // Binding did not work in this context
         {
@@ -54,6 +55,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         
+        // GET ROLES "GET REQUEST" ---------------------------------------------------
         [HttpGet]
         //[Authorize(Roles = "Admin")]
         public IActionResult GetRoles()                                                          // Method to get all roles
@@ -63,6 +65,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        // EDIT ROLES "GET REQUEST" ----------------------------------------------------
         [HttpGet]
         public async Task<IActionResult> EditRole(string Id)
         {
@@ -93,6 +96,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        // EDIT ROLES "POST REQUEST" ------------------------------------------------------
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleModelView model)
         {
@@ -122,7 +126,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
-
+        // DELETE ROLES "GET REQUEST" -----------------------------------------------------
         [HttpGet]
         public async Task<IActionResult> DeleteRole(string id)
         {
@@ -151,8 +155,9 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        // EDIT USER ROLES "GET REQUEST" ---------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> EditUsersInRole(string roleId)
+        public async Task<IActionResult> EditUsersInRole(string roleId)         // Search role by id
         {
             ViewBag.roleId = roleId;                                                // store roleId in "ViewBag" To acces in the view
             var role = await roleManager.FindByIdAsync(roleId);
@@ -162,9 +167,9 @@ namespace NJInsurancePlatform.Controllers
                 ViewBag.ErrorMessage = $"Role with id of {roleId} NOT FOUND";
             }
 
-            var model = new List<UserRoleViewModel>();
+            var model = new List<UserRoleViewModel>();              // instantiate a list of "UserRoleViewModel" Objects
 
-            foreach(var user in userManager.Users)
+            foreach(var user in userManager.Users)                      // create "UserRoleViewModel" Object for each user
             {
                 var userRoleViewModel = new UserRoleViewModel
                 {
@@ -172,7 +177,7 @@ namespace NJInsurancePlatform.Controllers
                     userName = user.UserName,
                 };
 
-                if(await userManager.IsInRoleAsync(user, role.Name))
+                if(await userManager.IsInRoleAsync(user, role.Name))        // access if user is in role
                 {
                     userRoleViewModel.IsSelected = true;
                 }
@@ -181,13 +186,14 @@ namespace NJInsurancePlatform.Controllers
                     userRoleViewModel.IsSelected = false;
                 }
 
-                model.Add(userRoleViewModel);
+                model.Add(userRoleViewModel);                            // after "IsSelected" status is accessed, add to "model" list.
             }
-            return View(model);
+            return View(model);                                     // pass "model" list to the view to display "checked" or "unchecked"
         }
 
 
-        [HttpPost]
+        // EDIT USER ROLES "POST REQUEST" ------------------------------------------------
+        [HttpPost]                                                                                    // when submit is clicked from "EditUsersInRole" View Model, the full list of iterated objects is passed
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)        // Note: "string roleId" Parameter is coming from the url
 
         {
@@ -199,9 +205,10 @@ namespace NJInsurancePlatform.Controllers
                 return View("NotFound");
             }
 
+            // iterate over the entire list of users to check the updated status of the "IsSelected" attribute
             for (int i = 0; i < model.Count; i++)
             {
-                var user = await userManager.FindByIdAsync(model[i].Userid);
+                var user = await userManager.FindByIdAsync(model[i].Userid);                        // check each "UserRoleViewModel" object                       
                 IdentityResult result = null;                                                                   // Initialize null variable for result
 
                 if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))                 // If User is Selected, And NOT already in this role
@@ -219,16 +226,18 @@ namespace NJInsurancePlatform.Controllers
                     continue;       
                 }
 
-                if (result.Succeeded)                                                                           // If Added or Deleted Successfully
+                // continue iteration to check "IsSelected" status until you reach the end
+                if (result.Succeeded)                                                             // After each user is added or deleted from the role, check if iteration is complete
                 {
-                    if (i < (model.Count - 1)) continue;                                                        // AND iteration is NOT complete, continue to next iteration
-                    else return RedirectToAction("EditRole", new {id = role.Id});                               // If iteration is complete redirect to Current Role using "role.Id"
+                    if (i < (model.Count - 1)) continue;                                                // if iteration is NOT complete, continue iteration
+                    else return RedirectToAction("EditRole", new {id = role.Id});                               // If iteration is complete redirect to Current Role Edit Page using "role.Id"
                 }
             }   
-            return RedirectToAction("EditRole", new { id = role.Id });                                          //If Nothing is selected, redirect to Edit Role View
+            return RedirectToAction("EditRole", new { id = role.Id });                                   //If Nothing is selected, redirect to current role Edit page View
         }
 
-        // ACCESS DENIED
+
+        // ACCESS DENIED "GET REQUEST" -----------------------------------------------------
         [HttpGet]
         [AllowAnonymous]
         public IActionResult AccessDenied()
