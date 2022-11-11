@@ -19,6 +19,7 @@
        text-align: right;
    }
 </style>
+
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
@@ -26,9 +27,15 @@
         <h6 class="time">(Current Time)</h6>
     </span>
     <span class="weather-right">
-        <h3>Current Weather</h3>
+        <h4>Current Weather</h4>
         <h6 class="weather-h6">(Display temp) || (Rainy, Sunny, Cloudy, Ect.)</h6>
+        <h4>Current Balance</h4>
+        <h6>$183.12</h6>
     </span>
+</div>
+<div>
+    <div>
+    </div>
 </div>
 
 <div class="row" style="margin-top: 100px">
@@ -106,20 +113,16 @@
     </div>
 
 
-@*    <div class="">
-        <div class="row">
-                <h4 class="center-align"><i class="material-icons mini" style="color: red">priority_high</i>Policy Payment's Due</h4>
-            <div class="divider"></div>
-            <h6>Policy 1</h6>
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>View All Beneficieries</a>
 
-        </div>
-        <div class="row" style="margin-top: 100px">
-            <h4 class="center-align">Upcoming Policy Payments</h4>
-            <div class="divider"></div>
-            <h6>Policy 2</h6>
-            <h6>Policy 3</h6>
-        </div>
-    </div>*@
+  <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Hulk Smash</a></li>
+        <li><a href="#!">Iron Man</a></li>
+        <li><a href="#!">Tha Nos</a></li>
+      </ul>
+
 
     <a href="/Policy/PolicyRequest" class="waves-effect waves-light btn right light-blue" style="margin-bottom: 30px">Request A Policy</a>
 </div>
