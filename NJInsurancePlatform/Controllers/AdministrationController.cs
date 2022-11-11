@@ -240,6 +240,15 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        // GET PAID TRANSACTIONS "GET REQUEST"
+        [HttpGet]
+        public IActionResult PaidTransactions()
+        {
+            var transactions = _transactionRepository.GetTransactions();
+            return View(transactions);
+        }        
+
+
         // ACCESS DENIED "GET REQUEST" -----------------------------------------------------
         [HttpGet]
         [AllowAnonymous]
