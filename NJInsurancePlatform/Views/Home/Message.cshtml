@@ -36,6 +36,7 @@
 
     .groupRoomName h2 {
         font-size: 2.7vw;
+        font-family: Georgia;
     }
 
     .groupRoomList {
@@ -46,19 +47,22 @@
 
     .groupRoomNameList {
         margin-top: 0px;
+        border-top: solid 1px black;
     }
 
     .groupRoomNameList h2  {
         font-size:25px;
         font-weight:normal;
         margin-left: 10px;
+        font-family: Georgia;
     }
 
     .groupRoomNameList h3 {
-        font-size:20px;
+        font-size:16px;
         font-weight:normal;
         margin-top: -10px;
         margin-left: 10px;
+        font-family: 'Lucida Sans';
     }
 
     .groupRoomNameList li {
@@ -66,7 +70,7 @@
         justify-content: flex-start;
         align-items: center;
         padding-left: 10px;
-        border-bottom: solid 1px black;
+        border-bottom: solid 1px black; 
     }
 
     .chatBox {
@@ -95,6 +99,7 @@
         border-radius:5px;
         font-size: 25px;
         max-height: 70px;
+        font-family: Helvetica, sans-serif;
     }
 
     .groupChat .senderA {
@@ -139,7 +144,8 @@
         display:inline-block;
         font-size:13px;
         font-weight:normal;
-        margin-top: -50px
+        margin-top: -50px;
+        font-family: 'Lucida Sans';
     }
 
     #messageBox {
@@ -176,11 +182,28 @@
         margin-left: 10px;
     }
 
+    .createNewGroup {
+        display: flex;
+        justify-content: center;
+    }
+
+    .createNewGroupBtn {
+        border-radius: 10px;
+        font-size: 20px;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 </style>
 
 <div id="messageContainer">
     <div class="groupRoomName"><h2>Group One</h2></div>
     <div class="groupRoomList">
+        <div class="createNewGroup">
+            <button class="createNewGroupBtn"><i class="small material-icons">add</i><p>Create New Group</p></button>
+        </div>
         <ul class="groupRoomNameList">
             <li>
                 <i class="small material-icons">people</i>
