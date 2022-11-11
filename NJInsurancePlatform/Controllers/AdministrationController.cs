@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NJInsurancePlatform.Interfaces;
 using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Controllers
@@ -12,13 +13,15 @@ namespace NJInsurancePlatform.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ITransactionRepository _transactionRepository;
 
         // Create a Contructure to Inject RoleManager Service
         // Pass Identity Role as generic argument to Role Manager Class
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ITransactionRepository transactionRepository)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this._transactionRepository = transactionRepository;
         }
 
         // CREATE ROLES "GET REQUEST"
