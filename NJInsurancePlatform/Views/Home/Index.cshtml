@@ -6,11 +6,41 @@
     #PolicyList {
         border: 3px solid;
     }
+   .center-align{
+       background-color: #8080807f;
+   }
+   .welcome-container{
+      display: flex;
+      justify-content: space-between;
+   }
+   .welcome-left{
+   }
+   .weather-right{
+       text-align: right;
+   }
 </style>
 
+@*<-- User welcome & Weather-->*@
+<div class="welcome-container">
+    <span class="welcome-left">
+        <h3>Welcome User</h3>
+        <h6 class="time">(Current Time)</h6>
+    </span>
+    <span class="weather-right">
+        <h4>Current Weather</h4>
+        <h6 class="weather-h6">(Display temp) || (Rainy, Sunny, Cloudy, Ect.)</h6>
+        <h4>Current Balance</h4>
+        <h6>$183.12</h6>
+    </span>
+</div>
+<div>
+    <div>
+    </div>
+</div>
+
 <div class="row" style="margin-top: 100px">
-    <div class="col s4 center-align">
-        <h4>Policy List</h4>
+    <div class=""> @*class="col s4 center-align"*@
+        <h4 class="center-align">Policy List</h4>
         <table class="highlight centered responsive-table" id="PolicyList">
             <thead>
                 <tr>
@@ -19,7 +49,6 @@
                     <th>Date</th>
                 </tr>
             </thead>
-
             <tbody>
                 <tr>
                     <td>Policy 1</td>
@@ -38,23 +67,64 @@
                 </tr>
             </tbody>
         </table>
-        <a href="/Policy/PolicyRequest" class="waves-effect waves-light btn right light-blue" style="margin-top: 30px">Request A Policy</a>
-    </div>
-    <div class="col s4 right">
-        <div class="row">
-            <h5 class="center-align"><i class="material-icons small" style="color: red">priority_high</i>Policy Payment Due</h5>
-            <div class="divider"></div>
-            <h6>Policy 1</h6>
-
-        </div>
-        <div class="row" style="margin-top: 100px">
-            <h5 class="center-align">Upcoming Policy Payments</h5>
-            <div class="divider"></div>
-            <h6>Policy 1</h6>
-            <h6>Policy 3</h6>
-        </div>
     </div>
 
+    @*<-- Paymwnt info table -->*@
+     <div class="row"> @*class="col s4 center-align"*@
+        <h4 class="center-align">Payment Info</h4>
+        <table class="highlight responsive-table" id="">
+            <thead>
+                <tr>
+                    <th><i class="material-icons mini" style="color: red">priority_high</i>Policy Payment's Due</h5></th>
+                    <th></th>
+                    <th>Due Date</th>
+                    <th>Upcoming Policy Payments</th>
+                    <th></th>
+                    <th>Due Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Policy 1</td>
+                    <td></td>
+                    <td>11/10/2022</td> 
+                    <td>Policy 1</td>
+                    <td></td>
+                    <td>12/10/2022</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Policy 2</td>
+                    <td></td>
+                    <td>02/22/2023</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Policy 3</td>
+                    <td></td>
+                    <td>03/03/2023</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>View All Beneficieries</a>
+
+  <!-- Dropdown Structure -->
+      <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Hulk Smash</a></li>
+        <li><a href="#!">Iron Man</a></li>
+        <li><a href="#!">Tha Nos</a></li>
+      </ul>
+
+
+    <a href="/Policy/PolicyRequest" class="waves-effect waves-light btn right light-blue" style="margin-bottom: 30px">Request A Policy</a>
 </div>
 
 
