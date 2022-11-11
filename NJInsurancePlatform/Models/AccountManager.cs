@@ -9,6 +9,11 @@ namespace NJInsurancePlatform.Models
 {
     public class AccountManager
     {
+        public AccountManager()
+        {
+            this.Transactions = new List<Transaction>();
+        }
+
         [Key]
         [ScaffoldColumn(false)]
         public Guid AccountManagerMUID { get; set; }

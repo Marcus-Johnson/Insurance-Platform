@@ -242,10 +242,28 @@ namespace NJInsurancePlatform.Controllers
 
         // GET PAID TRANSACTIONS "GET REQUEST"
         [HttpGet]
-        public IActionResult PaidTransactions()
+        public async Task<IActionResult> PaidTransactions()
         {
-            var transactions = _transactionRepository.GetTransactions();
-            return View(transactions);
+            // Test By Seeding DataBase with One Transaction
+            //var seed = new Transaction()
+            //{
+            //    CustomerMUID = Guid.NewGuid(),
+            //    PolicyMUID = Guid.NewGuid(),
+            //    isPaymentComplete = false,
+            //    PaymentAmount = 200,
+            //    PaymentDate = DateTime.Now,
+            //};
+
+            //_transactionRepository.InsertTransaction(seed);
+            //_transactionRepository.Save();
+
+            var transactions = await _transactionRepository.GetTransactions();
+            //System.Diagnostics.Debug.WriteLine(transactions.Count());
+            var accountManager = new AccountManager();
+            var accountManagerTransactions = accountManager.Transactions.ToList();
+
+            return View(accountManager);
+            //return View();
         }        
 
 
@@ -256,7 +274,5 @@ namespace NJInsurancePlatform.Controllers
         {
             return View();
         }
-
-
     }
 }
