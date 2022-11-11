@@ -3,4 +3,14 @@
 }
 <h1>Unpaid Transactions</h1>
 
+<div style="display:flex; justify-content:column">
+    @foreach(var transaction in Model.Transactions)
+    {
+        <span>@Html.DisplayFor(modelItem => transaction.isPaymentComplete)</span>
+        <span>@Html.DisplayFor(modelItem => transaction.PaymentDate)</span>
+    }
+
+
+</div>
+
 

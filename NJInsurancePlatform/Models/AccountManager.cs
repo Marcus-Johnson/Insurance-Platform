@@ -9,6 +9,7 @@ namespace NJInsurancePlatform.Models
 {
     public class AccountManager
     {
+        public List<Transaction>? Transactions { get; set; }
         public AccountManager()
         {
             this.Transactions = new List<Transaction>();
@@ -42,7 +43,5 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Active")]
         public bool Active { get; set; }
 
-        [DisplayName("Unpaid Transaction")]
-        public IEnumerable<Transaction>? Transactions { get; set; }
     }
 }

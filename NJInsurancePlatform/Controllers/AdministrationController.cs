@@ -259,8 +259,15 @@ namespace NJInsurancePlatform.Controllers
 
             var transactions = await _transactionRepository.GetTransactions();
             //System.Diagnostics.Debug.WriteLine(transactions.Count());
-            var accountManager = new AccountManager();
-            var accountManagerTransactions = accountManager.Transactions.ToList();
+            AccountManager? accountManager = new AccountManager();
+            //var accountManagerTransactions = accountManager.Transactions.ToList();
+
+            foreach(var transaction in transactions)
+            {
+                accountManager.Transactions.Add(transaction);
+
+            }
+            //System.Diagnostics.Debug.WriteLine(accountManager.Transactions.Count());
 
             return View(accountManager);
             //return View();
