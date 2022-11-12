@@ -11,7 +11,7 @@ namespace NJInsurancePlatform.Models
     {
         [Key]
         [ScaffoldColumn(false)]
-        public Guid AccountManagerMUID { get; set; }
+        public Guid? AccountManagerMUID { get; set; }
 
         [DisplayName("First Name")]
         [Required(ErrorMessage = "Missing - First Name")]
