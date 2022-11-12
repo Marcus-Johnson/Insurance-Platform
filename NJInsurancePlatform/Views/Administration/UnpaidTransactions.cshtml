@@ -1,0 +1,33 @@
+﻿@model NJInsurancePlatform.Models.AccountManager
+@{
+}
+<h1>Unpaid Transactions</h1>
+
+<form class="col s12" method="post" action="#">
+    <div>
+
+            @for (int i = 0; i < Model.Transactions.Count; i++)
+            {
+                <p>
+                    <label>
+                        <input type="checkbox" asp-for="@Model.Transactions[i].isPaymentComplete" checked="@Model.Transactions[i].isPaymentComplete" />
+                        <span>
+                            <input type="hidden" asp-for="@Model.Transactions[i].TransactionMUID">
+                            <input type="hidden" asp-for="@Model.Transactions[i].PolicyMUID">
+                            <input type="hidden" asp-for="@Model.Transactions[i].CustomerMUID">
+                            <input type="hidden" asp-for="@Model.Transactions[i].PaymentAmount">
+                            <input type="hidden" asp-for="@Model.Transactions[i].PaymentDate">
+                            <label asp-for="@Model.Transactions[i].isPaymentComplete" style="font-size: 20px;border:1px solid;">@Model.Transactions[i].TransactionMUID</label>
+                        </span>
+                    </label>
+                </p>
+            }
+        </div>
+            <button class="btn waves-effect waves-light" type="submit">Update</button>
+@*            <button class="btn waves-effect waves-light red" asp-action="EditRole" asp-route-Id="@roleId">Cancel</button>
+*@        </div>
+    </div>
+
+</form>
+
+
