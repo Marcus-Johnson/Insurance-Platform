@@ -1,0 +1,135 @@
+﻿@{
+    ViewData["Title"] = "Frequently Asked Questions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    body {
+        overflow-x: hidden;
+    }
+
+    #FAQContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-rows: 200px 300px 200px 250px;
+        width: 100vw;
+        height: 100vh;
+        grid-auto-flow: column;
+        gap: 0px 0px;
+        grid-template-areas:
+            "FAQSearchContainer FAQSearchContainer FAQSearchContainer FAQSearchContainer"
+            "qAndAContainer qAndAContainer qAndAContainer qAndAContainer"
+            "qAndAContainer qAndAContainer qAndAContainer qAndAContainer"
+            "qAndAContainer qAndAContainer qAndAContainer qAndAContainer";
+        margin-left: -300px;
+    }
+
+    .FAQSearchContainer {
+        grid-area: FAQSearchContainer;
+        color: white;
+        background-color: #513ec5;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        font-family: 'Lucida Sans';
+    }
+
+    #searchBar {
+        background-color: white;
+        width: 1000px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-input-placeholder {
+        text-align: center;
+    }
+
+    :-moz-placeholder {
+        text-align: center;
+    }
+
+    .qAndAContainer {
+        grid-area: qAndAContainer;
+        margin-top: 20px;
+    }
+    .collapsible-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-family: 'Lucida Sans';
+    }
+
+    .collapsible-body span {
+        font-family: 'Franklin Gothic Medium';
+    }
+
+
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var instances = M.Collapsible.init(elems, options);
+    });
+</script>
+
+<div id="FAQContainer">
+    <div class="FAQSearchContainer">
+            <h2>Frequently Asked Questions</h2>
+            <input type="text" id="searchBar" placeholder="Search" />
+    </div>
+    <div class="qAndAContainer">
+        <div class="row">
+            <div class="col s6">
+                <ul class="collapsible expandable">
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="large material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col s6">
+                <ul class="collapsible expandable">
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                    <li>
+                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

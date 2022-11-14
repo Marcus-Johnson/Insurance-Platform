@@ -144,5 +144,10 @@ namespace NJInsurancePlatform.Controllers
         {
             return View();
         }
+
+        public IActionResult FAQ()
+        {
+            return View();
+        }
     }
 }
