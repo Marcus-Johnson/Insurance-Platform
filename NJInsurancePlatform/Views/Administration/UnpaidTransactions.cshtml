@@ -23,7 +23,8 @@
         font-size: 40px;
         font-weight:800px;
         color:white;
-        background-color: #4a2da8;
+        background-color: #11438c;
+;
         border:1px solid black;
         border-top-right-radius:10px;
         border-top-left-radius:10px;
@@ -45,6 +46,9 @@
     }  
     .unpaid-content-row:nth-child(2n+0){
         background-color: white;
+    }     
+    .unpaid-content-row{
+        padding-top: 20px;
     }          
     .unpaid-content-inner-container{
         width:100%;
@@ -78,7 +82,6 @@
     }
      .unpaid-footer{
         grid-area: footer;
-        background-color: purple;
     }
     .unpaid-button{
         font-family:sans-serif;
@@ -94,7 +97,8 @@
         justify-content: space-between;
         align-items:center;
         width:100%;
-        height: 40px;
+        height: 30px;
+        border-bottom:1px solid silver;
     }    
     .unpaid-content-name{
         font-size: 17px;
@@ -108,9 +112,11 @@
         font-family: sans-serif;
         height:90px;
         width:100%;
+        padding-left:30px;
+        padding-right:30px;
     }
     .unpaid-footer{
-        background-color:#4a2da8;
+        background-color:#11438c;
         border:1px solid black;
         border-top: none;
         border-bottom-right-radius:10px;
@@ -124,6 +130,7 @@
 @{
 }
 
+    
 <form method="post" asp-controller="Administration">
     <div class="unpaid-container">
 
@@ -154,12 +161,16 @@
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentAmount"></label>
-                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].PaymentAmount">
+                            <input style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].PaymentAmount">
                         </div>
+                        <span asp-validation-for="@Model.Transactions[i].PaymentAmount"></span>
+
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentDate"></label>
-                            <input  readonly style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
+                            <input placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
                         </div>
+                        <span asp-validation-for="@Model.Transactions[i].PaymentDate"></span>
+
                         <div class="unpaid-content-value">
                            <label class="unpaid-content-name" asp-for="@Model.Transactions[i].isPaymentComplete"></label>
                             <label>
@@ -170,9 +181,9 @@
                         </div>
                         <div class="unpaid-button-div">
                             <span>
-                                <label class="btn waves-effect blue" asp-for="@Model.Transactions[i].isPaymentComplete">Payment Complete</label>
+                                <label class="btn waves-effect #283593 indigo darken-3" asp-for="@Model.Transactions[i].isPaymentComplete">Update Payment</label>
                             </span>
-                                <button class="btn waves-effect waves-light" type="submit">Update</button>
+                                <button class="btn waves-effect #283593 indigo darken-3" type="submit">Submit ALL</button>
                         </div>
                     </label>
                  </div>
@@ -192,6 +203,8 @@
         </div>
     </div>
 </form>
+
+
 
 
 

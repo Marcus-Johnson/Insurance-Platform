@@ -41,7 +41,7 @@ namespace NJInsurancePlatform.Controllers
                 }
             }
 
-            if (model.Transactions?.Count == 0 || model.Transactions == null) return RedirectToAction("Administration", "AllTransactionsPaid");
+            if (model.Transactions?.Count == 0 || model.Transactions == null) return RedirectToAction("AllPaymentsComplete", "Administration");
 
             return View(model);                                                             // Pass AccountManager to View
         }
@@ -51,9 +51,13 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> UnpaidTransactions(AccountManager model)
         {
+
             for (int i = 0; i < model.Transactions?.Count; i++)
             {
-                _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transaction
+                if(model.Transactions[i].isPaymentComplete == true)
+                {
+                    _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
+                }
 
                 if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
 
@@ -63,19 +67,7 @@ namespace NJInsurancePlatform.Controllers
                 }
             }
 
-            var transactions = await _transactionRepository.GetTransactions();
-            foreach (var transaction in transactions)
-            {
-                if(transaction.isPaymentComplete == false)
-                {
-                    model.Transactions?.Add(transaction);
-                }
-                if(model.Transactions?.Count == 0)
-                {
-                    return RedirectToAction("Administration","AllTransactionsPaid");
-                }
-            }
-            return View(model);
+            return RedirectToAction("UpdateRecorded", "Administration");
         }
 
 
@@ -85,9 +77,22 @@ namespace NJInsurancePlatform.Controllers
         public IActionResult AccessDenied()
         {
             return View();
-        }
-
-        public IActionResult AllTransactionsPaid()
+        }        
+        
+        
+        // ALL PAYMENTS COMPLETE "GET REQUEST" ---------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AllPaymentsComplete()
+        {
+            return View();
+        }        
+        
+        
+        // COMPLETE PAYMENT RECORDED "GET REQUEST" ---------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult UpdateRecorded()
         {
             return View();
         }
