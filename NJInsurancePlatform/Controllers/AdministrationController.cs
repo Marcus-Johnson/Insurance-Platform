@@ -247,22 +247,6 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> UnpaidTransactions()
         {
-            //var custGuid = new Guid();
-            //var policyGuid = new Guid();
-            //DateTime date = DateTime.Now;
-
-            //var addTransaction = new Transaction()
-            //{
-            //    CustomerMUID = custGuid,
-            //    PolicyMUID =    policyGuid,
-            //    isPaymentComplete = false,
-            //    PaymentAmount = 1287.29,
-            //    PaymentDate = date,
-            //};
-
-            //_transactionRepository.InsertTransaction(addTransaction);
-            //_transactionRepository.Save();
-
             var transactions = await _transactionRepository.GetTransactions();             // get Transactions from Database
             var model = new AccountManager();
 
@@ -302,6 +286,53 @@ namespace NJInsurancePlatform.Controllers
 
             return RedirectToAction("UpdateRecorded", "Administration");
         }
+
+
+
+        // GET PAID TRANSACTIONS "GET REQUEST" ------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        public async Task<IActionResult> PaidTransactions()
+        {
+            var transactions = await _transactionRepository.GetTransactions();               // get Transactions from Database
+            var model = new AccountManager();
+
+            foreach (var transaction in transactions)                                        // populate AccountManager Transactions List
+            {
+                if (transaction.isPaymentComplete == true)
+                {
+                    model.Transactions?.Add(transaction);
+                }
+            }
+
+            if (model.Transactions?.Count == 0 || model.Transactions == null) return RedirectToAction("NoPaymentsComplete", "Administration");
+
+            return View(model);                                                             // Pass AccountManager to View
+        }
+
+
+        // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
+        [HttpPost]
+        public async Task<IActionResult> PaidTransactions(AccountManager model)
+        {
+
+            for (int i = 0; i < model.Transactions?.Count; i++)
+            {
+                if (model.Transactions[i].isPaymentComplete == false)
+                {
+                    _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
+                }
+
+                if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
+
+                else
+                {
+                    _transactionRepository.Save();
+                }
+            }
+
+            return RedirectToAction("UpdateRecorded", "Administration");
+        }
+
 
 
         // ACCESS DENIED "GET REQUEST" ---------------------------------------------------------------------------------------------------------
