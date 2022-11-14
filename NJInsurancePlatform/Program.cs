@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.Models;
+using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Interfaces;
 using System.Configuration;
 using Microsoft.AspNetCore.Identity;

@@ -2,6 +2,7 @@ using NJInsurancePlatform.Models;
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using System;
+using NJInsurancePlatform.InterfaceImplementation;
 
 namespace NJInsurancePlatform.Interfaces
 {

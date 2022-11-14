@@ -2,11 +2,11 @@ using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using NJInsurancePlatform.Models;
 using System;
 
-namespace NJInsurancePlatform.Interfaces
+namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface iGroupRoomMessageRepository : IDisposable
     {
-        Task<IEnumerable<GroupRoomMessage>>GetMessages();
+        Task<IEnumerable<GroupRoomMessage>> GetMessages();
 
         Task<GroupRoomMessage> GetMessagesByID(Guid GroupRoomMessageMUID);
 

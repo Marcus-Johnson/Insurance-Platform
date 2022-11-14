@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NJInsurancePlatform.Interfaces;
+using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
 using System.Diagnostics;
 

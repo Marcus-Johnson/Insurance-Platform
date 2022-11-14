@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
+using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
 using System;
 

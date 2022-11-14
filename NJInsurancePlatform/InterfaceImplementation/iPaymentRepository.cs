@@ -1,7 +1,7 @@
 ﻿using NJInsurancePlatform.Models;
 using System;
 
-namespace NJInsurancePlatform.Interfaces
+namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface IPaymentRepository : IDisposable
     {
