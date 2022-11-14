@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.Models;
+using NJInsurancePlatform.Interfaces;
 using System.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -8,9 +9,13 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Transaction Repository Dependency Injection
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<InsuranceCorpDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("InsureConnect")));
+
 // Application user Dependency Injection
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<InsuranceCorpDbContext>().AddDefaultTokenProviders();  //Change To IDENTITY CONTEXT
 

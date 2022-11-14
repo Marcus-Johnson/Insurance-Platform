@@ -9,6 +9,12 @@ namespace NJInsurancePlatform.Models
 {
     public class AccountManager
     {
+        public List<Transaction>? Transactions { get; set; }
+        public AccountManager()
+        {
+            this.Transactions = new List<Transaction>();
+        }
+
         [Key]
         [ScaffoldColumn(false)]
         public Guid? AccountManagerMUID { get; set; }
@@ -36,5 +42,6 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Active")]
         [Required(ErrorMessage = "Missing - Active")]
         public bool Active { get; set; }
+
     }
 }
