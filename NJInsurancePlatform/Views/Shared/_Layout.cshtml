@@ -99,6 +99,46 @@
                     <a asp-controller="" asp-action="" class="breadcrumb">@ViewContext.RouteData.Values["controller"]</a>
                     <a asp-controller="@ViewContext.RouteData.Values["controller"]" asp-action=@ViewContext.RouteData.Values["action"] class="breadcrumb">@ViewContext.RouteData.Values["action"]</a>
             </div>
+            } else {
+                <div class="nav-content" style="display: flex; justify-content: center; width: 100%; align-items: center;">
+                    <!-- Modal Trigger -->
+                    <a class="waves-effect waves-light btn modal-trigger indigo" style="justify-content: center; align-items: center; display: flex; margin-bottom: 1%;" href="#modal1">Make a Claim</a>
+
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal" style="color: darkseagreen; background-color: cadetblue;">
+                        <div class="modal-content">
+                            <div class="row">
+                                <input placeholder="PolicyMUID" type="text">
+                                <label style="color:black" for="PolicyMUID">PolicyMUID</label>
+                            </div>
+                            <div class="row">
+                                <input placeholder="DateOfClaim" type="text">
+                                <label style="color:black" for="DateOfClaim">DateOfClaim</label>
+                            </div>
+                            <div class="row">
+                                <input placeholder="ClaimUserDescription" type="text">
+                                <label style="color:black" for="ClaimUserDescription">ClaimUserDescription</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close out</a>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var elems = document.querySelectorAll('.modal');
+                        var instances = M.Modal.init(elems);
+                    });
+                </script>
+@*                <script>
+                    $(document).ready(function(){$('#modal1').modal();})
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var elems = document.querySelectorAll('#modal');
+                        var instances = M.Modal.init(elems, options);
+                        instances.open();
+                    });
+                </script>*@
             }
 
         </nav>

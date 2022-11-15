@@ -49,3 +49,13 @@ footer {
 .logout-hover:hover {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+.modal {
+    background-color: cadetblue;
+    color:darkseagreen;
+}
+
+.modal-content {
+    background-color: cadetblue;
+    color: darkseagreen;
+}
