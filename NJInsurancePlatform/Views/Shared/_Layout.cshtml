@@ -36,7 +36,19 @@
 
                     <!-- Dropdown Trigger -->
                     <li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">My Profile<i class="material-icons left">account_circle</i></a></li>
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
+                            @if (signInManager.IsSignedIn(User))
+                            {
+                                <span>@User.Identity.Name</span>
+                            }
+                            else
+                            {
+                                <span>My Profile</span>
+                            }
+                            <i class="material-icons left">account_circle</i>
+                        </a>
+                    </li>
 
                     @if (signInManager.IsSignedIn(User))
                     {
@@ -93,13 +105,18 @@
                 </ul>
             </div>
 
-            @if (@ViewContext.RouteData.Values["action"].ToString() != "Index")
+            @if (@ViewData["Title"] != null)
             {
-            <div class="nav-content">
+                <div class="nav-content">
                     <a asp-controller="" asp-action="" class="breadcrumb">@ViewContext.RouteData.Values["controller"]</a>
-                    <a asp-controller="@ViewContext.RouteData.Values["controller"]" asp-action=@ViewContext.RouteData.Values["action"] class="breadcrumb">@ViewContext.RouteData.Values["action"]</a>
-            </div>
+                    <a asp-controller="@ViewContext.RouteData.Values["controller"]" asp-action=@ViewContext.RouteData.Values["action"] class="breadcrumb">@ViewData["Title"]</a>
+                </div>
+                
+                <div class="indigo lighten-1" style="padding:1px">
+                    <h3 class="header center">@ViewData["Title"]</h3>
+                    </div>
             }
+
 
         </nav>
 
@@ -130,7 +147,7 @@
         </ul>
     </header>
     <main>
-        <div>
+        <div style="padding-top:25px">
             @RenderBody()
 
             <!--Chat Button-->
@@ -153,6 +170,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="~/js/site.js"></script>
-    @await RenderSectionAsync("Scripts", required: false);
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
