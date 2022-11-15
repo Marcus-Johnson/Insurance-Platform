@@ -2,6 +2,10 @@
 
 Demonstrate the capabilities of Rapid Prototyping a set of User Stories using Agile methodologies. 
 
+## Screenshots
+
+Update the ReadMe with screenshots.
+
 ## Installation
 
 
