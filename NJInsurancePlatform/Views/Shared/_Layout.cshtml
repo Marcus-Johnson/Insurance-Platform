@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Identity
-
+@model NJInsurancePlatform.Models.Claim
 @*TESTING FUNCTIONALIY OF ROLE CREATION AND FUNCTION*@
 
 @inject SignInManager<ApplicationUser> signInManager;
@@ -114,6 +114,57 @@
                 <div class="indigo lighten-1" style="padding:1px">
                     <h3 class="header center">@ViewData["Title"]</h3>
                     </div>
+            }
+            else
+            {
+                <div class="nav-content" style="display: flex; justify-content: center; width: 100%; align-items: center;">
+                    <!-- Modal Trigger -->
+                    <button class="waves-effect waves-light btn btn-large white modal-trigger" style="border-radius: 40px;width:15%;color:purple; font-weight:600; justify-content: center; align-items: center; display: flex; margin-bottom: 1%;" href="#modal1">Make a Claim</button>
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal bottom-sheet">
+                        <form method="post">
+                            <div class="modal-content">
+                            <div class="row">
+                                @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
+                                <ul id='dropdown1' class='dropdown-content'>
+                                    <label asp-for="PolicyMUID" hidden></label>
+                                        <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
+                                    <li class="divider" tabindex="-1"></li>
+                                        <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
+                                    </ul>
+                                <br />
+                                commented out above is the dropdown*@
+                                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" asp-for="PolicyMUID">
+                                    <label asp-for="PolicyMUID" style="color:black">Policy ID</label>
+                            </div>
+                            <div class="row">
+                                <input readonly placeholder=@DateTime.Now.ToString() type="text" asp-for="DateOfClaim">
+                                <label asp-for="DateOfClaim" style="color:black" for="DateOfClaim">Date of Claim</label>
+                            </div>
+                            <div class="row">
+                                <input placeholder="Description" type="text" asp-for="ClaimUserDescription">
+                                <label asp-for="ClaimUserDescription"style="color:black" for="ClaimUserDescription">Description</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="waves-effect waves-light btn-large white" style="margin: 1%; border-radius: 40px;width:15%;color:purple; font-weight:600">Submit</button>
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close out</a>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+                <script>
+                    //this script below adds event listener for the Modal
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var elems = document.querySelectorAll('.modal');
+                        var instances = M.Modal.init(elems);
+                    });
+                    //this script beflow adds event listener for the dropdown inside the Modal
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var elems = document.querySelectorAll('.dropdown-trigger');
+                        var instances = M.Dropdown.init(elems, options);
+                    });
+                </script>
             }
 
 
