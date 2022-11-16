@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "All Current Roles";
+}
 
-<h1>All Current Roles</h1>
 @if (Model.Any())
 {
     <a class="" style="width:auto" asp-action="CreateRole" asp-controller="Administration">Add New</a>
