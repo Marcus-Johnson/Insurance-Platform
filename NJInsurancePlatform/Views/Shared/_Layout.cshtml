@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Identity
-
+@model NJInsurancePlatform.Models.Claim
 @*TESTING FUNCTIONALIY OF ROLE CREATION AND FUNCTION*@
 
 @inject SignInManager<ApplicationUser> signInManager;
@@ -122,38 +122,35 @@
                     <button class="waves-effect waves-light btn btn-large white modal-trigger" style="border-radius: 40px;width:15%;color:purple; font-weight:600; justify-content: center; align-items: center; display: flex; margin-bottom: 1%;" href="#modal1">Make a Claim</button>
                     <!-- Modal Structure -->
                     <div id="modal1" class="modal bottom-sheet">
-                        <div class="modal-content">
+                        <form method="post">
+                            <div class="modal-content">
                             <div class="row">
                                 <a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
                                 <ul id='dropdown1' class='dropdown-content'>
                                     @*This is where we will have a for loop iterating over our policies to populate the dropdown.*@
                                     @*for the time being, dummy data is thrown into here*@
-                                    <li><a href="#!">one</a></li>
+                                    <label asp-for="PolicyMUID" hidden></label>
+                                        <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
                                     <li class="divider" tabindex="-1"></li>
-                                    <li><a href="#!">two</a></li>
-                                    <li class="divider" tabindex="-1"></li>
-                                    <li><a href="#!">three</a></li>
-                                    <li class="divider" tabindex="-1"></li>
-                                    <li><a href="#!"><i class="material-icons">view_module</i>four</a></li>
-                                    <li class="divider" tabindex="-1"></li>
-                                    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-                                </ul>
+                                        <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
+                                    </ul>
                                 <br />
                                 @*<label style="color:black" for="PolicyMUID">PolicyMUID</label>*@
                             </div>
                             <div class="row">
-                                <input readonly placeholder=@DateTime.Now.ToString() type="text">
-                                <label style="color:black" for="DateOfClaim">Date of Claim</label>
+                                <input readonly placeholder=@DateTime.Now.ToString() type="text" asp-for="DateOfClaim">
+                                <label asp-for="DateOfClaim" style="color:black" for="DateOfClaim">Date of Claim</label>
                             </div>
                             <div class="row">
-                                <input placeholder="Description" type="text">
-                                <label style="color:black" for="ClaimUserDescription">Description</label>
+                                <input placeholder="Description" type="text" asp-for="ClaimUserDescription">
+                                <label asp-for="ClaimUserDescription"style="color:black" for="ClaimUserDescription">Description</label>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="submit" class="waves-effect waves-light btn-large white" style="margin: 1%; border-radius: 40px;width:15%;color:purple; font-weight:600">Submit</button>
                             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close out</a>
                         </div>
+                        </form>
                     </div>
                 </div>
                 <script>
