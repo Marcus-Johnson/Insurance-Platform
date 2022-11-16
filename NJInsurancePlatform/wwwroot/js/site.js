@@ -40,3 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         disableWeekends: true
     });
 });
+
+// Tabs
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tabs');
+        M.Tabs.init(tabs, {
+            swipeable: true,
+            responsiveThreshold: 300
+        });
+    });
