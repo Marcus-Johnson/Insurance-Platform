@@ -121,10 +121,10 @@
                     <!-- Modal Trigger -->
                     <button class="waves-effect waves-light btn btn-large white modal-trigger" style="border-radius: 40px;width:15%;color:purple; font-weight:600; justify-content: center; align-items: center; display: flex; margin-bottom: 1%;" href="#modal1">Make a Claim</button>
                     <!-- Modal Structure -->
-                    <div id="modal1" class="modal" style="color: darkseagreen; background-color: cadetblue;">
+                    <div id="modal1" class="modal bottom-sheet">
                         <div class="modal-content">
                             <div class="row">
-                                <a style=width:25%; class='dropdown-trigger btn' href='#' data-target='dropdown1'>My Policies</a>
+                                <a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
                                 <ul id='dropdown1' class='dropdown-content'>
                                     @*This is where we will have a for loop iterating over our policies to populate the dropdown.*@
                                     @*for the time being, dummy data is thrown into here*@
@@ -139,19 +139,19 @@
                                     <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
                                 </ul>
                                 <br />
-                                <label style="color:black" for="PolicyMUID">PolicyMUID</label>
+                                @*<label style="color:black" for="PolicyMUID">PolicyMUID</label>*@
                             </div>
                             <div class="row">
                                 <input readonly placeholder=@DateTime.Now.ToString() type="text">
                                 <label style="color:black" for="DateOfClaim">Date of Claim</label>
                             </div>
                             <div class="row">
-                                <input placeholder="ClaimUserDescription" type="text">
-                                <label style="color:black" for="ClaimUserDescription">ClaimUserDescription</label>
+                                <input placeholder="Description" type="text">
+                                <label style="color:black" for="ClaimUserDescription">Description</label>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="waves-effect waves-light btn-large white" style="margin: 0; border-radius: 40px;width:15%;color:purple; font-weight:600">Submit</button>
+                            <button type="submit" class="waves-effect waves-light btn-large white" style="margin: 1%; border-radius: 40px;width:15%;color:purple; font-weight:600">Submit</button>
                             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close out</a>
                         </div>
                     </div>
