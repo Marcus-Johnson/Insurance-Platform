@@ -7,9 +7,11 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class GroupRoomMessageRepository : iGroupRoomMessageRepository,IDisposable
+    public class GroupRoomMessageRepository : iGroupRoomMessageRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
+        private bool disposed = false;
+        
         public async Task<IEnumerable<GroupRoomMessage>> GetMessages()
         {
             return _databaseContext.GroupRoomMessages.ToList();
@@ -49,9 +51,22 @@ namespace NJInsurancePlatform.Interfaces
             await _databaseContext.SaveChangesAsync();
         }
 
-        public async void Dispose()
+        protected virtual void Dispose(bool disposing)
         {
-            throw new NotImplementedException();
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
