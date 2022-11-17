@@ -9,6 +9,7 @@ namespace NJInsurancePlatform.Interfaces
     public class PolicyRepository : iPolicyRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
+        private bool disposed = false;
         
         public async Task<IEnumerable<Policy>> GetPolicies()
         {
@@ -49,9 +50,22 @@ namespace NJInsurancePlatform.Interfaces
             await _databaseContext.SaveChangesAsync();
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
