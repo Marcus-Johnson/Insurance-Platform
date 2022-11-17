@@ -12,8 +12,8 @@ using NJInsurancePlatform.Data;
 namespace NJInsurancePlatform.Migrations
 {
     [DbContext(typeof(InsuranceCorpDbContext))]
-    [Migration("20221108223419_migration2")]
-    partial class migration2
+    [Migration("20221117160157_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,22 +53,22 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7f416a94-ae45-419c-85e3-341d80e67b7f",
-                            ConcurrencyStamp = "343f2388-5fc2-4faf-b65a-bca90970221a",
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+                            ConcurrencyStamp = "696e630f-0364-4477-87d5-ad883bec5293",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "eb408119-362f-4873-abe8-ca9b41e326f4",
-                            ConcurrencyStamp = "60366701-b432-4c78-b901-a4e502e5e01f",
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
+                            ConcurrencyStamp = "25f70d31-1e4c-4a37-ad55-ae046d08df42",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "183da404-2d6f-4c83-91de-af4cf69ccf0f",
-                            ConcurrencyStamp = "2882b99c-47a0-4c85-87d9-363001f466f0",
+                            Id = "2c5e174e-3b0e-446f-86af-483d56fd7212",
+                            ConcurrencyStamp = "a73ce350-eb55-42ba-931f-4907601ea112",
                             Name = "Beneficiary",
                             NormalizedName = "BENEFICIARY"
                         });
@@ -230,6 +230,23 @@ namespace NJInsurancePlatform.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210"
+                        },
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb8",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7212"
+                        },
+                        new
+                        {
+                            UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7",
+                            RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7211"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -570,6 +587,23 @@ namespace NJInsurancePlatform.Migrations
                     b.HasKey("PolicyMUID");
 
                     b.ToTable("Policies");
+
+                    b.HasData(
+                        new
+                        {
+                            PolicyMUID = new Guid("339fddaa-7337-4ed8-8461-57b0b8fa910a"),
+                            AnnualLimitOfCoverage = 14999.99,
+                            Deductible = 100.25,
+                            NameOfPolicy = "Dental Gold",
+                            OutOfPocketLimit = 999.99000000000001,
+                            PolicyEnd_Date = new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3859),
+                            PolicyNumber = 10101,
+                            PolicyOwner = "Customer",
+                            PolicyPaidOffAmount = 0.0,
+                            PolicyPaymentisDue = false,
+                            PolicyStart_Date = new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3801),
+                            PolicyTotalAmount = 35000.0
+                        });
                 });
 
             modelBuilder.Entity("NJInsurancePlatform.Models.Transaction", b =>
@@ -603,6 +637,50 @@ namespace NJInsurancePlatform.Migrations
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4fac6d52-44d9-4bdb-bdb6-20224a20af22",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJv3+I49M0AGTi0AtbBM0XPCbNo8sV7YvFwCvcoCpw/I58WttmGw4w1+7+u/HoPOQA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1d7d0e81-c5cd-4f57-975e-3ac77f67b72e",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb8",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b791d6dd-101e-4c2c-89e5-480068027f9f",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "BENEFICIARY",
+                            PasswordHash = "AQAAAAEAACcQAAAAELaebwmbYL2Y3zxUMM57+ku0wQAwHBxqYrO6k220R4XVyqreepTWXOTeen/Z6k9Ivg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "a8164dce-cd1d-4689-a020-178e43aec929",
+                            TwoFactorEnabled = false,
+                            UserName = "beneficiary"
+                        },
+                        new
+                        {
+                            Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ea7d7170-80af-4ec8-a316-32db29ffe264",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "CUSTOMER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAIkG/XrZw/4x9ekCFqWpZiWBe76eQcO93cU8hLmeA7Vd0kDBpiBMCRxDRZ5eFVVuQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "b5e5d031-353b-4c7f-9237-0aba9f4f6164",
+                            TwoFactorEnabled = false,
+                            UserName = "customer"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

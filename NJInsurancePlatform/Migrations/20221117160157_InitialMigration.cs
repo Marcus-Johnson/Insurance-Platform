@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NJInsurancePlatform.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -311,9 +311,9 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "389475c2-5feb-4489-883a-719866e12720", "Admin", "ADMIN" },
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7211", "05c1eb9f-0435-4ffe-9cb3-7c8cf8820314", "Customer", "CUSTOMER" },
-                    { "2c5e174e-3b0e-446f-86af-483d56fd7212", "124bdc48-0776-4e95-8ec4-d65af8638e69", "Beneficiary", "BENEFICIARY" }
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7210", "696e630f-0364-4477-87d5-ad883bec5293", "Admin", "ADMIN" },
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7211", "25f70d31-1e4c-4a37-ad55-ae046d08df42", "Customer", "CUSTOMER" },
+                    { "2c5e174e-3b0e-446f-86af-483d56fd7212", "a73ce350-eb55-42ba-931f-4907601ea112", "Beneficiary", "BENEFICIARY" }
                 });
 
             migrationBuilder.InsertData(
@@ -321,15 +321,15 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, "825608ef-ec67-4389-93ec-7c85ef687593", "ApplicationUser", null, false, false, null, null, "CUSTOMER", "AQAAAAEAACcQAAAAEKejXlrzKuEgrfZmci4/054a77ArJmbL4m7lKHhAtxo2BZCEYlW6uqkTdk1HxhOJSw==", null, false, "95605667-b560-4a85-b7bf-77428b0d90d0", false, "customer" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, "6623287e-3f55-4bdd-aa16-86155b681c4c", "ApplicationUser", null, false, false, null, null, "BENEFICIARY", "AQAAAAEAACcQAAAAEKAtlz3REs4k9Wxhw+lB0KmvVf26j/3XTGHsKn09VzRolSNcabrLqnf9UUxpt4U3Kw==", null, false, "7c7f9f16-01a7-46fe-8fe5-9a29792163de", false, "beneficiary" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "02abc639-d53a-4ab6-a64c-45741f87fb85", "ApplicationUser", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAECWGK9g7abstEe1xVDLnjuv7+lnGLt4vFdoaTaq78FQoWLv2roi2d7jcZ/hLCN/iqw==", null, false, "dac33129-2a14-411f-821b-4c5665c7afab", false, "admin" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, "ea7d7170-80af-4ec8-a316-32db29ffe264", "ApplicationUser", null, false, false, null, null, "CUSTOMER", "AQAAAAEAACcQAAAAEAIkG/XrZw/4x9ekCFqWpZiWBe76eQcO93cU8hLmeA7Vd0kDBpiBMCRxDRZ5eFVVuQ==", null, false, "b5e5d031-353b-4c7f-9237-0aba9f4f6164", false, "customer" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, "b791d6dd-101e-4c2c-89e5-480068027f9f", "ApplicationUser", null, false, false, null, null, "BENEFICIARY", "AQAAAAEAACcQAAAAELaebwmbYL2Y3zxUMM57+ku0wQAwHBxqYrO6k220R4XVyqreepTWXOTeen/Z6k9Ivg==", null, false, "a8164dce-cd1d-4689-a020-178e43aec929", false, "beneficiary" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "4fac6d52-44d9-4bdb-bdb6-20224a20af22", "ApplicationUser", null, false, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEJv3+I49M0AGTi0AtbBM0XPCbNo8sV7YvFwCvcoCpw/I58WttmGw4w1+7+u/HoPOQA==", null, false, "1d7d0e81-c5cd-4f57-975e-3ac77f67b72e", false, "admin" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Policies",
                 columns: new[] { "PolicyMUID", "AnnualLimitOfCoverage", "Deductible", "NameOfPolicy", "OutOfPocketLimit", "PolicyEnd_Date", "PolicyNumber", "PolicyOwner", "PolicyPaidOffAmount", "PolicyPaymentisDue", "PolicyStart_Date", "PolicyTotalAmount" },
-                values: new object[] { new Guid("65bebea1-55ef-4580-9d53-788925fe1df7"), 14999.99, 100.25, "Dental Gold", 999.99000000000001, new DateTime(2022, 11, 11, 17, 1, 18, 377, DateTimeKind.Local).AddTicks(3739), 10101, "Customer", 0.0, false, new DateTime(2022, 11, 11, 17, 1, 18, 377, DateTimeKind.Local).AddTicks(3710), 35000.0 });
+                values: new object[] { new Guid("339fddaa-7337-4ed8-8461-57b0b8fa910a"), 14999.99, 100.25, "Dental Gold", 999.99000000000001, new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3859), 10101, "Customer", 0.0, false, new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3801), 35000.0 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
