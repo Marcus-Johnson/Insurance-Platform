@@ -9,6 +9,7 @@ namespace NJInsurancePlatform.Interfaces
     public class TransactionRepository : ITransactionRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
+        private bool disposed = false;
 
         public TransactionRepository(InsuranceCorpDbContext databaseContext)
         {
@@ -53,9 +54,22 @@ namespace NJInsurancePlatform.Interfaces
             await _databaseContext.SaveChangesAsync();
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
