@@ -66,7 +66,7 @@ namespace NJInsurancePlatform.Interfaces
             this.disposed = true;
         }
 
-        public void dispose()
+        public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
