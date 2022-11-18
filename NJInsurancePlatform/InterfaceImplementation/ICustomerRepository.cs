@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface ICustomerRepository : IDisposable
+    public interface ICustomerRepository 
     {
         Task<IEnumerable<Customer>> GetCustomer();
         Task<Customer> GetCustomerById(Guid CustomerMUID);
