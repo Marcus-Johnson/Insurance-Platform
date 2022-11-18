@@ -4,9 +4,7 @@
 }
 
 <div class="container">
-
-    <div class="row" style="height: 60vh; border: solid 2px grey; border-radius: 15px">
-
+    <div class="row" id="border" style="height: 60vh">
         <div class="col s3" style="height: 100%; overflow: auto">
             <div class="collection">
                 @for (int i = 0; i < 20; i++)
@@ -21,21 +19,19 @@
         </div>
 
         <div class="col s9" style="height: 100%">
-
             <h4 class="center indigo-text" style="height: 5%">Group Name</h4>
 
-            <div style="height: 70%; overflow:auto; border-top: solid 1px lightgrey; border-bottom: solid 1px lightgrey">
-
+            <div id="messages-wrapper">
                 @for (int i = 0; i < 10; i++)
                 {
-                    <p class="left indigo lighten-4" style="width: 70%; border:solid 1px; border-radius: 3rem; padding: 10px">
+                    <p class="left indigo lighten-4" id="messages">
                         Received: @DateTime.Now.ToString("hh:mm tt") <br>
                         The overflow property specifies whether to clip
                         content or to add scrollbars when an element's
                         content is too big to fit in a specified area.
                     </p>
 
-                    <p class="right indigo lighten-5" style="width: 70%; border:solid 1px; border-radius: 3rem; padding: 10px">
+                    <p class="right indigo lighten-5" id="messages">
                         Sent: @DateTime.Now.ToString("hh:mm tt") <br>
                         The overflow property specifies whether to clip
                         content or to add scrollbars when an element's
@@ -44,13 +40,19 @@
                 }
             </div>
 
-            <div style="height: 20%; display: flex; flex-direction: row">
-                <div class="input-field" style="flex-grow: 4; overflow:hidden; height: 90%; margin: auto 0">
+            <div id="message-box">
+                <div class="input-field" id="message-input">
                     <textarea id="textarea1" class="materialize-textarea"></textarea>
                     <label for="textarea1">Message</label>
                 </div>
-                <div class="" style="height: 100%; display:flex;flex-direction:column;justify-content:space-evenly; align-items:center; width: 10%">
-                    <a class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">add</i></a>
+
+                <div id="button-wrapper">
+                    <div class="file-field input-field">
+                        <div class="btn-floating indigo">
+                            <input type="file">
+                            <i class="material-icons">add</i>
+                        </div>
+                    </div>
                     <a class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></a>
                 </div>
             </div>
