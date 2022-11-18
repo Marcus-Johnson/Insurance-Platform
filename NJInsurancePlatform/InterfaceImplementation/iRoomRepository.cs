@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface iRoomRepository : IDisposable
+    public interface iRoomRepository
     {
         Task<IEnumerable<GroupRoom>> GetGroupRooms();
 
