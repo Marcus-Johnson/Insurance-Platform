@@ -6,7 +6,7 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class BeneficiaryRepository: iBeneficiaryRepository, IDisposable
+    public class BeneficiaryRepository: iBeneficiaryRepository
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
