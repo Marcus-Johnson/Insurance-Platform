@@ -57,22 +57,22 @@ namespace NJInsurancePlatform.Interfaces
             await _dbContext.SaveChangesAsync();
         }
         
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
+        //protected virtual void Dispose(bool disposing)
+        //{
+            //if (!this.disposed)
+            //{
+                //if (disposing)
+                //{
+                    //context.Dispose();
+                //}
+            //}
+            //this.disposed = true;
+        //}
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        //public void Dispose()
+        //{
+            //Dispose(true);
+            //GC.SuppressFinalize(this);
+        //}
     }
 }
