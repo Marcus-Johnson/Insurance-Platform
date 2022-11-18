@@ -465,8 +465,10 @@ namespace NJInsurancePlatform.Data
                     Gender = "male",
                     CreatedDate = DateTime.Now,
                     Active = true,
-                    UserName = "PatrickL@mymail.com",
-                    NormalizedUserName = "PATRICKL@MYMAIL.COM",
+                    //UserName = "PatrickL@mymail.com",
+                    //NormalizedUserName = "PATRICKL@MYMAIL.COM",                    //UserName = "PatrickL@mymail.com",
+                    UserName = "Pato",                    //UserName = "PatrickL@mymail.com",
+                    NormalizedUserName = "PATO",
                     PasswordHash = hasher.HashPassword(null, "Password123@")
 
                 },
