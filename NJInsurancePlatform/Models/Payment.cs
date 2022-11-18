@@ -12,7 +12,7 @@ namespace NJInsurancePlatform.Models
 
         [ForeignKey("BillMUID")]
         [ScaffoldColumn(false)]
-        public virtual int BillMUID { get; set; }
+        public virtual Guid BillMUID { get; set; }
 
         [Required(ErrorMessage = "Paid Date is required.")]
         [DisplayName("Paid Date")]

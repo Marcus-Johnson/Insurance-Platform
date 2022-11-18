@@ -12,7 +12,7 @@ namespace NJInsurancePlatform.Models
 
         [ForeignKey("PolicyMUID")]
         [ScaffoldColumn(false)]
-        public virtual int PolicyMUID { get; set; }
+        public virtual Guid PolicyMUID { get; set; }
 
         [Required(ErrorMessage = "Missing - Policy Due Date")]
         [DisplayName("Policy Due Date")]
