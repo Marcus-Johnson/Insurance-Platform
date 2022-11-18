@@ -19,9 +19,7 @@ namespace NJInsurancePlatform.Data
         }
 
         public DbSet<GroupRoomMessage> GroupRoomMessages { get; set; }
-
         public DbSet<Policy> Policies { get; set; }
-        public DbSet<GroupRoom> GroupRooms { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Bill> Bills { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -85,98 +83,98 @@ namespace NJInsurancePlatform.Data
             var GroupSend3 = new Guid("bce87d97-e9b6-483f-8ed2-4200aeef26ba");
             var groupSend4 = new Guid("93fa9038-9c45-42cf-993b-fc3d15764f18");
 
-            //Seed "Admin" Role
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                Name = "Admin",
-                NormalizedName = "ADMIN"
-            });
+            ////Seed "Admin" Role
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole
+            //{
+            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+            //    Name = "Admin",
+            //    NormalizedName = "ADMIN"
+            //});
 
-            //Seed "Customer" Role
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                Name = "Customer",
-                NormalizedName = "CUSTOMER"
-            });
+            ////Seed "Customer" Role
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole
+            //{
+            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
+            //    Name = "Customer",
+            //    NormalizedName = "CUSTOMER"
+            //});
 
-            //Seed "Beneficiary" Role
-            builder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Id = "2c5e174e-3b0e-446f-86af-483d56fd7212", // primary key
-                Name = "Beneficiary",
-                NormalizedName = "BENEFICIARY",
-            });
-
-
-
-
-            //Seed the "admin" User to AspNetUsers table
-            builder.Entity<ApplicationUser>().HasData(
-                new ApplicationUser
-                {
-                    Id = "8e445865-a24d-4543-a6c6-9443d048cdb9", // primary key
-                    UserName = "admin",
-                    EmailAddress = "admin",
-                    NormalizedUserName = "ADMIN",
-                    PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-                }
-            );
-
-            //Beneficiary
-            builder.Entity<ApplicationUser>().HasData(
-               new ApplicationUser
-               {
-                   Id = "8e445865-a24d-4543-a6c6-9443d048cdb8", // primary key
-                   UserName = "beneficiary",
-                   EmailAddress = "beneficiary",
-                   NormalizedUserName = "BENEFICIARY",
-                   PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-               }
-            );
-
-            //Customer
-            builder.Entity<ApplicationUser>().HasData(
-               new ApplicationUser
-               {
-                   Id = "8e445865-a24d-4543-a6c6-9443d048cdb7", // primary key
-                   UserName = "customer",
-                   EmailAddress = "customer",
-                   NormalizedUserName = "CUSTOMER",
-                   PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-               }
-            );
+            ////Seed "Beneficiary" Role
+            //builder.Entity<IdentityRole>().HasData(new IdentityRole
+            //{
+            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7212", // primary key
+            //    Name = "Beneficiary",
+            //    NormalizedName = "BENEFICIARY",
+            //});
 
 
 
-            //Seeding the relation between our user and role to AspNetUserRoles table
-            //Admin
-            builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>
-                {
-                    RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                    UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
-                }
-            );
 
-            //Beneficiary
-            builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>
-                {
-                    RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7212",
-                    UserId = "8e445865-a24d-4543-a6c6-9443d048cdb8"
-                }
-            );
+            ////Seed the "admin" User to AspNetUsers table
+            //builder.Entity<ApplicationUser>().HasData(
+            //    new ApplicationUser
+            //    {
+            //        Id = "8e445865-a24d-4543-a6c6-9443d048cdb9", // primary key
+            //        UserName = "admin",
+            //        EmailAddress = "admin",
+            //        NormalizedUserName = "ADMIN",
+            //        PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
+            //    }
+            //);
 
-            //Customer
-            builder.Entity<IdentityUserRole<string>>().HasData(
-                new IdentityUserRole<string>
-                {
-                    RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                    UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
-                }
-            );
+            ////Beneficiary
+            //builder.Entity<ApplicationUser>().HasData(
+            //   new ApplicationUser
+            //   {
+            //       Id = "8e445865-a24d-4543-a6c6-9443d048cdb8", // primary key
+            //       UserName = "beneficiary",
+            //       EmailAddress = "beneficiary",
+            //       NormalizedUserName = "BENEFICIARY",
+            //       PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
+            //   }
+            //);
+
+            ////Customer
+            //builder.Entity<ApplicationUser>().HasData(
+            //   new ApplicationUser
+            //   {
+            //       Id = "8e445865-a24d-4543-a6c6-9443d048cdb7", // primary key
+            //       UserName = "customer",
+            //       EmailAddress = "customer",
+            //       NormalizedUserName = "CUSTOMER",
+            //       PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
+            //   }
+            //);
+
+
+
+            ////Seeding the relation between our user and role to AspNetUserRoles table
+            ////Admin
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string>
+            //    {
+            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
+            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
+            //    }
+            //);
+
+            ////Beneficiary
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string>
+            //    {
+            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7212",
+            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb8"
+            //    }
+            //);
+
+            ////Customer
+            //builder.Entity<IdentityUserRole<string>>().HasData(
+            //    new IdentityUserRole<string>
+            //    {
+            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7211",
+            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
+            //    }
+            //);
 
             builder.Entity<Policy>().HasData(
                 new Policy
@@ -446,8 +444,44 @@ namespace NJInsurancePlatform.Data
                 }
             );
 
+            // build roles
+            List<IdentityRole> roles = new List<IdentityRole>()
+            {
+                new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Name = "Beneficiary", NormalizedName = "BENEFICIARY" },
+                new IdentityRole { Name = "Customer", NormalizedName = "CUSTOMER" }
+            };
+
+            builder.Entity<IdentityRole>().HasData(roles);
+
+
             // Customers
-            builder.Entity<ApplicationUser>().HasData(
+            List<ApplicationUser> users = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
+                    UserName = "admin",
+                    EmailAddress = "admin",
+                    NormalizedUserName = "ADMIN",
+                    PasswordHash = hasher.HashPassword(null, "Password123@")
+                },
+               new ApplicationUser
+               {
+                   Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
+                   UserName = "customer",
+                   EmailAddress = "customer",
+                   NormalizedUserName = "CUSTOMER",
+                   PasswordHash = hasher.HashPassword(null, "Password123@")
+               },
+               new ApplicationUser
+               {
+                   Id = "8e445865-a24d-4543-a6c6-9443d048cdb8",
+                   UserName = "beneficiary",
+                   EmailAddress = "beneficiary",
+                   NormalizedUserName = "BENEFICIARY",
+                   PasswordHash = hasher.HashPassword(null, "Password123@")
+               },
                 new ApplicationUser
                 {
                     CustomerMUID = cust1,
@@ -467,9 +501,7 @@ namespace NJInsurancePlatform.Data
                     Gender = "male",
                     CreatedDate = DateTime.Now,
                     Active = true,
-                    //UserName = "PatrickL@mymail.com",
-                    //NormalizedUserName = "PATRICKL@MYMAIL.COM",                    //UserName = "PatrickL@mymail.com",
-                    UserName = "Pato",                    //UserName = "PatrickL@mymail.com",
+                    UserName = "Pato",
                     NormalizedUserName = "PATO",
                     PasswordHash = hasher.HashPassword(null, "Password123@")
 
@@ -542,11 +574,10 @@ namespace NJInsurancePlatform.Data
                     UserName = "LeonaW@mymail.com",
                     NormalizedUserName = "LEONAW@MYMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "Password123@")
-                }
-            );
+                },
 
             // Beneficiaries
-            builder.Entity<ApplicationUser>().HasData(
+            //builder.Entity<ApplicationUser>().HasData(
                 new ApplicationUser
                 {
                     BeneficiaryMUID = ben1,
@@ -615,7 +646,84 @@ namespace NJInsurancePlatform.Data
                     NormalizedUserName = "JOANAM@MYMAIL.COM",
                     PasswordHash = hasher.HashPassword(null, "Password123@")
                 }
-            );
+            };
+
+
+            builder.Entity<ApplicationUser>().HasData(users);
+
+
+            // Seed User in Roles
+            List<IdentityUserRole<string>> userRoles = new List<IdentityUserRole<string>>();
+
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[0].Id,
+                RoleId = roles.First(q => q.Name == "Admin").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[1].Id,
+                RoleId = roles.First(q => q.Name == "Customer").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[2].Id,
+                RoleId = roles.First(q => q.Name == "Beneficiary").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[3].Id,
+                RoleId = roles.First(q => q.Name == "Customer").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[4].Id,
+                RoleId = roles.First(q => q.Name == "Customer").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[5].Id,
+                RoleId = roles.First(q => q.Name == "Customer").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[6].Id,
+                RoleId = roles.First(q => q.Name == "Customer").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[7].Id,
+                RoleId = roles.First(q => q.Name == "Beneficiary").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[8].Id,
+                RoleId = roles.First(q => q.Name == "Beneficiary").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[9].Id,
+                RoleId = roles.First(q => q.Name == "Beneficiary").Id
+            });
+            userRoles.Add(new IdentityUserRole<string>
+            {
+                UserId = users[10].Id,
+                RoleId = roles.First(q => q.Name == "Beneficiary").Id
+            });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }
