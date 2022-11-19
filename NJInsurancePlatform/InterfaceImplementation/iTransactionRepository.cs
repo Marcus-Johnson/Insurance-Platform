@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface ITransactionRepository : IDisposable
+    public interface ITransactionRepository
     {
         Task<IEnumerable<Transaction>> GetTransactions();
 
