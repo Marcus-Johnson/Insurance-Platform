@@ -63,7 +63,7 @@ namespace NJInsurancePlatform.Interfaces
             {
                 if (disposing)
                 {
-                    context.Dispose();
+                    _dbContext.Dispose();
                 }
             }
             this.disposed = true;
