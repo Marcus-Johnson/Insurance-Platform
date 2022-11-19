@@ -6,7 +6,8 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class BeneficiaryRepository: iBeneficiaryRepository
+    public class BeneficiaryRepository : iBeneficiaryRepository, IDisposable
+
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
@@ -55,22 +56,22 @@ namespace NJInsurancePlatform.Interfaces
             await _databaseContext.SaveChangesAsync();
         }
 
-        //protected virtual void Dispose(bool disposing)
-        //{
-            //if (!this.disposed)
-            //{
-                //if (disposing)
-                //{
-                    //context.Dispose();
-                //}
-            //}
-            //this.disposed = true;
-        //}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _databaseContext.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
 
-        //public void Dispose()
-        //{
-            //Dispose(true);
-            //GC.SuppressFinalize(this);
-        //}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

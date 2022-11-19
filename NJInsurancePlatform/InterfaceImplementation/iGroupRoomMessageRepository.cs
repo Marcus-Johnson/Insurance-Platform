@@ -4,7 +4,7 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface iGroupRoomMessageRepository 
+    public interface iGroupRoomMessageRepository : IDisposable
     {
         Task<IEnumerable<GroupRoomMessage>> GetMessages();
 

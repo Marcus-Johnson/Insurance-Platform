@@ -3,7 +3,7 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface iPolicyRepository
+    public interface iPolicyRepository : IDisposable
     {
         Task<IEnumerable<Policy>> GetPolicies();
 
