@@ -2,10 +2,10 @@ name: "Super-Linter"
 
 on:
   push:
-    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+    branches: [ "Main" ]
   pull_request:
 
-    branches: [ "CENJ-3-visual-studios-create-the-project" ]
+    branches: [ "Main" ]
 
 jobs:
   build:
