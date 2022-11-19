@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NJInsurancePlatform.Controllers
 {
+
     [AllowAnonymous]
     public class ClaimController : Controller
     {
