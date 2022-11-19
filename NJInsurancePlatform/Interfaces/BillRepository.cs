@@ -5,7 +5,7 @@ using NJInsurancePlatform.Models;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class BillRepository : iBillRepository
+    public class BillRepository : iBillRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
