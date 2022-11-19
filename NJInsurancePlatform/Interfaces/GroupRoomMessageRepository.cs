@@ -7,7 +7,7 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class GroupRoomMessageRepository : iGroupRoomMessageRepository
+    public class GroupRoomMessageRepository : iGroupRoomMessageRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;

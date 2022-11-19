@@ -6,7 +6,7 @@ using NJInsurancePlatform.InterfaceImplementation;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class CustomerRepository : ICustomerRepository
+    public class CustomerRepository : ICustomerRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _dbContext;
         private bool disposed = false;
