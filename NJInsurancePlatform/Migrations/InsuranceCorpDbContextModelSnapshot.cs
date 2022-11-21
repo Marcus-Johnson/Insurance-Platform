@@ -52,21 +52,21 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "696e630f-0364-4477-87d5-ad883bec5293",
+                            ConcurrencyStamp = "3a365b64-69f1-43ef-9cd9-8e7d4152f0d1",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "25f70d31-1e4c-4a37-ad55-ae046d08df42",
+                            ConcurrencyStamp = "536b80a7-7484-42d9-9832-979341bd42ae",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7212",
-                            ConcurrencyStamp = "a73ce350-eb55-42ba-931f-4907601ea112",
+                            ConcurrencyStamp = "33d64499-c196-4f30-a5a5-23f5aa5dfd92",
                             Name = "Beneficiary",
                             NormalizedName = "BENEFICIARY"
                         });
@@ -589,17 +589,17 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            PolicyMUID = new Guid("339fddaa-7337-4ed8-8461-57b0b8fa910a"),
+                            PolicyMUID = new Guid("fa125974-0bd2-44bf-9fb4-9dd1c00db62b"),
                             AnnualLimitOfCoverage = 14999.99,
                             Deductible = 100.25,
                             NameOfPolicy = "Dental Gold",
                             OutOfPocketLimit = 999.99000000000001,
-                            PolicyEnd_Date = new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3859),
+                            PolicyEnd_Date = new DateTime(2022, 11, 21, 11, 21, 18, 747, DateTimeKind.Local).AddTicks(9504),
                             PolicyNumber = 10101,
                             PolicyOwner = "Customer",
                             PolicyPaidOffAmount = 0.0,
                             PolicyPaymentisDue = false,
-                            PolicyStart_Date = new DateTime(2022, 11, 17, 11, 1, 56, 655, DateTimeKind.Local).AddTicks(3801),
+                            PolicyStart_Date = new DateTime(2022, 11, 21, 11, 21, 18, 747, DateTimeKind.Local).AddTicks(9452),
                             PolicyTotalAmount = 35000.0
                         });
                 });
@@ -641,13 +641,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4fac6d52-44d9-4bdb-bdb6-20224a20af22",
+                            ConcurrencyStamp = "ba88ed05-be2b-46ee-ba4e-bd3890f5f5d4",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJv3+I49M0AGTi0AtbBM0XPCbNo8sV7YvFwCvcoCpw/I58WttmGw4w1+7+u/HoPOQA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPCNC1pDyatD9mte2E46m8X1BK0ZJltYgIprM4UI4TFzo+jpEGI8J6toC9jNhA2t6Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1d7d0e81-c5cd-4f57-975e-3ac77f67b72e",
+                            SecurityStamp = "3a2aa3dc-6ce8-4b43-bb1f-f3cb3aea8aa6",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -655,13 +655,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b791d6dd-101e-4c2c-89e5-480068027f9f",
+                            ConcurrencyStamp = "a3e0e9ff-28e8-4280-8499-a62a49cec867",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "BENEFICIARY",
-                            PasswordHash = "AQAAAAEAACcQAAAAELaebwmbYL2Y3zxUMM57+ku0wQAwHBxqYrO6k220R4XVyqreepTWXOTeen/Z6k9Ivg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO5nscIMyPzV9Jek/ubXRTT3DqW496rqgwTfsHifJvGJr456ViUV2srQR9u00nHubQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a8164dce-cd1d-4689-a020-178e43aec929",
+                            SecurityStamp = "97f346b5-8252-4962-8c64-d8654ee4cbf8",
                             TwoFactorEnabled = false,
                             UserName = "beneficiary"
                         },
@@ -669,13 +669,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea7d7170-80af-4ec8-a316-32db29ffe264",
+                            ConcurrencyStamp = "140e646b-4440-46d3-a7ce-e6f26dba7d5a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "CUSTOMER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAIkG/XrZw/4x9ekCFqWpZiWBe76eQcO93cU8hLmeA7Vd0kDBpiBMCRxDRZ5eFVVuQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOi55resam0G8DKhJBd9ONq9Kt6Q2x+XuUPYmDIdSyg10u45GdTVDBZrx+dPZWMlTA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b5e5d031-353b-4c7f-9237-0aba9f4f6164",
+                            SecurityStamp = "5d92230c-52e1-4174-a4bb-2a451b067074",
                             TwoFactorEnabled = false,
                             UserName = "customer"
                         });
