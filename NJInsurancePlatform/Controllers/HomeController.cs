@@ -23,7 +23,6 @@ namespace NJInsurancePlatform.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-
        
         }
 
