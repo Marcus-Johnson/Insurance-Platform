@@ -59,15 +59,16 @@ footer {
 #messages-wrapper {
     height: 70%;
     overflow: auto;
+    padding: 1rem;
     border-top: solid 1px lightgrey;
     border-bottom: solid 1px lightgrey;
 }
 
 #messages {
-    width: 70%;
-    border: solid 1px;
+    width: 75%;
+    border: solid 1px grey;
     border-radius: 3rem;
-    padding: 10px;
+    padding: 1rem;
 }
 
 #message-box {
@@ -82,7 +83,6 @@ footer {
     height: 90%;
     margin: auto 0;
 }
-
 #button-wrapper {
     height: 100%;
     display: flex;

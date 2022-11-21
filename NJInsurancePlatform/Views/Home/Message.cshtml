@@ -2,61 +2,67 @@
     ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    footer {
+        display: none;
+    }
+</style>
 
-<div class="container">
-    <div class="row" id="border" style="height: 60vh">
-        <div class="col s3" style="height: 100%; overflow: auto">
-            <div class="collection">
-                @for (int i = 0; i < 20; i++)
-                {
-                    <a class="collection-item">
-                        <span class="new badge indigo">4</span>
-                        <img src="~/images/Gx-Icon-Color.png" style="height: 30px">
-                        <b class="truncate indigo-text">Group Name truncated</b>
-                    </a>
-                }
-            </div>
+<div class="row" id="border" style="height: 70vh; width: 95vw">
+
+    <div class="col s3" style="height: 93%">
+        <a class="btn waves-effect waves-light indigo" style=" margin-top: 5px; border-radius: 2rem">Add Group<i class="material-icons left">add</i></a>
+
+        <div class="collection" style="height: 92%; overflow: auto">
+            @for (int i = 0; i < 20; i++)
+            {
+                <a class="collection-item">
+                    <span class="new badge indigo">4</span>
+                    <img src="~/images/Gx-Icon-Color.png" style="height: 30px">
+                    <b class="truncate indigo-text">Group Name truncated</b>
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="col s9" style="height: 94%; width: 75%">
+        <h4 class="center indigo-text">Group Name</h4>
+
+        <div id="messages-wrapper">
+            @for (int i = 0; i < 10; i++)
+            {
+                <p class="left indigo lighten-4" id="messages">
+                    Received: @DateTime.Now.ToString("hh:mm tt") <br>
+                    The overflow property specifies whether to clip
+                    content or to add scrollbars when an element's
+                    content is too big to fit in a specified area.
+                </p>
+
+                <p class="right indigo lighten-5" id="messages">
+                    Sent: @DateTime.Now.ToString("hh:mm tt") <br>
+                    The overflow property specifies whether to clip
+                    content or to add scrollbars when an element's
+                    content is too big to fit in a specified area.
+                </p>
+            }
         </div>
 
-        <div class="col s9" style="height: 100%">
-            <h4 class="center indigo-text" style="height: 5%">Group Name</h4>
 
-            <div id="messages-wrapper">
-                @for (int i = 0; i < 10; i++)
-                {
-                    <p class="left indigo lighten-4" id="messages">
-                        Received: @DateTime.Now.ToString("hh:mm tt") <br>
-                        The overflow property specifies whether to clip
-                        content or to add scrollbars when an element's
-                        content is too big to fit in a specified area.
-                    </p>
-
-                    <p class="right indigo lighten-5" id="messages">
-                        Sent: @DateTime.Now.ToString("hh:mm tt") <br>
-                        The overflow property specifies whether to clip
-                        content or to add scrollbars when an element's
-                        content is too big to fit in a specified area.
-                    </p>
-                }
+        <div id="message-box">
+            <div class="input-field" id="message-input">
+                <textarea id="message-textarea" class="materialize-textarea"style="height: 100%"></textarea>
+                <label for="message-textarea">Message</label>
             </div>
 
-            <div id="message-box">
-                <div class="input-field" id="message-input">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
-                    <label for="textarea1">Message</label>
-                </div>
-
-                <div id="button-wrapper">
-                    <div class="file-field input-field">
-                        <div class="btn-floating indigo">
-                            <input type="file">
-                            <i class="material-icons">add</i>
-                        </div>
+            <div id="button-wrapper">
+                <div class="file-field input-field">
+                    <div class="btn-floating indigo">
+                        <input type="file">
+                        <i class="material-icons">attach_file</i>
                     </div>
-                    <a class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></a>
                 </div>
+                <a class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></a>
             </div>
-
         </div>
     </div>
 </div>

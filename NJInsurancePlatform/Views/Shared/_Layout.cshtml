@@ -150,11 +150,14 @@
             @RenderBody()
 
             <!--Chat Button-->
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large indigo pulse" asp-controller="Home" asp-action="Message" target="">
+            @if (@ViewData["Title"] != "Messages")
+            {
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large indigo pulse" asp-controller="Home" asp-action="Message" target="">
                     <i class="large material-icons">chat</i>
                 </a>
             </div>
+            }
         </div>
     </main>
 
