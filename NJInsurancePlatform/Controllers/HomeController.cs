@@ -81,7 +81,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login()
+        public async Task<IActionResult> Login()
         {
             return View();
         }
