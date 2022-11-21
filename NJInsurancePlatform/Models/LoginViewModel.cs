@@ -7,6 +7,8 @@ namespace NJInsurancePlatform.Models
     [AllowAnonymous]
     public class LoginViewModel
     {
+        [Key]
+        public Guid loginMUID { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]

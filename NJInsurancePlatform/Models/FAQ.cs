@@ -21,8 +21,8 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Answer")]
         public string? Answer { get; set; }
 
-        [DisplayName("Date Created")]
-        [Required(ErrorMessage = "Missing - Date Created")]
-        public TimestampAttribute DateCreated { get; set; }
+        //[DisplayName("Date Created")]
+        //[Required(ErrorMessage = "Missing - Date Created")]
+        //public TimestampAttribute DateCreated { get; set; }
     }
 }
