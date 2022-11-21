@@ -22,7 +22,7 @@ function DarkMode() {
 }
 
 // Sidenav functionality
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function() {
     const MainSidenav = document.querySelectorAll('.sidenav');
     const ProfileSidenav = document.getElementById('profile-sidenav')
 
@@ -39,4 +39,13 @@ document.addEventListener('DOMContentLoaded', function () {
         format: 'mmmm dd, yyyy',
         disableWeekends: true
     });
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tabs');
+    M.Tabs.init(tabs, {
+        swipeable: true
+    });
 });
+
+
+
