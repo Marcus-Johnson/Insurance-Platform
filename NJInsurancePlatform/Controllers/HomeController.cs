@@ -4,6 +4,8 @@ using System.Diagnostics;
 using NJInsurancePlatform.Models;
 
 using Microsoft.AspNetCore.Authorization;
+using NJInsurancePlatform.InterfaceImplementation;
+
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -15,17 +17,16 @@ namespace NJInsurancePlatform.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly IHttpContextAccessor httpContextAccessor;
+        //private readonly iPolicyRepository policyRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-            this.httpContextAccessor = httpContextAccessor;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
