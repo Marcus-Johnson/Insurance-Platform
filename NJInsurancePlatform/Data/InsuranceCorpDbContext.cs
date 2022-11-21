@@ -28,6 +28,7 @@ namespace NJInsurancePlatform.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;  // For the purpos of Migration
         public DbSet<Beneficiary> Beneficiaries { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Claim> Claims { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
