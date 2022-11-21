@@ -12,9 +12,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Gx Insurance</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/css/site.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 </head>
 <body>
 
@@ -27,7 +27,7 @@
         <!--Main Navbar-->
         <nav class="nav-extended indigo darken-3">
             <div class="nav-wrapper">
-                <a href="/Home/Index" class="brand-logo">Gx Insurance<i class="material-icons">business</i></a>
+                <a href="/Home/Index" class="brand-logo">Insurance<img class="responsive-img left" src="~/images/Gx-Icon-White.png" style="height:40px; margin-top:12px; margin-right: 10px"></a>
                 <a href="#" data-target="main-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
                 <ul class="right hide-on-med-and-down">
@@ -201,11 +201,14 @@
             @RenderBody()
 
             <!--Chat Button-->
-            <div class="fixed-action-btn">
-                <a class="btn-floating btn-large indigo pulse" href="#" target="">
+            @if (@ViewData["Title"] != "Messages")
+            {
+                <div class="fixed-action-btn">
+                    <a class="btn-floating btn-large indigo pulse" asp-controller="Home" asp-action="Message" target="">
                     <i class="large material-icons">chat</i>
                 </a>
             </div>
+            }
         </div>
     </main>
 

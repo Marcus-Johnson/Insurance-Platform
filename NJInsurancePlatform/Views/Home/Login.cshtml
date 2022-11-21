@@ -51,7 +51,7 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="login-input-row">
-                <i class="material-icons left" style="color:purple">account_circle</i>
+                <i class="material-icons left indigo-text">person_outline</i>
                 <label asp-for="UserName" hidden></label>
                 <div class="login-input-box">
                 <input style="border:none;height:100%; width:50%;text-align:left;padding: 0px 0px 0px 60px" type="text"  placeholder="User Name" asp-for="UserName" />
@@ -61,7 +61,7 @@
             </div>
 
             <div class="login-input-row">
-                <i class="material-icons left" style="color:purple">enhanced_encryption</i>
+                <i class="material-icons left indigo-text">lock_outline</i>
                 <label asp-for="PasswordHash" hidden></label>
                 <div class="login-input-box">
                 <input style="border:none;height:100%; width:50%;text-align:left;padding: 0px 0px 0px 60px" type="password" placeholder="Password" asp-for="PasswordHash" />
@@ -73,7 +73,7 @@
             <div class="login-submit-button-container">
                <!-- <input  type="submit" value="Submit" class="btn btn-primary" /> -->
                 <a href="/Home/ForgotPassword">Forgot Password</a><br/><br/>
-                <button type="submit" class="waves-effect waves-light btn-large white" style="border-radius: 40px;width:100%;color:purple; font-weight:600">Submit<i class="material-icons right">keyboard_arrow_right</i></button>
+                <button type="submit" class="waves-effect waves-light btn-large" id="btn">Login<i class="material-icons right">login</i></button>
                 <br/><br/>
             </div>
         </form>
