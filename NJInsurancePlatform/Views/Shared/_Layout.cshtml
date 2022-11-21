@@ -2,8 +2,8 @@
 
 @inject SignInManager<ApplicationUser> signInManager;
 
-@model NJInsurancePlatform.Models.Claim
-
+@*@model NJInsurancePlatform.Models.Claim
+*@
 
 
 <!DOCTYPE html>
@@ -117,6 +117,7 @@
             }
             else
             {
+
                 <div class="nav-content" style="display: flex; justify-content: center; width: 100%; align-items: center;">
                     <!-- Modal Trigger -->
                     <button class="waves-effect waves-light btn btn-large white modal-trigger" style="border-radius: 40px;width:15%;color:purple; font-weight:600; justify-content: center; align-items: center; display: flex; margin-bottom: 1%;" href="#modal1">Make a Claim</button>
@@ -134,16 +135,16 @@
                                     </ul>
                                 <br />
                                 commented out above is the dropdown*@
-                                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" asp-for="PolicyMUID">
-                                    <label asp-for="PolicyMUID" style="color:black">Policy ID</label>
+                                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" for="PolicyMUID">
+                                    <label for="PolicyMUID" style="color:black">Policy ID</label>
                             </div>
                             <div class="row">
-                                <input readonly placeholder=@DateTime.Now.ToString() type="text" asp-for="DateOfClaim">
-                                <label asp-for="DateOfClaim" style="color:black" for="DateOfClaim">Date of Claim</label>
+                                <input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
+                                <label for="DateOfClaim" style="color:black" for="DateOfClaim">Date of Claim</label>
                             </div>
                             <div class="row">
-                                <input placeholder="Description" type="text" asp-for="ClaimUserDescription">
-                                <label asp-for="ClaimUserDescription"style="color:black" for="ClaimUserDescription">Description</label>
+                                <input placeholder="Description" type="text" for="ClaimUserDescription">
+                                <label for="ClaimUserDescription"style="color:black" for="ClaimUserDescription">Description</label>
                             </div>
                         </div>
                         <div class="modal-footer">

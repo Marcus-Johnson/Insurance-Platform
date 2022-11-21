@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJInsurancePlatform", "NJInsurancePlatform\NJInsurancePlatform.csproj", "{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NJInsurancePlatform.Tests", "NJInsurancePlatform.Tests\NJInsurancePlatform.Tests.csproj", "{2B9742CD-9D4F-4C5A-B294-FAA1455873E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9742CD-9D4F-4C5A-B294-FAA1455873E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9742CD-9D4F-4C5A-B294-FAA1455873E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9742CD-9D4F-4C5A-B294-FAA1455873E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9742CD-9D4F-4C5A-B294-FAA1455873E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
