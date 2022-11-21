@@ -45,7 +45,7 @@
    }
 
    .tabs .tab a{
-       color:#00294d
+       color:#00294d;
    }
 
   .tabs .tab a.active{
@@ -79,12 +79,6 @@
     @*Tabs for each policy*@
     
     <section class="policy-tab">
-        @for(int i=0; i <Model.Count; i++)
-        {
-            <a>@Model[i].NameOfPolicy</a>
-            <a>@Model[i].PolicyOwner</a>
-
-        }
         <div class="row">
             <div class="col s12">
             <ul class="tabs" id="tabs-swipe-demo">

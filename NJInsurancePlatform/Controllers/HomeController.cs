@@ -16,24 +16,20 @@ namespace NJInsurancePlatform.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly iPolicyRepository policyRepository;
+        //private readonly iPolicyRepository policyRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, iPolicyRepository policyRepository)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-            this.policyRepository = policyRepository;
+       
         }
 
         public async Task<IActionResult> Index()
         {
-            var policies = await policyRepository.GetPolicies();
-            var policydb = policies.ToList();
-            System.Diagnostics.Debug.WriteLine(">>>>" + policydb.Count);
 
-
-            return View(policydb);
+            return View();
         }
 
         [HttpGet]
