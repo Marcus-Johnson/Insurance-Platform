@@ -39,14 +39,16 @@ namespace NJInsurancePlatform.Controllers
 
         public IActionResult SignUp()
         {
+
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(ApplicationUser model)
+        public async Task<IActionResult> SignUp(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
+
                 // assign new record to "user" 
                 // assign value from input field
                 var user = new ApplicationUser 

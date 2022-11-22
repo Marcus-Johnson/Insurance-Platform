@@ -9,6 +9,10 @@ namespace NJInsurancePlatform.Models
         [ScaffoldColumn(false)]
         public Guid PolicyMUID { get; set; }
 
+        [DisplayName("Customer MUID")]
+        [Required]
+        public Guid CustomerMUID { get; set; }
+
         [DisplayName("Policy Number")]
         [Required(ErrorMessage = "Missing - PolicyNumber")]
         public int PolicyNumber { get; set; }
