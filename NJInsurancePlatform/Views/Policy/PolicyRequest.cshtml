@@ -2,7 +2,10 @@
     ViewData["Title"] = "Policy Request";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@*@Model NJInsurancePlatform.Models.Policy*@
+@*@model Policy;*@
+@*@using NJInsurancePlatform.Models;*@
+@*@using IEnumerable<ApplicationModelConventionExtensions.Policy>;*@
 <style>
     .policyButton {
         background-color: white;
@@ -17,44 +20,42 @@
     }
 </style>
 
+
 <div class="container">
 
     <div class="row">
         <div class="buttons">
 
-            @foreach ( var policy in Model)
+            @foreach (var policy in Model)
             {
-                @*@if (policy.Pending == true)
-                {*@
-                    <button class="policyButton">
-                        <h5>@policy.NameOfPolicy</h5>
-                        <hr size="1" width="90%" />
-                        <p>Policy total: @policy.PolicyTotalAmount</p>
-                        <p></p>
-                    </button>
-                //}
+                @if (policy.Pending == false || policy.Pending == null)
+                {
+                    @*@model Policy;*@
+
+                    <form method="post" asp-controller="Policy" asp-action="PolicyRequest">
+                        <button class="policyButton" asp-action="PolicyRequest">
+                            @*<input readonly type="text" HTML.DisplayFor("@policy.NameOfPolicy") value="@policy.NameOfPolicy"/>*@
+                            @*<label HTML.DisplayFor("@policy.NameOfPolicy")>Name Of Policy</label>*@
+                            @*<input readonly type="text" HTML.DisplayFor("@policy.PolicyOwner") value="@policy.PolicyOwner"/>*@
+                            <h5 HTML.DisplayFor("@policy.PolicyOwner")>@policy.NameOfPolicy</h5>
+                            <h5 HTML.DisplayFor("@policy.PolicyOwner")>@policy.PolicyOwner</h5>
+                            <hr size="1" width="90%" />
+                            <p HTML.DisplayFor("@policy.PolicyTotalAmount") style="margin-bottom: 5%; padding: 2%;">Policy total: @policy.PolicyTotalAmount</p>
+                            <p HTML.DisplayFor("@policy.PoicyPaidOffAmount") style="margin-bottom: 5%; padding: 2%;">Policy Paid off Amount: @policy.PolicyPaidOffAmount</p>
+                            <p HTML.DisplayFor("@policy.Deductible") style="margin-bottom: 5%; padding: 2%;">Policy Deductible: @policy.Deductible</p>
+                            <p HTML.DisplayFor("@policy.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;">Out of Pocket Limit: @policy.OutOfPocketLimit</p>
+                            <p HTML.DisplayFor("@policy.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;">Annual limit of coverage: @policy.AnnualLimitOfCoverage</p>
+                            <p HTML.DisplayFor("@policy.PolicyPaymentisDue") style="margin-bottom: 5%; padding: 2%;">Policy Payment Due: @policy.PolicyPaymentisDue</p>
+                            <p HTML.DisplayFor("@policy.PolicyMUID") style="margin-bottom: 5%; padding: 2%;">Policy ID: @policy.PolicyMUID</p>
+                            <p HTML.DisplayFor("@policy.PolicyNumber") style="margin-bottom: 5%; padding: 2%;">Policy Number: @policy.PolicyNumber</p>
+                            <p HTML.DisplayFor("@policy.PolicyStart_Date") style="margin-bottom: 5%; padding: 2%;">Start Date: @policy.PolicyStart_Date</p>
+                            <p HTML.DisplayFor("@policy.PolicyEnd_Date") style="margin-bottom: 5%; padding: 2%;">End Date: @policy.PolicyEnd_Date</p>
+                            <p HTML.DisplayFor("@policy.Pending") style="margin-bottom: 5%; padding: 2%;">Active?: @policy.Pending</p>
+                        </button>
+                    </form>
+                }
             }
 
-        <button class="policyButton">
-            <h5>Policy 1</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 1 Details</p>
-            <p>Premium: 00000</p>
-        </button>
-
-        <button class="policyButton">
-            <h5>Policy 2</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 2 Details</p>
-            <p>Premium: 00000</p>
-        </button>
-
-        <button class="policyButton">
-            <h5>Policy 3</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 3 Details</p>
-            <p>Premium: 00000</p>
-        </button>
         </div>
     </div>
     <button class="btn waves-effect waves-light right indigo" type="submit" name="action">
