@@ -2,66 +2,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    #PolicyList {
-        border: 3px solid;
-    }
-   .center-align{
-       background-color: #8080807f;
-   }
-   .welcome-container{
-      display: flex;
-      justify-content: space-between;
-   }
-   .welcome-left{
-   }
-   .weather-right{
-       text-align: right;
-   }
+ #PolicyList {
+ border: 3px solid;
+}
 
-   .policy-tab {
-       border:2px solid #58585b;
-       border-radius: 10px;
-       margin:  25px 70px 75px;
-       padding: 0;
-       box-sizing: border-box;
-   }
-  
+.center-align {
+    background-color: #8080807f;
+}
 
+.welcome-container {
+    display: flex;
+    justify-content: space-between;
+}
 
-   #swipe-1{
-       height:auto;
-   }
+.welcome-left {
+}
+
+.weather-right {
+    text-align: right;
+}
+
+.policy-tab {
+    border: 2px solid #58585b;
+    border-radius: 10px;
+    margin: 25px 70px 75px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#swipe-1 {
+    height: auto;
+}
 
 /*GalaxE Blue color for indicator line */
-   .tabs .indicator{
-       background-color: #1072ba;
-   }
+.tabs .indicator {
+    background-color: #1072ba;
+}
 
 /*Color for tab and text when clicked*/
-   .tabs .tab a:focus.active{
-       background-color: #00294d;
-       color: #ffffff;
-   }
+.tabs .tab a:focus.active {
+    background-color: #00294d;
+    color: #ffffff;
+}
 
-   .tabs .tab a{
-       color:#00294d;
-   }
+.tabs .tab a {
+    color: #00294d;
+}
 
-  .tabs .tab a.active{
-       color: #00294d ;
-   }
+    .tabs .tab a.active {
+        color: #00294d;
+    }
 
-   .tabs .tab a:hover {
-       color: #1072ba;
-   }
-
+    .tabs .tab a:hover {
+        color: #1072ba;
+    }
 </style>
 
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
-        <h3>Welcome User</h3>
-        <h6 class="time">(Current Time)</h6>
+        <h3>Welcome @User.Identity.Name</h3>
+        <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
         <h4>Current Weather</h4>
@@ -70,12 +71,8 @@
         <h6>$183.12</h6>
     </span>
 </div>
-<div>
-    <div>
-    </div>
-</div>
 
-    @*Tabs for each policy*@
+    <!-- Tabs for each policy -->
     
     <section class="policy-tab">
         <div class="row">
@@ -101,7 +98,7 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn-small light-blue darken-3">Make a Claim</a>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
                   </div>
               </div>
           </div>
@@ -121,7 +118,7 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn-small light-blue darken-3">Make a Claim</a>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
                   </div>
               </div>
           <div id="swipe-3" class="col s12">
@@ -140,7 +137,7 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn-small light-blue darken-3">Make a Claim</a>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
                   </div>
               </div>
             </div>
@@ -149,7 +146,7 @@
 
 
 
-    @*<-- Paymwnt info table -->*@
+    <!-- Paymwnt info table -->
      <div class="row"> @*class="col s4 center-align"*@
         <h4 class="center-align">Payment Info</h4>
         <table class="highlight responsive-table" id="">

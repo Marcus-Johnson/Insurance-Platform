@@ -54,5 +54,8 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Policy End Date")]
         public DateTime PolicyEnd_Date { get; set; }
 
+        [DisplayName("Is Policy Pending")]
+        public Boolean Pending { get; set; }
+
     }
 }

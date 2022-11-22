@@ -33,7 +33,13 @@ document.addEventListener("DOMContentLoaded", function() {
     M.Collapsible.init(collapsible);
 
     // Date Picker
+    const dobDate = document.getElementById('.dob');
     const date = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(dobDate, {
+        autoClose: true,
+        format: 'mmmm dd, yyyy'
+    });
+
     M.Datepicker.init(date, {
         autoClose: true,
         format: 'mmmm dd, yyyy',

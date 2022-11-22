@@ -68,10 +68,10 @@
                         <!-- Drop Down for My Profile-->
                         <ul id="MyProfileDropdown" class="dropdown-content">
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Signup">Sign Up</a>
                             </li>
                             <li>
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                             </li>
                         </ul>
                     }
@@ -115,7 +115,7 @@
                     <h3 class="header center">@ViewData["Title"]</h3>
                     </div>
             }
-            else
+               else
             {
 
                 <div class="nav-content" style="display: flex; justify-content: center; width: 100%; align-items: center;">
@@ -153,12 +153,17 @@
                         </div>
                         </form>
                     </div>
-                </div>
+                </div>         
                 <script>
                     //this script below adds event listener for the Modal
                     document.addEventListener('DOMContentLoaded', function () {
                         var elems = document.querySelectorAll('.modal');
                         var instances = M.Modal.init(elems);
+                            
+                        const tabs = document.querySelectorAll('.tabs');
+                        M.Tabs.init(tabs, {
+                        swipeable: true
+                        });
                     });
                     //this script beflow adds event listener for the dropdown inside the Modal
                     document.addEventListener('DOMContentLoaded', function () {
@@ -166,8 +171,8 @@
                         var instances = M.Dropdown.init(elems, options);
                     });
                 </script>
-            }
-
+                }
+            
 
         </nav>
 

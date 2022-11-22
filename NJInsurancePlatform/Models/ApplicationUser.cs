@@ -27,6 +27,9 @@ namespace NJInsurancePlatform.Models
         [StringLength(140)]
         [DisplayName("Last Name")]
         public string? LastName { get; set; }
+        
+        [DisplayName("Date of Birth")]
+        public DateTime DOB { set; get; }
 
         [StringLength(200)]
         [DisplayName("Email Address")]

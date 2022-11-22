@@ -23,7 +23,7 @@ namespace NJInsurancePlatform.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-            this.httpContextAccessor = httpContextAccessor;
+            //this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
@@ -44,15 +44,29 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(ApplicationUser model)
+        public async Task<IActionResult> SignUp(ApplicationUser model)
         {
             if (ModelState.IsValid)
             {
                 // assign new record to "user" 
                 // assign value from input field
                 var user = new ApplicationUser 
-                { 
-                    UserName = model.UserName, 
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    DOB = model.DOB,
+                    EmailAddress = model.EmailAddress,
+                    PhoneNumber = model.PhoneNumber,
+                    CurrentAddress = model.CurrentAddress,
+                    CurrentCity = model.CurrentCity,
+                    CurrentZipcode = model.CurrentZipcode,
+                    CurrentState = model.CurrentState,
+                    CurrentEmployer = model.CurrentEmployer,
+                    SSN = model.SSN,
+                    LicenseNumber = model.LicenseNumber,
+                    IsPrimaryPolicyHolder = model.IsPrimaryPolicyHolder,
+                    Gender = model.Gender,
+                    UserName = model.UserName
                 };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
@@ -65,7 +79,7 @@ namespace NJInsurancePlatform.Controllers
                     await signInManager.SignInAsync(user, isPersistent: false);
 
                     if (!User.IsInRole("Customer")){
-                        await userManager.AddToRoleAsync(user, "Customer");
+                        await userManager.AddToRoleAsync(user, "Pending");
                     }
 
                     return RedirectToAction("Index", "Home");
