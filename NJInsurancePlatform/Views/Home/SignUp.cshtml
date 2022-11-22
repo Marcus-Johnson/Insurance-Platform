@@ -4,122 +4,126 @@
     ViewData["Title"] = "Create an Account";
 }
 <style>
- 
+
     .input-field label {
-     color: #616161;
-     font-size: 17px;
-   }
+        color: #616161;
+        font-size: 17px;
+    }
+
+    nav {
+        display: none;
+    }
+
 
 </style>
+<div class="indigo lighten-1" style="margin-top:-2rem; margin-bottom: 1rem; padding: 1rem; width:100vw">
+    <h3 class="header center white-text">@ViewData["Title"]</h3>
+</div>
+
 <div class="container">
 
-<div class="row">
+    <div class="row">
 
-    <div class="row" style="border: 2px solid; border-radius: 10px">
-        <form method="POST" class="col s12">
-            <div class="row" style="margin: 10px">
+        <div class="row" style="border: 2px solid; border-radius: 10px">
 
-                <div class="input-field col s12">
-                    <input asp-for="FirstName" placeholder="" id="first_name" type="text" class="validate">
-                    <label asp-for="FirstName">First Name</label>
-                </div>
+            <form method="post" class="col s12">
+                <div class="row" style="margin: 10px">
 
-                <div class="input-field col s12">
-                    <input placeholder="" id="last_name" type="text" class="validate">
-                    <label asp-for="LastName">Last Name</label>
-                </div>
-
-                 <div class="input-field col s12">
-                    <input placeholder="" id="dob" type="text" class="validate dobdatepicker">
-                    <label for="">Date of Birth</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="EmailAddress" placeholder="" id="email" type="email" class="validate">
-                    <label asp-for="EmailAddress">Email</label>
-                </div>
-                
-                <div class="input-field col s12">
-                    <input asp-for="UserName" placeholder="" id="username" type="text" class="validate">
-                    <label asp-for="UserName">User Name</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="PasswordHash" placeholder="" id="password" type="password" class="validate">
-                    <label asp-for="PasswordHash">Password</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="PhoneNumber" placeholder="" id="phone_number" type="text" class="validate">
-                    <label asp-for="PhoneNumber">Phone Number</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="SSN" placeholder="" id="social_security" type="text" class="validate">
-                    <label asp-for="SSN">Social Security</label>
-                </div>
-
-
-                <div class="input-field col s12">
-                    <input asp-for="LicenseNumber" placeholder="" id="license_number" type="text" class="validate">
-                    <label asp-for="LicenseNumber">License Number</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="Gender" placeholder="" id="gender" type="text" class="validate">
-                    <label asp-for="Gender">Gender</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="CurrentAddress" placeholder="" id="current_address" type="text" class="validate">
-                    <label asp-for="CurrentAddress">Address</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="CurrentCity" placeholder="" id="current_city" type="text" class="validate">
-                    <label asp-for="CurrentCity">City</label>
-                </div>               
-
-                <div class="input-field col s12">
-                    <input asp-for="CurrentState" placeholder="" id="current_state" type="text" class="validate">
-                    <label asp-for="CurrentState">State</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="CurrentZipcode" placeholder="" id="current_zipcode" type="text" class="validate">
-                    <label asp-for="CurrentZipcode">Zip Code</label>
-                </div>
-
-                <div class="input-field col s12">
-                    <input asp-for="CurrentEmployer" placeholder="" id="current_employer" type="text" class="validate">
-                    <label asp-for="CurrentEmployer">Current Employer</label>
-                </div>
-
-                <div>
-                    <p>
-                        <label>
-                            <label>Are you the Primary Account Holder?</label>
-                            <input name="group1" type="radio" checked />
-                            <span>Yes</span>
-                        </label>
-                        <label>
-                            <input name="group1" type="radio" checked />
-                            <span>No</span>
-                        </label>
-                    </p>
-                </div>
-
-                <div class="row">
-                    <div class="col s2">
-                        <input type="submit" class="waves-effect waves-light btn" value="Sign UP" id="btn">
+                    <div class="input-field col s12">
+                        <input asp-for="FirstName" type="text" class="validate">
+                        <label asp-for="FirstName">First Name</label>
                     </div>
 
-                    <div class="col s2">
-                        <a asp-controller="Home" asp-action="Login">or Login</a>
-                        </div>
+                    <div class="input-field col s12">
+                        <input asp-for="LastName" type="text" class="validate">
+                        <label asp-for="LastName">Last Name</label>
+                    </div>
+
+                    @*                 <div class="input-field col s12">
+                    <input id="dob" type="text" class="validate">
+                    <label for="dob">Date of Birth</label>
+                    </div>*@
+
+                    <div class="input-field col s12">
+                        <input asp-for="EmailAddress" type="email" class="validate">
+                        <label asp-for="EmailAddress">Email</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="UserName" type="text" class="validate">
+                        <label asp-for="UserName">User Name</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="PasswordHash" type="password" class="validate">
+                        <label asp-for="PasswordHash">Password</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="PhoneNumber" type="text" class="validate">
+                        <label asp-for="PhoneNumber">Phone Number</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="SSN" type="text" class="validate">
+                        <label asp-for="SSN">Social Security</label>
+                    </div>
+
+
+                    <div class="input-field col s12">
+                        <input asp-for="LicenseNumber" type="text" class="validate">
+                        <label asp-for="LicenseNumber">License Number</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="Gender" type="text" class="validate">
+                        <label asp-for="Gender">Gender</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="CurrentAddress" type="text" class="validate">
+                        <label asp-for="CurrentAddress">Address</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="CurrentCity" type="text" class="validate">
+                        <label asp-for="CurrentCity">City</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="CurrentState" type="text" class="validate">
+                        <label asp-for="CurrentState">State</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="CurrentZipcode" type="text" class="validate">
+                        <label asp-for="CurrentZipcode">Zip Code</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <input asp-for="CurrentEmployer" type="text" class="validate">
+                        <label asp-for="CurrentEmployer">Current Employer</label>
+                    </div>
+
+                    <div>
+                        <p>
+                            <label>
+                                <label>Are you the Primary Account Holder?</label>
+                                <input name="group1" type="radio" checked />
+                                <span>Yes</span>
+                            </label>
+                            <label>
+                                <input name="group1" type="radio" checked />
+                                <span>No</span>
+                            </label>
+                        </p>
+                    </div>
+
+                    <button type="submit" class="waves-effect waves-light btn" id="btn">Sign Up</button>
+                    <a asp-controller="Home" asp-action="Login">or Login</a>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 </div>

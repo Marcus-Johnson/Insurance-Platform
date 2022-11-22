@@ -2,28 +2,67 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-    #PolicyList {
-        border: 3px solid;
+ #PolicyList {
+ border: 3px solid;
+}
+
+.center-align {
+    background-color: #8080807f;
+}
+
+.welcome-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-left {
+}
+
+.weather-right {
+    text-align: right;
+}
+
+.policy-tab {
+    border: 2px solid #58585b;
+    border-radius: 10px;
+    margin: 25px 70px 75px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#swipe-1 {
+    height: auto;
+}
+
+/*GalaxE Blue color for indicator line */
+.tabs .indicator {
+    background-color: #1072ba;
+}
+
+/*Color for tab and text when clicked*/
+.tabs .tab a:focus.active {
+    background-color: #00294d;
+    color: #ffffff;
+}
+
+.tabs .tab a {
+    color: #00294d;
+}
+
+    .tabs .tab a.active {
+        color: #00294d;
     }
-   .center-align{
-       background-color: #8080807f;
-   }
-   .welcome-container{
-      display: flex;
-      justify-content: space-between;
-   }
-   .welcome-left{
-   }
-   .weather-right{
-       text-align: right;
-   }
+
+    .tabs .tab a:hover {
+        color: #1072ba;
+    }
 </style>
 
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
-        <h3>Welcome User</h3>
-        <h6 class="time">(Current Time)</h6>
+        <h3>Welcome @User.Identity.Name</h3>
+        <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
         <h4>Current Weather</h4>
@@ -32,43 +71,82 @@
         <h6>$183.12</h6>
     </span>
 </div>
-<div>
-    <div>
-    </div>
-</div>
 
-<div class="row" style="margin-top: 100px">
-    <div class=""> @*class="col s4 center-align"*@
-        <h4 class="center-align">Policy List</h4>
-        <table class="highlight centered responsive-table" id="PolicyList">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th></th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Policy 1</td>
-                    <td></td>
-                    <td>01/11/2020</td>
-                </tr>
-                <tr>
-                    <td>Policy 2</td>
-                    <td></td>
-                    <td>02/22/2022</td>
-                </tr>
-                <tr>
-                    <td>Policy 3</td>
-                    <td></td>
-                    <td>03/03/2023</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <!-- Tabs for each policy -->
+    
+    <section class="policy-tab">
+        <div class="row">
+            <div class="col s12">
+            <ul class="tabs" id="tabs-swipe-demo">
+            <li class="tab col s3"><a class="active" href="#swipe-1">Policy 1</a></li>
+            <li class="tab col s3"><a href="#swipe-2">Policy 2</a></li>
+            <li class="tab col s3"><a href="#swipe-3">Policy 3</a></li>
+            </ul>
+          <div id="swipe-1" class="col s12">
+              <div class="row">
+                  <div class="col s4">
+                      <p>Policy Number</p>
+                      <p>Name of Policy</p>
+                      <p>Policy Owner</p>
+                      <p>Deductible</p>
+                      <p>Out of Pocket Limit</p>
+                      <p>Annual Limit of Coverage</p>
+                      </div>
+                  <div class="col s4">
+                      <p>Policy Payment is Due</p>
+                      <p>Policy Total Amount</p>
+                      <p>Policy Paid Off Amount</p>
+                      <p>Policy Start Date</p>
+                      <p>Policy End Date</p>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
+                  </div>
+              </div>
+          </div>
+          <div id="swipe-2" class="col s12">
+               <div class="row">
+                  <div class="col s4">
+                      <p>Policy Number</p>
+                      <p>Name of Policy</p>
+                      <p>Policy Owner</p>
+                      <p>Deductible</p>
+                      <p>Out of Pocket Limit</p>
+                      <p>Annual Limit of Coverage</p>
+                      </div>
+                  <div class="col s4">
+                      <p>Policy Payment is Due</p>
+                      <p>Policy Total Amount</p>
+                      <p>Policy Paid Off Amount</p>
+                      <p>Policy Start Date</p>
+                      <p>Policy End Date</p>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
+                  </div>
+              </div>
+          <div id="swipe-3" class="col s12">
+               <div class="row">
+                  <div class="col s4">
+                      <p>Policy Number</p>
+                      <p>Name of Policy</p>
+                      <p>Policy Owner</p>
+                      <p>Deductible</p>
+                      <p>Out of Pocket Limit</p>
+                      <p>Annual Limit of Coverage</p>
+                      </div>
+                  <div class="col s4">
+                      <p>Policy Payment is Due</p>
+                      <p>Policy Total Amount</p>
+                      <p>Policy Paid Off Amount</p>
+                      <p>Policy Start Date</p>
+                      <p>Policy End Date</p>
+                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
+                  </div>
+              </div>
+            </div>
+        </div>
+  </section>
 
-    @*<-- Paymwnt info table -->*@
+
+
+    <!-- Paymwnt info table -->
      <div class="row"> @*class="col s4 center-align"*@
         <h4 class="center-align">Payment Info</h4>
         <table class="highlight responsive-table" id="">

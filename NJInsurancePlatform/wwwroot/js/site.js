@@ -22,7 +22,7 @@ function DarkMode() {
 }
 
 // Sidenav functionality
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener("DOMContentLoaded", function() {
     const MainSidenav = document.querySelectorAll('.sidenav');
     const ProfileSidenav = document.getElementById('profile-sidenav')
 
@@ -33,10 +33,25 @@ document.addEventListener('DOMContentLoaded', function () {
     M.Collapsible.init(collapsible);
 
     // Date Picker
+    const dobDate = document.getElementById('.dob');
     const date = document.querySelectorAll('.datepicker');
+    M.Datepicker.init(dobDate, {
+        autoClose: true,
+        format: 'mmmm dd, yyyy'
+    });
+
     M.Datepicker.init(date, {
         autoClose: true,
         format: 'mmmm dd, yyyy',
         disableWeekends: true
     });
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tabs');
+    M.Tabs.init(tabs, {
+        swipeable: true
+    });
 });
+
+
+

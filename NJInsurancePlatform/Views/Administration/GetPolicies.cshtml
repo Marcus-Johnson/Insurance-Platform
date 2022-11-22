@@ -1,0 +1,26 @@
+@Model NJInsurancePlatform.Models.Policy
+@{
+    ViewData["Title"] = "All Pending Policies";
+}
+
+@if(Model.Any()){
+    foreach(var policy in Model)
+    {
+        if(policy.Pending)
+        {
+        <div class="card mb-3">
+            <div class="card-header">
+                Policy ID: @policy.PolicyMUID
+            </div>
+            <div class="card-body">
+                <h5>Policy Name: @policy.NameOfPolicy</h5>
+            </div>
+            <div class="card-footer">
+                <button class="btn waves-effect waves-light red">Activate @policy.NameOfPolicy</button>
+            </div>        
+        </div>
+        }
+    }
+} else {
+    <h5> No Policies Presently need approval</h5>
+}

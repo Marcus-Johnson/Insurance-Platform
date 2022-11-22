@@ -501,7 +501,8 @@ namespace NJInsurancePlatform.Data
             {
                 new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
                 new IdentityRole { Name = "Beneficiary", NormalizedName = "BENEFICIARY" },
-                new IdentityRole { Name = "Customer", NormalizedName = "CUSTOMER" }
+                new IdentityRole { Name = "Customer", NormalizedName = "CUSTOMER" },
+                new IdentityRole { Name = "Pending", NormalizedName = "PENDING" }
             };
 
             builder.Entity<IdentityRole>().HasData(roles);

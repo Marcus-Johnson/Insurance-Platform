@@ -30,6 +30,7 @@ body {
 
 main {
     padding-bottom: 50px;
+    width: 95vw;
 }
 
 footer {
@@ -55,8 +56,12 @@ footer {
     border-radius: 15px;
 }
 #btn {
-    background: #3f51b5;
-    border-radius: 3rem;
+    border: solid 1px grey;
+    margin: 1rem;
+    border-radius: 2rem;
+    background-color: white;
+    color: midnightblue;
+    font-weight: 600
 }
 /* Message Page*/
 #messages-wrapper {

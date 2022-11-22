@@ -6,7 +6,6 @@ using NJInsurancePlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
 
-
 namespace NJInsurancePlatform.Controllers
 {
     [AllowAnonymous]
@@ -28,6 +27,7 @@ namespace NJInsurancePlatform.Controllers
 
         public async Task<IActionResult> Index()
         {
+
             return View();
         }
 
@@ -52,8 +52,22 @@ namespace NJInsurancePlatform.Controllers
                 // assign new record to "user" 
                 // assign value from input field
                 var user = new ApplicationUser 
-                { 
-                    UserName = model.UserName, 
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    DOB = model.DOB,
+                    EmailAddress = model.EmailAddress,
+                    PhoneNumber = model.PhoneNumber,
+                    CurrentAddress = model.CurrentAddress,
+                    CurrentCity = model.CurrentCity,
+                    CurrentZipcode = model.CurrentZipcode,
+                    CurrentState = model.CurrentState,
+                    CurrentEmployer = model.CurrentEmployer,
+                    SSN = model.SSN,
+                    LicenseNumber = model.LicenseNumber,
+                    IsPrimaryPolicyHolder = model.IsPrimaryPolicyHolder,
+                    Gender = model.Gender,
+                    UserName = model.UserName
                 };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
@@ -66,7 +80,7 @@ namespace NJInsurancePlatform.Controllers
                     await signInManager.SignInAsync(user, isPersistent: false);
 
                     if (!User.IsInRole("Customer")){
-                        await userManager.AddToRoleAsync(user, "Customer");
+                        await userManager.AddToRoleAsync(user, "Pending");
                     }
 
                     return RedirectToAction("Index", "Home");
