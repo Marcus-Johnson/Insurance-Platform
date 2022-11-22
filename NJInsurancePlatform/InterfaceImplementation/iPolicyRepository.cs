@@ -3,9 +3,9 @@ using System;
 
 namespace NJInsurancePlatform.InterfaceImplementation
 {
-    public interface iPolicyRepository : IDisposable
+    public interface IPolicyRepository : IDisposable
     {
-        Task<IEnumerable<Policy>> GetPolicies();
+        Task<List<Policy>> GetPolicies();
 
         Task<Customer> GetPoliciesByID(Guid PolicyMUID);
 
