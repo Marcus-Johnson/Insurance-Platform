@@ -1,0 +1,62 @@
+﻿@model List<NJInsurancePlatform.Models.Product>
+
+@{
+    ViewData["Title"] = "Policy Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .policyButton {
+        background-color: white;
+        border-radius: 20px;
+        border-width: 1px;
+        width: 300px;
+    }
+    .buttons {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+    }
+</style>
+
+<div class="container">
+
+    <div class="row">
+        <div class="buttons">
+
+            @foreach ( var product in Model)
+            {
+
+                    <button class="policyButton">
+                        <h4>@product.ProductName</h4>
+                    </button>
+            }
+
+        <button class="policyButton">
+            <h5>Policy 1</h5>
+            <hr size="1" width="90%" />
+            <p>Policy 1 Details</p>
+            <p>Premium: 00000</p>
+        </button>
+
+        <button class="policyButton">
+            <h5>Policy 2</h5>
+            <hr size="1" width="90%" />
+            <p>Policy 2 Details</p>
+            <p>Premium: 00000</p>
+        </button>
+
+        <button class="policyButton">
+            <h5>Policy 3</h5>
+            <hr size="1" width="90%" />
+            <p>Policy 3 Details</p>
+            <p>Premium: 00000</p>
+        </button>
+        </div>
+    </div>
+    <button class="btn waves-effect waves-light right indigo" type="submit" name="action">
+        Submit
+        <i class="material-icons right">send</i>
+    </button>
+
+</div>

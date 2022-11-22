@@ -30,6 +30,7 @@ namespace NJInsurancePlatform.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Claim> Claims { get; set; }
         public DbSet<PolicyRequest> PolicyRequests { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
