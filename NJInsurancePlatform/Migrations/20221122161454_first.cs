@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NJInsurancePlatform.Migrations
 {
-    public partial class forth : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,7 @@ namespace NJInsurancePlatform.Migrations
                     PolicyMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     FirstName = table.Column<string>(type: "nvarchar(140)", maxLength: 140, nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(140)", maxLength: 140, nullable: true),
+                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EmailAddress = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     CurrentAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CurrentCity = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -208,11 +209,26 @@ namespace NJInsurancePlatform.Migrations
                     PolicyTotalAmount = table.Column<double>(type: "float", nullable: false),
                     PolicyPaidOffAmount = table.Column<double>(type: "float", nullable: false),
                     PolicyStart_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    PolicyEnd_Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    PolicyEnd_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Pending = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Policies", x => x.PolicyMUID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PolicyRequests",
+                columns: table => new
+                {
+                    RequestMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CustomerMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PolicyMUID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PolicyRequests", x => x.RequestMUID);
                 });
 
             migrationBuilder.CreateTable(
@@ -386,27 +402,28 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "49c07cb6-db68-4d62-892a-bc27028c6833", "Customer", "CUSTOMER" },
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "8e7a5f56-ca8d-4d65-9258-40ade2cdd8c4", "Beneficiary", "BENEFICIARY" },
-                    { "d3c521b0-239d-44f1-980e-08c18b51b6d1", "388f69b4-102c-496b-a88a-87641ca962b2", "Admin", "ADMIN" }
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "369a9b8c-7670-4978-9884-8f7740224b41", "Beneficiary", "BENEFICIARY" },
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "9101afb9-a0f1-45fa-9b29-1dc372cd6fcb", "Customer", "CUSTOMER" },
+                    { "c48efb8c-3b73-4158-8faa-64682835cdd4", "be5623e1-0d00-420e-924f-200e95ca0874", "Admin", "ADMIN" },
+                    { "fbb1a4f1-cc50-4892-84f5-4480d5e5c6f1", "ba1c0d37-b825-448e-ad0a-e777e6ece12b", "Pending", "PENDING" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Active", "BeneficiaryMUID", "ConcurrencyStamp", "CreatedDate", "CurrentAddress", "CurrentCity", "CurrentEmployer", "CurrentState", "CurrentZipcode", "CustomerMUID", "Discriminator", "Email", "EmailAddress", "EmailConfirmed", "FirstName", "Gender", "IsPrimaryPolicyHolder", "LastName", "LicenseNumber", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PolicyMUID", "SSN", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "Active", "BeneficiaryMUID", "ConcurrencyStamp", "CreatedDate", "CurrentAddress", "CurrentCity", "CurrentEmployer", "CurrentState", "CurrentZipcode", "CustomerMUID", "DOB", "Discriminator", "Email", "EmailAddress", "EmailConfirmed", "FirstName", "Gender", "IsPrimaryPolicyHolder", "LastName", "LicenseNumber", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PolicyMUID", "SSN", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "0ae85e99-c175-4b6e-8fb6-c14f90d26d0f", 0, true, new Guid("78d9cd41-acde-48fc-baa9-29b5065af159"), "f235bb59-9861-432f-8902-40a596767531", new DateTime(2022, 11, 22, 6, 23, 42, 278, DateTimeKind.Local).AddTicks(838), null, null, null, null, null, new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), "ApplicationUser", null, "BritneyG@mymail.com", false, "Brittney", "female", false, "Giles", "39k8ew8087hf", false, null, null, "BRITNEYG@MYMAIL.COM", "AQAAAAEAACcQAAAAEHq0DvoWONFzPbC9h4ABYWk6o1sl+2IVKOUcDL+hF9ZdePAD/tkzDCE0kPdQOJx1Vw==", "8790985467", false, null, "123456789", "7c9a77fb-5165-43ed-a9b4-8bd8f17f350b", false, "BritneyG@mymail.com" },
-                    { "3278f996-47a8-4227-99c4-e4849b2c5375", 0, true, null, "92a8ed0f-35f1-47c0-84e8-f0620694532a", new DateTime(2022, 11, 22, 6, 23, 42, 248, DateTimeKind.Local).AddTicks(5784), "3464 Brinkly street", "Gathersburg", "Brimson distributers", "Maryland", "7897678", new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), "ApplicationUser", null, "LeonaW@mymail.com", false, "Leona", "female", true, "Wilson", "39kh8087hf", false, null, null, "LEONAW@MYMAIL.COM", "AQAAAAEAACcQAAAAEONvvc+vY7ZngCST3Zzwc5RPb4Byh0fywXgA0NG7Trwy3nUTqN6uHPwfbaedlBo62A==", "8790985467", false, new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), "123456789", "3a5d1d69-598e-4f8d-a9e8-ce2e899ffe69", false, "LeonaW@mymail.com" },
-                    { "377c2de5-dd38-4722-8c7b-808f3b099f4d", 0, true, null, "2de01dc5-7734-4335-8657-ed849df39c27", new DateTime(2022, 11, 22, 6, 23, 42, 206, DateTimeKind.Local).AddTicks(6725), "123 Elm street", "Milwaukee", "Alphabet Corp", "Wisconsin", "7897678", new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), "ApplicationUser", null, "PatrickL@mymail.com", false, "Patrick", "male", true, "Leon", "39kh8087hf", false, null, null, "PATO", "AQAAAAEAACcQAAAAEFaaB2rzOCRwSZpKhCt3PhylPGBMUDAUwreIrfliLUlwNUZsixf4XJWXAKQfBVRLmA==", "2019878709", false, new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), "123456789", "2a527f12-4ffe-40f7-84ff-a0e94b6b3c51", false, "Pato" },
-                    { "37a20670-5dd7-438f-8c47-031bcba856d5", 0, true, new Guid("fa75877d-66a1-4f63-b8fa-d2cdb59fbdd1"), "a984cf00-56e1-40b3-83e5-caca4de0ea95", new DateTime(2022, 11, 22, 6, 23, 42, 287, DateTimeKind.Local).AddTicks(2728), null, null, null, null, null, new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), "ApplicationUser", null, "JoanaM@mymail.com", false, "Joana", "female", false, "Martin", "39k8ew8087hf", false, null, null, "JOANAM@MYMAIL.COM", "AQAAAAEAACcQAAAAEFa9Mm+Cu+HPvjPzs09AJiOu44Nz4h18iOncSBy9y1Uv8t6ZSnJ1D6mhgx184KA8rQ==", "8790985467", false, null, "123456789", "eff17b6b-a881-41fd-b775-da6144533b94", false, "JoanaM@mymail.com" },
-                    { "4d5cb594-4d5d-430e-ae54-e1b06143c318", 0, true, null, "36ebbdc7-835b-480b-8f53-8251dfeebd29", new DateTime(2022, 11, 22, 6, 23, 42, 221, DateTimeKind.Local).AddTicks(5192), "456 main street", "Baltimore", "Xillon Co", "Maryland", "7897678", new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), "ApplicationUser", null, "EricD@mymail.com", false, "Eric", "male", true, "Daley", "39kh8087hf", false, null, null, "ERICD@MYMAIL.COM", "AQAAAAEAACcQAAAAEDQE4LO6pJZDkpbhth58AHPouoSYwvKwVdJ0EjgNVg8w9YvwTGsdqN00+J6n/HHRPg==", "8790985467", false, new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), "123456789", "5c65411f-4ddf-44b9-bc0d-15f6896fb287", false, "EricD@mymail.com" },
-                    { "6ad2b816-f9c8-4db7-bc57-fb9965baa548", 0, true, new Guid("54d5eae1-ee39-4f2d-8535-5f610d2e1cff"), "285214b3-89a3-4b79-90d4-4c4347509a18", new DateTime(2022, 11, 22, 6, 23, 42, 269, DateTimeKind.Local).AddTicks(221), null, null, null, null, null, new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), "ApplicationUser", null, "CynthiaS@mymail.com", false, "Cynthia", "female", false, "Smithers", "39k8ew8087hf", false, null, null, "CYNTHIAS@MYMAIL.COM", "AQAAAAEAACcQAAAAEIjE6FXh6C6VEJYsmoCH5Dt2+uXbnsc5RKpEhU45q9rigGr/FwFwX1IlGuvb/FvQ9g==", "8790985467", false, null, "123456789", "f42c7177-1e6c-4949-89dd-13b1a25475a3", false, "CynthiaS@mymail.com" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, false, null, "4c1380bd-036c-43ec-b9f5-8606f31a6361", null, null, null, null, null, null, null, "ApplicationUser", null, "customer", false, null, null, false, null, null, false, null, null, "CUSTOMER", "AQAAAAEAACcQAAAAEGRJijzaDmNCVO4WE+DVL9rK4srlnBpwqQh4EpP1PTvqnd1RlmYnVb9xUQJhANxJ0A==", null, false, null, null, "7b49c18c-86b5-415f-b3da-0e807785bf04", false, "customer" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, false, null, "5e7452e2-d9a4-4618-a6ef-2138d3bf85db", null, null, null, null, null, null, null, "ApplicationUser", null, "beneficiary", false, null, null, false, null, null, false, null, null, "BENEFICIARY", "AQAAAAEAACcQAAAAEAmp0QK9Ei9n4ExizuO4TzNy1UEYEb9JtDsEBmu8FwZKOWl84RZgsFUerpoo6RpWVA==", null, false, null, null, "d104f236-e44a-4fe8-98ae-818fef2f2bd1", false, "beneficiary" },
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, false, null, "9b50b5d0-59b8-4516-93b4-fcc1c8ac4609", null, null, null, null, null, null, null, "ApplicationUser", null, "admin", false, null, null, false, null, null, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAENm90gcwr1I1OeXACMwO/iij8i3wpsFeXFvmRs4eVWVKpZ17thkaEdbEw8gGuvS3Hg==", null, false, null, null, "16b34d4a-03bf-4a1d-b941-1259bb57f24b", false, "admin" },
-                    { "9c27ee4c-0763-4b1e-b159-32b56790e710", 0, true, null, "8685bae1-d57a-40b8-8fed-fdaf9c3e3896", new DateTime(2022, 11, 22, 6, 23, 42, 238, DateTimeKind.Local).AddTicks(4116), "789 Grove street", "Rockville", "techumseh International", "Maryland", "7897678", new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), "ApplicationUser", null, "NikosiT@mymail.com", false, "Nikosi", "female", true, "Thom", "39kh8087hf", false, null, null, "NIKOSIT@MYMAIL.COM", "AQAAAAEAACcQAAAAEE5zTTE4VpC9J7xzyxVAQFk96tajHRO0vRWqSlDom+TimC81sI1/Y4Fp3QL/3RR6Cg==", "8790985467", false, new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), "123456789", "96d25210-8623-49f6-8066-de8d94e949ae", false, "NikosiT@mymail.com" },
-                    { "b8557280-cee3-454d-96a9-247c511fc89e", 0, true, new Guid("6808f1f0-47c1-4136-b775-b1f6ffc541fd"), "ef5a48bd-e5de-449d-ada4-65d8961420ea", new DateTime(2022, 11, 22, 6, 23, 42, 257, DateTimeKind.Local).AddTicks(7329), null, null, null, null, null, new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), "ApplicationUser", null, "AndreaB@mymail.com", false, "Andrea", "female", false, "Bogataw", "39kh8087hf", false, null, null, "ANDREAB@MYMAIL.COM", "AQAAAAEAACcQAAAAEK4BJePKHiYtmxLx3kmeZjuIcLSoMc8bQFAdeX8rWXkvv+oNEYhexqRp389n4TYO/A==", "8790985467", false, null, "123456789", "1ea1e83c-347c-4f95-b9b7-fb964d80cee2", false, "AndreaB@mymail.com" }
+                    { "21dd204f-b050-4860-ac0e-0a58f071a348", 0, true, null, "7714ff82-0348-474b-9d0c-58f70bbb4d4c", new DateTime(2022, 11, 22, 11, 14, 53, 901, DateTimeKind.Local).AddTicks(5046), "123 Elm street", "Milwaukee", "Alphabet Corp", "Wisconsin", "7897678", new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "PatrickL@mymail.com", false, "Patrick", "male", true, "Leon", "39kh8087hf", false, null, null, "PATO", "AQAAAAEAACcQAAAAEIHE/lnkZw2EC0bUTco0PsaMb1v66ijVu7pfQxHvx9semTAt7ArxMqxl491oWfKrfA==", "2019878709", false, new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), "123456789", "2b5bdbca-06dc-46d0-b02a-e7f2ed1cd712", false, "Pato" },
+                    { "3ec5aa81-9d31-4671-87a6-e9ec40208469", 0, true, new Guid("78d9cd41-acde-48fc-baa9-29b5065af159"), "14484a13-b72c-4b12-b89d-89b382baa1e2", new DateTime(2022, 11, 22, 11, 14, 53, 954, DateTimeKind.Local).AddTicks(4974), null, null, null, null, null, new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "BritneyG@mymail.com", false, "Brittney", "female", false, "Giles", "39k8ew8087hf", false, null, null, "BRITNEYG@MYMAIL.COM", "AQAAAAEAACcQAAAAEImGerh7fdRcWo/W4a5e2V8V7TFbufIKkszrhch3aCrn3Ct30aKP004C37fsmqy7nA==", "8790985467", false, null, "123456789", "028e8806-f570-46cb-8a8d-2039303bf8c4", false, "BritneyG@mymail.com" },
+                    { "6ec64434-a359-42a2-a44e-436aebc39896", 0, true, new Guid("54d5eae1-ee39-4f2d-8535-5f610d2e1cff"), "8041ad0d-1610-407b-8709-a133b42b97ed", new DateTime(2022, 11, 22, 11, 14, 53, 945, DateTimeKind.Local).AddTicks(8959), null, null, null, null, null, new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "CynthiaS@mymail.com", false, "Cynthia", "female", false, "Smithers", "39k8ew8087hf", false, null, null, "CYNTHIAS@MYMAIL.COM", "AQAAAAEAACcQAAAAEL2A2B9QE87rvDauEE8fQDOnOT6Yym9hRSDD/Hv2UnNAq4UTw2s9WDsashGrZhGgbQ==", "8790985467", false, null, "123456789", "4542225b-d338-43d1-bdf1-a6844f1de4be", false, "CynthiaS@mymail.com" },
+                    { "83f5f021-b6cb-45ea-b828-9bb844bd1c10", 0, true, null, "924993d5-3f18-4b39-bb8d-6604949ec76f", new DateTime(2022, 11, 22, 11, 14, 53, 919, DateTimeKind.Local).AddTicks(4061), "789 Grove street", "Rockville", "techumseh International", "Maryland", "7897678", new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "NikosiT@mymail.com", false, "Nikosi", "female", true, "Thom", "39kh8087hf", false, null, null, "NIKOSIT@MYMAIL.COM", "AQAAAAEAACcQAAAAEF8Y0plsqT64eZCyhKxBKEJyjtF8thug4kUy34PBm87vuuzUm3J28u61cZju8pak/Q==", "8790985467", false, new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), "123456789", "9cc6f00d-4811-4544-b10a-efd0af471048", false, "NikosiT@mymail.com" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb7", 0, false, null, "ffa4751f-21c7-4fc5-ba14-5f5bce99c2e7", null, null, null, null, null, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "customer", false, null, null, false, null, null, false, null, null, "CUSTOMER", "AQAAAAEAACcQAAAAEN79PSGz44cf+Msd6F+GlCwJvZhLDvmfCUc/TmtFsj+M+KFk6HOY0lcGyPNZwrEDuA==", null, false, null, null, "958a76d6-9253-491a-914a-1c33a71a60e6", false, "customer" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb8", 0, false, null, "c9cc54e1-9c8b-42b9-ac46-84d267d20953", null, null, null, null, null, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "beneficiary", false, null, null, false, null, null, false, null, null, "BENEFICIARY", "AQAAAAEAACcQAAAAEGAEChicuFBy0zjmjgJatvdlitWuLdQj1VYk7/+Y/+8stiKYyuia08/eXq2WfD6HLQ==", null, false, null, null, "ec615f40-1bdc-43f0-bb28-478c0b4b0b75", false, "beneficiary" },
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, false, null, "fbdb7a2f-530a-4004-b084-f34017fc1f19", null, null, null, null, null, null, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "admin", false, null, null, false, null, null, false, null, null, "ADMIN", "AQAAAAEAACcQAAAAEFQjZg2hFHCcpFKpraNBTw2eynkZhUB2OFQFs/OdcBH3rNhfHkyI9WScKoXKbMcspw==", null, false, null, null, "dd4dd4c5-7554-4326-b009-184a68fc8407", false, "admin" },
+                    { "9d0c201d-965f-460a-944f-21cbecb8d396", 0, true, null, "7fc27a1d-1405-43dd-8017-f84222e60fb2", new DateTime(2022, 11, 22, 11, 14, 53, 928, DateTimeKind.Local).AddTicks(6965), "3464 Brinkly street", "Gathersburg", "Brimson distributers", "Maryland", "7897678", new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "LeonaW@mymail.com", false, "Leona", "female", true, "Wilson", "39kh8087hf", false, null, null, "LEONAW@MYMAIL.COM", "AQAAAAEAACcQAAAAEP1EWEM42vMAnEnhsNV+k5gFsNCxuuiGM6/KbnKRHdmQTXeK6bNEkh2hfQQeBjjM2A==", "8790985467", false, new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), "123456789", "215dc228-1100-405a-8e2e-86e4235d2ed4", false, "LeonaW@mymail.com" },
+                    { "9e080d84-7550-4926-97d5-241f7f89868c", 0, true, null, "6b8683b2-4ffb-470d-af51-2c5013b44fe7", new DateTime(2022, 11, 22, 11, 14, 53, 910, DateTimeKind.Local).AddTicks(3011), "456 main street", "Baltimore", "Xillon Co", "Maryland", "7897678", new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "EricD@mymail.com", false, "Eric", "male", true, "Daley", "39kh8087hf", false, null, null, "ERICD@MYMAIL.COM", "AQAAAAEAACcQAAAAEJalmqovZx7tDZJhQaxdkqNvLJNuhg32MMj7YamDBIa5wm9/LZu9SVdRgR+Pk5WyJQ==", "8790985467", false, new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), "123456789", "93878702-d53d-468d-9642-af5cce84238b", false, "EricD@mymail.com" },
+                    { "c5a1c394-2da3-47d6-882c-62a9a10c2bba", 0, true, new Guid("6808f1f0-47c1-4136-b775-b1f6ffc541fd"), "ade4d973-6a5c-4f3d-9db9-89fde00f1161", new DateTime(2022, 11, 22, 11, 14, 53, 937, DateTimeKind.Local).AddTicks(1743), null, null, null, null, null, new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "AndreaB@mymail.com", false, "Andrea", "female", false, "Bogataw", "39kh8087hf", false, null, null, "ANDREAB@MYMAIL.COM", "AQAAAAEAACcQAAAAENbD33VcPZtAuzGlPhCjPQZlAOZuCJgOKeQN2eiaQf9b8odBhkvpitichpU3kuplTg==", "8790985467", false, null, "123456789", "badfdc0d-9d59-49c3-9e52-c6174644f411", false, "AndreaB@mymail.com" },
+                    { "daff0122-bea0-49d0-8876-f51fd3da8f0c", 0, true, new Guid("fa75877d-66a1-4f63-b8fa-d2cdb59fbdd1"), "d6755ace-7a23-4603-88a8-092576e81537", new DateTime(2022, 11, 22, 11, 14, 53, 962, DateTimeKind.Local).AddTicks(9977), null, null, null, null, null, new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", null, "JoanaM@mymail.com", false, "Joana", "female", false, "Martin", "39k8ew8087hf", false, null, null, "JOANAM@MYMAIL.COM", "AQAAAAEAACcQAAAAEJn3D4z8ky4hvzIE4SM7igEZ+FsZh4lyIO5YQKXfOM440bRbri24bCfAqS6w75e+BQ==", "8790985467", false, null, "123456789", "b5f34e13-b380-4a5c-8d31-0593b81611f9", false, "JoanaM@mymail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -414,10 +431,10 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "BillMUID", "Balance", "CreatedDate", "MinimumPayment", "PolicyDueDate", "PolicyMUID", "Status" },
                 values: new object[,]
                 {
-                    { new Guid("417a8279-0227-43c4-8504-c4396860ada0"), 509.33999999999997, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(534), 283.99000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(531), new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), "status" },
-                    { new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"), 278.33999999999997, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(549), 449.08999999999997, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(545), new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), "status" },
-                    { new Guid("c28330de-a718-465b-9772-5b28ad6395e8"), 109.34, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(542), 129.09, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(539), new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), "status" },
-                    { new Guid("f46090ed-d574-4456-8e18-97150ff885ed"), 799.34000000000003, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(525), 123.98999999999999, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(521), new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), "status" }
+                    { new Guid("417a8279-0227-43c4-8504-c4396860ada0"), 509.33999999999997, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5203), 283.99000000000001, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5201), new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), "status" },
+                    { new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"), 278.33999999999997, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5212), 449.08999999999997, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5210), new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), "status" },
+                    { new Guid("c28330de-a718-465b-9772-5b28ad6395e8"), 109.34, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5207), 129.09, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5205), new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), "status" },
+                    { new Guid("f46090ed-d574-4456-8e18-97150ff885ed"), 799.34000000000003, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5197), 123.98999999999999, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5195), new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), "status" }
                 });
 
             migrationBuilder.InsertData(
@@ -436,21 +453,21 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "PaymentMUID", "AccountNumber", "AdditionalInfo", "Amount", "BankName", "BillMUID", "CardExpireDate", "CardNumber", "CheckImage", "CheckNumber", "CreatedDate", "DebitOrCredit", "PaidDate", "PayerFirstName", "PayerLastName", "PaymentMethod", "RoutingNumber", "ZipCode" },
                 values: new object[,]
                 {
-                    { new Guid("0b73fbd0-eb85-42c4-a634-e8ee78d81218"), "2345643", "Additional info", 58.990000000000002, "Bank of the Oranges", new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"), new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(624), "123498732", "check Image", 9870, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(627), "credit", new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(620), "katherine", "Rivera", "visa", "2345432", "12345" },
-                    { new Guid("0b8e18c5-0b17-4bc1-b2a3-00abe6fb5e72"), "2345643", "Additional info", 234.88999999999999, "Peoples Savings", new Guid("417a8279-0227-43c4-8504-c4396860ada0"), new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(601), "123498732", "check Image", 345, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(606), "credit", new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(596), "Fred", "Sanders", "mastercard", "2345432", "12345" },
-                    { new Guid("0fc63b41-88b2-4ad9-9035-0951611d62ae"), "2345643", "Additional info", 563.99000000000001, "Bank of Nova Scotia", new Guid("c28330de-a718-465b-9772-5b28ad6395e8"), new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(613), "123498732", "check Image", 4532, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(617), "credit", new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(609), "Phillis", "McMahon", "visa", "2345432", "12345" },
-                    { new Guid("d3bfa2b2-a707-412f-9c4d-cbf1ec275693"), "2345643", "Additional info", 123.98999999999999, "Spring Savings", new Guid("f46090ed-d574-4456-8e18-97150ff885ed"), new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(586), "123498732", "check Image", 123, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(591), "debit", new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(580), "Jillian", "Flowers", "visa", "2345432", "12345" }
+                    { new Guid("0b73fbd0-eb85-42c4-a634-e8ee78d81218"), "2345643", "Additional info", 58.990000000000002, "Bank of the Oranges", new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"), new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5261), "123498732", "check Image", 9870, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5263), "credit", new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5259), "katherine", "Rivera", "visa", "2345432", "12345" },
+                    { new Guid("0b8e18c5-0b17-4bc1-b2a3-00abe6fb5e72"), "2345643", "Additional info", 234.88999999999999, "Peoples Savings", new Guid("417a8279-0227-43c4-8504-c4396860ada0"), new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5246), "123498732", "check Image", 345, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5249), "credit", new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5244), "Fred", "Sanders", "mastercard", "2345432", "12345" },
+                    { new Guid("0fc63b41-88b2-4ad9-9035-0951611d62ae"), "2345643", "Additional info", 563.99000000000001, "Bank of Nova Scotia", new Guid("c28330de-a718-465b-9772-5b28ad6395e8"), new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5255), "123498732", "check Image", 4532, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5257), "credit", new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5253), "Phillis", "McMahon", "visa", "2345432", "12345" },
+                    { new Guid("d3bfa2b2-a707-412f-9c4d-cbf1ec275693"), "2345643", "Additional info", 123.98999999999999, "Spring Savings", new Guid("f46090ed-d574-4456-8e18-97150ff885ed"), new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5238), "123498732", "check Image", 123, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5241), "debit", new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5234), "Jillian", "Flowers", "visa", "2345432", "12345" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Policies",
-                columns: new[] { "PolicyMUID", "AnnualLimitOfCoverage", "CustomerMUID", "Deductible", "NameOfPolicy", "OutOfPocketLimit", "PolicyEnd_Date", "PolicyNumber", "PolicyOwner", "PolicyPaidOffAmount", "PolicyPaymentisDue", "PolicyStart_Date", "PolicyTotalAmount" },
+                columns: new[] { "PolicyMUID", "AnnualLimitOfCoverage", "CustomerMUID", "Deductible", "NameOfPolicy", "OutOfPocketLimit", "Pending", "PolicyEnd_Date", "PolicyNumber", "PolicyOwner", "PolicyPaidOffAmount", "PolicyPaymentisDue", "PolicyStart_Date", "PolicyTotalAmount" },
                 values: new object[,]
                 {
-                    { new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Eye Emarald", 999.99000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(434), 769564, "Leona wilson", 0.0, false, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(431), 35000.0 },
-                    { new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Eye Emarald", 999.99000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(427), 78910, "Nikosi Thom", 0.0, false, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(424), 35000.0 },
-                    { new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Dental Gold", 999.99000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(410), 1234, "Patrick Leon", 0.0, false, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(367), 35000.0 },
-                    { new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Health Platinum", 999.99000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(419), 4567, "Eric Daley", 0.0, false, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(417), 35000.0 }
+                    { new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Eye Emarald", 999.99000000000001, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5136), 769564, "Leona wilson", 0.0, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5135), 35000.0 },
+                    { new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Eye Emarald", 999.99000000000001, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5132), 78910, "Nikosi Thom", 0.0, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5130), 35000.0 },
+                    { new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Dental Gold", 999.99000000000001, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5117), 1234, "Patrick Leon", 0.0, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5083), 35000.0 },
+                    { new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), 14999.99, new Guid("00000000-0000-0000-0000-000000000000"), 100.25, "Health Platinum", 999.99000000000001, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5126), 4567, "Eric Daley", 0.0, false, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5124), 35000.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -458,10 +475,10 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "ProductMUID", "AnnualLimitOfCoverage", "Deductible", "Description", "OutOfPocketLimit", "Price", "ProductName" },
                 values: new object[,]
                 {
-                    { new Guid("6a953682-d65c-4b82-ada3-add94b43f662"), 1345.99, 50.670000000000002, "Lorus Plorem enum taknut", 1200.45, 789.0, "Eye Emerald" },
-                    { new Guid("9360cae5-8274-46d8-86af-7f5f1c29f693"), 25999.990000000002, 200.15000000000001, "Enum Zelgar Phlnnub nilsup", 999.99000000000001, 3343.0, "Health Platinum" },
-                    { new Guid("95659b08-242a-4e22-96a7-653d381c4362"), 5345.9899999999998, 160.69, "Bupka ladna velnup halstus", 5600.4499999999998, 1200.98, "Empoyee Individual" },
-                    { new Guid("cebb703c-fe28-431f-856e-7a9cc024c9fe"), 14999.99, 100.25, "Lorus Plorem enum taknut", 999.99000000000001, 2343.0, "DentalGold" }
+                    { new Guid("03b8f5e4-17d8-4002-9544-93ce27a08e80"), 1345.99, 50.670000000000002, "Lorus Plorem enum taknut", 1200.45, 789.0, "Eye Emerald" },
+                    { new Guid("1b6cf635-ab48-4f1d-a072-882b800a073b"), 25999.990000000002, 200.15000000000001, "Enum Zelgar Phlnnub nilsup", 999.99000000000001, 3343.0, "Health Platinum" },
+                    { new Guid("481166dc-1049-4651-afcf-7d3ea414c263"), 14999.99, 100.25, "Lorus Plorem enum taknut", 999.99000000000001, 2343.0, "DentalGold" },
+                    { new Guid("853d425d-a649-41d7-a0e9-12075479882a"), 5345.9899999999998, 160.69, "Bupka ladna velnup halstus", 5600.4499999999998, 1200.98, "Empoyee Individual" }
                 });
 
             migrationBuilder.InsertData(
@@ -469,10 +486,10 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "TransactionMUID", "CustomerMUID", "PaymentAmount", "PaymentDate", "PolicyMUID", "isPaymentComplete" },
                 values: new object[,]
                 {
-                    { new Guid("3287bca8-d9dc-4f75-94ca-227cfb4c72da"), new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), 189.05000000000001, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(485), new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), false },
-                    { new Guid("530f62a1-8730-4784-bb71-a257136dd9f6"), new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), 2109.7800000000002, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(477), new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), true },
-                    { new Guid("76098a5e-bcda-46be-9cf3-a19f24d14018"), new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), 1199.78, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(472), new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), true },
-                    { new Guid("f752a2a0-7300-42ba-beab-dc65992ca945"), new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), 109.08, new DateTime(2022, 11, 22, 6, 23, 42, 173, DateTimeKind.Local).AddTicks(481), new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), false }
+                    { new Guid("3287bca8-d9dc-4f75-94ca-227cfb4c72da"), new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), 189.05000000000001, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5168), new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"), false },
+                    { new Guid("530f62a1-8730-4784-bb71-a257136dd9f6"), new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"), 2109.7800000000002, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5164), new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"), true },
+                    { new Guid("76098a5e-bcda-46be-9cf3-a19f24d14018"), new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"), 1199.78, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5160), new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"), true },
+                    { new Guid("f752a2a0-7300-42ba-beab-dc65992ca945"), new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"), 109.08, new DateTime(2022, 11, 22, 11, 14, 53, 873, DateTimeKind.Local).AddTicks(5166), new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"), false }
                 });
 
             migrationBuilder.InsertData(
@@ -480,17 +497,17 @@ namespace NJInsurancePlatform.Migrations
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[,]
                 {
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "0ae85e99-c175-4b6e-8fb6-c14f90d26d0f" },
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "3278f996-47a8-4227-99c4-e4849b2c5375" },
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "377c2de5-dd38-4722-8c7b-808f3b099f4d" },
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "37a20670-5dd7-438f-8c47-031bcba856d5" },
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "4d5cb594-4d5d-430e-ae54-e1b06143c318" },
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "6ad2b816-f9c8-4db7-bc57-fb9965baa548" },
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "8e445865-a24d-4543-a6c6-9443d048cdb7" },
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "8e445865-a24d-4543-a6c6-9443d048cdb8" },
-                    { "d3c521b0-239d-44f1-980e-08c18b51b6d1", "8e445865-a24d-4543-a6c6-9443d048cdb9" },
-                    { "02c6d277-2941-4bd3-abb7-ec53ca51fe82", "9c27ee4c-0763-4b1e-b159-32b56790e710" },
-                    { "171affe6-2663-4b32-be9a-8cf5ba15a6d9", "b8557280-cee3-454d-96a9-247c511fc89e" }
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "21dd204f-b050-4860-ac0e-0a58f071a348" },
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "3ec5aa81-9d31-4671-87a6-e9ec40208469" },
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "6ec64434-a359-42a2-a44e-436aebc39896" },
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "83f5f021-b6cb-45ea-b828-9bb844bd1c10" },
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "8e445865-a24d-4543-a6c6-9443d048cdb7" },
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "8e445865-a24d-4543-a6c6-9443d048cdb8" },
+                    { "c48efb8c-3b73-4158-8faa-64682835cdd4", "8e445865-a24d-4543-a6c6-9443d048cdb9" },
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "9d0c201d-965f-460a-944f-21cbecb8d396" },
+                    { "81712ce2-c07f-43b3-943b-5b06b41ce3a1", "9e080d84-7550-4926-97d5-241f7f89868c" },
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "c5a1c394-2da3-47d6-882c-62a9a10c2bba" },
+                    { "29a6429c-122a-439e-bbbf-f9ec4927fb94", "daff0122-bea0-49d0-8876-f51fd3da8f0c" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -581,6 +598,9 @@ namespace NJInsurancePlatform.Migrations
 
             migrationBuilder.DropTable(
                 name: "Policies");
+
+            migrationBuilder.DropTable(
+                name: "PolicyRequests");
 
             migrationBuilder.DropTable(
                 name: "Product");
