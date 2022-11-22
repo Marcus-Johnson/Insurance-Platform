@@ -29,6 +29,7 @@ namespace NJInsurancePlatform.Data
         public DbSet<Beneficiary> Beneficiaries { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Claim> Claims { get; set; }
+        public DbSet<PolicyRequest> PolicyRequests { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
