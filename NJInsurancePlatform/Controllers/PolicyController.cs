@@ -15,11 +15,13 @@ namespace NJInsurancePlatform.Controllers
     {
         private readonly IPolicyRepository PolicyRepository;
         private readonly ITransactionRepository TransactionRepository;
+        private readonly IProductRepository ProductRepository;
 
-        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository)
+        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository, IProductRepository ProductRepository)
         {
             this.PolicyRepository = PolicyRepository;
             this.TransactionRepository = TransactionRepository;
+            this.ProductRepository = ProductRepository;
         }
 
 
@@ -32,8 +34,24 @@ namespace NJInsurancePlatform.Controllers
         {
             var pol = await PolicyRepository.GetPolicies();
             IEnumerable<Policy> pol2 = pol.ToList();
-            //System.Diagnostics.Debug.WriteLine("HHEHEHEHEHEHEHEHEHEHEHEHHEHEHEHEHEHEHHEHEHEHEHEHEHEHHEHEHEHEHEHEHE" + pol);
             return View(pol2);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetProducts()
+        {
+            var getProducts = await ProductRepository.GetPolicies();
+
+            List<Product> products = new List<Product>();
+
+            foreach (var product in getProducts)
+            {
+                products.Add(product);
+            };
+
+            return View(products);
+          
         }
 
         //public async RequestApprove()
