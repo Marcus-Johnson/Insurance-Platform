@@ -2,8 +2,8 @@
     ViewData["Title"] = "Policy Request";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*@Model NJInsurancePlatform.Models.Policy*@
-@*@model Policy;*@
+@model List<NJInsurancePlatform.Models.Policy>
+@*@model< Policy>*@
 @*@using NJInsurancePlatform.Models;*@
 @*@using IEnumerable<ApplicationModelConventionExtensions.Policy>;*@
 <style>
@@ -24,7 +24,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="buttons">
+        <div class="policyButton" style="width: 100%; justify-content: center; align-items: center;">
 
             @foreach (var policy in Model)
             {
@@ -32,26 +32,27 @@
                 {
                     @*@model Policy;*@
 
-                    <form method="post" asp-controller="Policy" asp-action="PolicyRequest">
-                        <button class="policyButton" asp-action="PolicyRequest">
+                    <form method="post" asp-controller="Policy" asp-action="PolicyRequest" style>
                             @*<input readonly type="text" HTML.DisplayFor("@policy.NameOfPolicy") value="@policy.NameOfPolicy"/>*@
                             @*<label HTML.DisplayFor("@policy.NameOfPolicy")>Name Of Policy</label>*@
                             @*<input readonly type="text" HTML.DisplayFor("@policy.PolicyOwner") value="@policy.PolicyOwner"/>*@
-                            <h5 HTML.DisplayFor("@policy.PolicyOwner")>@policy.NameOfPolicy</h5>
-                            <h5 HTML.DisplayFor("@policy.PolicyOwner")>@policy.PolicyOwner</h5>
-                            <hr size="1" width="90%" />
-                            <p HTML.DisplayFor("@policy.PolicyTotalAmount") style="margin-bottom: 5%; padding: 2%;">Policy total: @policy.PolicyTotalAmount</p>
-                            <p HTML.DisplayFor("@policy.PoicyPaidOffAmount") style="margin-bottom: 5%; padding: 2%;">Policy Paid off Amount: @policy.PolicyPaidOffAmount</p>
-                            <p HTML.DisplayFor("@policy.Deductible") style="margin-bottom: 5%; padding: 2%;">Policy Deductible: @policy.Deductible</p>
-                            <p HTML.DisplayFor("@policy.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;">Out of Pocket Limit: @policy.OutOfPocketLimit</p>
-                            <p HTML.DisplayFor("@policy.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;">Annual limit of coverage: @policy.AnnualLimitOfCoverage</p>
-                            <p HTML.DisplayFor("@policy.PolicyPaymentisDue") style="margin-bottom: 5%; padding: 2%;">Policy Payment Due: @policy.PolicyPaymentisDue</p>
-                            <p HTML.DisplayFor("@policy.PolicyMUID") style="margin-bottom: 5%; padding: 2%;">Policy ID: @policy.PolicyMUID</p>
-                            <p HTML.DisplayFor("@policy.PolicyNumber") style="margin-bottom: 5%; padding: 2%;">Policy Number: @policy.PolicyNumber</p>
-                            <p HTML.DisplayFor("@policy.PolicyStart_Date") style="margin-bottom: 5%; padding: 2%;">Start Date: @policy.PolicyStart_Date</p>
-                            <p HTML.DisplayFor("@policy.PolicyEnd_Date") style="margin-bottom: 5%; padding: 2%;">End Date: @policy.PolicyEnd_Date</p>
-                            <p HTML.DisplayFor("@policy.Pending") style="margin-bottom: 5%; padding: 2%;">Active?: @policy.Pending</p>
-                        </button>
+                        <input readonly type="text" asp-for="@policy.NameOfPolicy" placeholder="@policy.NameOfPolicy"/>
+                        <input readonly type="text" asp-for="@policy.PolicyOwner" placeholder="@policy.PolicyOwner"/>
+                        <input readonly type="text" asp-for="@policy.CustomerMUID" placeholder="@policy.CustomerMUID"/>
+
+                        <hr size="1" width="90%" />
+                        <input readonly type="text" asp-for="@policy.PolicyTotalAmount" placeholder="@policy.PolicyTotalAmount" />
+                        <input readonly type="text" asp-for="@policy.PolicyPaidOffAmount" placeholder="@policy.PolicyPaidOffAmount" />
+                        <input readonly type="text" asp-for="@policy.Deductible" placeholder="@policy.Deductible" />
+                        <input readonly type="text" asp-for="@policy.OutOfPocketLimit" placeholder="@policy.OutOfPocketLimit" />
+                        <input readonly type="text" asp-for="@policy.AnnualLimitOfCoverage" placeholder="@policy.AnnualLimitOfCoverage" />
+                        <input readonly type="text" asp-for="@policy.PolicyPaymentisDue" placeholder="@policy.PolicyPaymentisDue" />
+                        <input readonly type="text" asp-for="@policy.PolicyMUID" placeholder="@policy.PolicyMUID" />
+                        <input readonly type="text" asp-for="@policy.PolicyNumber" placeholder="@policy.PolicyNumber" />
+                        <input readonly type="text" asp-for="@policy.PolicyStart_Date" placeholder="@policy.PolicyStart_Date" />
+                        <input readonly type="text" asp-for="@policy.PolicyEnd_Date" placeholder="@policy.PolicyEnd_Date" />
+                        <input readonly type="text" asp-for="@policy.Pending" placeholder="@policy.Pending" />
+                        <button type="submit" class="policyButton">Request</button>
                     </form>
                 }
             }

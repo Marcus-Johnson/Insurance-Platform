@@ -3,6 +3,7 @@ using NJInsurancePlatform.Data;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
 using System;
+using System.Diagnostics;
 
 namespace NJInsurancePlatform.Interfaces
 {
@@ -13,6 +14,7 @@ namespace NJInsurancePlatform.Interfaces
         public PolicyRepository(InsuranceCorpDbContext databaseContext)
         {
             this._databaseContext = databaseContext;
+            this.disposed = false;
         }
 
         public async Task<List<Policy>> GetPolicies()
@@ -37,21 +39,24 @@ namespace NJInsurancePlatform.Interfaces
             _databaseContext.Policies.Remove(policyRemove);
         }
 
-        public async void UpdatePolicy(Policy policy)
+        public async Task UpdatePolicy(Policy policy)
         {
             try
             {
-                _databaseContext.Update(policy);
+                Debug.WriteLine("trying");
+
+               _databaseContext.Policies.Update(policy);
             }
             catch (DbUpdateConcurrencyException)
             {
+                Debug.WriteLine("Caught");
                 throw;
             }
         }
 
-        public async void Save()
+        public void Save()
         {
-            await _databaseContext.SaveChangesAsync();
+            _databaseContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)

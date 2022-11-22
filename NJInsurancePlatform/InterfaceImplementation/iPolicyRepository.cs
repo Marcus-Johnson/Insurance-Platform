@@ -13,7 +13,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
 
         void DeletePolicy(Guid PolicyMUID);
 
-        void UpdatePolicy(Policy policy);
+        Task UpdatePolicy(Policy policy);
 
         void Save();
     }
