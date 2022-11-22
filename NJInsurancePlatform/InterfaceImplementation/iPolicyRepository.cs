@@ -7,7 +7,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
     {
         Task<List<Policy>> GetPolicies();
 
-        Task<Customer> GetPoliciesByID(Guid PolicyMUID);
+        //Task<Customer> GetPoliciesByID(Guid PolicyMUID);
 
         void InsertPolicy(Policy policy);
 

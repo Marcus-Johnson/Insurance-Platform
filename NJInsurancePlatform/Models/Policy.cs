@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NJInsurancePlatform.Models
 {
@@ -8,7 +9,7 @@ namespace NJInsurancePlatform.Models
         [Key]
         [ScaffoldColumn(false)]
         public Guid PolicyMUID { get; set; }
-
+        [ForeignKey("Customer")]
         [DisplayName("Customer MUID")]
         [Required]
         public Guid CustomerMUID { get; set; }

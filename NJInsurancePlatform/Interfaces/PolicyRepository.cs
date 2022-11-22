@@ -20,11 +20,11 @@ namespace NJInsurancePlatform.Interfaces
             return _databaseContext.Policies.ToList();
         }
 
-        public async Task<Customer> GetPoliciesByID(Guid PolicyMUID)
-        {
-            var customer = await _databaseContext.Customers.FindAsync(PolicyMUID);
-            return customer;
-        }
+        //public async Task<Customer> GetPoliciesByID(Guid PolicyMUID)
+        //{
+        //    var customer = await _databaseContext.Customers.FindAsync(PolicyMUID);
+        //    return customer;
+        //}
 
         public async void InsertPolicy(Policy policy)
         {

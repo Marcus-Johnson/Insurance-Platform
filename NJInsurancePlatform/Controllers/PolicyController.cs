@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.Interfaces;
 using NJInsurancePlatform.InterfaceImplementation;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -35,6 +36,7 @@ namespace NJInsurancePlatform.Controllers
             var pol = await PolicyRepository.GetPolicies();
             var pol2 = pol.ToList();
 
+
             return View(pol2);
         }
 
@@ -58,7 +60,6 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> GetProducts(List<Product> model)
         {
-            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + model[0].Price);
             var getProducts = await ProductRepository.GetPolicies();
 
             List<Product> products = new List<Product>();
@@ -69,6 +70,7 @@ namespace NJInsurancePlatform.Controllers
             };
 
             return View(products);
+
         }
     }
 }
