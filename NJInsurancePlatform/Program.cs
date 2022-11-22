@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Transaction Repository Dependency Injection
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
