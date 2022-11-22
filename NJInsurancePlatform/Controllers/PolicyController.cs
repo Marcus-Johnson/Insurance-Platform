@@ -29,6 +29,7 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        
         public async Task<IActionResult> PolicyRequest()
         {
             var pol = await PolicyRepository.GetPolicies();
@@ -41,6 +42,23 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
+            var getProducts = await ProductRepository.GetPolicies();
+
+            List<Product> products = new List<Product>();
+
+            foreach (var product in getProducts)
+            {
+                products.Add(product);
+            };
+
+            return View(products);
+        }        
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> GetProducts(List<Product> model)
+        {
+            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + model[0].Price);
             var getProducts = await ProductRepository.GetPolicies();
 
             List<Product> products = new List<Product>();
