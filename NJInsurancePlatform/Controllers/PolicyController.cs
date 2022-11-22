@@ -30,7 +30,8 @@ namespace NJInsurancePlatform.Controllers
         {
             return View();
         }
-        [HttpGet]
+
+        
         public async Task<IActionResult> PolicyRequest()
         {
             //var pol = await PolicyRepository.GetPolicies();
@@ -44,6 +45,7 @@ namespace NJInsurancePlatform.Controllers
                 policies.Add(policy);
             }
             return View(policies);
+
         }
 
 
@@ -60,13 +62,9 @@ namespace NJInsurancePlatform.Controllers
             };
 
             return View(products);
-          
-        }
-
-        //public async RequestApprove()
-        //{
-
-        //}
+        }        
+        
+        
         [HttpPost]
         public async Task<IActionResult> PolicyRequest(Policy policy)
         {
@@ -97,6 +95,22 @@ namespace NJInsurancePlatform.Controllers
         {
             PolicyRepository.Dispose();
             base.Dispose(disposing);
+         }
+        [HttpPost]
+        public async Task<IActionResult> GetProducts(List<Product> model)
+        {
+            var getProducts = await ProductRepository.GetPolicies();
+
+            List<Product> products = new List<Product>();
+
+            foreach (var product in getProducts)
+            {
+                products.Add(product);
+            };
+
+            return View(products);
+
+
         }
     }
 }
