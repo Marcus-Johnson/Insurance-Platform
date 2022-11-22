@@ -1,10 +1,14 @@
 ﻿@model List<NJInsurancePlatform.Models.Product>
 
 @{
-    ViewData["Title"] = "Policy Request";
+    ViewData["Title"] = "Product Options";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
+}
+@*@Model NJInsurancePlatform.Models.Policy*@
+@*@model Policy;*@
+@*@using NJInsurancePlatform.Models;*@
+@*@using IEnumerable<ApplicationModelConventionExtensions.Policy>;*@
 <style>
     .policyButton {
         background-color: white;
@@ -19,42 +23,36 @@
     }
 </style>
 
-<div class="container">
+
+<div class="container" style="width:80%;">
 
     <div class="row">
         <div class="buttons">
 
-            @foreach ( var product in Model)
+            @foreach (var product in Model)
             {
 
-                    <button class="policyButton">
-                        <h4>@product.ProductName</h4>
-                    </button>
+                    <form method="post" asp-controller="Policy" asp-action="MakeRequest" style="width:35%;">
+                        <button class="policyButton" asp-route-id="@product.ProductMUID" asp-action="PolicyRequest" style="width:100%">
+                            <input asp-for="@product.ProductName"/>
+                            @*<input readonly type="text" HTML.DisplayFor("@policy.NameOfPolicy") value="@policy.NameOfPolicy"/>*@
+                            @*<label HTML.DisplayFor("@policy.NameOfPolicy")>Name Of Policy</label>*@
+                            @*<input readonly type="text" HTML.DisplayFor("@policy.PolicyOwner") value="@policy.PolicyOwner"/>*@
+                            <h5>@product.ProductName</h5>
+                            <hr size="1" width="90%" />
+                            <p HTML.DisplayFor("@product.Price") style="margin-bottom: 5%; padding: 2%;">Policy total: $@product.Price</p>
+                            <p HTML.DisplayFor("@product.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;">Policy Paid off Amount: $@product.AnnualLimitOfCoverage</p>
+                            <p HTML.DisplayFor("@product.Deductible") style="margin-bottom: 5%; padding: 2%;">Policy Deductible: $@product.Deductible</p>
+                            <p HTML.DisplayFor("@product.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;">Out of Pocket Limit: $@product.OutOfPocketLimit</p>
+                            <p HTML.DisplayFor("@product.Description") style="margin-bottom: 5%; padding: 2%;">Description @product.Description</p>
+                        </button>
+                        <br/>
+                        <br/>
+                    </form>
             }
 
-        <button class="policyButton">
-            <h5>Policy 1</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 1 Details</p>
-            <p>Premium: 00000</p>
-        </button>
-
-        <button class="policyButton">
-            <h5>Policy 2</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 2 Details</p>
-            <p>Premium: 00000</p>
-        </button>
-
-        <button class="policyButton">
-            <h5>Policy 3</h5>
-            <hr size="1" width="90%" />
-            <p>Policy 3 Details</p>
-            <p>Premium: 00000</p>
-        </button>
         </div>
     </div>
-    <button class="btn waves-effect waves-light right indigo" type="submit" name="action">
         Submit
         <i class="material-icons right">send</i>
     </button>

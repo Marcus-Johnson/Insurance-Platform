@@ -29,11 +29,14 @@ namespace NJInsurancePlatform.Controllers
         {
             return View();
         }
-        [HttpGet]
+
+        
         public async Task<IActionResult> PolicyRequest()
         {
             var pol = await PolicyRepository.GetPolicies();
-            IEnumerable<Policy> pol2 = pol.ToList();
+            var pol2 = pol.ToList();
+
+
             return View(pol2);
         }
 
@@ -51,18 +54,23 @@ namespace NJInsurancePlatform.Controllers
             };
 
             return View(products);
-          
-        }
-
-        //public async RequestApprove()
-        //{
-
-        //}
+        }        
+        
+        
         [HttpPost]
-        public void PolicyRequest(Policy policy)
+        public async Task<IActionResult> GetProducts(List<Product> model)
         {
-            PolicyRepository.UpdatePolicy(policy);
-            RedirectToAction("Index");
+            var getProducts = await ProductRepository.GetPolicies();
+
+            List<Product> products = new List<Product>();
+
+            foreach (var product in getProducts)
+            {
+                products.Add(product);
+            };
+
+            return View(products);
+
         }
     }
 }
