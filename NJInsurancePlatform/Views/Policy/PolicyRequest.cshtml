@@ -3,8 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model NJInsurancePlatform.Models.Policy
-
 <style>
     .policyButton {
         background-color: white;
@@ -23,6 +21,20 @@
 
     <div class="row">
         <div class="buttons">
+
+            @foreach ( var policy in Model)
+            {
+                @*@if (policy.Pending == true)
+                {*@
+                    <button class="policyButton">
+                        <h5>@policy.NameOfPolicy</h5>
+                        <hr size="1" width="90%" />
+                        <p>Policy total: @policy.PolicyTotalAmount</p>
+                        <p></p>
+                    </button>
+                //}
+            }
+
         <button class="policyButton">
             <h5>Policy 1</h5>
             <hr size="1" width="90%" />

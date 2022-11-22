@@ -6,12 +6,16 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class PolicyRepository : iPolicyRepository, IDisposable
+    public class PolicyRepository : IPolicyRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
-        
-        public async Task<IEnumerable<Policy>> GetPolicies()
+        public PolicyRepository(InsuranceCorpDbContext databaseContext)
+        {
+            this._databaseContext = databaseContext;
+        }
+
+        public async Task<List<Policy>> GetPolicies()
         {
             return _databaseContext.Policies.ToList();
         }
