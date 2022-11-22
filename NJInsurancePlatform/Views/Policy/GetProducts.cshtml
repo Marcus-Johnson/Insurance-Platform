@@ -2,8 +2,13 @@
 
 @{
     ViewData["Title"] = "Product Options";
-    Layout = "~/Views/Shared/_Layout.cshtml"
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+@*@Model NJInsurancePlatform.Models.Policy*@
+@*@model Policy;*@
+@*@using NJInsurancePlatform.Models;*@
+@*@using IEnumerable<ApplicationModelConventionExtensions.Policy>;*@
 <style>
     .policyButton {
         background-color: white;
@@ -20,7 +25,6 @@
 
 
 <div class="container" style="width:80%;">
-
 
     <div class="row">
         <div class="buttons">
@@ -40,7 +44,7 @@
                             <p HTML.DisplayFor("@product.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;">Policy Paid off Amount: $@product.AnnualLimitOfCoverage</p>
                             <p HTML.DisplayFor("@product.Deductible") style="margin-bottom: 5%; padding: 2%;">Policy Deductible: $@product.Deductible</p>
                             <p HTML.DisplayFor("@product.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;">Out of Pocket Limit: $@product.OutOfPocketLimit</p>
-                            <p HTML.DisplayFor("@product.Description") style="margin-bottom: 5%; padding: 2%;">Active?: @product.Description</p>
+                            <p HTML.DisplayFor("@product.Description") style="margin-bottom: 5%; padding: 2%;">Description @product.Description</p>
                         </button>
                         <br/>
                         <br/>
@@ -49,7 +53,6 @@
 
         </div>
     </div>
-
         Submit
         <i class="material-icons right">send</i>
     </button>
