@@ -18,12 +18,11 @@ namespace NJInsurancePlatform.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         //private readonly iPolicyRepository policyRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, IHttpContextAccessor httpContextAccessor)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
-            //this.httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
@@ -40,6 +39,7 @@ namespace NJInsurancePlatform.Controllers
 
         public IActionResult SignUp()
         {
+
             return View();
         }
 
@@ -48,6 +48,7 @@ namespace NJInsurancePlatform.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 // assign new record to "user" 
                 // assign value from input field
                 var user = new ApplicationUser 

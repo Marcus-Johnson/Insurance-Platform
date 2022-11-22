@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NJInsurancePlatform.Data;
 
@@ -11,9 +12,10 @@ using NJInsurancePlatform.Data;
 namespace NJInsurancePlatform.Migrations
 {
     [DbContext(typeof(InsuranceCorpDbContext))]
-    partial class InsuranceCorpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221122112342_forth")]
+    partial class forth
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,13 +71,6 @@ namespace NJInsurancePlatform.Migrations
                             ConcurrencyStamp = "49c07cb6-db68-4d62-892a-bc27028c6833",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
-                        },
-                        new
-                        {
-                            Id = "63419f5d-1aa3-4855-a9a3-d7038c6ea6e7",
-                            ConcurrencyStamp = "e811e260-3b90-44e5-a2ad-908be3a3da2a",
-                            Name = "Pending",
-                            NormalizedName = "PENDING"
                         });
                 });
 
@@ -827,9 +822,6 @@ namespace NJInsurancePlatform.Migrations
                         .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<bool>("Pending")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime>("PolicyEnd_Date")
                         .HasColumnType("datetime2");
 
@@ -1102,9 +1094,6 @@ namespace NJInsurancePlatform.Migrations
                     b.Property<Guid?>("CustomerMUID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("EmailAddress")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
@@ -1151,7 +1140,6 @@ namespace NJInsurancePlatform.Migrations
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             Active = false,
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "admin",
                             IsPrimaryPolicyHolder = false
                         },
@@ -1169,7 +1157,6 @@ namespace NJInsurancePlatform.Migrations
                             TwoFactorEnabled = false,
                             UserName = "customer",
                             Active = false,
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "customer",
                             IsPrimaryPolicyHolder = false
                         },
@@ -1187,7 +1174,6 @@ namespace NJInsurancePlatform.Migrations
                             TwoFactorEnabled = false,
                             UserName = "beneficiary",
                             Active = false,
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "beneficiary",
                             IsPrimaryPolicyHolder = false
                         },
@@ -1213,7 +1199,6 @@ namespace NJInsurancePlatform.Migrations
                             CurrentState = "Wisconsin",
                             CurrentZipcode = "7897678",
                             CustomerMUID = new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "PatrickL@mymail.com",
                             FirstName = "Patrick",
                             Gender = "male",
@@ -1245,7 +1230,6 @@ namespace NJInsurancePlatform.Migrations
                             CurrentState = "Maryland",
                             CurrentZipcode = "7897678",
                             CustomerMUID = new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "EricD@mymail.com",
                             FirstName = "Eric",
                             Gender = "male",
@@ -1277,7 +1261,6 @@ namespace NJInsurancePlatform.Migrations
                             CurrentState = "Maryland",
                             CurrentZipcode = "7897678",
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "NikosiT@mymail.com",
                             FirstName = "Nikosi",
                             Gender = "female",
@@ -1309,7 +1292,6 @@ namespace NJInsurancePlatform.Migrations
                             CurrentState = "Maryland",
                             CurrentZipcode = "7897678",
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "LeonaW@mymail.com",
                             FirstName = "Leona",
                             Gender = "female",
@@ -1337,7 +1319,6 @@ namespace NJInsurancePlatform.Migrations
                             BeneficiaryMUID = new Guid("6808f1f0-47c1-4136-b775-b1f6ffc541fd"),
                             CreatedDate = new DateTime(2022, 11, 22, 6, 23, 42, 257, DateTimeKind.Local).AddTicks(7329),
                             CustomerMUID = new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "AndreaB@mymail.com",
                             FirstName = "Andrea",
                             Gender = "female",
@@ -1364,7 +1345,6 @@ namespace NJInsurancePlatform.Migrations
                             BeneficiaryMUID = new Guid("54d5eae1-ee39-4f2d-8535-5f610d2e1cff"),
                             CreatedDate = new DateTime(2022, 11, 22, 6, 23, 42, 269, DateTimeKind.Local).AddTicks(221),
                             CustomerMUID = new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "CynthiaS@mymail.com",
                             FirstName = "Cynthia",
                             Gender = "female",
@@ -1391,7 +1371,6 @@ namespace NJInsurancePlatform.Migrations
                             BeneficiaryMUID = new Guid("78d9cd41-acde-48fc-baa9-29b5065af159"),
                             CreatedDate = new DateTime(2022, 11, 22, 6, 23, 42, 278, DateTimeKind.Local).AddTicks(838),
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "BritneyG@mymail.com",
                             FirstName = "Brittney",
                             Gender = "female",
@@ -1402,7 +1381,6 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-
                             Id = "37a20670-5dd7-438f-8c47-031bcba856d5",
                             AccessFailedCount = 0,
                             ConcurrencyStamp = "a984cf00-56e1-40b3-83e5-caca4de0ea95",
@@ -1418,9 +1396,7 @@ namespace NJInsurancePlatform.Migrations
                             Active = true,
                             BeneficiaryMUID = new Guid("fa75877d-66a1-4f63-b8fa-d2cdb59fbdd1"),
                             CreatedDate = new DateTime(2022, 11, 22, 6, 23, 42, 287, DateTimeKind.Local).AddTicks(2728),
-
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
-                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "JoanaM@mymail.com",
                             FirstName = "Joana",
                             Gender = "female",

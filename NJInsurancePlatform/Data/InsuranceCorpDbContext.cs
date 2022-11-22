@@ -87,6 +87,11 @@ namespace NJInsurancePlatform.Data
             var GroupSend3 = new Guid("bce87d97-e9b6-483f-8ed2-4200aeef26ba");
             var groupSend4 = new Guid("93fa9038-9c45-42cf-993b-fc3d15764f18");
 
+            var prod1 = Guid.NewGuid();
+            var prod2 = Guid.NewGuid();
+            var prod3 = Guid.NewGuid();
+            var prod4 = Guid.NewGuid();
+
             ////Seed "Admin" Role
             //builder.Entity<IdentityRole>().HasData(new IdentityRole
             //{
@@ -179,6 +184,50 @@ namespace NJInsurancePlatform.Data
             //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
             //    }
             //);
+
+            // Products
+            builder.Entity<Product>().HasData(
+                new Product
+                {
+                    ProductMUID = prod1,
+                    ProductName = "DentalGold",
+                    Description = "Lorus Plorem enum taknut",
+                    Price = 2343,
+                    Deductible = 100.25,
+                    AnnualLimitOfCoverage = 14999.99,
+                    OutOfPocketLimit = 999.99,
+                },
+                new Product
+                {
+                    ProductMUID = prod2,
+                    ProductName = "Health Platinum",
+                    Description = "Enum Zelgar Phlnnub nilsup",
+                    Price = 3343,
+                    Deductible = 200.15,
+                    AnnualLimitOfCoverage = 25999.99,
+                    OutOfPocketLimit = 999.99,
+                },
+                new Product
+                {
+                    ProductMUID = prod3,
+                    ProductName = "Eye Emerald",
+                    Description = "Lorus Plorem enum taknut",
+                    Price = 789,
+                    Deductible = 50.67,
+                    AnnualLimitOfCoverage = 1345.99,
+                    OutOfPocketLimit = 1200.45,
+                },
+                new Product
+                {
+                    ProductMUID = prod4,
+                    ProductName = "Empoyee Individual",
+                    Description = "Bupka ladna velnup halstus",
+                    Price = 1200.98,
+                    Deductible = 160.69,
+                    AnnualLimitOfCoverage = 5345.99,
+                    OutOfPocketLimit = 5600.45,
+                }
+            );
 
             builder.Entity<Policy>().HasData(
                 new Policy
