@@ -32,36 +32,36 @@
                 {
                     @*@model Policy;*@
 
-                    <form method="post" asp-controller="Policy" asp-action="PolicyRequest" style>
+                    <form method="post" asp-controller="Policy" asp-action="PolicyRequest" style="margin:1%; margin-left: 12%; margin-top: 2%; padding: 1%; width: 80%; align-items: center; justify-content: center; border: 1px solid #58585b; background-color: floralwhite; border-radius: 5%; box-shadow: 2px 2px #58585b;">
                             @*<input readonly type="text" HTML.DisplayFor("@policy.NameOfPolicy") value="@policy.NameOfPolicy"/>*@
                             @*<label HTML.DisplayFor("@policy.NameOfPolicy")>Name Of Policy</label>*@
                             @*<input readonly type="text" HTML.DisplayFor("@policy.PolicyOwner") value="@policy.PolicyOwner"/>*@
-                        <input readonly type="text" asp-for="@policy.NameOfPolicy" placeholder="@policy.NameOfPolicy"/>
-                        <input readonly type="text" asp-for="@policy.PolicyOwner" placeholder="@policy.PolicyOwner"/>
-                        <input readonly type="text" asp-for="@policy.CustomerMUID" placeholder="@policy.CustomerMUID"/>
+                        <input readonly type="text" asp-for="@policy.NameOfPolicy" placeholder="@policy.NameOfPolicy" style="justify-content: center; align-items: center; text-shadow: 1px 1px lightgrey;"/>
+                        <input readonly type="text" asp-for="@policy.PolicyOwner" placeholder="@policy.PolicyOwner" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.CustomerMUID" placeholder="@policy.CustomerMUID" style=" text-shadow: 1px 1px lightgrey;" />
 
-                        <hr size="1" width="90%" />
-                        <input readonly type="text" asp-for="@policy.PolicyTotalAmount" placeholder="@policy.PolicyTotalAmount" />
-                        <input readonly type="text" asp-for="@policy.PolicyPaidOffAmount" placeholder="@policy.PolicyPaidOffAmount" />
-                        <input readonly type="text" asp-for="@policy.Deductible" placeholder="@policy.Deductible" />
-                        <input readonly type="text" asp-for="@policy.OutOfPocketLimit" placeholder="@policy.OutOfPocketLimit" />
-                        <input readonly type="text" asp-for="@policy.AnnualLimitOfCoverage" placeholder="@policy.AnnualLimitOfCoverage" />
-                        <input readonly type="text" asp-for="@policy.PolicyPaymentisDue" placeholder="@policy.PolicyPaymentisDue" />
-                        <input readonly type="text" asp-for="@policy.PolicyMUID" placeholder="@policy.PolicyMUID" />
-                        <input readonly type="text" asp-for="@policy.PolicyNumber" placeholder="@policy.PolicyNumber" />
-                        <input readonly type="text" asp-for="@policy.PolicyStart_Date" placeholder="@policy.PolicyStart_Date" />
-                        <input readonly type="text" asp-for="@policy.PolicyEnd_Date" placeholder="@policy.PolicyEnd_Date" />
-                        <input readonly type="text" asp-for="@policy.Pending" placeholder="@policy.Pending" />
-                        <button type="submit" class="policyButton">Request</button>
+                        @*<hr size="1" width="90%" />*@
+                        <input readonly type="text" asp-for="@policy.PolicyTotalAmount" placeholder="@policy.PolicyTotalAmount" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyPaidOffAmount" placeholder="@policy.PolicyPaidOffAmount" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.Deductible" placeholder="@policy.Deductible" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.OutOfPocketLimit" placeholder="@policy.OutOfPocketLimit" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.AnnualLimitOfCoverage" placeholder="@policy.AnnualLimitOfCoverage" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyPaymentisDue" placeholder="@policy.PolicyPaymentisDue" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyMUID" placeholder="@policy.PolicyMUID" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyNumber" placeholder="@policy.PolicyNumber" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyStart_Date" placeholder="@policy.PolicyStart_Date" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.PolicyEnd_Date" placeholder="@policy.PolicyEnd_Date" style=" text-shadow: 1px 1px lightgrey;" />
+                        <input readonly type="text" asp-for="@policy.Pending" placeholder="@policy.Pending" style=" text-shadow: 1px 1px lightgrey;" />
+                        <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Request</button>
                     </form>
                 }
             }
 
         </div>
     </div>
-    <button class="btn waves-effect waves-light right indigo" type="submit" name="action">
+    @*<button class="btn waves-effect waves-light right indigo" type="submit" name="action">
         Submit
         <i class="material-icons right">send</i>
-    </button>
+    </button>*@
 
 </div>
