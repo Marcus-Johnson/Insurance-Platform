@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NJInsurancePlatform", "NJInsurancePlatform\NJInsurancePlatform.csproj", "{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.ApiWrapper", "..\..\..\Downloads\NET-Core-Weather-API-Wrapper-master\.NET-Core-Weather-API-Wrapper-master\Weather.ApiWrapper\Weather.ApiWrapper.csproj", "{04B8714F-B3D9-4CBD-99D4-2792492110B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weather.ApiWrapper", "Weather.ApiWrapper\Weather.ApiWrapper.csproj", "{9E2E25FB-0E56-4A63-ACD4-818F7134A8BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80151A59-C8B2-48F8-9E2C-4AE17ED3129E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04B8714F-B3D9-4CBD-99D4-2792492110B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04B8714F-B3D9-4CBD-99D4-2792492110B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04B8714F-B3D9-4CBD-99D4-2792492110B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04B8714F-B3D9-4CBD-99D4-2792492110B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E2E25FB-0E56-4A63-ACD4-818F7134A8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E2E25FB-0E56-4A63-ACD4-818F7134A8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E2E25FB-0E56-4A63-ACD4-818F7134A8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E2E25FB-0E56-4A63-ACD4-818F7134A8BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

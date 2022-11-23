@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Downloads\NET-Core-Weather-API-Wrapper-master\.NET-Core-Weather-API-Wrapper-master\Weather.ApiWrapper\Weather.ApiWrapper.csproj" />
+    <ProjectReference Include="..\Weather.ApiWrapper\Weather.ApiWrapper.csproj" />
   </ItemGroup>
 
 </Project>
