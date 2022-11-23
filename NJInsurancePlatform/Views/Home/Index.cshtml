@@ -65,15 +65,12 @@
         <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
-        <h4>Current Weather</h4>
-        <h6 class="weather-h6">(Display temp) || (Rainy, Sunny, Cloudy, Ect.)</h6>
         <h4>Current Balance</h4>
         <h6>$183.12</h6>
     </span>
 </div>
 
     <!-- Tabs for each policy -->
-    
     <section class="policy-tab">
         <div class="row">
             <div class="col s12">
@@ -98,8 +95,9 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
-                  </div>
+                        <!-- Modal Trigger -->
+                        <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
+                    </div>
               </div>
           </div>
           <div id="swipe-2" class="col s12">
@@ -118,7 +116,7 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
+                      <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
                   </div>
               </div>
           <div id="swipe-3" class="col s12">
@@ -137,16 +135,49 @@
                       <p>Policy Paid Off Amount</p>
                       <p>Policy Start Date</p>
                       <p>Policy End Date</p>
-                      <a class="waves-effect waves-light btn" id="btn">Make a Claim</a>
+                      <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
                   </div>
               </div>
             </div>
         </div>
   </section>
 
+<div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
+        <form method="post">
+            <div class="modal-content">
+                <div class="row">
+                    @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                    <label asp-for="PolicyMUID" hidden></label>
+                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
+                    </ul>
+                    <br />
+                    commented out above is the dropdown*@
+                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" for="PolicyMUID">
+                    <label for="PolicyMUID">Policy ID</label>
+                </div>
+                <div class="row">
+                    <input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
+                    <label for="DateOfClaim" for="DateOfClaim">Date of Claim</label>
+                </div>
+                <div class="row">
+                    <input placeholder="Description" type="text" for="ClaimUserDescription">
+                    <label for="ClaimUserDescription" for="ClaimUserDescription">Description</label>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn" id="btn">Submit</button>
+            <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
+        </form>
+    </div>
+</div>
 
 
-    <!-- Paymwnt info table -->
+
+    <!-- Payment info table -->
      <div class="row"> @*class="col s4 center-align"*@
         <h4 class="center-align">Payment Info</h4>
         <table class="highlight responsive-table" id="">

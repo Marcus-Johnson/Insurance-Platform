@@ -17,4 +17,8 @@
     <PackageReference Include="System.Collections.NonGeneric" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Downloads\NET-Core-Weather-API-Wrapper-master\.NET-Core-Weather-API-Wrapper-master\Weather.ApiWrapper\Weather.ApiWrapper.csproj" />
+  </ItemGroup>
+
 </Project>

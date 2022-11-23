@@ -24,7 +24,7 @@ function DarkMode() {
 // Sidenav functionality
 document.addEventListener("DOMContentLoaded", function() {
     const MainSidenav = document.querySelectorAll('.sidenav');
-    const ProfileSidenav = document.getElementById('profile-sidenav')
+    const ProfileSidenav = document.querySelectorAll('#profile-sidenav')
 
     M.Sidenav.init(MainSidenav);
     M.Sidenav.init(ProfileSidenav, {'edge':'right'});
@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     M.Collapsible.init(collapsible);
 
     // Date Picker
-    const dobDate = document.getElementById('.dob');
+    const dobDate = document.querySelectorAll('#DOB');
     const date = document.querySelectorAll('.datepicker');
     M.Datepicker.init(dobDate, {
         autoClose: true,
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const tabs = document.querySelectorAll('.tabs');
     M.Tabs.init(tabs, {
         swipeable: true
-    });
+    });   
 });
 
 

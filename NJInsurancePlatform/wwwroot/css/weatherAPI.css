@@ -1,0 +1,214 @@
+﻿.message {
+    text-align: center;
+}
+
+.padding {
+    padding: 5rem;
+}
+
+.card-weather {
+    background: #e1ecff;
+    background-image: linear-gradient( to left bottom, #d6eef6, #dff0fa, #e7f3fc, #eff6fe, #f6f9ff );
+}
+
+.stretch-card > .card {
+    width: 100%;
+    min-width: 100%;
+}
+
+.grid-margin {
+    margin-bottom: 25px;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+}
+
+.card-weather .card-body:first-child {
+    background: url(https://res.cloudinary.com/dxfq3iotg/image/upload/v1557323760/weather.svg) no-repeat center;
+    background-size: cover;
+    height: 350px;
+}
+
+.card .card-body {
+    padding: 1.88rem 1.81rem;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.card-weather .weather-date-location {
+    padding: 0 0 38px;
+}
+
+.text-gray {
+    color: #969696;
+}
+
+.mr-auto,
+.mx-auto {
+    margin-right: auto !important;
+}
+
+.card-weather .card-body {
+    background: #ffffff;
+}
+
+.card-weather .weakly-weather {
+    background: #ffffff;
+    overflow-x: auto;
+}
+
+    .card-weather .weakly-weather .weakly-weather-item {
+        flex: 0 0 14.28%;
+        border-right: 1px solid #f2f2f2;
+        padding: 1rem;
+        text-align: center;
+    }
+
+.mb-0,
+.my-0 {
+    margin-bottom: 0 !important;
+}
+
+.card-weather .weakly-weather .weakly-weather-item i {
+    font-size: 1.2rem;
+}
+
+.display-3 {
+    font-size: 2.5rem;
+}
+
+.h3,
+h3 {
+    font-size: 1.56rem;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+}
+
+.weather-info {
+    height: 50px;
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.freezing_rain_heavy {
+    background-image: url("/images/freezing_rain_heavy.svg");
+}
+
+.freezing_rain {
+    background-image: url("/images/freezing_rain.svg");
+}
+
+.freezing_rain_light {
+    background-image: url("/images/freezing_rain_light.svg");
+}
+
+.freezing_drizzle {
+    background-image: url("/images/freezing_drizzle.svg");
+}
+
+.ice_pellets_heavy {
+    background-image: url("/images/ice_pellets_heavy.svg");
+}
+
+.ice_pellets {
+    background-image: url("/images/ice_pellets.svg");
+}
+
+.ice_pellets_light {
+    background-image: url("/images/ice_pellets_light.svg");
+}
+
+.snow_heavy {
+    background-image: url("/images/snow_heavy.svg");
+}
+
+.snow {
+    background-image: url("/images/snow.svg");
+}
+
+.snow_light {
+    background-image: url("/images/snow_light.svg");
+}
+
+.flurries {
+    background-image: url("/images/flurries.svg");
+}
+
+.tstorm {
+    background-image: url("/images/tstorm.svg");
+}
+
+.rain_heavy {
+    background-image: url("/images/rain_heavy.svg");
+}
+
+.rain {
+    background-image: url("/images/rain.svg");
+}
+
+.rain_light {
+    background-image: url("/images/rain_light.svg");
+}
+
+.drizzle {
+    background-image: url("/images/drizzle.svg");
+}
+
+.fog_light {
+    background-image: url("/images/fog_light.svg");
+}
+
+.light_fog {
+    background-image: url("/images/fog_light.svg");
+}
+
+.fog {
+    background-image: url("/images/fog.svg");
+}
+
+.cloudy {
+    background-image: url("/images/cloudy.svg");
+}
+
+.mostly_cloudy {
+    background-image: url("/images/mostly_cloudy.svg");
+}
+
+.partly_cloudy {
+    background-image: url("/images/partly_cloudy_day.svg");
+}
+
+.mostly_clear {
+    background-image: url("/images/mostly_clear_day.svg");
+}
+
+.clear {
+    background-image: url("/images/mostly_clear_day.svg");
+}
