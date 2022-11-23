@@ -27,6 +27,10 @@ namespace NJInsurancePlatform.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Customer");
+            }
 
             return View();
         }
@@ -97,7 +101,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -121,7 +125,7 @@ namespace NJInsurancePlatform.Controllers
 
                     // If Admin Signs In, Redirect To Roles Page
                     if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
-                    return RedirectToAction("MyPage", "Customer");
+                    return RedirectToAction("Index", "Customer");
                 }
 
                 // If Model is not valid
@@ -129,10 +133,13 @@ namespace NJInsurancePlatform.Controllers
 
 
             }
-                //// If user forgot password
-                //if()
+            //// If user forgot password
+            //if()
             return View(model);
         }
+
+
+
 
         [HttpGet]
         public IActionResult ForgotPassword()

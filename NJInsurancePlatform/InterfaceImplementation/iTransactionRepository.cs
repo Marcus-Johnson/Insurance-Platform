@@ -5,7 +5,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface ITransactionRepository : IDisposable
     {
-        Task<IEnumerable<Transaction>> GetTransactions();
+        Task<List<Transaction>> GetTransactions();
 
         Task<Transaction> GetTransactionsByID(Guid TransactionMUID);
 

@@ -15,7 +15,7 @@ namespace NJInsurancePlatform.Interfaces
         {
             _databaseContext = databaseContext;
         }
-        public async Task<IEnumerable<Transaction>> GetTransactions()
+        public async Task<List<Transaction>> GetTransactions()
         {
             return await _databaseContext.Transactions.ToListAsync();
         }
