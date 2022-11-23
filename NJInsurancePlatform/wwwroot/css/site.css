@@ -14,8 +14,8 @@ html {
 }
 
 body {
-  font-family:Outfit;
-  margin-bottom: 60px;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 60px;
 }
 
 .dark-mode {
@@ -61,7 +61,7 @@ footer {
     border-radius: 2rem;
     background-color: white;
     color: midnightblue;
-    font-weight: 600
+    font-weight: 700;
 }
 /* Message Page*/
 #messages-wrapper {
