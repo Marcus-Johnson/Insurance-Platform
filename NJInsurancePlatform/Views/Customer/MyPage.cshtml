@@ -35,7 +35,7 @@ else {
                     <div class="weather-date-location">
                         <h3>@weatherJson.Data.Timelines[0].StartTime.ToString("dddd")</h3>
                         <p class="text-gray">
-                            <span class="weather-date">@weatherJson.Data.Timelines[0].Timestep</span>
+                                <span class="weather-date">@weatherJson.Data.Timelines[0].StartTime.ToShortDateString()</span>
                         </p>
                     </div>
                     <div class="weather-data d-flex">
@@ -51,5 +51,4 @@ else {
         </div>
     </div>
 </div>
-<p>@result</p>
 }

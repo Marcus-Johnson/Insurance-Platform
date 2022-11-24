@@ -64,7 +64,8 @@
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
-        <h3>Welcome @User.Identity?.Name</h3>
+
+        <h3>Welcome @User.Identity.Name</h3>
         <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
@@ -186,7 +187,7 @@
         <table class="highlight responsive-table" id="">
 
             <thead>
-            <tr>
+                <tr>
                     <th style="text-align:center">Payment Amount</th>
                     <th style="text-align:center">Payment complete</th>
                     <th style="text-align:center">Payment Date</th>

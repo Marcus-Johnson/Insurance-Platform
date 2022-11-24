@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
 using NJInsurancePlatform.Models;
-
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
 
@@ -166,10 +165,12 @@ namespace NJInsurancePlatform.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Message()
-        {
-            return View();
-        }
+        //public IActionResult Message()
+        //{
+        //    MessagesViewModel messages = new MessagesViewModel();
+        //    messages.groupRooms = Gro
+        //    return View();
+        //}
 
         public IActionResult FAQ()
         {
