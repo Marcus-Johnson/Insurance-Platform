@@ -35,41 +35,24 @@ namespace NJInsurancePlatform.Controllers
             var allTransactions = await transactionRepository.GetTransactions();
             var findTransactionByCustomerMUID = allTransactions.FindAll(t => t.CustomerMUID == user.CustomerMUID);
             
-            List<PolicyTransaction> policies = new List<PolicyTransaction>();                               //Create a List of Policies with with Specific CustoomerMUID
+            CustomerListItems customerListItems = new CustomerListItems();
 
-
+            // Add Policies To Customer List Items
             foreach(var policy in findPolicyByCustomerMUID)
             {
-                PolicyTransaction policyTransaction = new PolicyTransaction()
-                {
-                    PolicyMUID = policy.CustomerMUID,
-                    CustomerMUID = policy.CustomerMUID,
-                    PolicyNumber = policy.PolicyNumber,
-                    NameOfPolicy = policy.NameOfPolicy,
-                    PolicyOwner = policy.PolicyOwner,
-                    Deductible = policy.Deductible,
-                    OutOfPocketLimit = policy.OutOfPocketLimit,
-                    AnnualLimitOfCoverage = policy.AnnualLimitOfCoverage,
-                    PolicyPaidOffAmount = policy.PolicyPaidOffAmount,
-                    PolicyStart_Date = policy.PolicyStart_Date,
-                    PolicyEnd_Date = policy.PolicyEnd_Date,
-                    Pending = policy.Pending,
-                }; 
-
-                policies.Add(policyTransaction);
-            }             
-            
-            PolicyTransaction customerTransactions = new PolicyTransaction();
-
-            foreach (var transaction in findPolicyByCustomerMUID)
-            {
-
+                customerListItems.Policies?.Add(policy);
+                customerListItems.PolicyNames?.Add(policy.NameOfPolicy);
             }
 
-
+            // Add Transactions To customer List Items
+            foreach(var transaction in findTransactionByCustomerMUID)
+            {
+                customerListItems.Transactions?.Add(transaction);
+            }             
             
-            return View(policies);
+            return View(customerListItems);
         }
+
 
         public IActionResult Details()
         {
