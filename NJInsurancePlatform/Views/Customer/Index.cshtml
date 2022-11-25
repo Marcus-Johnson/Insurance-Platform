@@ -1,4 +1,4 @@
-﻿@model List<NJInsurancePlatform.Models.PolicyTransaction>
+﻿@model NJInsurancePlatform.Models.CustomerListItems
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -64,6 +64,7 @@
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
+
         <h3>Welcome @User.Identity.Name</h3>
         <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
@@ -78,63 +79,63 @@
                 <div class="row">
                     <div class="col s12">
                     <ul class="tabs" id="tabs-swipe-demo">
-                        @for(int i = 0; i < Model.Count; i++)
+                        @for(int i = 0; i < Model.Policies?.Count; i++)
                         {
-                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model[i].NameOfPolicy</a></li>
+                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
                         }
 
                     </ul>
-            @for(int i = 0; i <Model.Count; i++)
+            @for(int i = 0; i < Model.Policies?.Count; i++)
             {
              <div id="@($"swipe-{i}")" class="col s12">
                       <div class="row">
                           <div class="col s4">
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy Number</b></span>
-                                  <span>@Model[i].PolicyMUID</span>
+                                  <span>@Model.Policies[i]?.PolicyMUID</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Name of Policy</b></span>
-                                  <span>@Model[i].NameOfPolicy</span>
+                                  <span>@Model.Policies[i]?.NameOfPolicy</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Name of Policy</b></span>
-                                  <span>@Model[i].NameOfPolicy</span>
+                                  <span>@Model.Policies[i]?.NameOfPolicy</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Deductible</b></span>
-                                  <span>@Model[i].Deductible</span>
+                                  <span>@Model.Policies[i]?.Deductible</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Out of Pocket Limit</b></span>
-                                  <span>@Model[i].OutOfPocketLimit</span>
+                                  <span>@Model.Policies[i]?.OutOfPocketLimit</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                    <span><b>Annual Limit of Coverage</b></span>
-                                   <span>@Model[i].AnnualLimitOfCoverage</span>                             
+                                   <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
                               </div>
                             <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
                               </div>
                           <div class="col s4">
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy Payment is Due</b></span>
-                                  <span>@Model[i].PolicyPaymentisDue</span>
+                                  <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy Total Amount</b></span>
-                                  <span>@Model[i].PolicyTotalAmount</span>
+                                  <span>@Model.Policies[i]?.PolicyTotalAmount</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy Paid Off Amount</b></span>
-                                  <span>@Model[i].PolicyPaidOffAmount</span>
+                                  <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy Start Date</b></span>
-                                  <span>@Model[i].PolicyStart_Date</span>
+                                  <span>@Model.Policies[i]?.PolicyStart_Date</span>
                               </div>
                               <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                   <span><b>Policy End Date</b></span>
-                                  <span>@Model[i].PolicyEnd_Date</span>
+                                  <span>@Model.Policies[i]?.PolicyEnd_Date</span>
                               </div>
                           </div>
                       </div>
@@ -182,29 +183,27 @@
 
     <!-- Payment info table -->
      <div class="row"> @*class="col s4 center-align"*@
-        <h4 class="center-align">Payment Info</h4>
+        <h4 class="center-align">Transaction History</h4>
         <table class="highlight responsive-table" id="">
 
             <thead>
-            <tr>
-                    <th><i class="material-icons mini" style="color: red">priority_high</i>Policy Payment's Due</h5></th>
-                    <th></th>
-                    <th>Due Date</th>
-                    <th>Upcoming Policy Payments</th>
-                    <th></th>
-                    <th>Due Date</th>
+                <tr>
+                    <th style="text-align:center">Payment Amount</th>
+                    <th style="text-align:center">Payment complete</th>
+                    <th style="text-align:center">Payment Date</th>
+                    <th style="text-align:center">Policy MUID</th>
                 </tr>
             </thead>
             <tbody>
+            @for(int i = 0; i < Model.Transactions?.Count; i++)
+            {
                 <tr>
-                    <td>Policy 1</td>
-                    <td></td>
-                    <td>11/10/2022</td> 
-                    <td>Policy 1</td>
-                    <td></td>
-                    <td>12/10/2022</td>
-                </tr>
-
+                    <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
+                    <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
+                    <td style="text-align:center">@Model.Transactions[i].PaymentDate</td> 
+                    <td style="text-align:center">@Model.PolicyNames?[i]</td>
+                </tr>     
+            }              
             </tbody>
         </table>
     </div>
