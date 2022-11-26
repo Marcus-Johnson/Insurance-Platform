@@ -47,19 +47,20 @@ namespace NJInsurancePlatform.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(ApplicationUser model)
+        public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
             if (ModelState.IsValid)
             {
 
                 // assign new record to "user" 
                 // assign value from input field
-                var user = new ApplicationUser 
+                var user = new ApplicationUser
                 {
+                    CustomerMUID = Guid.NewGuid(),
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     DOB = model.DOB,
-                    EmailAddress = model.EmailAddress,
+                    UserName = model.UserName,
                     PhoneNumber = model.PhoneNumber,
                     CurrentAddress = model.CurrentAddress,
                     CurrentCity = model.CurrentCity,
@@ -70,7 +71,7 @@ namespace NJInsurancePlatform.Controllers
                     LicenseNumber = model.LicenseNumber,
                     IsPrimaryPolicyHolder = model.IsPrimaryPolicyHolder,
                     Gender = model.Gender,
-                    UserName = model.UserName
+                    CreatedDate = model.CreatedDate
                 };
 
                 // Create new record in "(user, model.Password)". user = UserName, model.Password = Password
