@@ -45,7 +45,7 @@ namespace NJInsurancePlatform.Data
 
             var cust1 = new Guid("7e46ae9d-ff19-47da-ae69-922069555efb");
             var cust2 = new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1");
-            var cust3 = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce");
+            var cust3 = new Guid("f71979e2-b649-4fbc-bc63-3bafa1d65176");
             var cust4 = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce");
 
             var ben1 = new Guid("6808f1f0-47c1-4136-b775-b1f6ffc541fd");
@@ -234,6 +234,7 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol1,
+                    CustomerMUID = cust1,
                     PolicyNumber = 1234,
                     NameOfPolicy = "Dental Gold",
                     PolicyOwner = "Patrick Leon",
@@ -249,6 +250,7 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol2,
+                    CustomerMUID = cust2,
                     PolicyNumber = 4567,
                     NameOfPolicy = "Health Platinum",
                     PolicyOwner = "Eric Daley",
@@ -264,6 +266,7 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol3,
+                    CustomerMUID= cust3,
                     PolicyNumber = 78910,
                     NameOfPolicy = "Eye Emarald",
                     PolicyOwner = "Nikosi Thom",
@@ -279,6 +282,7 @@ namespace NJInsurancePlatform.Data
              new Policy
              {
                  PolicyMUID = pol4,
+                 CustomerMUID = cust4,
                  PolicyNumber = 769564,
                  NameOfPolicy = "Eye Emarald",
                  PolicyOwner = "Leona wilson",

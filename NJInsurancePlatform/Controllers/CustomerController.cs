@@ -41,7 +41,7 @@ namespace NJInsurancePlatform.Controllers
             foreach(var policy in findPolicyByCustomerMUID)
             {
                 customerListItems.Policies?.Add(policy);
-                customerListItems.PolicyNames?.Add(policy.NameOfPolicy);
+                customerListItems.PolicyNames?.Add(policy?.NameOfPolicy);
             }
 
             // Add Transactions To customer List Items
