@@ -49,7 +49,7 @@ namespace NJInsurancePlatform.Controllers
             {
                 customerHomePageVieModel.Transactions?.Add(transaction);
             }             
-            
+
             return View(customerHomePageVieModel);
         }
 
