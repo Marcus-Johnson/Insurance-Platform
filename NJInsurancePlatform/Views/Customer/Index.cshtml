@@ -91,6 +91,7 @@
                 {
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
+                            <!--COLUMN 1-->
                             <div class="col s4">
                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                     <span><b>Policy Number</b></span>
@@ -119,9 +120,12 @@
 
                                   <!--MAKE A CLAIM BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
+
+                                  <!--MAKE A PAYMENT BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white" id="btn">Make a Payment</button>
                                   </div>
 
+                                  <!--COLUMN 2-->
                                   <div class="col s4">
                                   <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                           <span><b>Policy Payment is Due</b></span>
@@ -148,6 +152,8 @@
                           </div>               
                 }
             }
+
+            <!--IF THERE ARE NO ACTIVE POLICIES-->
             @if(Model.Policies.Count == 0 || Model.Policies == null)
             {
                 <div style="text-align:center">
@@ -223,6 +229,7 @@
             </tbody>
         </table>
 
+        <!--IF THERE ARE NO TRANSACTIONS-->
             @if(Model.Transactions.Count == 0 || Model.Transactions == null)
             {
                 <div style="text-align:center">
