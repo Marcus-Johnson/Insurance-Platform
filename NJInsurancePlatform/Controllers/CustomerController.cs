@@ -35,22 +35,22 @@ namespace NJInsurancePlatform.Controllers
             var allTransactions = await transactionRepository.GetTransactions();
             var findTransactionByCustomerMUID = allTransactions.FindAll(t => t.CustomerMUID == user.CustomerMUID);
             
-            CustomerListItems customerListItems = new CustomerListItems();
+            CustomerHomePageVieModel customerHomePageVieModel = new CustomerHomePageVieModel();
 
             // Add Policies To Customer List Items
             foreach(var policy in findPolicyByCustomerMUID)
             {
-                customerListItems.Policies?.Add(policy);
-                customerListItems.PolicyNames?.Add(policy?.NameOfPolicy);
+                customerHomePageVieModel.Policies?.Add(policy);
+                customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
             }
 
             // Add Transactions To customer List Items
             foreach(var transaction in findTransactionByCustomerMUID)
             {
-                customerListItems.Transactions?.Add(transaction);
+                customerHomePageVieModel.Transactions?.Add(transaction);
             }             
             
-            return View(customerListItems);
+            return View(customerHomePageVieModel);
         }
 
 
