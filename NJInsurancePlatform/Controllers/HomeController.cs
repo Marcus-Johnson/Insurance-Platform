@@ -125,6 +125,8 @@ namespace NJInsurancePlatform.Controllers
 
                     // If Admin Signs In, Redirect To Roles Page
                     if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
+                    if (await userManager.IsInRoleAsync(user, "Beneficiary")) return RedirectToAction("Index", "Customer");
+                    if (await userManager.IsInRoleAsync(user, "Customer")) return RedirectToAction("Index", "Customer");
                     return RedirectToAction("Index", "Customer");
                 }
 
