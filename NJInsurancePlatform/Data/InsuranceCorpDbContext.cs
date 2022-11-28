@@ -773,9 +773,31 @@ namespace NJInsurancePlatform.Data
             builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
 
+            var faq1 = Guid.NewGuid();
+            var faq2 = Guid.NewGuid();
+            var faq3 = Guid.NewGuid();
 
 
-
+            builder.Entity<Faq>().HasData(
+               new Faq
+               {
+                   FaqMUID = faq1,
+                   Question = "Where Is our company based out of?",
+                   Answer = "Somerset, NJ"
+               },
+               new Faq
+               {
+                    FaqMUID = faq2,
+                    Question = "Why is my role listed as pending?",
+                    Answer = "That is your initial role when you first register.  An Admin will approve your account and set you to your appropriate role."
+                },
+               new Faq
+               {
+                   FaqMUID = faq3,
+                   Question = "Why is my policy listed as pending?",
+                   Answer = "Your policy must first be approved by an Admin, please check your policy again in a little while."
+               }
+            );
 
 
 
