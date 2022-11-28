@@ -9,7 +9,154 @@
 </head>
 
 <!--Main container-->
-<div class="ProductRequestContainer">
+<form method="post">
+<div class="productRequestBody">
+    <div class="productRequestContainer">
+        <div class="productRequestHeader">
+            @Model.Product.ProductName Policy Request For @Model.Customer.FirstName @Model.Customer.LastName
+                    <div class="productRequestPolicyRequestID">
+                        <div>
+                            <label asp-for="@Model.PolicyRequest.RequestMUID" class="productRequestInfoLabel">Request Number: &nbsp</label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.PolicyRequest.RequestMUID" value="@Guid.NewGuid()"/>
+                        </div>
+                    </div>  
+            </div>
+        <div class="productRequestPolicyInfoRow">
+            <div class="productRequestPolicyInfoColumn">
+                <div class="productRequestPolicyInfoColumnTitle">Policy Information</div>
+                <div class="productRequestPolicyInfoColumnInfo">
+                    <div hidden class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label hidden asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input hidden style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID" value="@Model.Product.ProductMUID"/>
+                        </div>
+                    </div>                       
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.ProductName" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductName" value="@Model.Product.ProductName"/>
+                        </div>
+                    </div>                     
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.Price" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.Price" value="@Model.Product.Price"/>
+                        </div>
+                    </div>                     
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.Deductible" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.Deductible" value="@Model.Product.Deductible"/>
+                        </div>
+                    </div>                        
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.AnnualLimitOfCoverage" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.AnnualLimitOfCoverage" value="@Model.Product.AnnualLimitOfCoverage"/>
+                        </div>
+                    </div>                        
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.OutOfPocketLimit" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.OutOfPocketLimit" value="@Model.Product.OutOfPocketLimit"/>
+                        </div>
+                    </div>                    
 
+                </div>
+            </div>
+            <div class="productRequestPolicyInfoColumn2">
+                <div class="productRequestPolicyInfoColumnTitle">Customer Information</div>
+                <div class="productRequestPolicyInfoColumnInfo">                    
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.LastName" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.LastName" value="@Model.Customer.LastName"/>
+                        </div>
+                    </div>                      
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.FirstName" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.FirstName" value="@Model.Customer.FirstName"/>
+                        </div>
+                    </div>                       
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.PhoneNumber" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.PhoneNumber" value="@Model.Customer.PhoneNumber"/>
+                        </div>
+                    </div>                       
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.CurrentAddress" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CurrentAddress" value="@Model.Customer.CurrentAddress"/>
+                        </div>
+                    </div>                      
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.CurrentCity" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CurrentCity" value="@Model.Customer.CurrentCity"/>
+                        </div>
+                    </div>                     
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.CurrentZipcode" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CurrentZipcode" value="@Model.Customer.CurrentZipcode"/>
+                        </div>
+                    </div>                      
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.CurrentState" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CurrentState" value="@Model.Customer.CurrentState"/>
+                        </div>
+                    </div>                      
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Customer.CurrentEmployer" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CurrentEmployer" value="@Model.Customer.CurrentEmployer"/>
+                            
+                            <!--CREATED DATE-->
+                            <label hidden asp-for="@Model.Customer.CreatedDate" class="productRequestInfoLabel"></label>
+                            <input hidden style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CreatedDate" value="@DateTime.Now"/>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+        <div class="productRequestFooter">
+            <button style="width:200px;height:50px;color:white" type="submit" class="waves-effect waves-light btn blue"  id="btn" value="Submit Request">Submit Request</button>
+        </div>
+    </div>
 </div>
+</form>
+
 

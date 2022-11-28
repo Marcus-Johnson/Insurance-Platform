@@ -66,14 +66,25 @@ namespace NJInsurancePlatform.Controllers
             var allProducts = await productRepository.GetPolicies();                                        // Get Products
             var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
-            var customerMUID = new Guid(user.CustomerMUID.ToString());
-            var customer = await customerRepository.GetCustomerById(customerMUID);
             var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);            //Find Product Clicked On
 
             CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
             {
                 Product = product,
-                Customer = customer
+                Customer = user
+            };
+
+            return View(customerRequestView);
+        }        
+        
+        
+        [HttpPost]
+        public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)                                     
+        {  
+            CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
+            {
+                Product = product,
+                Customer = user
             };
 
             return View(customerRequestView);
