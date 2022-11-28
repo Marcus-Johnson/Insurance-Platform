@@ -82,28 +82,15 @@
                 </ul>
             </div>
             <div class="col s6">
-                <ul class="collapsible expandable">
+            <ul class="collapsible expandable">
+                @foreach (var faq in Model)
+                {
                     <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        <div class="collapsible-header"><h4>@faq.Question </h4><i class="material-icons">add</i></div>
+                        <div class="collapsible-body"><span>@faq.Answer</span></div>
                     </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                </ul>
+                }
+            </ul>
             </div>
         </div>
   </div>

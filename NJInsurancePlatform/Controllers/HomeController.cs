@@ -4,6 +4,7 @@ using System.Diagnostics;
 using NJInsurancePlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -16,12 +17,14 @@ namespace NJInsurancePlatform.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         //private readonly iPolicyRepository policyRepository;
+        private readonly iFaqRepository faqRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, iFaqRepository faqRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.faqRepository = faqRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -175,9 +178,22 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
-        public IActionResult FAQ()
+        [HttpGet]
+        public async Task<IActionResult> FAQ()
         {
-            return View();
+            var getFaqs = await faqRepository.GetFaqs();
+
+            List<Faq> faqs = new List<Faq>();
+
+            foreach (var faq in getFaqs)
+            {
+                faqs.Add(faq);
+            };
+
+            return View(faqs);
         }
+
+
+
     }
 }
