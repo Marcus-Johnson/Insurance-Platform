@@ -29,10 +29,9 @@
             @foreach (var product in Model)
             {
 
-                    <form method="post" asp-controller="Policy" asp-action="MakeRequest" style="width:35%;">
-                        <button class="policyButton" asp-route-id="@product.ProductMUID" asp-action="PolicyRequest" style="width:100%;box-shadow:4px 4px 4px rgba(5,5,5,.3)">
-                            <input hidden readonly asp-for="@product.ProductMUID">
-                            <input asp-for="@product.ProductName"/>
+                    <form style="width:35%;">
+                        <button class="policyButton" asp-controller="Customer" asp-action="CustomerPolicyRequest" asp-route-Id="@product.ProductMUID"  style="width:100%;box-shadow:4px 4px 4px rgba(5,5,5,.3)">
+                            <input readonly asp-for="@product.ProductName"/>
             
                             <h5>@product.ProductName</h5>
                             <hr size="1" width="90%" />

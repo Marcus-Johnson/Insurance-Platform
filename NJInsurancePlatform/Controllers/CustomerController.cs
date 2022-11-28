@@ -17,13 +17,19 @@ namespace NJInsurancePlatform.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IPolicyRepository policyRepository;
         private readonly ITransactionRepository transactionRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ICustomerRepository customerRepository;
 
-        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IPolicyRepository policyRepository, ITransactionRepository transactionRepository)
+        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
+            IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository, 
+            ICustomerRepository customerRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.policyRepository = policyRepository;
-            this.transactionRepository = transactionRepository; 
+            this.transactionRepository = transactionRepository;
+            this.productRepository = productRepository;
+            this.customerRepository = customerRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -51,6 +57,26 @@ namespace NJInsurancePlatform.Controllers
             }             
 
             return View(customerHomePageVieModel);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> CustomerPolicyRequest(string Id)                                     
+        {            
+            var allProducts = await productRepository.GetPolicies();                                        // Get Products
+            var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
+            var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
+            var customerMUID = new Guid(user.CustomerMUID.ToString());
+            var customer = await customerRepository.GetCustomerById(customerMUID);
+            var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);            //Find Product Clicked On
+
+            CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
+            {
+                Product = product,
+                Customer = customer
+            };
+
+            return View(customerRequestView);
         }
 
 

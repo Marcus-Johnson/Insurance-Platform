@@ -17,12 +17,14 @@ namespace NJInsurancePlatform.Controllers
         private readonly IPolicyRepository PolicyRepository;
         private readonly ITransactionRepository TransactionRepository;
         private readonly IProductRepository ProductRepository;
+        private readonly ICustomerRepository customerRepository;
 
-        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository, IProductRepository ProductRepository)
+        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository, IProductRepository ProductRepository, ICustomerRepository customerRepository)
         {
             this.PolicyRepository = PolicyRepository;
             this.TransactionRepository = TransactionRepository;
             this.ProductRepository = ProductRepository;
+            this.customerRepository = customerRepository;
         }
 
 
@@ -45,7 +47,6 @@ namespace NJInsurancePlatform.Controllers
                 policies.Add(policy);
             }
             return View(policies);
-
         }
 
 
