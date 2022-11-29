@@ -8,7 +8,6 @@ using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -27,6 +26,7 @@ namespace NJInsurancePlatform.Controllers
             this.faqRepository = faqRepository;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             if (signInManager.IsSignedIn(User))
@@ -37,18 +37,21 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult SignUp()
         {
 
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
@@ -103,12 +106,14 @@ namespace NJInsurancePlatform.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -145,13 +150,14 @@ namespace NJInsurancePlatform.Controllers
 
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -159,18 +165,20 @@ namespace NJInsurancePlatform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [AllowAnonymous]
         public IActionResult Message()
         {
             //MessagesViewModel messages = new MessagesViewModel();
@@ -178,6 +186,7 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> FAQ()
         {
@@ -194,7 +203,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
-
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> FAQ(Faq faq)
         {
