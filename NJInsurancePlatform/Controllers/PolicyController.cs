@@ -17,12 +17,14 @@ namespace NJInsurancePlatform.Controllers
         private readonly IPolicyRepository PolicyRepository;
         private readonly ITransactionRepository TransactionRepository;
         private readonly IProductRepository ProductRepository;
+        private readonly ICustomerRepository customerRepository;
 
-        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository, IProductRepository ProductRepository)
+        public PolicyController(ITransactionRepository TransactionRepository, IPolicyRepository PolicyRepository, IProductRepository ProductRepository, ICustomerRepository customerRepository)
         {
             this.PolicyRepository = PolicyRepository;
             this.TransactionRepository = TransactionRepository;
             this.ProductRepository = ProductRepository;
+            this.customerRepository = customerRepository;
         }
 
 
@@ -45,7 +47,6 @@ namespace NJInsurancePlatform.Controllers
                 policies.Add(policy);
             }
             return View(policies);
-
         }
 
 
@@ -68,12 +69,12 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> PolicyRequest(Policy policy)
         {
-
             Policy updatedPolicy = new Policy()
             {
                 PolicyMUID = policy.PolicyMUID,
+                ProductMUID = policy.ProductMUID,
                 CustomerMUID = policy.CustomerMUID,
-                PolicyNumber = policy.PolicyNumber,
+                //PolicyNumber = policy.PolicyNumber,
                 NameOfPolicy = policy.NameOfPolicy,
                 PolicyOwner = policy.PolicyOwner,
                 Deductible = policy.Deductible,
@@ -86,7 +87,6 @@ namespace NJInsurancePlatform.Controllers
                 PolicyEnd_Date = policy.PolicyEnd_Date,
                 Pending = true,
             };
-            Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + policy.NameOfPolicy);
             PolicyRepository.UpdatePolicy(updatedPolicy);
             PolicyRepository.Save();
             return RedirectToAction("PolicyRequest");

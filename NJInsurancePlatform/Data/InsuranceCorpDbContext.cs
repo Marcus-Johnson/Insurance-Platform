@@ -197,6 +197,9 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     AnnualLimitOfCoverage = 14999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 10000,
+                    PolicyPaidOffAmount = 0,
+
                 },
                 new Product
                 {
@@ -207,6 +210,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 200.15,
                     AnnualLimitOfCoverage = 25999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 150000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -217,6 +222,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 50.67,
                     AnnualLimitOfCoverage = 1345.99,
                     OutOfPocketLimit = 1200.45,
+                    PolicyTotalAmount = 2000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -227,6 +234,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 160.69,
                     AnnualLimitOfCoverage = 5345.99,
                     OutOfPocketLimit = 5600.45,
+                    PolicyTotalAmount = 100000,
+                    PolicyPaidOffAmount = 0,
                 }
             );
 
@@ -234,8 +243,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol1,
+                    ProductMUID = prod1,
                     CustomerMUID = cust1,
-                    PolicyNumber = 1234,
                     NameOfPolicy = "Dental Gold",
                     PolicyOwner = "Patrick Leon",
                     Deductible = 100.25,
@@ -250,8 +259,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol2,
+                    ProductMUID = prod2,
                     CustomerMUID = cust2,
-                    PolicyNumber = 4567,
                     NameOfPolicy = "Health Platinum",
                     PolicyOwner = "Eric Daley",
                     Deductible = 100.25,
@@ -266,8 +275,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol3,
-                    CustomerMUID= cust3,
-                    PolicyNumber = 78910,
+                    ProductMUID = prod3,
+                    CustomerMUID = cust3,
                     NameOfPolicy = "Eye Emarald",
                     PolicyOwner = "Nikosi Thom",
                     Deductible = 100.25,
@@ -282,8 +291,8 @@ namespace NJInsurancePlatform.Data
              new Policy
              {
                  PolicyMUID = pol4,
+                 ProductMUID = prod4,
                  CustomerMUID = cust4,
-                 PolicyNumber = 769564,
                  NameOfPolicy = "Eye Emarald",
                  PolicyOwner = "Leona wilson",
                  Deductible = 100.25,

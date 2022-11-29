@@ -28,9 +28,10 @@ body {
 }
 
 main {
-    width: 95vw;
-    margin: auto;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+    width:100%;
+    padding:30px;
+
 }
 
 footer {

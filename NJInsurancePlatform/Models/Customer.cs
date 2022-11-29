@@ -77,7 +77,7 @@ namespace NJInsurancePlatform.Models
 
         [Required(ErrorMessage = "Missing field: Gender")]
         [DisplayName("Gender")]
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
 
         [Required(ErrorMessage = "Missing field: Date Created")]
         [DisplayName("Date Created")]
