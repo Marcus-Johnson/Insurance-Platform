@@ -14,6 +14,7 @@ namespace NJInsurancePlatform.Interfaces
         public FaqRepository(InsuranceCorpDbContext _databaseContent)
         {
             this._databaseContext = _databaseContent;
+            //this.disposed = disposed;
         }
 
         public async Task<IEnumerable<Faq>> GetFaqs()
@@ -36,6 +37,7 @@ namespace NJInsurancePlatform.Interfaces
         {
             var faqRemove = _databaseContext.Faqs.FirstOrDefault(p => p.FaqMUID == FaqMUID);
             _databaseContext.Faqs.Remove(faqRemove);
+            //_databaseContext.SaveChanges();
         }
         
         public async void UpdateFaq(Faq faq)
@@ -52,7 +54,7 @@ namespace NJInsurancePlatform.Interfaces
         
         public async void Save()
         {
-            await _databaseContext.SaveChangesAsync();
+            _databaseContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
