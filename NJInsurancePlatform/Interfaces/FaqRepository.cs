@@ -10,7 +10,12 @@ namespace NJInsurancePlatform.Interfaces
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
-        
+
+        public FaqRepository(InsuranceCorpDbContext _databaseContent)
+        {
+            this._databaseContext = _databaseContent;
+        }
+
         public async Task<IEnumerable<Faq>> GetFaqs()
         {
             return _databaseContext.Faqs.ToList();

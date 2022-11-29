@@ -214,7 +214,8 @@
                 </tr>
             </thead>
             <tbody>
-            @if(Model.Transactions.Count != null || Model.Transactions.Count != 0)
+
+            @if(Model.Transactions?.Count != null || Model.Transactions?.Count != 0)
             {
                 @for(int i = 0; i < Model.Transactions?.Count; i++)
                 {
@@ -226,6 +227,15 @@
                     </tr>     
                 }
             }
+            else
+            {
+                <tr>
+                    <td>
+                        <h3>You Have No Transactions</h3>
+                    </td>
+                </tr>
+            }
+            
             </tbody>
         </table>
 

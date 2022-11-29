@@ -4,6 +4,7 @@ using System.Diagnostics;
 using NJInsurancePlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -16,12 +17,14 @@ namespace NJInsurancePlatform.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         //private readonly iPolicyRepository policyRepository;
+        private readonly iFaqRepository faqRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, iFaqRepository faqRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.faqRepository = faqRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -125,6 +128,8 @@ namespace NJInsurancePlatform.Controllers
 
                     // If Admin Signs In, Redirect To Roles Page
                     if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
+                    if (await userManager.IsInRoleAsync(user, "Beneficiary")) return RedirectToAction("Index", "Customer");
+                    if (await userManager.IsInRoleAsync(user, "Customer")) return RedirectToAction("Index", "Customer");
                     return RedirectToAction("Index", "Customer");
                 }
 
@@ -166,16 +171,29 @@ namespace NJInsurancePlatform.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //public IActionResult Message()
-        //{
-        //    MessagesViewModel messages = new MessagesViewModel();
-        //    messages.groupRooms = Gro
-        //    return View();
-        //}
-
-        public IActionResult FAQ()
+        public IActionResult Message()
         {
+            //MessagesViewModel messages = new MessagesViewModel();
+            //messages.groupRooms = Gro
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> FAQ()
+        {
+            var getFaqs = await faqRepository.GetFaqs();
+
+            List<Faq> faqs = new List<Faq>();
+
+            foreach (var faq in getFaqs)
+            {
+                faqs.Add(faq);
+            };
+
+            return View(faqs);
+        }
+
+
+
     }
 }

@@ -48,6 +48,7 @@ namespace NJInsurancePlatform.Controllers
             {
                 customerHomePageVieModel.Policies?.Add(policy);
                 customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
+
             }
 
             // Add Transactions To customer List Items

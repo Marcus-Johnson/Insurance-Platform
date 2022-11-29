@@ -15,7 +15,6 @@ html {
 
 body {
     font-family: 'Open Sans', sans-serif;
-    margin-bottom: 60px;
 }
 
 .dark-mode {
@@ -32,13 +31,12 @@ main {
     padding-bottom: 50px;
     width:100%;
     padding:30px;
+
 }
 
 footer {
-    padding-top: 50px;
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
 }
 
