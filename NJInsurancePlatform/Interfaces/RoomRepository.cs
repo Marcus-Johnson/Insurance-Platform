@@ -11,7 +11,7 @@ namespace NJInsurancePlatform.Interfaces
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
         
-        public async Task<IEnumerable<GroupRoom>> GetGroupRooms()
+        public async Task<List<GroupRoom>> GetGroupRooms()
         {
             return _databaseContext.GroupRooms.ToList();
         }

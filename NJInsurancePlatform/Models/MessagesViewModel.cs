@@ -2,8 +2,8 @@
 {
     public class MessagesViewModel
     {
-        public IEnumerable<GroupRoom> groupRooms { get; set; }
-        public IEnumerable<GroupRoomMessage> groupRoomMessages { get; set; }
+        public List<GroupRoom>? groupRooms { get; set; }
+        public List<GroupRoomMessage>? groupRoomMessages { get; set; }
 
         public MessagesViewModel()
         {

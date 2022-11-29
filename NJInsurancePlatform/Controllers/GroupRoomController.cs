@@ -60,10 +60,20 @@ namespace NJInsurancePlatform.Controllers
 
         // Route To Create Group View
         [HttpGet]
-        public async Task<ActionResult> CreateGroup()
+        public async Task<ActionResult> Message()
         {
-            return View();
-        }
+            var allRooms = await _roomRepository.GetGroupRooms();
+            var allMessages = await _iGroupRoomMessageRepository.GetMessages();
+
+            MessagesViewModel messagesViewModel = new MessagesViewModel()
+            {
+                groupRooms = allRooms,
+                groupRoomMessages = allMessages,
+            };
+
+            return View(messagesViewModel);
+        }       
+        
 
 
         // Post Form Input From View

@@ -6,7 +6,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface iGroupRoomMessageRepository : IDisposable
     {
-        Task<IEnumerable<GroupRoomMessage>> GetMessages();
+        Task<List<GroupRoomMessage>> GetMessages();
 
         Task<GroupRoomMessage> GetMessagesByID(Guid GroupRoomMessageMUID);
 
