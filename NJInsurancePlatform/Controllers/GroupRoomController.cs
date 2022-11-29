@@ -57,6 +57,37 @@ namespace NJInsurancePlatform.Controllers
 
             return RedirectToAction("", "");
         }
+
+        // Route To Create Group View
+        [HttpGet]
+        public async Task<ActionResult> CreateGroup()
+        {
+            return View();
+        }
+
+
+        // Post Form Input From View
+        [HttpPost]
+        public async Task<ActionResult> CreateGroup([Bind(include:"GroupMUID, Name")]GroupRoom model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _roomRepository.InsertGroupRoom(model);
+                    _roomRepository.Save();
+
+                    return RedirectToAction("GroupCreatedConfirmation", "GroupRoom");
+
+                }
+            }
+            catch(ArgumentNullException e)
+            {
+                throw new ArgumentNullException(paramName: nameof(e), message: "Parameter can't be null"); 
+            }
+            
+            return View("Not Found"); 
+        }
     }
 }
 

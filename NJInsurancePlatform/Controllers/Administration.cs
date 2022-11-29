@@ -14,21 +14,6 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> UnpaidTransactions()                           
         {
-            //var custGuid = new Guid();
-            //var policyGuid = new Guid();
-            //DateTime date = DateTime.Now;
-
-            //var addTransaction = new Transaction()
-            //{
-            //    CustomerMUID = custGuid,
-            //    PolicyMUID =    policyGuid,
-            //    isPaymentComplete = false,
-            //    PaymentAmount = 1287.29,
-            //    PaymentDate = date,
-            //};
-
-            //_transactionRepository.InsertTransaction(addTransaction);
-            //_transactionRepository.Save();
 
             var transactions =  await _transactionRepository.GetTransactions();             // get Transactions from Database
             var model = new AccountManager();
