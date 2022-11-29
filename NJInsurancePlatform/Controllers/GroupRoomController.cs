@@ -65,6 +65,14 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<ActionResult> Message()
         {
+            // If Not Logged In, Reroute To Access Denied
+            if(User.Identity.Name == null)
+            {
+                return RedirectToAction("AccessDenied", "Administration");
+            }
+
+            var identityUser = User.Identity?.Name;
+            var user = await _userManager.FindByNameAsync(identityUser);
             var allRooms = await _roomRepository.GetGroupRooms();
             var allMessages = await _iGroupRoomMessageRepository.GetMessages();
 
@@ -72,6 +80,7 @@ namespace NJInsurancePlatform.Controllers
             {
                 groupRooms = allRooms,
                 groupRoomMessages = allMessages,
+                applicationUser = user,
             };
 
             return View(messagesViewModel);
@@ -81,18 +90,21 @@ namespace NJInsurancePlatform.Controllers
 
         // Post Form Input From View
         [HttpPost]
-        public async Task<ActionResult> CreateGroup([Bind(include:"GroupMUID, Name")]GroupRoom model)
+        public async Task<ActionResult> CreateGroup(MessagesViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    _roomRepository.InsertGroupRoom(model);
+                    GroupRoom groupRoom = new GroupRoom()
+                    {
+                        GroupMUID = model.groupRoom.GroupMUID,
+                        Name = model.groupRoom.Name,
+                    };
+
+                    _roomRepository.InsertGroupRoom(groupRoom);
                     _roomRepository.Save();
 
-                    return RedirectToAction("GroupCreatedConfirmation", "GroupRoom");
+                    return RedirectToAction("Message", "GroupRoom");
 
-                }
             }
             catch(ArgumentNullException e)
             {

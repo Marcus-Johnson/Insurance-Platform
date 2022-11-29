@@ -8,7 +8,7 @@
         display: none;
     }
 </style>
-<form>
+<form method="post">
 <div class="row" id="border" style="height: 70vh; width: 95vw">
 
     <div class="col s3" style="height: 93%">
@@ -72,31 +72,22 @@
 
     <!-- Modal Structure -->
     <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
-        <form method="post">
+        <form method="post" asp-controller="GroupRoom" asp-action="CreateGroup">
             <div class="modal-content">
                 <div class="row">
-                    @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
-                    <ul id='dropdown1' class='dropdown-content'>
-                    <label asp-for="PolicyMUID" hidden></label>
-                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
-                    </ul>
-                    <br />
-                    commented out above is the dropdown*@
-                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" for="PolicyMUID">
-                    <label for="PolicyMUID">Policy ID</label>
+                    <input required asp-for="@Model.groupRoom.Name" placeholder="Enter Group Name" type="text" style="font-size:30px;color:silver">
+                    <span asp-validation-for="@Model.groupRoom.Name"></span>
                 </div>
                 <div class="row">
-                    <input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
-                    <label for="DateOfClaim" for="DateOfClaim">Date of Claim</label>
+                    <input readonly asp-for="@Model.applicationUser.CustomerMUID" readonly type="text" for="PolicyMUID" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.applicationUser.CustomerMUID"></label>
                 </div>
                 <div class="row">
-                    <input placeholder="Description" type="text" for="ClaimUserDescription">
-                    <label for="ClaimUserDescription" for="ClaimUserDescription">Description</label>
+                    <input readonly asp-for="@Model.groupRoom.GroupMUID" value="@Guid.NewGuid()" type="text" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.groupRoom.GroupMUID" ></label>
                 </div>
             </div>
-            <button type="submit" class="waves-effect waves-light btn" id="btn">Submit</button>
+            <button type="submit" class="waves-effect waves-light btn" id="btn" value="Submit GroupName">Submit Group Name</button>
             <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
         </form>
     </div>
