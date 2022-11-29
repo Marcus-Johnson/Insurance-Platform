@@ -213,5 +213,31 @@ namespace NJInsurancePlatform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult CreateFAQ()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult CreateFAQ(Faq model)
+        {
+            var faq = new Faq
+            {
+                FaqMUID = model.FaqMUID,
+                Question = model.Question,
+                Answer = model.Answer
+            };
+        
+            faqRepository.InsertFaq(faq);
+            faqRepository.Save();
+            return RedirectToAction("FAQ", "Home");
+
+        }
+
     }
 }
