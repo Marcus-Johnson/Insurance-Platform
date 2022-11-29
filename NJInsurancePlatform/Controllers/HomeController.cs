@@ -189,11 +189,20 @@ namespace NJInsurancePlatform.Controllers
             {
                 faqs.Add(faq);
             };
-
+            System.Diagnostics.Debug.WriteLine(faqs);
             return View(faqs);
         }
 
 
+
+        [HttpPost]
+        public async Task<IActionResult> FAQ(Faq faq)
+        {
+            var FaqMUID = new Guid(faq.FaqMUID.ToString());
+            faqRepository.DeleteFaq(FaqMUID);
+            faqRepository.Save();
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
