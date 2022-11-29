@@ -11,7 +11,12 @@ namespace NJInsurancePlatform.Interfaces
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
-        
+
+        public GroupRoomMessageRepository(InsuranceCorpDbContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
+
         public async Task<List<GroupRoomMessage>> GetMessages()
         {
             return _databaseContext.GroupRoomMessages.ToList();

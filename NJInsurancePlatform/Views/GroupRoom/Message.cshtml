@@ -12,26 +12,18 @@
 <div class="row" id="border" style="height: 70vh; width: 95vw">
 
     <div class="col s3" style="height: 93%">
-        
-        <a class="btn waves-effect waves-light" id="btn" style="display: flex; justify-content: center"><i class="material-icons left">add</i>Add Group</a>
+        <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
+     
 
         <div class="collection" style="height: 92%; overflow: auto">
-                @if(Model.groupRooms.Count == null)
-                {
-                    <p>No Rooms</p>
-                }
-                @if(Model.groupRooms.Count != null)
-                {
-                   @for (int i = 0; i < Model.groupRooms?.Count; i++)
-                    {
+            @for (int i = 0; i < Model.groupRooms?.Count; i++)
+            {
                 <a class="collection-item">
                     <span class="new badge indigo">4</span>
                     <img src="~/images/Gx-Icon-Color.png" style="height: 30px">
-                    <b class="truncate indigo-text">Group Name truncated</b>
+                    <b class="truncate indigo-text">@Model.groupRooms[i].Name</b>
                 </a>
-                    }                 
-                }
-
+            }
         </div>
     </div>
 
@@ -77,3 +69,35 @@
     </div>
 </div>
 </form>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
+        <form method="post">
+            <div class="modal-content">
+                <div class="row">
+                    @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
+                    <ul id='dropdown1' class='dropdown-content'>
+                    <label asp-for="PolicyMUID" hidden></label>
+                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
+                    </ul>
+                    <br />
+                    commented out above is the dropdown*@
+                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" for="PolicyMUID">
+                    <label for="PolicyMUID">Policy ID</label>
+                </div>
+                <div class="row">
+                    <input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
+                    <label for="DateOfClaim" for="DateOfClaim">Date of Claim</label>
+                </div>
+                <div class="row">
+                    <input placeholder="Description" type="text" for="ClaimUserDescription">
+                    <label for="ClaimUserDescription" for="ClaimUserDescription">Description</label>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn" id="btn">Submit</button>
+            <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
+        </form>
+    </div>
+</div>

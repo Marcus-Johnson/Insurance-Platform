@@ -16,13 +16,16 @@ namespace NJInsurancePlatform.Controllers
     [AllowAnonymous]
     public class GroupRoomController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly iRoomRepository _roomRepository;
-
         private readonly iGroupRoomMessageRepository _iGroupRoomMessageRepository;
-        public GroupRoomController(iRoomRepository iroomRepository, iGroupRoomMessageRepository iGroupRoomMessageRepository)
+        public GroupRoomController(iRoomRepository iroomRepository, iGroupRoomMessageRepository iGroupRoomMessageRepository, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             this._roomRepository = iroomRepository;
             _iGroupRoomMessageRepository = iGroupRoomMessageRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost]

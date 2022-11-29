@@ -484,25 +484,25 @@ namespace NJInsurancePlatform.Data
                 new GroupRoom
                 {
                     GroupMUID = group1,
-                    Name = "Group 1"
+                    Name = "Nikosi's Group"
 
                 },                
                 new GroupRoom
                 {
                     GroupMUID = group2,
-                    Name = "Group 2"
+                    Name = "Eric's Group"
 
                 },               
                 new GroupRoom
                 {
                     GroupMUID = group3,
-                    Name = "Group 3"
+                    Name = "Leona's Group"
 
                 },                
                 new GroupRoom
                 {
                     GroupMUID = group4,
-                    Name = "Group 4"
+                    Name = "Patrick's Group"
 
                 }
 
