@@ -214,7 +214,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult CreateFAQ()
         {
@@ -222,7 +222,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult CreateFAQ(Faq model)
         {
