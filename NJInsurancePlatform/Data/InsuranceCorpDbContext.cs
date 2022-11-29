@@ -197,6 +197,9 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     AnnualLimitOfCoverage = 14999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 10000,
+                    PolicyPaidOffAmount = 0,
+
                 },
                 new Product
                 {
@@ -207,6 +210,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 200.15,
                     AnnualLimitOfCoverage = 25999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 150000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -217,6 +222,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 50.67,
                     AnnualLimitOfCoverage = 1345.99,
                     OutOfPocketLimit = 1200.45,
+                    PolicyTotalAmount = 2000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -227,6 +234,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 160.69,
                     AnnualLimitOfCoverage = 5345.99,
                     OutOfPocketLimit = 5600.45,
+                    PolicyTotalAmount = 100000,
+                    PolicyPaidOffAmount = 0,
                 }
             );
 

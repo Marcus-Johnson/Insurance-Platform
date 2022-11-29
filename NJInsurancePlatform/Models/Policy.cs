@@ -19,10 +19,6 @@ namespace NJInsurancePlatform.Models
         [Required]
         public Guid CustomerMUID { get; set; }
 
-        //[DisplayName("Policy Number")]
-        //[Required(ErrorMessage = "Missing - PolicyNumber")]
-        //public int PolicyNumber { get; set; }
-
         [DisplayName("Name Of Policy")]
         [Required(ErrorMessage = "Missing - Name Of Policy")]
         [StringLength(50)]

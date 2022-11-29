@@ -68,27 +68,11 @@ namespace NJInsurancePlatform.Controllers
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
             var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);            //Find Product Clicked On
             var customerMUID = new Guid(user.CustomerMUID.ToString());
-            var policyMUID = new Guid(user.PolicyMUID.ToString());
 
             CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
             {
-                CustomerMUID = customerMUID,
-                PolicyMUID = policyMUID,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                EmailAddress = user.EmailAddress,
-                PhoneNumber = user.PhoneNumber,
-                CurrentAddress = user.CurrentAddress,
-                CurrentCity = user.CurrentCity,
-                CurrentZipcode = user.CurrentZipcode,
-                CurrentState = user.CurrentState,
-                CurrentEmployer = user.CurrentEmployer,
-                LicenseNumber = user.LicenseNumber,
-                IsPrimaryPolicyHolder = user.IsPrimaryPolicyHolder,
-                CreatedDate = user.CreatedDate.ToString(),
-                Active = user.Active
-
-                
+                Product = product,
+                Customer = user,
             };
 
             return View(customerRequestView);
@@ -98,12 +82,28 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)                                     
         {
+            var customerMUID = new Guid(model.Customer.CustomerMUID.ToString());
 
-            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>> " + model.Product.ProductMUID);
+            Policy policy = new Policy()
+            {
+                PolicyMUID = Guid.NewGuid(),
+                ProductMUID = model.Product.ProductMUID,
+                CustomerMUID = customerMUID,
+                NameOfPolicy = model.Product.ProductName,
+                PolicyOwner = model.Customer.FirstName + model.Customer.LastName,
+                Deductible = model.Product.Deductible,
+                OutOfPocketLimit = model.Product.OutOfPocketLimit,
+                AnnualLimitOfCoverage = model.Product.AnnualLimitOfCoverage,
+                PolicyPaymentisDue = true,
+                PolicyTotalAmount = model.Product.PolicyTotalAmount,
+                PolicyPaidOffAmount = 0,
+                Pending = true,
+            };
 
+            policyRepository.InsertPolicy(policy);
+            policyRepository.Save();
 
-            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>> " + model.PolicyRequest.RequestMUID);
-            return View();
+            return RedirectToAction("Index", "Customer");
         }
 
 

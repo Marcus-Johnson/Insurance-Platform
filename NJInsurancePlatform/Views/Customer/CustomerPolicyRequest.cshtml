@@ -1,6 +1,6 @@
 ﻿@model NJInsurancePlatform.Models.CustomerPolicyRequestViewModel
 @{
-    //ViewData["Title"] = "Customer Policy Request";
+    ViewData["Title"] = "Customer Policy Request";
 }
 
 <!--Add CSS To Header-->
@@ -9,11 +9,11 @@
 </head>
 
 <!--Main container-->
-@*<form method="post" asp-controller="Customer">
+<form method="post" asp-controller="Customer">
 <div class="productRequestBody">
     <div class="productRequestContainer">
         <div class="productRequestHeader">
-
+            @Model.Product.ProductName Policy Request For @Model.Customer.FirstName @Model.Customer.LastName
             </div>
         <div class="productRequestPolicyInfoRow">
             <div class="productRequestPolicyInfoColumn">
@@ -21,12 +21,10 @@
                 <div class="productRequestPolicyInfoColumnInfo">
                     <div hidden class="productRequestPolicyInfoColumnInfoItem">
                         <div>
+                            <label hidden  asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
                         </div>
                         <div style="font-size:9px">
-        
-                                <label  asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
-@*                            <input type="text"  style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID"  placeholder="@Model.Product.ProductMUID"/>
-*@                @*<input readonly type="text" asp-for="@Model.Product.ProductMUID" placeholder="@Model.Product.ProductMUID" style="text-shadow: 1px 1px lightgrey;" />
+                            <input hidden type="text"  style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID"  placeholder="@Model.Product.ProductMUID"/>
                         </div>
                     </div>                       
                     <div class="productRequestPolicyInfoColumnInfoItem">
@@ -67,6 +65,14 @@
                         </div>
                         <div style="font-size:9px">
                             <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.OutOfPocketLimit" value="@Model.Product.OutOfPocketLimit"/>
+                        </div>
+                    </div>                        
+                    <div class="productRequestPolicyInfoColumnInfoItem">
+                        <div>
+                            <label asp-for="@Model.Product.PolicyTotalAmount" class="productRequestInfoLabel"></label>
+                        </div>
+                        <div style="font-size:9px">
+                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.PolicyTotalAmount" value="@Model.Product.PolicyTotalAmount"/>
                         </div>
                     </div>                    
 
@@ -141,15 +147,19 @@
                             <!--CREATED DATE-->
                             <label hidden asp-for="@Model.Customer.CreatedDate" class="productRequestInfoLabel"></label>
                             <input hidden style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CreatedDate" value="@DateTime.Now"/>
+
+                            <label hidden asp-for="@Model.Customer.CustomerMUID" class="productRequestInfoLabel"></label>
+                            <input hidden style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.CustomerMUID" value="@Model.Customer.CustomerMUID"/>
                         </div>
                     </div>   
                 </div>
             </div>
         </div>
         <div class="productRequestFooter">
-            <button style="width:200px;height:50px;color:white" type="submit" class="waves-effect waves-light btn blue"  id="btn" value="Submit Request">Submit Request</button>
+            <button style="width:60%;height:60px;color:white;font-size:25px;font-weight:700;" type="submit" class="waves-effect waves-light btn blue"  id="btn" value="Submit Request">Submit Request</button>
         </div>
     </div>
 </div>
-</form>*@
+</form>
+
 
