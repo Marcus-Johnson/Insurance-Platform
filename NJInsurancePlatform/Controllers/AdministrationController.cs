@@ -241,5 +241,7 @@ namespace NJInsurancePlatform.Controllers
             }   
             return RedirectToAction("EditRole", new { id = role.Id });                                          //If Nothing is selected, redirect to current role Edit page View
         }
+
+
     }
 }
