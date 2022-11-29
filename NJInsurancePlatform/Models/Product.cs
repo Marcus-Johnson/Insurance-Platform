@@ -18,7 +18,7 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Description")]
         public string? Description { get; set; }
 
-        [DisplayName("Name Of Policy")]
+        [DisplayName("Policy Price")]
         [Required(ErrorMessage = "Missing - Name Of Policy")]
         public double? Price { get; set; }
 
