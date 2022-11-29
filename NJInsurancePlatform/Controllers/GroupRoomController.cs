@@ -88,6 +88,30 @@ namespace NJInsurancePlatform.Controllers
             
             return View("Not Found"); 
         }
+
+
+        // Post Form Input From View
+        [HttpPost]
+        public async Task<ActionResult> CreateMessage([Bind(include: "GroupRoomMessageMUID, GroupRoomMUID, SenderMUID, Message")] GroupRoomMessage model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _iGroupRoomMessageRepository.InsertMessage(model);
+                    _iGroupRoomMessageRepository.Save();
+
+                    return RedirectToAction("Message", "Home");
+
+                }
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new ArgumentNullException(paramName: nameof(e), message: "Parameter can't be null");
+            }
+
+            return View("Not Found");
+        }
     }
 }
 
