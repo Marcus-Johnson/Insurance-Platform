@@ -5,7 +5,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface iRoomRepository : IDisposable
     {
-        Task<IEnumerable<GroupRoom>> GetGroupRooms();
+        Task<List<GroupRoom>> GetGroupRooms();
 
         Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID);
 

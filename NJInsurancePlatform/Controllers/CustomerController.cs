@@ -67,7 +67,7 @@ namespace NJInsurancePlatform.Controllers
             var allProducts = await productRepository.GetPolicies();                                        // Get Products
             var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
-            var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);            //Find Product Clicked On
+            var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);                  //Find Product Clicked On
             var customerMUID = new Guid(user.CustomerMUID.ToString());
 
             CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()

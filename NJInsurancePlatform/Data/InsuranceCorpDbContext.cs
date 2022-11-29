@@ -479,6 +479,35 @@ namespace NJInsurancePlatform.Data
                 }
             );
 
+            // Group Rooms
+            builder.Entity<GroupRoom>().HasData(
+                new GroupRoom
+                {
+                    GroupMUID = group1,
+                    Name = "Nikosi's Group"
+
+                },                
+                new GroupRoom
+                {
+                    GroupMUID = group2,
+                    Name = "Eric's Group"
+
+                },               
+                new GroupRoom
+                {
+                    GroupMUID = group3,
+                    Name = "Leona's Group"
+
+                },                
+                new GroupRoom
+                {
+                    GroupMUID = group4,
+                    Name = "Patrick's Group"
+
+                }
+
+            );            
+            
             // Group Room messages
             builder.Entity<GroupRoomMessage>().HasData(
                 new GroupRoomMessage

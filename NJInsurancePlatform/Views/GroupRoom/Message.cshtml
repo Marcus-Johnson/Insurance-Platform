@@ -1,4 +1,5 @@
-﻿@{
+﻿@model NJInsurancePlatform.Models.MessagesViewModel
+@{
     ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,20 +8,20 @@
         display: none;
     }
 </style>
-
+<form method="post">
 <div class="row" id="border" style="height: 70vh; width: 95vw">
 
     <div class="col s3" style="height: 93%">
-        
-        <a class="btn waves-effect waves-light" id="btn" style="display: flex; justify-content: center"><i class="material-icons left">add</i>Add Group</a>
+        <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
+     
 
         <div class="collection" style="height: 92%; overflow: auto">
-            @for (int i = 0; i < 20; i++)
+            @for (int i = 0; i < Model.groupRooms?.Count; i++)
             {
                 <a class="collection-item">
                     <span class="new badge indigo">4</span>
                     <img src="~/images/Gx-Icon-Color.png" style="height: 30px">
-                    <b class="truncate indigo-text">Group Name truncated</b>
+                    <b class="truncate indigo-text">@Model.groupRooms[i].Name</b>
                 </a>
             }
         </div>
@@ -65,5 +66,29 @@
                 <a class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></a>
             </div>
         </div>
+    </div>
+</div>
+</form>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
+        <form method="post" asp-controller="GroupRoom" asp-action="CreateGroup">
+            <div class="modal-content">
+                <div class="row">
+                    <input required asp-for="@Model.groupRoom.Name" placeholder="Enter Group Name" type="text" style="font-size:30px;color:silver">
+                    <span asp-validation-for="@Model.groupRoom.Name"></span>
+                </div>
+                <div class="row">
+                    <input readonly asp-for="@Model.applicationUser.CustomerMUID" readonly type="text" for="PolicyMUID" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.applicationUser.CustomerMUID"></label>
+                </div>
+                <div class="row">
+                    <input readonly asp-for="@Model.groupRoom.GroupMUID" value="@Guid.NewGuid()" type="text" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.groupRoom.GroupMUID" ></label>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn" id="btn" value="Submit GroupName">Submit Group Name</button>
+            <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
+        </form>
     </div>
 </div>
