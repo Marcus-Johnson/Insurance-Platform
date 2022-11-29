@@ -69,12 +69,12 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public async Task<IActionResult> PolicyRequest(Policy policy)
         {
-
             Policy updatedPolicy = new Policy()
             {
                 PolicyMUID = policy.PolicyMUID,
+                ProductMUID = policy.ProductMUID,
                 CustomerMUID = policy.CustomerMUID,
-                PolicyNumber = policy.PolicyNumber,
+                //PolicyNumber = policy.PolicyNumber,
                 NameOfPolicy = policy.NameOfPolicy,
                 PolicyOwner = policy.PolicyOwner,
                 Deductible = policy.Deductible,
@@ -87,7 +87,6 @@ namespace NJInsurancePlatform.Controllers
                 PolicyEnd_Date = policy.PolicyEnd_Date,
                 Pending = true,
             };
-            Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + policy.NameOfPolicy);
             PolicyRepository.UpdatePolicy(updatedPolicy);
             PolicyRepository.Save();
             return RedirectToAction("PolicyRequest");

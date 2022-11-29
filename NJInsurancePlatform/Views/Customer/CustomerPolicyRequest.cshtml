@@ -1,6 +1,6 @@
 ﻿@model NJInsurancePlatform.Models.CustomerPolicyRequestViewModel
 @{
-    ViewData["Title"] = "Customer Policy Request";
+    //ViewData["Title"] = "Customer Policy Request";
 }
 
 <!--Add CSS To Header-->
@@ -9,19 +9,11 @@
 </head>
 
 <!--Main container-->
-<form method="post">
+@*<form method="post" asp-controller="Customer">
 <div class="productRequestBody">
     <div class="productRequestContainer">
         <div class="productRequestHeader">
-            @Model.Product.ProductName Policy Request For @Model.Customer.FirstName @Model.Customer.LastName
-                    <div class="productRequestPolicyRequestID">
-                        <div>
-                            <label asp-for="@Model.PolicyRequest.RequestMUID" class="productRequestInfoLabel">Request Number: &nbsp</label>
-                        </div>
-                        <div style="font-size:9px">
-                            <input style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.PolicyRequest.RequestMUID" value="@Guid.NewGuid()"/>
-                        </div>
-                    </div>  
+
             </div>
         <div class="productRequestPolicyInfoRow">
             <div class="productRequestPolicyInfoColumn">
@@ -29,10 +21,12 @@
                 <div class="productRequestPolicyInfoColumnInfo">
                     <div hidden class="productRequestPolicyInfoColumnInfoItem">
                         <div>
-                            <label hidden asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
                         </div>
                         <div style="font-size:9px">
-                            <input hidden style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID" value="@Model.Product.ProductMUID"/>
+        
+                                <label  asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
+@*                            <input type="text"  style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID"  placeholder="@Model.Product.ProductMUID"/>
+*@                @*<input readonly type="text" asp-for="@Model.Product.ProductMUID" placeholder="@Model.Product.ProductMUID" style="text-shadow: 1px 1px lightgrey;" />
                         </div>
                     </div>                       
                     <div class="productRequestPolicyInfoColumnInfoItem">
@@ -157,6 +151,5 @@
         </div>
     </div>
 </div>
-</form>
-
+</form>*@
 

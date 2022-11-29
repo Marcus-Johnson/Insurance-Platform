@@ -67,11 +67,28 @@ namespace NJInsurancePlatform.Controllers
             var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
             var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);            //Find Product Clicked On
+            var customerMUID = new Guid(user.CustomerMUID.ToString());
+            var policyMUID = new Guid(user.PolicyMUID.ToString());
 
             CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
             {
-                Product = product,
-                Customer = user
+                CustomerMUID = customerMUID,
+                PolicyMUID = policyMUID,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                EmailAddress = user.EmailAddress,
+                PhoneNumber = user.PhoneNumber,
+                CurrentAddress = user.CurrentAddress,
+                CurrentCity = user.CurrentCity,
+                CurrentZipcode = user.CurrentZipcode,
+                CurrentState = user.CurrentState,
+                CurrentEmployer = user.CurrentEmployer,
+                LicenseNumber = user.LicenseNumber,
+                IsPrimaryPolicyHolder = user.IsPrimaryPolicyHolder,
+                CreatedDate = user.CreatedDate.ToString(),
+                Active = user.Active
+
+                
             };
 
             return View(customerRequestView);
@@ -80,14 +97,13 @@ namespace NJInsurancePlatform.Controllers
         
         [HttpPost]
         public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)                                     
-        {  
-            CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
-            {
-                Product = product,
-                Customer = user
-            };
+        {
 
-            return View(customerRequestView);
+            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>>>>>> " + model.Product.ProductMUID);
+
+
+            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>> " + model.PolicyRequest.RequestMUID);
+            return View();
         }
 
 
