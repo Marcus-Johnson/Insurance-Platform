@@ -21,6 +21,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<iFaqRepository, FaqRepository>();
 builder.Services.AddScoped<iRoomRepository, RoomRepository>();
 builder.Services.AddScoped<iGroupRoomMessageRepository, GroupRoomMessageRepository>();
+builder.Services.AddScoped<iClaimRepository, ClaimRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

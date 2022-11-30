@@ -1,0 +1,27 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model NJInsurancePlatform.Models.Claim
+
+<form method="post" asp-controller="Claim" asp-action="CreateClaim">
+    <div class="card mb-3">
+        <div class="card-body">
+            <input readonly type="text" asp-for="ClaimMUID" placeholder="@Guid.NewGuid()" />
+            </br>
+            <input type="text" asp-for="CustomerMUID" placeholder="CustomerMUID"/>
+            </br>
+            <input type="text" asp-for="PolicyMUID" placeholder="PolicyMUID"/>
+            </br>
+            <input type="text" asp-for="ClaimUserDescription" placeholder="description"/>
+            </br>
+            <input readonly type="text" asp-for="DateOfClaim" placeholder="@DateTime.Now"/>
+            </br>
+        </div>
+        <div class="card-footer">
+            <button style="color:white; background-color: #1072ba; margin: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Create Claim</button>
+        </div>
+    </div>
+</form>
+
