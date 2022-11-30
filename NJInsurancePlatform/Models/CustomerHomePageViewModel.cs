@@ -13,5 +13,6 @@
             this.PolicyNames = new List<string>();
             this.Beneficiaries = new List<Beneficiary>();
         }
+        public string? ClaimUserDescription { get; set; }
     }
 }

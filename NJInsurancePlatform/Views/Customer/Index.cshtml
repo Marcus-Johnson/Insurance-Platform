@@ -168,7 +168,7 @@
 <div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
-        <form method="post">
+         <form method="post" asp-controller="Customer" asp-action="CreateClaim">
             <div class="modal-content">
                 <div class="row">
                     @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
@@ -180,16 +180,20 @@
                     </ul>
                     <br />
                     commented out above is the dropdown*@
-                    <input readonly placeholder="00000000-0000-0000-0000-000000000000" type="text" for="PolicyMUID">
+                    <input readonly placeholder="@Model.Policies[0].PolicyMUID" type="text" asp-for="@Model.Policies[0].PolicyMUID">
                     <label for="PolicyMUID">Policy ID</label>
+                    <input readonly placeholder="@Model.Policies[0].CustomerMUID" type="text" asp-for="@Model.Policies[0].CustomerMUID" />
+                    <label for="CustomerMUID">Customer MUID</label>
+                    @*<input readonly placeholder=@Guid.NewGuid() type="text" for="ClaimMUID" />
+                    <label for="ClaimMUID">Claim MUID</label>*@
                 </div>
                 <div class="row">
-                    <input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
-                    <label for="DateOfClaim" for="DateOfClaim">Date of Claim</label>
+                    @*<input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
+                    <label for="DateOfClaim">Date of Claim</label>*@
                 </div>
                 <div class="row">
-                    <input placeholder="Description" type="text" for="ClaimUserDescription">
-                    <label for="ClaimUserDescription" for="ClaimUserDescription">Description</label>
+                    <input placeholder="Description" type="text" asp-for="ClaimUserDescription">
+                    <label for="ClaimUserDescription">Description</label>
                 </div>
             </div>
             <button type="submit" class="waves-effect waves-light btn" id="btn">Submit</button>

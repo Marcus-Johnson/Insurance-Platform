@@ -5,6 +5,7 @@ using NJInsurancePlatform.Models;
 
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -19,10 +20,11 @@ namespace NJInsurancePlatform.Controllers
         private readonly ITransactionRepository transactionRepository;
         private readonly IProductRepository productRepository;
         private readonly ICustomerRepository customerRepository;
+        private readonly iClaimRepository ClaimRepository;
 
         public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
             IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository, 
-            ICustomerRepository customerRepository)
+            ICustomerRepository customerRepository, iClaimRepository ClaimRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -30,6 +32,7 @@ namespace NJInsurancePlatform.Controllers
             this.transactionRepository = transactionRepository;
             this.productRepository = productRepository;
             this.customerRepository = customerRepository;
+            this.ClaimRepository = ClaimRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -129,6 +132,25 @@ namespace NJInsurancePlatform.Controllers
         public IActionResult MyPage()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateClaim(CustomerHomePageVieModel model)
+        {
+            var claim = new Claim
+            {
+                ClaimMUID = Guid.NewGuid(),
+                PolicyMUID = model.Policies[0].PolicyMUID.ToString(),
+                CustomerMUID = model.Policies[0].CustomerMUID.ToString(),
+                ClaimUserDescription = model.ClaimUserDescription,
+                DateOfClaim = DateTime.Now
+            };
+
+            ClaimRepository.InsertClaim(claim);
+            ClaimRepository.Save();
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }
