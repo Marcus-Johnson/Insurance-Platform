@@ -7,6 +7,7 @@ namespace NJInsurancePlatform.Models
 
         public List<GroupRoom>? groupRooms { get; set; }
         public GroupRoom? groupRoom { get; set; }
+        public GroupRoomMessage? groupRoomMessage { get; set; } 
         public List<GroupRoomMessage>? groupRoomMessages { get; set; }
         public ApplicationUser? applicationUser { get; set; }
 
@@ -15,6 +16,7 @@ namespace NJInsurancePlatform.Models
             this.groupRooms = new List<GroupRoom>();
             this.groupRoom = new GroupRoom();
             this.groupRoomMessages = new List<GroupRoomMessage>();
+            this.groupRoomMessage = new GroupRoomMessage();
             this.applicationUser = new ApplicationUser();
         }
      }

@@ -74,12 +74,11 @@ namespace NJInsurancePlatform.Controllers
             var identityUser = User.Identity?.Name;
             var user = await _userManager.FindByNameAsync(identityUser);
             var allRooms = await _roomRepository.GetGroupRooms();
-            var allMessages = await _iGroupRoomMessageRepository.GetMessages();
+
 
             MessagesViewModel messagesViewModel = new MessagesViewModel()
             {
                 groupRooms = allRooms,
-                groupRoomMessages = allMessages,
                 applicationUser = user,
             };
 
@@ -115,20 +114,61 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        // Populate Field with Messages in Selected Group
+        [HttpGet]
+        public async Task<ActionResult> PopulateMessages(string Id)
+        {
+            var identityUser = User.Identity?.Name;
+            var user = await _userManager.FindByNameAsync(identityUser);
+            var roomMessages = await _iGroupRoomMessageRepository.GetMessages();
+            var messageByRoomID = roomMessages.FindAll(m => m.GroupRoomMUID.ToString() == Id);
+            var allRooms = await _roomRepository.GetGroupRooms();
+            var roomName = allRooms.FirstOrDefault(n => n.GroupMUID.ToString() == Id);
+
+            // using tempData to pass information to the view
+            TempData["RoomId"] = Id;
+            TempData["RoomName"] = roomName.Name;
+
+            // sort by date
+            messageByRoomID.Sort((x, y) => DateTime.Compare(x.CreatedDate, y.CreatedDate));
+
+            MessagesViewModel messagesViewModel = new MessagesViewModel()
+            {
+                groupRooms = allRooms,
+                groupRoomMessages = messageByRoomID,
+                applicationUser = user,
+            };
+
+            return View("Message", messagesViewModel);
+        }
+
+
         // Post Form Input From View
         [HttpPost]
-        public async Task<ActionResult> CreateMessage([Bind(include: "GroupRoomMessageMUID, GroupRoomMUID, SenderMUID, Message")] GroupRoomMessage model)
+        public async Task<ActionResult> CreateMessage(MessagesViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
+                //Get current User MUID
+                var customerIdentity = User.Identity.Name;
+                var user = await _userManager.FindByNameAsync(customerIdentity);
+
+                GroupRoomMessage roomMessage = new GroupRoomMessage()
                 {
-                    _iGroupRoomMessageRepository.InsertMessage(model);
+                    GroupRoomMessageMUID = model.groupRoomMessage.GroupRoomMessageMUID,
+                    GroupRoomMUID = model.groupRoom.GroupMUID,
+                    SenderMUID = (Guid)user.CustomerMUID,
+                    Message = model.groupRoomMessage.Message,
+                    CreatedDate = DateTime.Now
+                };
+
+
+                    _iGroupRoomMessageRepository.InsertMessage(roomMessage);
                     _iGroupRoomMessageRepository.Save();
 
-                    return RedirectToAction("Message", "Home");
+                // redirect to current group chat
+                return RedirectToAction("PopulateMessages", new {id = model.groupRoom.GroupMUID});
 
-                }
             }
             catch (ArgumentNullException e)
             {
