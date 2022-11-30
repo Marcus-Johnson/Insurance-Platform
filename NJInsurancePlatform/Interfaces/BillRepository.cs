@@ -17,7 +17,7 @@ namespace NJInsurancePlatform.Interfaces
 
         public async Task<IEnumerable<Bill>> GetBills()
         {
-            return _databaseContext.Bills.ToList();
+            return await _databaseContext.Bills.ToListAsync();
         }
 
         public async Task<Bill> GetBillsByID(Guid BillMUID)
