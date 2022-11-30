@@ -515,7 +515,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMessageMUID = groupMes1,
                     GroupRoomMUID = group1,
                     SenderMUID = groupSend1,
-                    Message = "Hello, Can you please Help Me?",
+                    Message = "Hello, And Welcome",
+                    CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
@@ -523,6 +524,7 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group2,
                     SenderMUID = groupSend2,
                     Message = "yes, How Can I Help you?",
+                    CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
@@ -530,6 +532,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group3,
                     SenderMUID = groupSend2,
                     Message = "I have a question About My Policy",
+                    CreatedDate = DateTime.Now
+
                 },
                 new GroupRoomMessage
                 {
@@ -537,6 +541,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group4,
                     SenderMUID = groupSend4,
                     Message = "Sure, What would you like to know?",
+                    CreatedDate = DateTime.Now
+
                 }
             );
 

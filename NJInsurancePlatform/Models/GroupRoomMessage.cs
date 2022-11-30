@@ -26,5 +26,10 @@ namespace NJInsurancePlatform.Models
         [StringLength(140)]
         [DisplayName("Message")] 
         public string? Message { get; set; }
+
+        [Required(ErrorMessage = "Missing field: DateTime")]
+        public DateTime CreatedDate { get; set; } 
+
+
     }
 }
