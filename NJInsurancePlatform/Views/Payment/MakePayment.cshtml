@@ -2,6 +2,12 @@
 @{
     ViewData["Title"] = "Payment";
 }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var collapsible = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(collapsible);
+    });
+</script>
 
 <div class="row">
     <div class="col s7">
@@ -10,67 +16,214 @@
             <img class="col s4" style="height: 3em" src="~/images/GalaxE-Solutions.svg" />
             <h5 class="col s4 right">@DateTime.Now.ToString("hh:mm tt")</h5>
         </div>
+    <ul class="collapsible" style="width: 90%">
+            <li class="">
+                <div class="collapsible-header"><i class="material-icons">credit_card</i>Credit Card Payment</div>
+                <div class="collapsible-body">
+                    <div class="row">
+                        <form class="col s12">
 
-        <div class="row" style="width: 90%">
-            <form class="col s12" id="border">
+                            <!-- Paid Date Label/Input-->
+                            <div class="row">
+                                <div class="col s6">
+                                    <h6>Paid Date</h6>
+                                    <input asp-for="@Model.Payment.PaidDate" type="text" class="validate">
+                                </div>
+                           
+                            <!-- Amount Label/Input-->
+                                <div class="col s6">
+                                    <h6>Amount</h6>
+                                    <input asp-for="@Model.Payment.Amount" type="text" class="validate">
+                                </div>
+                            </div>
+                            
+                            <!-- First Name Label/Input-->
+                            <div class="row">
+                                <div class="col s6">
+                                    <h6>First Name</h6>
+                                    <input asp-for="@Model.Payment.PayerFirstName" value="@Model.ApplicationUser.FirstName" type="text" class="validate">
+                                </div>
 
-                <div class="col s12">
-                    <h6>Card Number</h6>
-                    <label>Enter the 16-digit card number on the card</label>
-                </div>
+                                <!-- Last Name Label/Input-->
+                                <div class="col s6">
+                                    <h6>Last Name</h6>
+                                    <input asp-for="@Model.Payment.PayerLastName" value="@Model.ApplicationUser.LastName" type="text" class="validate">
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="input-field col s10">
-                        <img src="/images/mc_symbol.svg" class="material-icons prefix" />
-                        <input asp-for="@Model.Payment.CardNumber" placeholder="2412 - 7512 - 3412 - 3456" type="text" class="validate">
-                        <i class="material-icons prefix right">verified</i>
+                            <!-- Card Label/Input-->
+                            <div class="col s12">
+                                <h6>Card Number</h6>
+                                <label>Enter the 16-digit card number on the card</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s10">
+                                    <img src="/images/mc_symbol.svg" class="material-icons prefix" />
+                                    <input asp-for="@Model.Payment.CardNumber" placeholder="2412 - 7512 - 3412 - 3456" type="text" class="validate">
+                                    <i class="material-icons prefix right">verified</i>
+                                </div>
+                            </div>
+
+                            <!-- Zip Code Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Zip Code</h6>
+                                    <label>Enter the Zip Code associated with your card</label>
+                                </div>
+
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.ZipCode" value="@Model.ApplicationUser.CurrentZipcode" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.ZipCode">07***</label>
+                                </div>
+                            </div>
+
+                            <!-- CVV Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>CVV Number</h6>
+                                    <label>Enter the 3 or 4 digit number on the card</label>
+                                </div>
+
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.CVV" id="cvv" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.CVV">CVV</label>
+                                </div>
+                            </div>
+
+                            <!-- Card Expiration Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Expiry Date</h6>
+                                    <label>Enter the expiration date of the card</label>
+                                </div>
+
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.CardExpireDate" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.CardExpireDate">MM/YY</label>
+                                </div>
+                            </div>
+
+                            <!-- Password Confirmation Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Password</h6>
+                                    <label>Enter your Dynamic password</label>
+                                </div>
+                                <div class="input-field col s5">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+
+                            <!-- Debit or Credit Radio Button-->
+                                <label>
+                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Credit" type="radio" checked/>
+                                    <span>Credit</span>
+                                </label>
+                                <label>
+                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Debit" type="radio" />
+                                    <span>Debit</span>
+                                </label>
+
+                            <!-- Confirm Payment Button-->
+                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                        </form>
                     </div>
                 </div>
+            </li>
+        <li>
+            <li class="active">
+                <div class="collapsible-header"><i class="material-icons">account_balance</i>Bank Payment</div>
+                <div class="collapsible-body">
+                    <div class="row">
+                        <form class="col s12">
 
-                <div class="row">
-                    <div class="col s5">
-                        <h6>CVV Number</h6>
-                        <label>Enter the 3 or 4 digit number on the card</label>
-                    </div>
-                    <div class="input-field col s2">
-                        <input asp-for="@Model.Payment.CVV" id="cvv" type="text" class="validate">
-                        <label for="cvv">CVV</label>
+                            <!-- Bank Name Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Bank Name</h6>
+                                    <label>Name of Bank</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.BankName" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.BankName">Name of Bank</label>
+                                </div>
+                            </div>
+
+                            <!-- Account Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Account Number</h6>
+                                    <label>Enter account number from associated bank account</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.AccountNumber" type="number" class="validate">
+                                    <label asp-for="@Model.Payment.AccountNumber">Account Number</label>
+                                </div>
+                            </div>
+
+                            <!-- Routing Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Routing Number</h6>
+                                    <label>Enter routing number from associated bank account</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="number" class="validate">
+                                    <label asp-for="@Model.Payment.RoutingNumber">Routing Number</label>
+                                </div>
+                            </div>
+
+                            <!-- Check Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Check Number</h6>
+                                    <label class="truncate">Enter check number as displayed on check</label>
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="number" class="validate">
+                                </div>
+
+                            <!-- Check Image Label/Input-->
+                                <div class="col s5">
+                                    <h6>Check Image</h6>
+                                    <label class="truncate">Provide check image below</label>
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="text" class="validate">
+                                </div>
+                            </div>
+
+                            <!-- Additional Info Label/Input-->
+                            <div class="row">
+                                <div class="col s10">
+                                    <h6>Additional info</h6>
+                                    <label asp-for="@Model.Payment.AdditionalInfo">Please provide any additional info below</label>
+                                    <textarea asp-for="@Model.Payment.AdditionalInfo" class="materialize-textarea" data-length="120"></textarea>
+                                </div>
+                            </div>                            
+
+                            <!-- Dynamic Password-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Password</h6>
+                                    <label>Enter your Dynamic password</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                        </form>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col s5">
-                        <h6>Expiry Date</h6>
-                        <label>Enter the expiration date of the card</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="exp_month" type="text" class="validate">
-                        <label for="exp_month">12</label>
-                    </div>
-
-                    <div class="input-field col s2">
-                        <input id="exp_year" type="text" class="validate">
-                        <label for="exp_year">22</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s5">
-                        <h6>Password</h6>
-                        <label>Enter your Dynamic password</label>
-                    </div>
-
-                    <div class="input-field col s5">
-                        <input id="password" type="password" class="validate">
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <a class="col s10 btn-large" id="btn">Confirm Payment</a>
-            </form>
-        </div>
+            </li>
+        </ul>
     </div>
-
+        
+    <!-- Card/Policy Deatails-->
     <div class="col s5">
         <div class="row" id="CCinfo">
 

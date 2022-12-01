@@ -4,63 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
- #PolicyList {
- border: 3px solid;
-}
-
-.center-align {
-    background-color: #8080807f;
-}
-
-.welcome-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.welcome-left {
-}
-
-.weather-right {
-    text-align: right;
-}
-
-.policy-tab {
-    border: 2px solid #58585b;
-    border-radius: 10px;
-    margin: 25px 70px 75px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-#swipe-1 {
-    height: auto;
-}
-
-/*GalaxE Blue color for indicator line */
-.tabs .indicator {
-    background-color: #1072ba;
-}
-
-/*Color for tab and text when clicked*/
-.tabs .tab a:focus.active {
-    background-color: #00294d;
-    color: #ffffff;
-}
-
-.tabs .tab a {
-    color: #00294d;
-}
-
-    .tabs .tab a.active {
-        color: #00294d;
-    }
-
-    .tabs .tab a:hover {
-        color: #1072ba;
-    }
-</style>
-
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container">
     <span class="welcome-left">
@@ -92,7 +35,7 @@
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
                             <!--COLUMN 1-->
-                            <div class="col s4">
+                            <div class="col s6">
                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                     <span><b>Policy Number</b></span>
                                     <span>@Model.Policies[i]?.PolicyMUID</span>
@@ -118,12 +61,14 @@
                                            <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
                                   </div>
 
+                               
                                   <!--MAKE A CLAIM BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
 
                                   <!--MAKE A PAYMENT BUTTON-->
-                                    <button class="waves-effect waves-light btn btn-large white" id="btn">Make a Payment</button>
-                                  </div>
+                                    <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment" asp-action="MakePayment">Make a Payment</a>
+                                  
+                            </div>
 
                                   <!--COLUMN 2-->
                                   <div class="col s4">
