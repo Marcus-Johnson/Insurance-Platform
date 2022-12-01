@@ -14,6 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IPolicyRepository, PolicyRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<iBillRepository, BillRepository>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<iFaqRepository, FaqRepository>();
+builder.Services.AddScoped<iRoomRepository, RoomRepository>();
+builder.Services.AddScoped<iGroupRoomMessageRepository, GroupRoomMessageRepository>();
+builder.Services.AddScoped<iClaimRepository, ClaimRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

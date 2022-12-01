@@ -2,6 +2,7 @@
     ViewData["Title"] = "Frequently Asked Questions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model List<NJInsurancePlatform.Models.Faq>
 
 <style>
 
@@ -82,28 +83,23 @@
                 </ul>
             </div>
             <div class="col s6">
-                <ul class="collapsible expandable">
+            <ul class="collapsible expandable">
+                @foreach (var faq in Model)
+                {
                     <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                        <form method="post" asp-controller="Home" asp-action="FAQ">
+                            <div class="collapsible-header">
+                                @*<i class="material-icons">add</i>*@
+                                <input readonly type="text" asp-for="@faq.Question" placeholder="@faq.Question" />
+                                <input readonly hidden type="text" asp-for="@faq.Answer" placeholder="@faq.Answer" />
+                                <input readonly hidden type="text" asp-for="@faq.FaqMUID" placeholder="@faq.FaqMUID" />
+                                <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Delete FAQ</button>
+
+                            </div>
+                        </form>
                     </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                    <li>
-                        <div class="collapsible-header"><h4>Question </h4><i class="material-icons">add</i></div>
-                        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                    </li>
-                </ul>
+                }
+            </ul>
             </div>
         </div>
   </div>

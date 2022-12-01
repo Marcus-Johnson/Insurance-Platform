@@ -5,10 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-@*@Model NJInsurancePlatform.Models.Policy*@
-@*@model Policy;*@
-@*@using NJInsurancePlatform.Models;*@
-@*@using IEnumerable<ApplicationModelConventionExtensions.Policy>;*@
+
 <style>
     .policyButton {
         background-color: white;
@@ -32,19 +29,17 @@
             @foreach (var product in Model)
             {
 
-                    <form method="post" asp-controller="Policy" asp-action="MakeRequest" style="width:35%;">
-                        <button class="policyButton" asp-route-id="@product.ProductMUID" asp-action="PolicyRequest" style="width:100%">
-                            <input asp-for="@product.ProductName"/>
-                            @*<input readonly type="text" HTML.DisplayFor("@policy.NameOfPolicy") value="@policy.NameOfPolicy"/>*@
-                            @*<label HTML.DisplayFor("@policy.NameOfPolicy")>Name Of Policy</label>*@
-                            @*<input readonly type="text" HTML.DisplayFor("@policy.PolicyOwner") value="@policy.PolicyOwner"/>*@
+                    <form style="width:35%;">
+                        <button class="policyButton" asp-controller="Customer" asp-action="CustomerPolicyRequest" asp-route-Id="@product.ProductMUID"  style="width:100%;box-shadow:4px 4px 4px rgba(5,5,5,.3)">
+                            <input readonly asp-for="@product.ProductName"/>
+            
                             <h5>@product.ProductName</h5>
                             <hr size="1" width="90%" />
-                            <p HTML.DisplayFor("@product.Price") style="margin-bottom: 5%; padding: 2%;">Policy total: $@product.Price</p>
-                            <p HTML.DisplayFor("@product.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;">Policy Paid off Amount: $@product.AnnualLimitOfCoverage</p>
-                            <p HTML.DisplayFor("@product.Deductible") style="margin-bottom: 5%; padding: 2%;">Policy Deductible: $@product.Deductible</p>
-                            <p HTML.DisplayFor("@product.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;">Out of Pocket Limit: $@product.OutOfPocketLimit</p>
-                            <p HTML.DisplayFor("@product.Description") style="margin-bottom: 5%; padding: 2%;">Description @product.Description</p>
+                            <p HTML.DisplayFor("@product.Price") style="margin-bottom: 5%; padding: 2%;"><b>Policy total:</b>&nbsp;&nbsp; $@product.Price</p>
+                            <p HTML.DisplayFor("@product.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;"><b>Policy Paid off Amount:</b>&nbsp;&nbsp; $@product.AnnualLimitOfCoverage</p>
+                            <p HTML.DisplayFor("@product.Deductible") style="margin-bottom: 5%; padding: 2%;"><b>Policy Deductible:</b>&nbsp;&nbsp; $@product.Deductible</p>
+                            <p HTML.DisplayFor("@product.OutOfPocketLimit") style="margin-bottom: 5%; padding: 2%;"><b>Out of Pocket Limit:</b>&nbsp;&nbsp; $@product.OutOfPocketLimit</p>
+                            <p HTML.DisplayFor("@product.Description") style="margin-bottom: 5%; padding: 2%;"><b>Description:</b>&nbsp;&nbsp; @product.Description</p>
                         </button>
                         <br/>
                         <br/>
@@ -53,8 +48,5 @@
 
         </div>
     </div>
-        Submit
-        <i class="material-icons right">send</i>
-    </button>
 
 </div>

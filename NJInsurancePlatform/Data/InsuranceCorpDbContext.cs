@@ -197,6 +197,9 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     AnnualLimitOfCoverage = 14999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 10000,
+                    PolicyPaidOffAmount = 0,
+
                 },
                 new Product
                 {
@@ -207,6 +210,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 200.15,
                     AnnualLimitOfCoverage = 25999.99,
                     OutOfPocketLimit = 999.99,
+                    PolicyTotalAmount = 150000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -217,6 +222,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 50.67,
                     AnnualLimitOfCoverage = 1345.99,
                     OutOfPocketLimit = 1200.45,
+                    PolicyTotalAmount = 2000,
+                    PolicyPaidOffAmount = 0,
                 },
                 new Product
                 {
@@ -227,6 +234,8 @@ namespace NJInsurancePlatform.Data
                     Deductible = 160.69,
                     AnnualLimitOfCoverage = 5345.99,
                     OutOfPocketLimit = 5600.45,
+                    PolicyTotalAmount = 100000,
+                    PolicyPaidOffAmount = 0,
                 }
             );
 
@@ -234,8 +243,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol1,
+                    ProductMUID = prod1,
                     CustomerMUID = cust1,
-                    PolicyNumber = 1234,
                     NameOfPolicy = "Dental Gold",
                     PolicyOwner = "Patrick Leon",
                     Deductible = 100.25,
@@ -250,8 +259,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol2,
+                    ProductMUID = prod2,
                     CustomerMUID = cust2,
-                    PolicyNumber = 4567,
                     NameOfPolicy = "Health Platinum",
                     PolicyOwner = "Eric Daley",
                     Deductible = 100.25,
@@ -266,8 +275,8 @@ namespace NJInsurancePlatform.Data
                 new Policy
                 {
                     PolicyMUID = pol3,
-                    CustomerMUID= cust3,
-                    PolicyNumber = 78910,
+                    ProductMUID = prod3,
+                    CustomerMUID = cust3,
                     NameOfPolicy = "Eye Emarald",
                     PolicyOwner = "Nikosi Thom",
                     Deductible = 100.25,
@@ -282,8 +291,8 @@ namespace NJInsurancePlatform.Data
              new Policy
              {
                  PolicyMUID = pol4,
+                 ProductMUID = prod4,
                  CustomerMUID = cust4,
-                 PolicyNumber = 769564,
                  NameOfPolicy = "Eye Emarald",
                  PolicyOwner = "Leona wilson",
                  Deductible = 100.25,
@@ -474,6 +483,35 @@ namespace NJInsurancePlatform.Data
                 }
             );
 
+            // Group Rooms
+            builder.Entity<GroupRoom>().HasData(
+                new GroupRoom
+                {
+                    GroupMUID = group1,
+                    Name = "Nikosi's Group"
+
+                },                
+                new GroupRoom
+                {
+                    GroupMUID = group2,
+                    Name = "Eric's Group"
+
+                },               
+                new GroupRoom
+                {
+                    GroupMUID = group3,
+                    Name = "Leona's Group"
+
+                },                
+                new GroupRoom
+                {
+                    GroupMUID = group4,
+                    Name = "Patrick's Group"
+
+                }
+
+            );            
+            
             // Group Room messages
             builder.Entity<GroupRoomMessage>().HasData(
                 new GroupRoomMessage
@@ -481,7 +519,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMessageMUID = groupMes1,
                     GroupRoomMUID = group1,
                     SenderMUID = groupSend1,
-                    Message = "Hello, Can you please Help Me?",
+                    Message = "Hello, And Welcome",
+                    CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
@@ -489,6 +528,7 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group2,
                     SenderMUID = groupSend2,
                     Message = "yes, How Can I Help you?",
+                    CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
@@ -496,6 +536,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group3,
                     SenderMUID = groupSend2,
                     Message = "I have a question About My Policy",
+                    CreatedDate = DateTime.Now
+
                 },
                 new GroupRoomMessage
                 {
@@ -503,6 +545,8 @@ namespace NJInsurancePlatform.Data
                     GroupRoomMUID = group4,
                     SenderMUID = groupSend4,
                     Message = "Sure, What would you like to know?",
+                    CreatedDate = DateTime.Now
+
                 }
             );
 
@@ -777,9 +821,31 @@ namespace NJInsurancePlatform.Data
             builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
 
+            var faq1 = Guid.NewGuid();
+            var faq2 = Guid.NewGuid();
+            var faq3 = Guid.NewGuid();
 
 
-
+            builder.Entity<Faq>().HasData(
+               new Faq
+               {
+                   FaqMUID = faq1,
+                   Question = "Where Is our company based out of?",
+                   Answer = "Somerset, NJ"
+               },
+               new Faq
+               {
+                    FaqMUID = faq2,
+                    Question = "Why is my role listed as pending?",
+                    Answer = "That is your initial role when you first register.  An Admin will approve your account and set you to your appropriate role."
+                },
+               new Faq
+               {
+                   FaqMUID = faq3,
+                   Question = "Why is my policy listed as pending?",
+                   Answer = "Your policy must first be approved by an Admin, please check your policy again in a little while."
+               }
+            );
 
 
 

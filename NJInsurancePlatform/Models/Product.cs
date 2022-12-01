@@ -18,7 +18,7 @@ namespace NJInsurancePlatform.Models
         [Required(ErrorMessage = "Missing - Description")]
         public string? Description { get; set; }
 
-        [DisplayName("Name Of Policy")]
+        [DisplayName("Policy Price")]
         [Required(ErrorMessage = "Missing - Name Of Policy")]
         public double? Price { get; set; }
 
@@ -33,5 +33,13 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Out Of Pocket Limit")]
         [Required(ErrorMessage = "Missing - Annual Limit Of Coverage")]
         public double? OutOfPocketLimit { get; set; }
+
+        [DisplayName("Policy Paid Off Amount")]
+        [Required(ErrorMessage = "Missing - Minimum Payment")]
+        public double PolicyPaidOffAmount { get; set; }
+
+        [DisplayName("Policy Total Amount")]
+        [Required(ErrorMessage = "Missing - Minimum Payment")]
+        public double PolicyTotalAmount { get; set; }
     }
 }

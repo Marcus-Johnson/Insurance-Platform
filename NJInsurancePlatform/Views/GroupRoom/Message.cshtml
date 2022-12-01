@@ -1,0 +1,103 @@
+﻿@using System.Diagnostics
+@model NJInsurancePlatform.Models.MessagesViewModel
+@{
+    ViewData["Title"] = "Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var RoomID = TempData["RoomId"];
+    var RoomName = TempData["RoomName"];
+
+}
+<style>
+    footer {
+        display: none;
+    }
+</style>
+<form method="post" asp-controller="GroupRoom">
+<div class="row" id="border" style="height: 70vh; width: 95vw">
+
+    <div class="col s3" style="height: 93%">
+        <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
+     
+
+        <div class="collection" style="height: 92%; overflow: auto">
+            @for (int i = 0; i < Model.groupRooms?.Count; i++)
+            {
+                <a class="collection-item" asp-action="PopulateMessages" asp-route-id="@Model.groupRooms[i].GroupMUID">
+                    <span class="new badge indigo">4</span>
+                    <img src="~/images/Gx-Icon-Color.png" style="height: 30px">
+                    <b class="truncate indigo-text">@Model.groupRooms[i].Name</b>
+                </a>
+            }
+        </div>
+    </div>
+
+    <div class="col s9" style="height: 94%; width: 75%">
+        <h4 class="center indigo-text">@RoomName</h4>
+
+        <div id="messages-wrapper">
+            @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
+            {
+                <p class="left indigo lighten-4" id="messages" style="font-size:18px">
+                    <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span><br/>
+                    <span style="font-size:25px">@Model.groupRoomMessages[i].Message</span>
+                </p>
+
+@*                <p class="right indigo lighten-5" id="messages">
+                    The overflow property specifies whether to clip
+                    content or to add scrollbars when an element's
+                    content is too big to fit in a specified area.
+                </p>*@
+            }
+        </div>
+
+        <div id="message-box">
+            <input type="text" hidden readonly asp-for="@Model.groupRoomMessage.GroupRoomMessageMUID" value="@Guid.NewGuid()"/>
+            <input type="text" hidden readonly asp-for="@Model.groupRoom.GroupMUID" value="@RoomID"/>
+            <input type="text" hidden readonly asp-for="@Model.groupRoomMessage.SenderMUID" />
+
+            <div class="input-field" id="message-input">
+                <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height: 100%"></textarea>
+                <label asp-for="@Model.groupRoomMessage.Message">Message</label>
+            </div>
+            @if(Model.groupRoomMessages.Count != 0)
+            {
+            <div id="button-wrapper">
+
+                <div class="file-field input-field">
+                    <div class="btn-floating indigo">
+                        <input type="file">
+                        <i class="material-icons">attach_file</i>
+                    </div>
+                </div>
+                <button type="submit" asp-action="CreateMessage" class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></button>
+            </div>                    
+            }
+
+
+        </div>
+    </div>
+</div>
+</form>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
+        <form method="post" asp-controller="GroupRoom" asp-action="CreateGroup">
+            <div class="modal-content">
+                <div class="row">
+                    <input required asp-for="@Model.groupRoom.Name" placeholder="Enter Group Name" type="text" style="font-size:30px;color:silver">
+                    <span asp-validation-for="@Model.groupRoom.Name"></span>
+                </div>
+                <div class="row">
+                    <input readonly asp-for="@Model.applicationUser.CustomerMUID" readonly type="text" for="PolicyMUID" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.applicationUser.CustomerMUID"></label>
+                </div>
+                <div class="row">
+                    <input readonly asp-for="@Model.groupRoom.GroupMUID" value="@Guid.NewGuid()" type="text" style="font-size:30px;color:grey">
+                    <label asp-for="@Model.groupRoom.GroupMUID" ></label>
+                </div>
+            </div>
+            <button type="submit" class="waves-effect waves-light btn" id="btn" value="Submit GroupName">Submit Group Name</button>
+            <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
+        </form>
+    </div>
+</div>

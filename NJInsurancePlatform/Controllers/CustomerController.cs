@@ -5,6 +5,7 @@ using NJInsurancePlatform.Models;
 
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
@@ -17,13 +18,21 @@ namespace NJInsurancePlatform.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IPolicyRepository policyRepository;
         private readonly ITransactionRepository transactionRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ICustomerRepository customerRepository;
+        private readonly iClaimRepository ClaimRepository;
 
-        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IPolicyRepository policyRepository, ITransactionRepository transactionRepository)
+        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
+            IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository, 
+            ICustomerRepository customerRepository, iClaimRepository ClaimRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.policyRepository = policyRepository;
-            this.transactionRepository = transactionRepository; 
+            this.transactionRepository = transactionRepository;
+            this.productRepository = productRepository;
+            this.customerRepository = customerRepository;
+            this.ClaimRepository = ClaimRepository;
         }
         public async Task<IActionResult> Index()
         {
@@ -35,22 +44,70 @@ namespace NJInsurancePlatform.Controllers
             var allTransactions = await transactionRepository.GetTransactions();
             var findTransactionByCustomerMUID = allTransactions.FindAll(t => t.CustomerMUID == user.CustomerMUID);
             
-            CustomerListItems customerListItems = new CustomerListItems();
+            CustomerHomePageVieModel customerHomePageVieModel = new CustomerHomePageVieModel();
 
             // Add Policies To Customer List Items
             foreach(var policy in findPolicyByCustomerMUID)
             {
-                customerListItems.Policies?.Add(policy);
-                customerListItems.PolicyNames?.Add(policy?.NameOfPolicy);
+                customerHomePageVieModel.Policies?.Add(policy);
+                customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
+
             }
 
             // Add Transactions To customer List Items
             foreach(var transaction in findTransactionByCustomerMUID)
             {
-                customerListItems.Transactions?.Add(transaction);
+                customerHomePageVieModel.Transactions?.Add(transaction);
             }             
-            
-            return View(customerListItems);
+
+            return View(customerHomePageVieModel);
+        }
+
+
+        [HttpGet]
+        public async Task<ActionResult> CustomerPolicyRequest(string Id)                                     
+        {            
+            var allProducts = await productRepository.GetPolicies();                                        // Get Products
+            var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
+            var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
+            var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);                  //Find Product Clicked On
+            var customerMUID = new Guid(user.CustomerMUID.ToString());
+
+            CustomerPolicyRequestViewModel customerRequestView = new CustomerPolicyRequestViewModel()
+            {
+                Product = product,
+                Customer = user,
+            };
+
+            return View(customerRequestView);
+        }        
+        
+        
+        [HttpPost]
+        public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)                                     
+        {
+            var customerMUID = new Guid(model.Customer.CustomerMUID.ToString());
+
+            Policy policy = new Policy()
+            {
+                PolicyMUID = Guid.NewGuid(),
+                ProductMUID = model.Product.ProductMUID,
+                CustomerMUID = customerMUID,
+                NameOfPolicy = model.Product.ProductName,
+                PolicyOwner = model.Customer.FirstName + model.Customer.LastName,
+                Deductible = model.Product.Deductible,
+                OutOfPocketLimit = model.Product.OutOfPocketLimit,
+                AnnualLimitOfCoverage = model.Product.AnnualLimitOfCoverage,
+                PolicyPaymentisDue = true,
+                PolicyTotalAmount = model.Product.PolicyTotalAmount,
+                PolicyPaidOffAmount = 0,
+                Pending = true,
+            };
+
+            policyRepository.InsertPolicy(policy);
+            policyRepository.Save();
+
+            return RedirectToAction("Index", "Customer");
         }
 
 
@@ -75,6 +132,25 @@ namespace NJInsurancePlatform.Controllers
         public IActionResult MyPage()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult CreateClaim(CustomerHomePageVieModel model)
+        {
+            var claim = new Claim
+            {
+                ClaimMUID = Guid.NewGuid(),
+                PolicyMUID = model.Policies[0].PolicyMUID.ToString(),
+                CustomerMUID = model.Policies[0].CustomerMUID.ToString(),
+                ClaimUserDescription = model.ClaimUserDescription,
+                DateOfClaim = DateTime.Now
+            };
+
+            ClaimRepository.InsertClaim(claim);
+            ClaimRepository.Save();
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }

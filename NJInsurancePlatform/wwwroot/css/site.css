@@ -28,9 +28,10 @@ body {
 }
 
 main {
-    width: 95vw;
-    margin: auto;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
+    width:100%;
+    padding:30px;
+
 }
 
 footer {
@@ -38,16 +39,6 @@ footer {
     left: 0;
     bottom: 0;
     width: 100%;
-}
-
-.logout {
-    background-color: transparent;
-    color: white;
-    border: none;
-}
-
-.logout-hover:hover {
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 #border {

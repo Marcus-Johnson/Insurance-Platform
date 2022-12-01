@@ -4,10 +4,10 @@ using System.Diagnostics;
 using NJInsurancePlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -16,14 +16,17 @@ namespace NJInsurancePlatform.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         //private readonly iPolicyRepository policyRepository;
+        private readonly iFaqRepository faqRepository;
 
-        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, iFaqRepository faqRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.faqRepository = faqRepository;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             if (signInManager.IsSignedIn(User))
@@ -34,18 +37,21 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult SignUp()
         {
 
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> SignUp(SignUpViewModel model)
         {
@@ -100,12 +106,14 @@ namespace NJInsurancePlatform.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -125,6 +133,8 @@ namespace NJInsurancePlatform.Controllers
 
                     // If Admin Signs In, Redirect To Roles Page
                     if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
+                    if (await userManager.IsInRoleAsync(user, "Beneficiary")) return RedirectToAction("Index", "Customer");
+                    if (await userManager.IsInRoleAsync(user, "Customer")) return RedirectToAction("Index", "Customer");
                     return RedirectToAction("Index", "Customer");
                 }
 
@@ -140,13 +150,14 @@ namespace NJInsurancePlatform.Controllers
 
 
 
-
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
@@ -154,18 +165,20 @@ namespace NJInsurancePlatform.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        [AllowAnonymous]
         public IActionResult Message()
         {
             //MessagesViewModel messages = new MessagesViewModel();
@@ -173,9 +186,58 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
-        public IActionResult FAQ()
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> FAQ()
+        {
+            var getFaqs = await faqRepository.GetFaqs();
+
+            List<Faq> faqs = new List<Faq>();
+
+            foreach (var faq in getFaqs)
+            {
+                faqs.Add(faq);
+            };
+            System.Diagnostics.Debug.WriteLine(faqs);
+            return View(faqs);
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> FAQ(Faq faq)
+        {
+            var FaqMUID = new Guid(faq.FaqMUID.ToString());
+            faqRepository.DeleteFaq(FaqMUID);
+            faqRepository.Save();
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public IActionResult CreateFAQ()
         {
             return View();
         }
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public IActionResult CreateFAQ(Faq model)
+        {
+            var faq = new Faq
+            {
+                FaqMUID = model.FaqMUID,
+                Question = model.Question,
+                Answer = model.Answer
+            };
+        
+            faqRepository.InsertFaq(faq);
+            faqRepository.Save();
+            return RedirectToAction("FAQ", "Home");
+
+        }
+
     }
 }

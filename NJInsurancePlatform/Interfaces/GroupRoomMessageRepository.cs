@@ -11,8 +11,13 @@ namespace NJInsurancePlatform.Interfaces
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
-        
-        public async Task<IEnumerable<GroupRoomMessage>> GetMessages()
+
+        public GroupRoomMessageRepository(InsuranceCorpDbContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
+
+        public async Task<List<GroupRoomMessage>> GetMessages()
         {
             return _databaseContext.GroupRoomMessages.ToList();
         }
@@ -48,7 +53,7 @@ namespace NJInsurancePlatform.Interfaces
 
         public async void Save()
         {
-            await _databaseContext.SaveChangesAsync();
+            _databaseContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)
