@@ -40,6 +40,12 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Card Number")]
         public string? CardNumber { get; set; }
 
+        [Required(ErrorMessage = "Missing - CVV")]
+        [RegularExpression("^[0-9]*$")]
+        [StringLength(4)]
+        [DisplayName("CVV")]
+        public string? CVV { get; set; }
+
         [Required(ErrorMessage = "Missing - Zip Code")]
         [RegularExpression("^[0-9]*$")]
         [StringLength(5)]

@@ -1,115 +1,288 @@
-﻿@model NJInsurancePlatform.Models.Payment
+﻿@model NJInsurancePlatform.Models.PaymentViewModel
 @{
-    ViewData["Title"] = "Credit Card Payment";
+    ViewData["Title"] = "Payment";
 }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var collapsible = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(collapsible);
+    });
+</script>
 
-<form method="post" asp-action="Payment">
-    <div class="container">
-        <ul class="collapsible" data-collapsible="accordion">
-            <li class="active">
+<div class="row">
+    <div class="col s7">
+
+        <div class="row">
+            <img class="col s4" style="height: 3em" src="~/images/GalaxE-Solutions.svg" />
+            <h5 class="col s4 right">@DateTime.Now.ToString("hh:mm tt")</h5>
+        </div>
+    <ul class="collapsible" style="width: 90%">
+            <li class="">
+                <div class="collapsible-header"><i class="material-icons">credit_card</i>Credit Card Payment</div>
                 <div class="collapsible-body">
                     <div class="row">
-                        <div class="col s12 m12">
-                            <ul class="collapsible">
-                                <li>
-                                    <div class="collapsible-header">Date Paid</div>
-                                    <div class="collapsible-body"><input type="text" class="datepicker" asp-for="PaidDate" placeholder="Date Paid" style="border-bottom: none" /></div>
-                                </li>
+                        <form class="col s12">
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.Amount)</div>
-                                    <div class="collapsible-body">
-                                        <input type="number" asp-for="Amount" placeholder="@Html.DisplayNameFor(model => model.Amount)" style="border-bottom: none" />
-                                    </div>
-                                </li>
+                            <!-- Paid Date Label/Input-->
+                            <div class="row">
+                                <div class="col s6">
+                                    <h6>Paid Date</h6>
+                                    <input asp-for="@Model.Payment.PaidDate" type="text" class="validate">
+                                </div>
+                           
+                            <!-- Amount Label/Input-->
+                                <div class="col s6">
+                                    <h6>Amount</h6>
+                                    <input asp-for="@Model.Payment.Amount" type="text" class="validate">
+                                </div>
+                            </div>
+                            
+                            <!-- First Name Label/Input-->
+                            <div class="row">
+                                <div class="col s6">
+                                    <h6>First Name</h6>
+                                    <input asp-for="@Model.Payment.PayerFirstName" value="@Model.ApplicationUser.FirstName" type="text" class="validate">
+                                </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.PaymentMethod)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="PaymentMethod" placeholder="@Html.DisplayNameFor(model => model.PaymentMethod)" style="border-bottom: none" /></div>
-                                </li>
+                                <!-- Last Name Label/Input-->
+                                <div class="col s6">
+                                    <h6>Last Name</h6>
+                                    <input asp-for="@Model.Payment.PayerLastName" value="@Model.ApplicationUser.LastName" type="text" class="validate">
+                                </div>
+                            </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.PayerFirstName)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="PayerFirstName" placeholder="@Html.DisplayNameFor(model => model.PayerFirstName)" style="border-bottom: none" /></div>
-                                </li>
+                            <!-- Card Label/Input-->
+                            <div class="col s12">
+                                <h6>Card Number</h6>
+                                <label>Enter the 16-digit card number on the card</label>
+                            </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.PayerLastName)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="PayerLastName" placeholder="@Html.DisplayNameFor(model => model.PayerLastName)" style="border-bottom: none" /></div>
-                                </li>
+                            <div class="row">
+                                <div class="input-field col s10">
+                                    <img src="/images/mc_symbol.svg" class="material-icons prefix" />
+                                    <input asp-for="@Model.Payment.CardNumber" placeholder="2412 - 7512 - 3412 - 3456" type="text" class="validate">
+                                    <i class="material-icons prefix right">verified</i>
+                                </div>
+                            </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.CardNumber)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="CardNumber" placeholder="@Html.DisplayNameFor(model => model.CardNumber)" style="border-bottom: none" /></div>
-                                </li>
+                            <!-- Zip Code Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Zip Code</h6>
+                                    <label>Enter the Zip Code associated with your card</label>
+                                </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.CardExpireDate)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="CardExpireDate" placeholder="@Html.DisplayNameFor(model => model.CardExpireDate)" style="border-bottom: none" /></div>
-                                </li>
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.ZipCode" value="@Model.ApplicationUser.CurrentZipcode" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.ZipCode">07***</label>
+                                </div>
+                            </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.ZipCode)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="ZipCode" placeholder="@Html.DisplayNameFor(model => model.ZipCode)" style="border-bottom: none" /></div>
-                                </li>
+                            <!-- CVV Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>CVV Number</h6>
+                                    <label>Enter the 3 or 4 digit number on the card</label>
+                                </div>
 
-                                <li>
-                                    <div class="collapsible-header">Form of Payment</div>
-                                    <div class="collapsible-body">
-                                        <label>
-                                            <input name="group1" type="radio" />
-                                            <span>Credit</span>
-                                        </label>
-                                        <label>
-                                            <input name="group1" type="radio" />
-                                            <span>Debit</span>
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                            <a type="submit" class="waves-effect waves-light btn indigo right"><i class="material-icons right">send</i>Submit Payment</a>
-                        </div>
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.CVV" id="cvv" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.CVV">CVV</label>
+                                </div>
+                            </div>
+
+                            <!-- Card Expiration Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Expiry Date</h6>
+                                    <label>Enter the expiration date of the card</label>
+                                </div>
+
+                                <div class="input-field col s2">
+                                    <input asp-for="@Model.Payment.CardExpireDate" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.CardExpireDate">MM/YY</label>
+                                </div>
+                            </div>
+
+                            <!-- Password Confirmation Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Password</h6>
+                                    <label>Enter your Dynamic password</label>
+                                </div>
+                                <div class="input-field col s5">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+
+                            <!-- Debit or Credit Radio Button-->
+                                <label>
+                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Credit" type="radio" checked/>
+                                    <span>Credit</span>
+                                </label>
+                                <label>
+                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Debit" type="radio" />
+                                    <span>Debit</span>
+                                </label>
+
+                            <!-- Confirm Payment Button-->
+                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                        </form>
                     </div>
                 </div>
             </li>
-
-            <li>
-                <div class="collapsible-header"><h2 style="margin:auto">Bank Payment</h2></div>
+        <li>
+            <li class="active">
+                <div class="collapsible-header"><i class="material-icons">account_balance</i>Bank Payment</div>
                 <div class="collapsible-body">
                     <div class="row">
-                        <div class="col s12 m12">
-                            <ul class="collapsible">
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.BankName)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="BankName" placeholder="@Html.DisplayNameFor(model => model.BankName)" style="border-bottom: none" /></div>
-                                </li>
+                        <form class="col s12">
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.AccountNumber)</div>
-                                    <div class="collapsible-body"><input type="number" asp-for="AccountNumber" placeholder="@Html.DisplayNameFor(model => model.AccountNumber)" style="border-bottom: none" /></div>
-                                </li>
+                            <!-- Bank Name Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Bank Name</h6>
+                                    <label>Name of Bank</label>
+                                </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.RoutingNumber)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="RoutingNumber" placeholder="@Html.DisplayNameFor(model => model.RoutingNumber)" style="border-bottom: none" /></div>
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.BankName" type="text" class="validate">
+                                    <label asp-for="@Model.Payment.BankName">Name of Bank</label>
+                                </div>
+                            </div>
 
-                                </li>
+                            <!-- Account Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Account Number</h6>
+                                    <label>Enter account number from associated bank account</label>
+                                </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.CheckImage)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="CheckImage" placeholder="@Html.DisplayNameFor(model => model.CheckImage)" style="border-bottom: none" /></div>
-                                </li>
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.AccountNumber" type="number" class="validate">
+                                    <label asp-for="@Model.Payment.AccountNumber">Account Number</label>
+                                </div>
+                            </div>
 
-                                <li>
-                                    <div class="collapsible-header">@Html.DisplayNameFor(model => model.AdditionalInfo)</div>
-                                    <div class="collapsible-body"><input type="text" asp-for="AdditionalInfo" placeholder="@Html.DisplayNameFor(model => model.AdditionalInfo)" style="border-bottom: none" /></div>
-                                </li>
-                            </ul>
-                            <a type="submit" class="waves-effect waves-light btn indigo right"><i class="material-icons right">send</i>Submit Payment</a>
-                        </div>
+                            <!-- Routing Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Routing Number</h6>
+                                    <label>Enter routing number from associated bank account</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="number" class="validate">
+                                    <label asp-for="@Model.Payment.RoutingNumber">Routing Number</label>
+                                </div>
+                            </div>
+
+                            <!-- Check Number Label/Input-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Check Number</h6>
+                                    <label class="truncate">Enter check number as displayed on check</label>
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="number" class="validate">
+                                </div>
+
+                            <!-- Check Image Label/Input-->
+                                <div class="col s5">
+                                    <h6>Check Image</h6>
+                                    <label class="truncate">Provide check image below</label>
+                                    <input asp-for="@Model.Payment.RoutingNumber" type="text" class="validate">
+                                </div>
+                            </div>
+
+                            <!-- Additional Info Label/Input-->
+                            <div class="row">
+                                <div class="col s10">
+                                    <h6>Additional info</h6>
+                                    <label asp-for="@Model.Payment.AdditionalInfo">Please provide any additional info below</label>
+                                    <textarea asp-for="@Model.Payment.AdditionalInfo" class="materialize-textarea" data-length="120"></textarea>
+                                </div>
+                            </div>                            
+
+                            <!-- Dynamic Password-->
+                            <div class="row">
+                                <div class="col s5">
+                                    <h6>Password</h6>
+                                    <label>Enter your Dynamic password</label>
+                                </div>
+
+                                <div class="input-field col s5">
+                                    <input id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                        </form>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-</form>
+        
+    <!-- Card/Policy Deatails-->
+    <div class="col s5">
+        <div class="row" id="CCinfo">
+
+            <div class="cc-border"></div>
+
+            <div id="cc_info">
+                <img src="~/images/blob-scatter-haikei.svg" style="position: absolute; border-radius: .5rem" />
+                <div class="chip">
+                    <div class="chip-line"></div>
+                    <div class="chip-line"></div>
+                    <div class="chip-line"></div>
+                    <div class="chip-line"></div>
+                    <div class="chip-main"></div>
+                </div>
+
+                <svg class="wave" viewBox="0 3.71 26.959 38.787" width="26.959" height="38.787" fill="white">
+                    <path d="M19.709 3.719c.266.043.5.187.656.406 4.125 5.207 6.594 11.781 6.594 18.938 0 7.156-2.469 13.73-6.594 18.937-.195.336-.57.531-.957.492a.9946.9946 0 0 1-.851-.66c-.129-.367-.035-.777.246-1.051 3.855-4.867 6.156-11.023 6.156-17.718 0-6.696-2.301-12.852-6.156-17.719-.262-.317-.301-.762-.102-1.121.204-.36.602-.559 1.008-.504z"></path>
+                    <path d="M13.74 7.563c.231.039.442.164.594.343 3.508 4.059 5.625 9.371 5.625 15.157 0 5.785-2.113 11.097-5.625 15.156-.363.422-1 .472-1.422.109-.422-.363-.472-1-.109-1.422 3.211-3.711 5.156-8.551 5.156-13.843 0-5.293-1.949-10.133-5.156-13.844-.27-.309-.324-.75-.141-1.114.188-.367.578-.582.985-.542h.093z"></path>
+                    <path d="M7.584 11.438c.227.031.438.144.594.312 2.953 2.863 4.781 6.875 4.781 11.313 0 4.433-1.828 8.449-4.781 11.312-.398.387-1.035.383-1.422-.016-.387-.398-.383-1.035.016-1.421 2.582-2.504 4.187-5.993 4.187-9.875 0-3.883-1.605-7.372-4.187-9.875-.321-.282-.426-.739-.266-1.133.164-.395.559-.641.984-.617h.094zM1.178 15.531c.121.02.238.063.344.125 2.633 1.414 4.437 4.215 4.437 7.407 0 3.195-1.797 5.996-4.437 7.406-.492.258-1.102.07-1.36-.422-.257-.492-.07-1.102.422-1.359 2.012-1.075 3.375-3.176 3.375-5.625 0-2.446-1.371-4.551-3.375-5.625-.441-.204-.676-.692-.551-1.165.122-.468.567-.785 1.051-.742h.094z"></path>
+                </svg>
+
+                <div class="cc-holder">
+                    <b>@Model.ApplicationUser.FirstName @Model.ApplicationUser.LastName</b>
+                    <p>**** 3456</p>
+                    <p>12/22</p>
+                </div>
+                <img class="right" style="height: 50px; position: relative" src="~/images/mc_symbol.svg" />
+            </div>
+        </div>
+        <div class="row">
+
+            <h5 class="center">Policy Details</h5>
+                <div class="divider"></div> <br />
+
+                <div class="flow-text col s6">
+                <b>Name of Policy</b> <br />
+                @Model.Policy.NameOfPolicy<br />
+                <b>Deductible</b> <br />
+                @Model.Policy.Deductible <br />
+                <b>Out of Pocket Limit</b> <br />
+                @Model.Policy.OutOfPocketLimit <br />
+                </div>
+
+                <div class="flow-text col s6">
+                <b>Annual Limit Coverage</b> <br />
+                @Model.Policy.AnnualLimitOfCoverage <br />
+                <b>Policy Payment is Due</b> <br />
+                @Model.Policy.PolicyPaymentisDue <br />
+                <b>Policy Total Amount</b> <br />
+                @Model.Policy.PolicyTotalAmount
+                </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col s8">
+                <label>You have to Pay</label>
+                <h5>@Model.Bill.MinimumPayment<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right"><i class="material-icons">receipt_long</i></a></h5>
+            </div>
+        </div>
+    </div>
+</div>
