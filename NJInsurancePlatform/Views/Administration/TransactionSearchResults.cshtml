@@ -1,0 +1,87 @@
+﻿@model NJInsurancePlatform.Models.AllTransactionsViewModel
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/TransactionSearchResults.css" />
+</head>
+
+<form method="post" asp-controller="Administration" asp-action="UpdateTransactionStatus">
+    <div class="searchresults-container">
+            <div class="searchresults-header"></div>   
+        <!-- CONTENT -->
+
+        <div class="unpaid-content">
+            <div class="unpaid-content-inner-container">
+                @for (int i = 0; i < Model.Transactions?.Count; i++)
+                {
+                <div class="unpaid-content-row">
+                    <label class="unpaid-content-transaction">
+
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.Transactions[i].TransactionMUID"></label>
+                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].TransactionMUID">
+                        </div>
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.Policies[i].NameOfPolicy"></label>
+                            <input readonly style="width:55%;border:none;text-align:right;font-size:30px;"  asp-for="@Model.Policies[i].NameOfPolicy">
+                        </div>
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].FirstName"></label>
+                            <input readonly style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.ApplicationUsers[i].FirstName">
+                        </div>                        
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].LastName"></label>
+                            <input readonly style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.ApplicationUsers[i].LastName">
+                        </div>
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentAmount"></label>
+                            <input style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].PaymentAmount">
+                        </div>
+                        <span asp-validation-for="@Model.Transactions[i].PaymentAmount"></span>
+
+                        <div class="unpaid-content-value">
+                            <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentDate"></label>
+                            <input placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
+                        </div>
+                        <span asp-validation-for="@Model.Transactions[i].PaymentDate"></span>
+
+                        <div class="unpaid-content-value">
+                           <label class="unpaid-content-name" asp-for="@Model.Transactions[i].isPaymentComplete"></label>
+                            <label>
+                               <input type="checkbox" asp-for="@Model.Transactions[i].isPaymentComplete" checked="@Model.Transactions[i].isPaymentComplete" /> 
+                               <span></span>
+                            </label>
+                        </div>
+                        <div class="unpaid-button-div">
+@*                            <span>
+                                <label class="btn waves-effect #283593 indigo darken-3" asp-for="@Model.Transactions[i].isPaymentComplete">Update Payment</label>
+                            </span>*@
+                                <button class="btn waves-effect #283593 indigo darken-3" type="submit" style="width:50%;border-radius:30px;height:60px;font-size:30px;">Submit</button>
+                        </div>
+                    </label>
+                 </div>
+                }
+                @if(@Model.ApplicationUsers.Count == 0)
+                {
+                    <div style="width:100%;text-align:center;">
+                        <h3>No Records Found</h3>
+                    </div>
+                }
+            </div>
+        </div>
+
+
+
+        <!-- FOOTER -->
+
+        </div>
+    </div>
+</form>
+
+
+
+
+
+

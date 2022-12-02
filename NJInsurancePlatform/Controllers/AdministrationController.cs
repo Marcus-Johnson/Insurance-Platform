@@ -15,14 +15,16 @@ namespace NJInsurancePlatform.Controllers
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITransactionRepository _transactionRepository;
+        private readonly IPolicyRepository _policyRepository;
 
         // Create a Contructure to Inject RoleManager Service
         // Pass Identity Role as generic argument to Role Manager Class
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ITransactionRepository transactionRepository)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, ITransactionRepository transactionRepository,IPolicyRepository policyRepository)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this._transactionRepository = transactionRepository;
+            this._policyRepository = policyRepository;
         }
 
         // CREATE ROLES "GET REQUEST"

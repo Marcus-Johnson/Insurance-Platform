@@ -1,0 +1,43 @@
+﻿@model NJInsurancePlatform.Models.AllTransactionsViewModel
+@{
+    ViewData["Title"] = "Search All Transactions";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/SearchAllTransactions.css" />
+</head>
+
+<form method="post" asp-controller="Administration">
+    <div class="search-container">
+        
+        <!-- CONTENT -->
+        <div class="search-header">
+            <div style="display:flex;justify-content:center;align-items:center;padding-right:30px;padding-left:30px">
+
+            <label>
+                <input class="filled-in" type="checkbox" value="true"  name="ispaid" style="width:100px;color:white;"/>
+                <span style="font-size:30px;color:white;">Only Paid</span>
+            </label>
+            &nbsp;  &nbsp;  &nbsp;  &nbsp;
+            <label>
+                <input class="filled-in" type="checkbox" value="true"  name="getall" style="width:100px;color:white;"/>
+                <span style="font-size:30px;color:white;">Get All</span>
+            </label>           
+            </div>
+            <div class="header-search-div">
+
+            <input name="keywords" type="text" placeholder="Search By Name" style="width:70%;
+                background-color:white;border:none;height:50%;border-radius:40px;
+                font-size:30px;padding:15px;text-align:center;top:0px;"/>
+              <button asp-controller="Administration" asp-action="TransactionSearch" style="background-color:transparent;border:none;"><i class="medium material-icons" style="color:black">search</i></button>
+            </div>
+        </div>
+
+        </div>
+</form>
+
+
+
+
+
+
