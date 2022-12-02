@@ -34,6 +34,8 @@ namespace NJInsurancePlatform.Controllers
             this.customerRepository = customerRepository;
             this.ClaimRepository = ClaimRepository;
         }
+
+
         public async Task<IActionResult> Index()
         {
 
@@ -58,7 +60,7 @@ namespace NJInsurancePlatform.Controllers
             foreach(var transaction in findTransactionByCustomerMUID)
             {
                 customerHomePageVieModel.Transactions?.Add(transaction);
-            }             
+            }
 
             return View(customerHomePageVieModel);
         }

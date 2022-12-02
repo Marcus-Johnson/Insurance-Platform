@@ -5,6 +5,7 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var found = false;
 }
 
 @*<-- User welcome & Weather-->*@
@@ -25,23 +26,22 @@
         <div class="row">
           <div class="col s12">
             @if(Model.Policies != null || Model.Policies.Count != 0)
-            {                
-            <ul class="tabs" id="tabs-swipe-demo">
+            {  
+                <ul class="tabs" id="tabs-swipe-demo">
                 @for(int i = 0; i < Model.Policies?.Count; i++)
                 {
-                    @if (Model.Policies[i]?.Pending == true)
-                    {
-                       <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                    }
+                        if(Model.Policies[i].Pending != false)
+                        {
+                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
+                            found = true;
+                        }
                 }
 
                 </ul>
                 @for (int i = 0; i < Model.Policies?.Count; i++)
                 {
-                    @if (Model.Policies[i]?.Pending == true)
+                    if (Model.Policies[i].Pending != false)
                     {
-
-                    
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
                             <!--COLUMN 1-->
@@ -110,7 +110,7 @@
             }
 
             <!--IF THERE ARE NO ACTIVE POLICIES-->
-            @*@if(Model.Policies.Count == 0 || Model.Policies == null)
+            @if(found == false)
             {
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
