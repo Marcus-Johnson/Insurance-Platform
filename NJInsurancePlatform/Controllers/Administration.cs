@@ -126,10 +126,21 @@ namespace NJInsurancePlatform.Controllers
         {
             for (int i = 0; i < model.Transactions?.Count; i++)
             {
-                if (model.Transactions[i].isPaymentComplete == true)
+                System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> Transactions " + model.Transactions[i].CustomerMUID);
+                //if (model.Transactions[i].isPaymentComplete == true)
+                //{
+                var updatedTransaction = new Transaction()
                 {
-                    _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
-                }
+                    TransactionMUID = model.Transactions[i].TransactionMUID,
+                    CustomerMUID = model.Transactions[i].CustomerMUID,
+                    PolicyMUID = model.Transactions[i].PolicyMUID,
+                    isPaymentComplete = model.Transactions[i].isPaymentComplete,
+                    PaymentAmount = model.Transactions[i].PaymentAmount,
+                    PaymentDate = model.Transactions[i].PaymentDate
+                };
+                    _transactionRepository.UpdateTransaction(updatedTransaction);            // Update transactions
+                   // _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
+                //}
 
                 if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
 
@@ -142,53 +153,6 @@ namespace NJInsurancePlatform.Controllers
 
             return View("UpdateRecorded", "Administration");
         }
-
-
-
-
-        //// GET PAID TRANSACTIONS "GET REQUEST" ------------------------------------------------------------------------------------------------------
-        //[HttpGet]
-        //public async Task<IActionResult> PaidTransactions()
-        //{
-        //    var transactions = await _transactionRepository.GetTransactions();               // get Transactions from Database
-        //    var model = new AccountManager();
-
-        //    foreach (var transaction in transactions)                                        // populate AccountManager Transactions List
-        //    {
-        //        if (transaction.isPaymentComplete == true)
-        //        {
-        //            model.Transactions?.Add(transaction);
-        //        }
-        //    }
-
-        //    if (model.Transactions?.Count == 0 || model.Transactions == null) return RedirectToAction("NoPaymentsComplete", "Administration");
-
-        //    return View(model);                                                             // Pass AccountManager to View
-        //}
-
-
-        //// GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
-        //[HttpPost]
-        //public async Task<IActionResult> PaidTransactions(AccountManager model)
-        //{
-
-        //    for (int i = 0; i < model.Transactions?.Count; i++)
-        //    {
-        //        if (model.Transactions[i].isPaymentComplete == false)
-        //        {
-        //            _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
-        //        }
-
-        //        if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
-
-        //        else
-        //        {
-        //            _transactionRepository.Save();
-        //        }
-        //    }
-
-        //    return RedirectToAction("UpdateRecorded", "Administration");
-        //}
 
 
 

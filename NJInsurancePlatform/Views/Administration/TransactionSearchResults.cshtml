@@ -21,11 +21,14 @@
 
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].TransactionMUID"></label>
-                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].TransactionMUID">
+                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].TransactionMUID" value="@Model.Transactions[i].TransactionMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Policies[i].NameOfPolicy"></label>
                             <input readonly style="width:55%;border:none;text-align:right;font-size:30px;"  asp-for="@Model.Policies[i].NameOfPolicy">
+
+                            <!--Policy Number For POST-->
+                            <input hidden style="width:55%;border:none;text-align:right;font-size:30px;"  asp-for="@Model.Transactions[i].PolicyMUID" value="@Model.Transactions[i].PolicyMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].FirstName"></label>
@@ -34,16 +37,19 @@
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].LastName"></label>
                             <input readonly style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.ApplicationUsers[i].LastName">
+
+                            <!--Customer Number For POST-->
+                            <input hidden style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].CustomerMUID" value="@Model.Transactions[i].CustomerMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentAmount"></label>
-                            <input style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].PaymentAmount">
+                            <input style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].PaymentAmount" value="@Model.Transactions[i].PaymentAmount">
                         </div>
                         <span asp-validation-for="@Model.Transactions[i].PaymentAmount"></span>
 
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentDate"></label>
-                            <input placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
+                            <input  placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
                         </div>
                         <span asp-validation-for="@Model.Transactions[i].PaymentDate"></span>
 

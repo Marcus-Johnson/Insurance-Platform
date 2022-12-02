@@ -12,7 +12,7 @@ using NJInsurancePlatform.Data;
 namespace NJInsurancePlatform.Migrations
 {
     [DbContext(typeof(InsuranceCorpDbContext))]
-    [Migration("20221130163946_initial")]
+    [Migration("20221202101500_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,29 +53,29 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "91765d77-19fc-4104-9835-ceb4fdef5024",
-                            ConcurrencyStamp = "7424cdec-ca74-492a-9c02-95b14967e985",
+                            Id = "f5105087-cd3a-4b3c-9111-7983b9db6367",
+                            ConcurrencyStamp = "2953efe8-8c79-4145-828f-1ee42f73f9bd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "497a132b-dfc8-4e70-bff8-2acb96325392",
-                            ConcurrencyStamp = "31eda4a4-3f40-4233-ae38-5b55d34a4456",
+                            Id = "ec16931e-024e-4eb2-9f2c-8e04ed320a71",
+                            ConcurrencyStamp = "7f8c603b-61bd-4a07-9c49-2d060bc561e2",
                             Name = "Beneficiary",
                             NormalizedName = "BENEFICIARY"
                         },
                         new
                         {
-                            Id = "a59c54d5-8815-4983-8317-88c0d1f02304",
-                            ConcurrencyStamp = "ea42e981-c923-4497-a972-866cab6b980a",
+                            Id = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222",
+                            ConcurrencyStamp = "bd64bafb-61bd-4f50-8e04-ef1164cb6534",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
-                            Id = "6d803124-ad9e-4ae0-bcde-cf295e51d713",
-                            ConcurrencyStamp = "0bbd2c31-dcc9-4731-90ec-ce1c81c42277",
+                            Id = "aacea2e2-19fa-4dfe-a30d-9154c880d8bc",
+                            ConcurrencyStamp = "c5abd939-caf1-462e-bfdb-36ad55fdd1f3",
                             Name = "Pending",
                             NormalizedName = "PENDING"
                         });
@@ -242,57 +242,57 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9",
-                            RoleId = "91765d77-19fc-4104-9835-ceb4fdef5024"
+                            RoleId = "f5105087-cd3a-4b3c-9111-7983b9db6367"
                         },
                         new
                         {
                             UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7",
-                            RoleId = "a59c54d5-8815-4983-8317-88c0d1f02304"
+                            RoleId = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222"
                         },
                         new
                         {
                             UserId = "8e445865-a24d-4543-a6c6-9443d048cdb8",
-                            RoleId = "497a132b-dfc8-4e70-bff8-2acb96325392"
+                            RoleId = "ec16931e-024e-4eb2-9f2c-8e04ed320a71"
                         },
                         new
                         {
-                            UserId = "7df548f2-8144-4536-a0cf-f979c231ae0e",
-                            RoleId = "a59c54d5-8815-4983-8317-88c0d1f02304"
+                            UserId = "605aeb64-ec81-48e7-b014-605404cb8058",
+                            RoleId = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222"
                         },
                         new
                         {
-                            UserId = "04b44a8c-9a4c-4834-b712-61bec619b545",
-                            RoleId = "a59c54d5-8815-4983-8317-88c0d1f02304"
+                            UserId = "069fda50-c50c-4c1a-af7b-a6ed42786482",
+                            RoleId = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222"
                         },
                         new
                         {
-                            UserId = "63735308-4e1e-4738-9002-ebca7ed3b52c",
-                            RoleId = "a59c54d5-8815-4983-8317-88c0d1f02304"
+                            UserId = "eb9258ae-17f3-4b44-b800-4464d047431a",
+                            RoleId = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222"
                         },
                         new
                         {
-                            UserId = "040ba841-bb3a-44f6-bdda-3ee9731218f2",
-                            RoleId = "a59c54d5-8815-4983-8317-88c0d1f02304"
+                            UserId = "3d5a8838-8a13-4910-94db-28336428e853",
+                            RoleId = "76bcb73c-b5cc-41d2-9c9e-fe2c22622222"
                         },
                         new
                         {
-                            UserId = "8b7eb503-35d6-4e1c-9339-374b4c4a6672",
-                            RoleId = "497a132b-dfc8-4e70-bff8-2acb96325392"
+                            UserId = "8b9b4af1-a581-4721-8efb-96786b679cb0",
+                            RoleId = "ec16931e-024e-4eb2-9f2c-8e04ed320a71"
                         },
                         new
                         {
-                            UserId = "fc82c6b9-10ec-4ace-b819-d7fbfee4cf56",
-                            RoleId = "497a132b-dfc8-4e70-bff8-2acb96325392"
+                            UserId = "81753cf9-f48f-49da-bee6-5f16cbbce5d8",
+                            RoleId = "ec16931e-024e-4eb2-9f2c-8e04ed320a71"
                         },
                         new
                         {
-                            UserId = "d7a10c84-450f-42ea-a601-9e0ea61c3b98",
-                            RoleId = "497a132b-dfc8-4e70-bff8-2acb96325392"
+                            UserId = "5859e1ac-b69f-4175-a9f4-c05453ecdc7d",
+                            RoleId = "ec16931e-024e-4eb2-9f2c-8e04ed320a71"
                         },
                         new
                         {
-                            UserId = "dd6d4216-cdf4-4e91-91c4-82c1346376a4",
-                            RoleId = "497a132b-dfc8-4e70-bff8-2acb96325392"
+                            UserId = "8a15556f-85a8-45e2-8dd6-bdb37b12ac77",
+                            RoleId = "ec16931e-024e-4eb2-9f2c-8e04ed320a71"
                         });
                 });
 
@@ -409,9 +409,9 @@ namespace NJInsurancePlatform.Migrations
                         {
                             BillMUID = new Guid("f46090ed-d574-4456-8e18-97150ff885ed"),
                             Balance = 799.34000000000003,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5202),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(656),
                             MinimumPayment = 123.98999999999999,
-                            PolicyDueDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5200),
+                            PolicyDueDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(654),
                             PolicyMUID = new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"),
                             Status = "status"
                         },
@@ -419,9 +419,9 @@ namespace NJInsurancePlatform.Migrations
                         {
                             BillMUID = new Guid("417a8279-0227-43c4-8504-c4396860ada0"),
                             Balance = 509.33999999999997,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5206),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(662),
                             MinimumPayment = 283.99000000000001,
-                            PolicyDueDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5204),
+                            PolicyDueDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(660),
                             PolicyMUID = new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"),
                             Status = "status"
                         },
@@ -429,9 +429,9 @@ namespace NJInsurancePlatform.Migrations
                         {
                             BillMUID = new Guid("c28330de-a718-465b-9772-5b28ad6395e8"),
                             Balance = 109.34,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5210),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(667),
                             MinimumPayment = 129.09,
-                            PolicyDueDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5208),
+                            PolicyDueDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(665),
                             PolicyMUID = new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"),
                             Status = "status"
                         },
@@ -439,9 +439,9 @@ namespace NJInsurancePlatform.Migrations
                         {
                             BillMUID = new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"),
                             Balance = 278.33999999999997,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5213),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(672),
                             MinimumPayment = 449.08999999999997,
-                            PolicyDueDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5212),
+                            PolicyDueDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(670),
                             PolicyMUID = new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"),
                             Status = "status"
                         });
@@ -576,19 +576,19 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            FaqMUID = new Guid("906a6638-af9b-479f-a67f-ea41c0597807"),
+                            FaqMUID = new Guid("8648b45d-0e93-4711-99a2-e6092c2c6ce2"),
                             Answer = "Somerset, NJ",
                             Question = "Where Is our company based out of?"
                         },
                         new
                         {
-                            FaqMUID = new Guid("1aaf2fe6-d0a2-406d-b872-878f8902c5cf"),
+                            FaqMUID = new Guid("38bba7c6-861c-4ad1-b8b0-b134fc669e96"),
                             Answer = "That is your initial role when you first register.  An Admin will approve your account and set you to your appropriate role.",
                             Question = "Why is my role listed as pending?"
                         },
                         new
                         {
-                            FaqMUID = new Guid("9ad2222c-e13f-4a02-a3ed-5213d1b5cbae"),
+                            FaqMUID = new Guid("4a501bad-fe7d-44e0-8dd2-158bfcf9c7da"),
                             Answer = "Your policy must first be approved by an Admin, please check your policy again in a little while.",
                             Question = "Why is my policy listed as pending?"
                         });
@@ -660,7 +660,7 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             GroupRoomMessageMUID = new Guid("82ba35e1-0c52-4f91-8ff3-7ba15a87c237"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5291),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(809),
                             GroupRoomMUID = new Guid("f4f42d43-4d51-43a9-b398-5430131efd2a"),
                             Message = "Hello, And Welcome",
                             SenderMUID = new Guid("d9ef788c-a3f8-48b3-92ce-804170aba836")
@@ -668,7 +668,7 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             GroupRoomMessageMUID = new Guid("7a9ff0a2-6386-4094-8ae8-9240611eef7a"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5295),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(813),
                             GroupRoomMUID = new Guid("80d2744e-2de6-47cc-97d1-05f8a0794f6c"),
                             Message = "yes, How Can I Help you?",
                             SenderMUID = new Guid("a7071f27-db08-47fb-a05a-0a7da44b44c4")
@@ -676,7 +676,7 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             GroupRoomMessageMUID = new Guid("e857e40b-d4d6-45dc-912f-4be6fc749c2d"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5297),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(815),
                             GroupRoomMUID = new Guid("7e5319b1-4285-4811-bf88-c8542ac4bfa1"),
                             Message = "I have a question About My Policy",
                             SenderMUID = new Guid("a7071f27-db08-47fb-a05a-0a7da44b44c4")
@@ -684,7 +684,7 @@ namespace NJInsurancePlatform.Migrations
                         new
                         {
                             GroupRoomMessageMUID = new Guid("4db427d8-8084-4987-9783-ef1154a0627b"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5298),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(818),
                             GroupRoomMUID = new Guid("858efa88-5226-47e5-8bd0-80546b2f469d"),
                             Message = "Sure, What would you like to know?",
                             SenderMUID = new Guid("93fa9038-9c45-42cf-993b-fc3d15764f18")
@@ -775,13 +775,13 @@ namespace NJInsurancePlatform.Migrations
                             Amount = 123.98999999999999,
                             BankName = "Spring Savings",
                             BillMUID = new Guid("f46090ed-d574-4456-8e18-97150ff885ed"),
-                            CardExpireDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5233),
+                            CardExpireDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(744),
                             CardNumber = "123498732",
                             CheckImage = "check Image",
                             CheckNumber = 123,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5237),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(748),
                             DebitOrCredit = "debit",
-                            PaidDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5230),
+                            PaidDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(740),
                             PayerFirstName = "Jillian",
                             PayerLastName = "Flowers",
                             PaymentMethod = "visa",
@@ -796,13 +796,13 @@ namespace NJInsurancePlatform.Migrations
                             Amount = 234.88999999999999,
                             BankName = "Peoples Savings",
                             BillMUID = new Guid("417a8279-0227-43c4-8504-c4396860ada0"),
-                            CardExpireDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5242),
+                            CardExpireDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(754),
                             CardNumber = "123498732",
                             CheckImage = "check Image",
                             CheckNumber = 345,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5244),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(757),
                             DebitOrCredit = "credit",
-                            PaidDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5239),
+                            PaidDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(751),
                             PayerFirstName = "Fred",
                             PayerLastName = "Sanders",
                             PaymentMethod = "mastercard",
@@ -817,13 +817,13 @@ namespace NJInsurancePlatform.Migrations
                             Amount = 563.99000000000001,
                             BankName = "Bank of Nova Scotia",
                             BillMUID = new Guid("c28330de-a718-465b-9772-5b28ad6395e8"),
-                            CardExpireDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5248),
+                            CardExpireDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(761),
                             CardNumber = "123498732",
                             CheckImage = "check Image",
                             CheckNumber = 4532,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5250),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(764),
                             DebitOrCredit = "credit",
-                            PaidDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5246),
+                            PaidDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(759),
                             PayerFirstName = "Phillis",
                             PayerLastName = "McMahon",
                             PaymentMethod = "visa",
@@ -838,13 +838,13 @@ namespace NJInsurancePlatform.Migrations
                             Amount = 58.990000000000002,
                             BankName = "Bank of the Oranges",
                             BillMUID = new Guid("9b7d532c-62a8-4a8d-96d9-6a7a80b118d4"),
-                            CardExpireDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5254),
+                            CardExpireDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(769),
                             CardNumber = "123498732",
                             CheckImage = "check Image",
                             CheckNumber = 9870,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5256),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(771),
                             DebitOrCredit = "credit",
-                            PaidDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5252),
+                            PaidDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(766),
                             PayerFirstName = "katherine",
                             PayerLastName = "Rivera",
                             PaymentMethod = "visa",
@@ -919,13 +919,13 @@ namespace NJInsurancePlatform.Migrations
                             NameOfPolicy = "Dental Gold",
                             OutOfPocketLimit = 999.99000000000001,
                             Pending = false,
-                            PolicyEnd_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5140),
+                            PolicyEnd_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(580),
                             PolicyOwner = "Patrick Leon",
                             PolicyPaidOffAmount = 0.0,
                             PolicyPaymentisDue = false,
-                            PolicyStart_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5109),
+                            PolicyStart_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(546),
                             PolicyTotalAmount = 35000.0,
-                            ProductMUID = new Guid("f9097017-1c13-4590-b6bb-355418ec018e")
+                            ProductMUID = new Guid("e0e04190-4c30-4e55-adf1-f02e2528ca9e")
                         },
                         new
                         {
@@ -936,47 +936,47 @@ namespace NJInsurancePlatform.Migrations
                             NameOfPolicy = "Health Platinum",
                             OutOfPocketLimit = 999.99000000000001,
                             Pending = false,
-                            PolicyEnd_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5146),
+                            PolicyEnd_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(588),
                             PolicyOwner = "Eric Daley",
                             PolicyPaidOffAmount = 0.0,
                             PolicyPaymentisDue = false,
-                            PolicyStart_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5144),
+                            PolicyStart_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(586),
                             PolicyTotalAmount = 35000.0,
-                            ProductMUID = new Guid("4744efb6-564d-42ff-8ebd-e86fce1b3ccf")
+                            ProductMUID = new Guid("58f14674-af4c-4d32-a4e1-37093932bd5d")
                         },
                         new
                         {
                             PolicyMUID = new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"),
-                            AnnualLimitOfCoverage = 14999.99,
+                            AnnualLimitOfCoverage = 999.99000000000001,
                             CustomerMUID = new Guid("f71979e2-b649-4fbc-bc63-3bafa1d65176"),
                             Deductible = 100.25,
                             NameOfPolicy = "Eye Emarald",
                             OutOfPocketLimit = 999.99000000000001,
                             Pending = false,
-                            PolicyEnd_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5150),
+                            PolicyEnd_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(594),
                             PolicyOwner = "Nikosi Thom",
                             PolicyPaidOffAmount = 0.0,
                             PolicyPaymentisDue = false,
-                            PolicyStart_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5148),
+                            PolicyStart_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(592),
                             PolicyTotalAmount = 35000.0,
-                            ProductMUID = new Guid("821f419a-f7e2-4aa7-b6f2-e4d885afdeda")
+                            ProductMUID = new Guid("1a7e7982-391e-4fe8-b813-d87aba40b76d")
                         },
                         new
                         {
                             PolicyMUID = new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"),
                             AnnualLimitOfCoverage = 14999.99,
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
-                            Deductible = 100.25,
-                            NameOfPolicy = "Eye Emarald",
-                            OutOfPocketLimit = 999.99000000000001,
+                            Deductible = 500.98000000000002,
+                            NameOfPolicy = "Employee Individual Health",
+                            OutOfPocketLimit = 2099.9899999999998,
                             Pending = false,
-                            PolicyEnd_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5154),
+                            PolicyEnd_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(600),
                             PolicyOwner = "Leona wilson",
                             PolicyPaidOffAmount = 0.0,
                             PolicyPaymentisDue = false,
-                            PolicyStart_Date = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5152),
-                            PolicyTotalAmount = 35000.0,
-                            ProductMUID = new Guid("e4a9822a-2cc4-4f9d-bcee-57dbdbf07b58")
+                            PolicyStart_Date = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(597),
+                            PolicyTotalAmount = 150000.0,
+                            ProductMUID = new Guid("ddf7eae9-5683-4c64-895c-146bedfec386")
                         });
                 });
 
@@ -1044,7 +1044,7 @@ namespace NJInsurancePlatform.Migrations
                     b.HasData(
                         new
                         {
-                            ProductMUID = new Guid("f9097017-1c13-4590-b6bb-355418ec018e"),
+                            ProductMUID = new Guid("e0e04190-4c30-4e55-adf1-f02e2528ca9e"),
                             AnnualLimitOfCoverage = 14999.99,
                             Deductible = 100.25,
                             Description = "Lorus Plorem enum taknut",
@@ -1056,7 +1056,7 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            ProductMUID = new Guid("4744efb6-564d-42ff-8ebd-e86fce1b3ccf"),
+                            ProductMUID = new Guid("58f14674-af4c-4d32-a4e1-37093932bd5d"),
                             AnnualLimitOfCoverage = 25999.990000000002,
                             Deductible = 200.15000000000001,
                             Description = "Enum Zelgar Phlnnub nilsup",
@@ -1068,7 +1068,7 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            ProductMUID = new Guid("821f419a-f7e2-4aa7-b6f2-e4d885afdeda"),
+                            ProductMUID = new Guid("1a7e7982-391e-4fe8-b813-d87aba40b76d"),
                             AnnualLimitOfCoverage = 1345.99,
                             Deductible = 50.670000000000002,
                             Description = "Lorus Plorem enum taknut",
@@ -1080,7 +1080,7 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            ProductMUID = new Guid("e4a9822a-2cc4-4f9d-bcee-57dbdbf07b58"),
+                            ProductMUID = new Guid("ddf7eae9-5683-4c64-895c-146bedfec386"),
                             AnnualLimitOfCoverage = 5345.9899999999998,
                             Deductible = 160.69,
                             Description = "Bupka ladna velnup halstus",
@@ -1123,7 +1123,7 @@ namespace NJInsurancePlatform.Migrations
                             TransactionMUID = new Guid("76098a5e-bcda-46be-9cf3-a19f24d14018"),
                             CustomerMUID = new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"),
                             PaymentAmount = 1199.78,
-                            PaymentDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5172),
+                            PaymentDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(624),
                             PolicyMUID = new Guid("a61a15af-6a7d-4e82-9659-c5003721f5ea"),
                             isPaymentComplete = true
                         },
@@ -1132,7 +1132,7 @@ namespace NJInsurancePlatform.Migrations
                             TransactionMUID = new Guid("530f62a1-8730-4784-bb71-a257136dd9f6"),
                             CustomerMUID = new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"),
                             PaymentAmount = 2109.7800000000002,
-                            PaymentDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5175),
+                            PaymentDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(628),
                             PolicyMUID = new Guid("abdafd4a-48ff-4f1a-bcc6-fd3dd2c659a5"),
                             isPaymentComplete = true
                         },
@@ -1141,7 +1141,7 @@ namespace NJInsurancePlatform.Migrations
                             TransactionMUID = new Guid("f752a2a0-7300-42ba-beab-dc65992ca945"),
                             CustomerMUID = new Guid("f71979e2-b649-4fbc-bc63-3bafa1d65176"),
                             PaymentAmount = 109.08,
-                            PaymentDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5177),
+                            PaymentDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(630),
                             PolicyMUID = new Guid("67bb56de-01c9-42e2-b066-eea2c082f06f"),
                             isPaymentComplete = false
                         },
@@ -1150,7 +1150,7 @@ namespace NJInsurancePlatform.Migrations
                             TransactionMUID = new Guid("3287bca8-d9dc-4f75-94ca-227cfb4c72da"),
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
                             PaymentAmount = 189.05000000000001,
-                            PaymentDate = new DateTime(2022, 11, 30, 11, 39, 46, 102, DateTimeKind.Local).AddTicks(5179),
+                            PaymentDate = new DateTime(2022, 12, 2, 5, 15, 0, 332, DateTimeKind.Local).AddTicks(633),
                             PolicyMUID = new Guid("46c76123-4e2c-4cce-95fa-0646268c5b1d"),
                             isPaymentComplete = false
                         });
@@ -1231,13 +1231,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ed1322d-b5cf-4d72-84f5-688b7b26c235",
+                            ConcurrencyStamp = "9885b509-ee05-49f3-98b0-70257b9c2004",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOMJ/7dzFwPqroW9cI/uhP6D2O6RdWa3BkCmwxyNNmn3ibpvIOyV1qYBQ47SFaSFKQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDd9qFPwNfyGl/55B66+4FZ34E3TyykvKML7/6gafjyhdY3G9GCgNUZec2UImq6NVQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "472ecdce-8099-4658-803e-dd444f7479ad",
+                            SecurityStamp = "257c8433-6c04-427b-bc5c-fba14c6beef2",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             Active = false,
@@ -1249,13 +1249,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "117b37f2-0995-4608-a277-528b3919e8ec",
+                            ConcurrencyStamp = "9ec0a60e-3888-45c3-a7c6-5ef67d7f7f50",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "CUSTOMER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDwvErrj+M45qUTPWODF9zGfeJbdNRXA1OUS/HYpXMvHgEUh12hN3McXuewGCyuI7w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENT+XOJBcr1T3pDVH4Buv5T3vZSl+VM2YiqJXrD/6A1KRgQS0kUaTWGWG/R6l2jGOA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8008d7b5-50ca-4c92-af1e-19cf5cc220e6",
+                            SecurityStamp = "7edc1508-4ca1-4ff6-b7ff-d3b359f14524",
                             TwoFactorEnabled = false,
                             UserName = "customer",
                             Active = false,
@@ -1267,13 +1267,13 @@ namespace NJInsurancePlatform.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f2d50f1f-227a-4191-a578-7c916df73d32",
+                            ConcurrencyStamp = "0f378ed2-5052-426c-9ec6-003747b96380",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "BENEFICIARY",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMHyzEuX6U5xvPZef2oeYdKiT56n4PrguWJqMawNP8e+3q1khVMuj19lRVgrqmM6lg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEpf51G8JHgAurQgGdbNGgwdAca6FrRhfn3aUHznzF2tz6xVjQsJht51+nKFiI08yA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d030f2c5-61fd-4dab-8fe2-f918f703fa14",
+                            SecurityStamp = "17d72f57-5fdb-43e2-a7d5-6081df8a22cd",
                             TwoFactorEnabled = false,
                             UserName = "beneficiary",
                             Active = false,
@@ -1283,20 +1283,20 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "7df548f2-8144-4536-a0cf-f979c231ae0e",
+                            Id = "605aeb64-ec81-48e7-b014-605404cb8058",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "25e8afd8-1ada-4ea7-802d-dbfc0abf6e09",
+                            ConcurrencyStamp = "e7aac796-7e24-43f6-a090-7ce79e86740b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "PATO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN2cyS6YEpROfh2QqF8zXT1xjV84MuW16A+KHnuwsKLtClhFRBKBKsyzy4Hoid2X6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF9/52M0mWMe5o29W/wGgah7udwY8kX5alF6GzLZWX9Ni1NMOWWY7Gargg5HF6Ptig==",
                             PhoneNumber = "2019878709",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a9f28df3-fdcc-43f5-90c4-168ad5de383d",
+                            SecurityStamp = "2b96e96f-9827-44e9-a7fa-e56a3ca2c67b",
                             TwoFactorEnabled = false,
                             UserName = "Pato",
                             Active = true,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 125, DateTimeKind.Local).AddTicks(155),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 355, DateTimeKind.Local).AddTicks(3057),
                             CurrentAddress = "123 Elm street",
                             CurrentCity = "Milwaukee",
                             CurrentEmployer = "Alphabet Corp",
@@ -1315,20 +1315,20 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "04b44a8c-9a4c-4834-b712-61bec619b545",
+                            Id = "069fda50-c50c-4c1a-af7b-a6ed42786482",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e2a1277e-f039-4357-ade5-fcf12fc5d330",
+                            ConcurrencyStamp = "473a0549-ae1d-4972-92ee-d890a6574364",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ERICD@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJhCYDL3MHBFrzkbqmZ5iLqCw1u50rTt2iwQlyC+7HB0UdFxMz1IuC4sMobUk6OnNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOj0OeFhSb5ppVkzClZUDhC2uGqYancXWx1i2twDHaUNh7f9vCQfzUy5+nrpt5O1IA==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "054b0998-5049-47aa-bdf3-421d49dca830",
+                            SecurityStamp = "2faefa47-a119-446b-97fd-e3453ab2d842",
                             TwoFactorEnabled = false,
                             UserName = "EricD@mymail.com",
                             Active = true,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 133, DateTimeKind.Local).AddTicks(2893),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 364, DateTimeKind.Local).AddTicks(1305),
                             CurrentAddress = "456 main street",
                             CurrentCity = "Baltimore",
                             CurrentEmployer = "Xillon Co",
@@ -1347,20 +1347,20 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "63735308-4e1e-4738-9002-ebca7ed3b52c",
+                            Id = "eb9258ae-17f3-4b44-b800-4464d047431a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "89c2f7f0-eb9b-4302-86f2-8824ccdaf118",
+                            ConcurrencyStamp = "e89a68b1-394e-44d7-9bef-81cfe2050bfd",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "NIKOSIT@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENDdWZiastkNCHuXicp5LMYjjHi6YSnidOAQjHX695FNWjQ/o7c9R4cLVzs8ChFJ+A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDQLJEtXsc4RLXWZAsb4JcB6gMbLllm7F/jrXaK6BlN/godDijuOOym//f+YN6zwRg==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "485e2b2c-bb15-42e8-ada4-9d98e18f0e95",
+                            SecurityStamp = "e4d356e9-2741-4523-8258-a61cb3b6fc31",
                             TwoFactorEnabled = false,
                             UserName = "NikosiT@mymail.com",
                             Active = true,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 140, DateTimeKind.Local).AddTicks(3700),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 372, DateTimeKind.Local).AddTicks(4588),
                             CurrentAddress = "789 Grove street",
                             CurrentCity = "Rockville",
                             CurrentEmployer = "techumseh International",
@@ -1379,20 +1379,20 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "040ba841-bb3a-44f6-bdda-3ee9731218f2",
+                            Id = "3d5a8838-8a13-4910-94db-28336428e853",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7496894-3641-44b0-86ad-e0366014d697",
+                            ConcurrencyStamp = "b0b4f4d3-6a0c-4569-964d-92a72ab0db43",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "LEONAW@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECbZw7qjq3WOudhCj2yDhkLHdIM0o9Uy7lG8qLETsgO/FAl3AYH3SbYPybJUC6XT0Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECvUll3oG7HRisr6FRFPf9rMwuWgVYvTsCgTuzzNXvPvo+q4/VqqYhLkjuDUBnnUog==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0d5df980-3afe-418f-893d-d908d52b7d21",
+                            SecurityStamp = "740d901d-2377-43e7-bb85-91314bfede0b",
                             TwoFactorEnabled = false,
                             UserName = "LeonaW@mymail.com",
                             Active = true,
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 147, DateTimeKind.Local).AddTicks(8401),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 380, DateTimeKind.Local).AddTicks(1712),
                             CurrentAddress = "3464 Brinkly street",
                             CurrentCity = "Gathersburg",
                             CurrentEmployer = "Brimson distributers",
@@ -1411,21 +1411,21 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "8b7eb503-35d6-4e1c-9339-374b4c4a6672",
+                            Id = "8b9b4af1-a581-4721-8efb-96786b679cb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67ef69e8-40a8-47cf-ac1e-9e89437dbbfb",
+                            ConcurrencyStamp = "1b599599-e6a3-4eda-91e5-744b190b8f77",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "ANDREAB@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIQGXcGntsNghh02lMygetg0e86UGpsgrrJAORF8RuvtEo3vWLPJt3gZurfern/QNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELNpWh2VJ1NXErnspouP4ASPmgxmNcre5xSCnn94FeOra39/bXW1SViVg3Awr6/fVA==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "58934c7f-58cc-4df9-9a6c-8dadb81e81a9",
+                            SecurityStamp = "ab357732-49ee-437a-a500-017731daaa64",
                             TwoFactorEnabled = false,
                             UserName = "AndreaB@mymail.com",
                             Active = true,
                             BeneficiaryMUID = new Guid("6808f1f0-47c1-4136-b775-b1f6ffc541fd"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 155, DateTimeKind.Local).AddTicks(2453),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 388, DateTimeKind.Local).AddTicks(1865),
                             CustomerMUID = new Guid("7e46ae9d-ff19-47da-ae69-922069555efb"),
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "AndreaB@mymail.com",
@@ -1438,21 +1438,21 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "fc82c6b9-10ec-4ace-b819-d7fbfee4cf56",
+                            Id = "81753cf9-f48f-49da-bee6-5f16cbbce5d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1120581-f92c-4dc1-b179-15ad03b59caa",
+                            ConcurrencyStamp = "61c41b1e-4501-496b-b8f3-06f5601c843d",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "CYNTHIAS@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB3DMW/cZbiWYJqxvwAmCCNJz+oehFqYSNEPJmM5Q23I4zkD0QaOUf7WW+ANWThIiQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOFievN4MfQoqpW1xylMW5qrinwBZq5SVbwWz/kF8H5Eab2lLICPMSS7SrvjdN14Yg==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f9ff08bb-f604-443b-aba1-07ffe096e1eb",
+                            SecurityStamp = "c2b96cc7-fb6f-4ffb-ae8f-362edbc57b8d",
                             TwoFactorEnabled = false,
                             UserName = "CynthiaS@mymail.com",
                             Active = true,
                             BeneficiaryMUID = new Guid("54d5eae1-ee39-4f2d-8535-5f610d2e1cff"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 163, DateTimeKind.Local).AddTicks(601),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 395, DateTimeKind.Local).AddTicks(9261),
                             CustomerMUID = new Guid("0d7a4ff8-5b33-44bf-a0fe-bd0f696187f1"),
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "CynthiaS@mymail.com",
@@ -1465,21 +1465,21 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "d7a10c84-450f-42ea-a601-9e0ea61c3b98",
+                            Id = "5859e1ac-b69f-4175-a9f4-c05453ecdc7d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f139719-103d-4cfe-810f-2622419bf941",
+                            ConcurrencyStamp = "087cb0fb-07e9-48aa-bec5-28496331e008",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "BRITNEYG@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEtPVjQQXIESEaRsuZQWwueQs9CuR6mRGi2PAIx/yD1nShOIo7Dbdixk7/1v6XZQEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB2A1qAaPRjmfTgWPHN40vNHdE7Ot/ycvPpC7TqYw05NGaYB7tLrYn+5IO+WcwDn2Q==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b57f086-1c3a-4463-bad0-daf7089b00c8",
+                            SecurityStamp = "f072e3f3-670c-417c-81f9-8c3431d86c09",
                             TwoFactorEnabled = false,
                             UserName = "BritneyG@mymail.com",
                             Active = true,
                             BeneficiaryMUID = new Guid("78d9cd41-acde-48fc-baa9-29b5065af159"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 170, DateTimeKind.Local).AddTicks(6076),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 403, DateTimeKind.Local).AddTicks(8475),
                             CustomerMUID = new Guid("f71979e2-b649-4fbc-bc63-3bafa1d65176"),
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "BritneyG@mymail.com",
@@ -1492,21 +1492,21 @@ namespace NJInsurancePlatform.Migrations
                         },
                         new
                         {
-                            Id = "dd6d4216-cdf4-4e91-91c4-82c1346376a4",
+                            Id = "8a15556f-85a8-45e2-8dd6-bdb37b12ac77",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bbd169cb-a3d5-4a20-97d3-ac3c396af1b6",
+                            ConcurrencyStamp = "575910c6-f395-4320-bfbd-d518ea5e7e01",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedUserName = "JOANAM@MYMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECPp88wRO+mTDLvw3UrPuVEhk1KWRTyMEjQVRPu0UUeLiRJQSR4DQlUDihlCQt5ulQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEONU0h+JH1k+4wT5NjMULbV3ogZKt6yb4ZVNFM5zDePWbdSUaTn/VM+WEVQJVnXb9w==",
                             PhoneNumber = "8790985467",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e0c66f2-6a6b-420c-8ddb-e130b99925ad",
+                            SecurityStamp = "47ebc8ed-4648-4da4-8d0d-5e2700233bfe",
                             TwoFactorEnabled = false,
                             UserName = "JoanaM@mymail.com",
                             Active = true,
                             BeneficiaryMUID = new Guid("fa75877d-66a1-4f63-b8fa-d2cdb59fbdd1"),
-                            CreatedDate = new DateTime(2022, 11, 30, 11, 39, 46, 178, DateTimeKind.Local).AddTicks(4199),
+                            CreatedDate = new DateTime(2022, 12, 2, 5, 15, 0, 411, DateTimeKind.Local).AddTicks(5714),
                             CustomerMUID = new Guid("3498cdd0-6913-4c08-b29f-5291f28201ce"),
                             DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             EmailAddress = "JoanaM@mymail.com",
