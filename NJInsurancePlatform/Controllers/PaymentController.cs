@@ -59,9 +59,67 @@ namespace NJInsurancePlatform.Controllers
 
 
         [HttpPost]
-        public IActionResult MakePayment(Payment model)
+        public IActionResult MakePayment(PaymentViewModel model)
         {
-            return View("Index");
+            System.Diagnostics.Debug.WriteLine(model);
+            Payment newPayment = new Payment()
+            {
+                PaymentMUID = Guid.NewGuid(),
+                //PaymentMUID = model.Payment.PaymentMUID,
+                BillMUID = model.Bill.BillMUID,
+                PaidDate = DateTime.Now,
+                Amount = model.Payment.Amount,
+                CVV = model.Payment.CVV,
+                PaymentMethod = model.Payment.PaymentMethod,
+                PayerFirstName = model.Payment.PayerFirstName,
+                PayerLastName = model.Payment.PayerLastName,
+                CardNumber = model.Payment.CardNumber,
+                ZipCode = model.Payment.ZipCode,
+                CardExpireDate = model.Payment.CardExpireDate,
+                DebitOrCredit = model.Payment.DebitOrCredit,
+                BankName = model.Payment.BankName,
+                AccountNumber = model.Payment.AccountNumber,
+                RoutingNumber = model.Payment.RoutingNumber,
+                CheckNumber = model.Payment.CheckNumber,
+                CheckImage = model.Payment.CheckImage,
+                AdditionalInfo = model.Payment.AdditionalInfo,
+                CreatedDate = model.Payment.CreatedDate,
+            };
+            System.Diagnostics.Debug.WriteLine(newPayment);
+
+            PaymentRepository.InsertPayment(newPayment);
+            PaymentRepository.Save();
+            Thread.Sleep(5000);
+
+            Bill newBill = new Bill()
+            {
+                BillMUID = model.Bill.BillMUID,
+                PolicyMUID = model.Policy.PolicyMUID,                   
+                PolicyDueDate = model.Bill.PolicyDueDate,                     
+                MinimumPayment = model.Bill.MinimumPayment,                   
+                CreatedDate = DateTime.Now,
+                Balance = model.Bill.Balance,                         
+                Status = "Paid",              
+            };
+            System.Diagnostics.Debug.WriteLine(newBill);
+
+            BillRepository.UpdateBill(newBill);
+            BillRepository.Save();
+            Thread.Sleep(5000);
+
+
+            Transaction newTransaction = new Transaction()
+            {
+                TransactionMUID = Guid.NewGuid(),
+                CustomerMUID = model.Policy.CustomerMUID,                          
+                PolicyMUID = model.Policy.PolicyMUID,                              
+                isPaymentComplete = false,
+                PaymentAmount = model.Payment.Amount,                     
+                PaymentDate = DateTime.Now,
+            };
+            TransactionRepository.InsertTransaction(newTransaction);
+            TransactionRepository.Save();
+            return RedirectToAction("Index", "Customer");
         }
 
         public IActionResult Details()

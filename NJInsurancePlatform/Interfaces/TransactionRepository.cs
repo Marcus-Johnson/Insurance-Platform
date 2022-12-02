@@ -49,7 +49,7 @@ namespace NJInsurancePlatform.Interfaces
             }
         }
 
-        public async void Save()
+        public void Save()
         {
              _databaseContext.SaveChanges();
         }
