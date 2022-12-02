@@ -55,7 +55,7 @@ namespace NJInsurancePlatform.Controllers
                 customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
 
             }
-
+            customerHomePageVieModel.ApplicationUser = user;
             // Add Transactions To customer List Items
             foreach(var transaction in findTransactionByCustomerMUID)
             {

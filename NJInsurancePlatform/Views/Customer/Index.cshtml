@@ -1,185 +1,137 @@
-﻿Vustomer/Index
-
-
-@model NJInsurancePlatform.Models.CustomerHomePageVieModel
+﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
 @using Weather.ApiWrapper;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var found = false;
 }
+@{
+    var weatherWrapper = new WeatherApi();
 
-<style>
- #PolicyList {
- border: 3px solid;
+    var result = await weatherWrapper.GetResult();
+
+    var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+    var weatherJson = JsonSerializer.Deserialize<Root>(result, options);
 }
-
-.center-align {
-    background-color: #8080807f;
-}
-
-.welcome-container {
-    display: flex;
-    justify-content: space-between;
-}
-
-.welcome-left {
-}
-
-.weather-right {
-    text-align: right;
-}
-
-.policy-tab {
-    border: 2px solid #58585b;
-    border-radius: 10px;
-    margin: 25px 70px 75px;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-#swipe-1 {
-    height: auto;
-}
-
-/*GalaxE Blue color for indicator line */
-.tabs .indicator {
-    background-color: #1072ba;
-}
-
-/*Color for tab and text when clicked*/
-.tabs .tab a:focus.active {
-    background-color: #00294d;
-    color: #ffffff;
-}
-
-.tabs .tab a {
-    color: #00294d;
-}
-
-    .tabs .tab a.active {
-        color: #00294d;
-    }
-
-    .tabs .tab a:hover {
-        color: #1072ba;
-    }
-</style>
-
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container" style="clear:right">
     <span class="welcome-left">
-
-        <h4 class="white-text">Welcome @User.Identity.Name</h4>
+        <h4 class="white-text">Welcome, @Model.ApplicationUser.FirstName</h4>
         <h6 class="white-text">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
-        <h4>Current Balance</h4>
-        <h6>$183.12</h6>
+        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
+        <div style="position: relative; float:left; padding: 10px">
+            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
+            <p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
+        </div>
     </span>
 </div>
 
-       <!-- Tabs for each policy -->
-      <section class="policy-tab">
-        <div class="row">
-          <div class="col s12">
-            @if(Model.Policies != null || Model.Policies.Count != 0)
-            {  
+<!-- Tabs for each policy -->
+<section class="policy-tab">
+    <div class="row">
+        <div class="col s12">
+            @if (Model.Policies != null || Model.Policies.Count != 0)
+            {
                 <ul class="tabs" id="tabs-swipe-demo">
-                @for(int i = 0; i < Model.Policies?.Count; i++)
-                {
-                        if(Model.Policies[i].Pending == true)
+                    @for (int i = 0; i < Model.Policies?.Count; i++)
+                    {
+                        if (Model.Policies[i].Pending == true)
                         {
                             <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
                             found = true;
                         }
-                }
+                    }
 
                 </ul>
                 @for (int i = 0; i < Model.Policies?.Count; i++)
                 {
                     if (Model.Policies[i].Pending == true)
                     {
-                    <div id="@($"swipe-{i}")" class="col s12">
-                        <div class="row">
-                            <!--COLUMN 1-->
-                            <div class="col s6">
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy Number</b></span>
-                                    <span>@Model.Policies[i]?.PolicyMUID</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Name of Policy</b></span>
-                                    <span>@Model.Policies[i]?.NameOfPolicy</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Name of Policy</b></span>
-                                    <span>@Model.Policies[i]?.NameOfPolicy</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Deductible</b></span>
-                                    <span>@Model.Policies[i]?.Deductible</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Out of Pocket Limit</b></span>
-                                    <span>@Model.Policies[i]?.OutOfPocketLimit</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Annual Limit of Coverage</b></span>
-                                    <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
-                                </div>
+                        <div id="@($"swipe-{i}")" class="col s12">
+                            <div class="row">
+                                <!--COLUMN 1-->
+                                <div class="col s6">
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy Number</b></span>
+                                        <span>@Model.Policies[i]?.PolicyMUID</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Name of Policy</b></span>
+                                        <span>@Model.Policies[i]?.NameOfPolicy</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Name of Policy</b></span>
+                                        <span>@Model.Policies[i]?.NameOfPolicy</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Deductible</b></span>
+                                        <span>@Model.Policies[i]?.Deductible</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Out of Pocket Limit</b></span>
+                                        <span>@Model.Policies[i]?.OutOfPocketLimit</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Annual Limit of Coverage</b></span>
+                                        <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>
+                                    </div>
 
-                                  <!--MAKE A CLAIM BUTTON-->
+                                    <!--MAKE A CLAIM BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
 
-                                  <!--MAKE A PAYMENT BUTTON-->
+                                    <!--MAKE A PAYMENT BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white" id="btn">Make a Payment</button>
-                                  </div>
+                                </div>
 
-                            <!--COLUMN 2-->
-                            <div class="col s4">
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy Payment is Due</b></span>
-                                    <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy Total Amount</b></span>
-                                    <span>@Model.Policies[i]?.PolicyTotalAmount</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy Paid Off Amount</b></span>
-                                    <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy Start Date</b></span>
-                                    <span>@Model.Policies[i]?.PolicyStart_Date</span>
-                                </div>
-                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                    <span><b>Policy End Date</b></span>
-                                    <span>@Model.Policies[i]?.PolicyEnd_Date</span>
+                                <!--COLUMN 2-->
+                                <div class="col s4">
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy Payment is Due</b></span>
+                                        <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy Total Amount</b></span>
+                                        <span>@Model.Policies[i]?.PolicyTotalAmount</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy Paid Off Amount</b></span>
+                                        <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy Start Date</b></span>
+                                        <span>@Model.Policies[i]?.PolicyStart_Date</span>
+                                    </div>
+                                    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                        <span><b>Policy End Date</b></span>
+                                        <span>@Model.Policies[i]?.PolicyEnd_Date</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 }
-            }
             }
 
             <!--IF THERE ARE NO ACTIVE POLICIES-->
-            @if(found == false)
+            @if (found == false)
             {
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
                 </div>
-            }*@
+            }
         </div>
 
-                </div>
-      </section>
+    </div>
+</section>
 
 <div>
     <!-- Modal Structure -->
     <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
-         <form method="post" asp-controller="Customer" asp-action="CreateClaim">
+        <form method="post" asp-controller="Customer" asp-action="CreateClaim">
             <div class="modal-content">
                 <div class="row">
                     @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
@@ -215,31 +167,32 @@
 
 
 
-    <!-- Transactions Table -->
-     <div class="row"> @*class="col s4 center-align"*@
-        <h4 class="center-align">Transaction History</h4>
-        <table class="highlight responsive-table" id="">
+<!-- Transactions Table -->
+<div class="row">
+    @*class="col s4 center-align"*@
+    <h4 class="center-align">Transaction History</h4>
+    <table class="highlight responsive-table" id="">
 
-            <thead>
-                <tr>
-                    <th style="text-align:center">Payment Amount</th>
-                    <th style="text-align:center">Payment complete</th>
-                    <th style="text-align:center">Payment Date</th>
-                    <th style="text-align:center">Policy MUID</th>
-                </tr>
-            </thead>
-            <tbody>
+        <thead>
+            <tr>
+                <th style="text-align:center">Payment Amount</th>
+                <th style="text-align:center">Payment complete</th>
+                <th style="text-align:center">Payment Date</th>
+                <th style="text-align:center">Policy MUID</th>
+            </tr>
+        </thead>
+        <tbody>
 
-            @if(Model.Transactions?.Count != null || Model.Transactions?.Count != 0)
+            @if (Model.Transactions?.Count != null || Model.Transactions?.Count != 0)
             {
-                @for(int i = 0; i < Model.Transactions?.Count; i++)
+                @for (int i = 0; i < Model.Transactions?.Count; i++)
                 {
                     <tr>
                         <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
                         <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
-                        <td style="text-align:center">@Model.Transactions[i].PaymentDate</td> 
+                        <td style="text-align:center">@Model.Transactions[i].PaymentDate</td>
                         @*<td style="text-align:center">@Model.PolicyNames?[i]</td>*@
-                    </tr>     
+                    </tr>
                 }
             }
             else
@@ -250,39 +203,35 @@
                     </td>
                 </tr>
             }
-            
-            </tbody>
-        </table>
 
-        <!--IF THERE ARE NO TRANSACTIONS-->
-            @if(Model.Transactions.Count == 0 || Model.Transactions == null)
-            {
-                <div style="text-align:center">
-                        <h3>You Have No Transactions</h3>
-                </div>
-            }            
-    </div>
+        </tbody>
+    </table>
 
-
-    <!-- Dropdown Trigger -->
-    <a class='dropdown-trigger btn' id="btn" href='#' data-target='beneficiaries-dropdown'>View All Beneficiaries</a>
-
-  <!-- Dropdown Structure -->
-      <ul id='beneficiaries-dropdown' class='dropdown-content'>
-        <li><a href="#!">Hulk Smash</a></li>
-        <li><a href="#!">Iron Man</a></li>
-        <li><a href="#!">Tha Nos</a></li>
-      </ul>
-
-
-    <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
+    <!--IF THERE ARE NO TRANSACTIONS-->
+    @if (Model.Transactions.Count == 0 || Model.Transactions == null)
+    {
+        <div style="text-align:center">
+            <h3>You Have No Transactions</h3>
+        </div>
+    }
 </div>
 
 
+<!-- Dropdown Trigger -->
+<a class='dropdown-trigger btn' id="btn" href='#' data-target='beneficiaries-dropdown'>View All Beneficiaries</a>
 
-customerController
+<!-- Dropdown Structure -->
+<ul id='beneficiaries-dropdown' class='dropdown-content'>
+    <li><a href="#!">Hulk Smash</a></li>
+    <li><a href="#!">Iron Man</a></li>
+    <li><a href="#!">Tha Nos</a></li>
+</ul>
 
 
-  Pending = true,
+<a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
 
-
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large indigo" asp-controller="Home" asp-action="Message" target="">
+        <i class="large material-icons">chat</i>
+    </a>
+</div>

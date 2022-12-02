@@ -2,8 +2,7 @@
 
 @inject SignInManager<ApplicationUser> signInManager;
 
-@*@model NJInsurancePlatform.Models.Claim
-*@
+@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
 
 
 <!DOCTYPE html>
@@ -44,7 +43,7 @@
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {
-                                <span>@User.Identity.Name</span>
+                                <span>@Model.ApplicationUser.FirstName</span>
                             }
                             else
                             {
@@ -175,14 +174,14 @@
             @RenderBody()
 
             <!--Chat Button-->
-            @if (@ViewData["Title"] != "Messages")
+           @* @if (@ViewData["Title"] != "Messages")
             {
                 <div class="fixed-action-btn">
                     <a class="btn-floating btn-large indigo pulse" asp-controller="Home" asp-action="Message" target="">
                         <i class="large material-icons">chat</i>
                     </a>
                 </div>
-            }
+            }*@
         </div>
     </main>
 
