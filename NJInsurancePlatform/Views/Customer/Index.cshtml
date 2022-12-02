@@ -29,13 +29,11 @@
             <ul class="tabs" id="tabs-swipe-demo">
                 @for(int i = 0; i < Model.Policies?.Count; i++)
                 {
-                        @if (Model.Policies[i]?.Pending == true)
-                        {
-                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                        } else{
-                            <li>no active policies</li>
-                        }
+                    @if (Model.Policies[i]?.Pending == true)
+                    {
+                       <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
                     }
+                }
 
                 </ul>
                 @for (int i = 0; i < Model.Policies?.Count; i++)
