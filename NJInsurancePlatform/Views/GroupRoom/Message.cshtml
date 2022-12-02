@@ -34,13 +34,29 @@
     <div class="col s9" style="height: 94%; width: 75%">
         <h4 class="center indigo-text">@RoomName</h4>
 
-        <div id="messages-wrapper">
+        <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
             @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
             {
-                <p class="left indigo lighten-4" id="messages" style="font-size:18px">
-                    <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span><br/>
-                    <span style="font-size:25px">@Model.groupRoomMessages[i].Message</span>
-                </p>
+                <div class="individual-message-container" style="display:flex;justify-content:center;">
+
+                    <div class="sent-message-content" style="width:fit-content; border:1px solid silver;border-radius:80px;padding:10px 50px 10px 50px;background-color:#1976D2;color:white">
+
+                        <div class="sender-firstname">
+                            <span style="font-size:25px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                        </div>
+
+                        <p style="font-size:18px;line-height:.7;">
+                            <span style="font-size:40px">@Model.groupRoomMessages[i].Message</span>
+                        </p>
+
+                        <div class="message-date-created">
+                            <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
 
 @*                <p class="right indigo lighten-5" id="messages">
                     The overflow property specifies whether to clip

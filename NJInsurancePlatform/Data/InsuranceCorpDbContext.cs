@@ -427,24 +427,30 @@ namespace NJInsurancePlatform.Data
                 {
                     GroupRoomMessageMUID = groupMes1,
                     GroupRoomMUID = group1,
-                    SenderMUID = groupSend1,
-                    Message = "Hello, And Welcome",
+                    SenderMUID = cust1,
+                    Message = "Hello, How Are you?",
+                    FirstName = "Patrick",
+                    LastName = "Leon",
                     CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
                     GroupRoomMessageMUID = groupMes2,
                     GroupRoomMUID = group2,
-                    SenderMUID = groupSend2,
-                    Message = "yes, How Can I Help you?",
+                    SenderMUID = cust2,
+                    Message = "Good Morning!",
+                    FirstName = "Eric",
+                    LastName = "Daley",
                     CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
                     GroupRoomMessageMUID = groupMes3,
                     GroupRoomMUID = group3,
-                    SenderMUID = groupSend2,
+                    SenderMUID = cust3,
                     Message = "I have a question About My Policy",
+                    FirstName = "Nikosi",
+                    LastName = "Thom",
                     CreatedDate = DateTime.Now
 
                 },
@@ -452,8 +458,10 @@ namespace NJInsurancePlatform.Data
                 {
                     GroupRoomMessageMUID = groupMes4,
                     GroupRoomMUID = group4,
-                    SenderMUID = groupSend4,
+                    SenderMUID = cust4,
                     Message = "Sure, What would you like to know?",
+                    FirstName = "Leona",
+                    LastName = "Wilson",
                     CreatedDate = DateTime.Now
 
                 }

@@ -10,7 +10,6 @@ namespace NJInsurancePlatform.Models
         public GroupRoomMessage? groupRoomMessage { get; set; } 
         public List<GroupRoomMessage>? groupRoomMessages { get; set; }
         public ApplicationUser? applicationUser { get; set; }
-
         public MessagesViewModel()
         {
             this.groupRooms = new List<GroupRoom>();
