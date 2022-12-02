@@ -115,37 +115,34 @@
                     <a asp-controller="" asp-action="" class="breadcrumb">@ViewContext.RouteData.Values["controller"]</a>
                     <a asp-controller="@ViewContext.RouteData.Values["controller"]" asp-action=@ViewContext.RouteData.Values["action"] class="breadcrumb">@ViewData["Title"]</a>
                 </div>
-                
-                <div class="indigo lighten-1" style="padding:1px">
-                    <h3 class="header center">@ViewData["Title"]</h3>
-                    </div>
             }
-               else
-            {
-            }
-                
-                <script>
-                    //this script below adds event listener for the Modal
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const tabs = document.querySelectorAll('.tabs');
-                        M.Tabs.init(tabs, {
+
+            <script>
+                //this script below adds event listener for the Modal
+                document.addEventListener('DOMContentLoaded', function () {
+                    const tabs = document.querySelectorAll('.tabs');
+                    M.Tabs.init(tabs, {
                         swipeable: true
-                        });
+                    });
 
                     const modal = document.querySelectorAll('.modal');
                     M.Modal.init(modal, {
                         opacity: '0.8'
                     });
-                    
+
                     //this script beflow adds event listener for the dropdown inside the Modal
                     var elems = document.querySelectorAll('.dropdown-trigger');
                     M.Dropdown.init(elems);
-                    });
-                </script>
-                
-            
-
+                });
+            </script>
         </nav>
+
+        @if (@ViewData["Title"] != null)
+        {
+            <div class="white indigo-text" style="padding:1px">
+                <h3 class="center">@ViewData["Title"]</h3>
+            </div>
+        }
 
         <!-- MOBILE Main Sidenav-->
         <ul class="sidenav" id="main-sidenav">
@@ -182,9 +179,9 @@
             {
                 <div class="fixed-action-btn">
                     <a class="btn-floating btn-large indigo pulse" asp-controller="Home" asp-action="Message" target="">
-                    <i class="large material-icons">chat</i>
-                </a>
-            </div>
+                        <i class="large material-icons">chat</i>
+                    </a>
+                </div>
             }
         </div>
     </main>

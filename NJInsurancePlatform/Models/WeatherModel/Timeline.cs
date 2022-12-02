@@ -8,6 +8,6 @@ namespace NJInsurancePlatform.Models.WeatherModel
         public string? Timestep { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public List<Interval> Intervals { get; set; }
+        public List<Intervals> Intervals { get; set; }
     }
 }

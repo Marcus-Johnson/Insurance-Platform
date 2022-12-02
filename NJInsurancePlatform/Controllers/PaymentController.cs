@@ -61,7 +61,7 @@ namespace NJInsurancePlatform.Controllers
         [HttpPost]
         public IActionResult MakePayment(Payment model)
         {
-            return View("Index");
+            return View();
         }
 
         public IActionResult Details()

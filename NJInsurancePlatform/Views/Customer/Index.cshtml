@@ -1,16 +1,76 @@
-﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
+﻿Vustomer/Index
 
+
+@model NJInsurancePlatform.Models.CustomerHomePageVieModel
+@using Weather.ApiWrapper;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var found = false;
 }
 
+<style>
+ #PolicyList {
+ border: 3px solid;
+}
+
+.center-align {
+    background-color: #8080807f;
+}
+
+.welcome-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.welcome-left {
+}
+
+.weather-right {
+    text-align: right;
+}
+
+.policy-tab {
+    border: 2px solid #58585b;
+    border-radius: 10px;
+    margin: 25px 70px 75px;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#swipe-1 {
+    height: auto;
+}
+
+/*GalaxE Blue color for indicator line */
+.tabs .indicator {
+    background-color: #1072ba;
+}
+
+/*Color for tab and text when clicked*/
+.tabs .tab a:focus.active {
+    background-color: #00294d;
+    color: #ffffff;
+}
+
+.tabs .tab a {
+    color: #00294d;
+}
+
+    .tabs .tab a.active {
+        color: #00294d;
+    }
+
+    .tabs .tab a:hover {
+        color: #1072ba;
+    }
+</style>
+
 @*<-- User welcome & Weather-->*@
-<div class="welcome-container">
+<div class="welcome-container" style="clear:right">
     <span class="welcome-left">
 
-        <h3>Welcome @User.Identity.Name</h3>
-        <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
+        <h4 class="white-text">Welcome @User.Identity.Name</h4>
+        <h6 class="white-text">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
         <h4>Current Balance</h4>
@@ -39,7 +99,6 @@
                 {
                     if (Model.Policies[i].Pending == true)
                     {
-
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
                             <!--COLUMN 1-->
@@ -69,14 +128,12 @@
                                     <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
                                 </div>
 
+                                  <!--MAKE A CLAIM BUTTON-->
+                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
 
-                                <!--MAKE A CLAIM BUTTON-->
-                                <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
-
-                                <!--MAKE A PAYMENT BUTTON-->
-                                <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment" asp-action="MakePayment">Make a Payment</a>
-
-                            </div>
+                                  <!--MAKE A PAYMENT BUTTON-->
+                                    <button class="waves-effect waves-light btn btn-large white" id="btn">Make a Payment</button>
+                                  </div>
 
                             <!--COLUMN 2-->
                             <div class="col s4">
@@ -113,7 +170,7 @@
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
                 </div>
-            }
+            }*@
         </div>
 
                 </div>
@@ -181,7 +238,7 @@
                         <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
                         <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
                         <td style="text-align:center">@Model.Transactions[i].PaymentDate</td> 
-                        <td style="text-align:center">@Model.PolicyNames?[i]</td>
+                        @*<td style="text-align:center">@Model.PolicyNames?[i]</td>*@
                     </tr>     
                 }
             }
@@ -220,5 +277,12 @@
 
     <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
 </div>
+
+
+
+customerController
+
+
+  Pending = true,
 
 

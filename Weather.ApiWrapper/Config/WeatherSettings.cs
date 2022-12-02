@@ -8,24 +8,24 @@ namespace Weather.ApiWrapper.Config
     {
         private static readonly IConfiguration Configuration;
 
-        /// <summary>
-        /// Builds the configuration that we need to read
-        /// </summary>
+        // <summary>
+        // Builds the configuration that we need to read
+        // </summary>
         static WeatherSettings()
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appSettings.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             
             Configuration = builder.Build();
         }
 
-        /// <summary>
-        /// This method helps us to get the value of the section we need to read on our JSON configuration.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="isArray"></param>
-        /// <returns></returns>
+        // <summary>
+        // This method helps us to get the value of the section we need to read on our JSON configuration.
+        // </summary>
+        // <param name="name"></param>
+        // <param name="isArray"></param>
+        // <returns></returns>
         public static string Get(string name, bool isArray = false)
         {
             string appSettings;
