@@ -10,7 +10,7 @@ namespace NJInsurancePlatform.Models.WeatherModel
             {
                 { "0", "Unknown" },
                 { "1000", "Clear" },
-                { "1001", "Rain" },
+                { "1001", "Cloudy" },
                 { "1100", "Mostly Clear" },
                 { "1101", "Partly Cloudy" },
                 { "1102", "Mostly Cloudy" },

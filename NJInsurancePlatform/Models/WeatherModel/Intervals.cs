@@ -2,7 +2,7 @@
 
 namespace NJInsurancePlatform.Models.WeatherModel
 {
-    public class Interval
+    public class Intervals
     {
         public Values? Values { get; set; }
     }

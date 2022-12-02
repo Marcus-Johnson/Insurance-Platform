@@ -28,22 +28,25 @@ body {
 }
 
 main {
-    padding-bottom: 50px;
-    width:100%;
-    padding:0px;
-
+    width: 100vw;
+    margin-bottom: 75px; /* Margin so footer does not touch content on pages */
 }
 
+/* Footer Positioning */
 footer {
-    position: fixed;
-    bottom: 0px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     width: 100%;
 }
 
+/* Global Border Style */
 #border {
     border: solid 2px grey;
     border-radius: 15px;
 }
+
+/* Global Button Style */
 #btn {
     border: solid 1px grey;
     margin: 1rem;
@@ -51,40 +54,4 @@ footer {
     background-color: white;
     color: midnightblue;
     font-weight: 700;
-}
-/* Message Page*/
-#messages-wrapper {
-    height: 70%;
-    overflow: auto;
-    padding: 1rem;
-    border-top: solid 1px lightgrey;
-    border-bottom: solid 1px lightgrey;
-}
-
-#messages {
-    width: 75%;
-    border: solid 1px grey;
-    border-radius: 3rem;
-    padding: 1rem;
-}
-
-#message-box {
-    height: 20%;
-    display: flex;
-    flex-direction: row;
-}
-
-#message-input {
-    flex-grow: 4;
-    overflow: hidden;
-    height: 90%;
-    margin: auto 0;
-}
-#button-wrapper {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 10%;
 }
