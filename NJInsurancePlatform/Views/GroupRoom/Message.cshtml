@@ -55,12 +55,13 @@
             <input type="text" hidden readonly asp-for="@Model.groupRoom.GroupMUID" value="@RoomID"/>
             <input type="text" hidden readonly asp-for="@Model.groupRoomMessage.SenderMUID" />
 
+
+            @if(RoomName != null)
+            {
             <div class="input-field" id="message-input">
                 <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height: 100%"></textarea>
                 <label asp-for="@Model.groupRoomMessage.Message">Message</label>
             </div>
-            @if(Model.groupRoomMessages.Count != 0)
-            {
             <div id="button-wrapper">
 
                 <div class="file-field input-field">
