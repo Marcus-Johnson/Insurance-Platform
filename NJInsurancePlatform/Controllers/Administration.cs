@@ -11,7 +11,7 @@ namespace NJInsurancePlatform.Controllers
     {
         // GET PAID TRANSACTIONS "GET REQUEST" ------------------------------------------------------------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> SearchAllTransactions()                           
+        public async Task<IActionResult> SearchAllTransactions()
         {
             return View();                                                             // Pass AccountManager to View
         }
@@ -31,9 +31,9 @@ namespace NJInsurancePlatform.Controllers
             // retreive all records based on check status
             if (keywords == null && ispaid == false && getall == true)
             {
-                foreach(var user in allUsers)
+                foreach (var user in allUsers)
                 {
-                    foreach(var transaction in allTransactions)
+                    foreach (var transaction in allTransactions)
                     {
                         foreach (var policy in allPolicies)
                         {
@@ -50,14 +50,14 @@ namespace NJInsurancePlatform.Controllers
                 }
 
                 return View("TransactionSearchResults", allTransactionsViewModel);
-            }            
-            
+            }
+
             // if user input is Blank, retreive all records based on check status
             if (keywords == null)
             {
-                foreach(var user in allUsers)
+                foreach (var user in allUsers)
                 {
-                    foreach(var transaction in allTransactions)
+                    foreach (var transaction in allTransactions)
                     {
                         foreach (var policy in allPolicies)
                         {
@@ -78,26 +78,26 @@ namespace NJInsurancePlatform.Controllers
 
 
             // if user input is not blank
-            else if(keywords != null) 
+            else if (keywords != null)
             {
 
-            // Validate user input Search Input
-            foreach (var user in allUsers)
-            {
-                // remove all white space and to lowercase variables
-                var keywordsNOspace = String.Concat(keywords.Where(c => !Char.IsWhiteSpace(c))).ToLower();
-                var firstLast = user.FirstName + user.LastName;
-                var firstLastLowerCase = firstLast.ToLower();
-
-                // only get users with a first and last name
-                if (user.FirstName != null && user.FirstName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
-                    user.LastName != null && user.LastName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
-                    user.FirstName != null && user.LastName != null && keywordsNOspace == firstLastLowerCase)
+                // Validate user input Search Input
+                foreach (var user in allUsers)
                 {
-                    //allTransactionsViewModel.ApplicationUsers.Add(user);
+                    // remove all white space and to lowercase variables
+                    var keywordsNOspace = String.Concat(keywords.Where(c => !Char.IsWhiteSpace(c))).ToLower();
+                    var firstLast = user.FirstName + user.LastName;
+                    var firstLastLowerCase = firstLast.ToLower();
 
-                    foreach (var transaction in allTransactions)
+                    // only get users with a first and last name
+                    if (user.FirstName != null && user.FirstName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
+                        user.LastName != null && user.LastName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
+                        user.FirstName != null && user.LastName != null && keywordsNOspace == firstLastLowerCase)
                     {
+                        //allTransactionsViewModel.ApplicationUsers.Add(user);
+
+                        foreach (var transaction in allTransactions)
+                        {
                             foreach (var policy in allPolicies)
                             {
                                 if (transaction.CustomerMUID == user.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && transaction.isPaymentComplete == ispaid)
@@ -109,27 +109,35 @@ namespace NJInsurancePlatform.Controllers
                                 }
                             }
 
-                    }
+                        }
 
+                    }
                 }
+
             }
 
+            return View("TransactionSearchResults", allTransactionsViewModel);
         }
-            
-        return View("TransactionSearchResults", allTransactionsViewModel);
-        }        
-        
-        
+
+
         // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
         [HttpPost]
         public async Task<IActionResult> UpdateTransactionStatus(AllTransactionsViewModel model)
         {
             for (int i = 0; i < model.Transactions?.Count; i++)
             {
-                if (model.Transactions[i].isPaymentComplete == true)
+
+                var updatedTransaction = new Transaction()
                 {
-                    _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
-                }
+                    TransactionMUID = model.Transactions[i].TransactionMUID,
+                    CustomerMUID = model.Transactions[i].CustomerMUID,
+                    PolicyMUID = model.Transactions[i].PolicyMUID,
+                    isPaymentComplete = model.Transactions[i].isPaymentComplete,
+                    PaymentAmount = model.Transactions[i].PaymentAmount,
+                    PaymentDate = model.Transactions[i].PaymentDate
+                };
+                _transactionRepository.UpdateTransaction(updatedTransaction);            // Update transactions
+
 
                 if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
 
@@ -142,53 +150,6 @@ namespace NJInsurancePlatform.Controllers
 
             return View("UpdateRecorded", "Administration");
         }
-
-
-
-
-        //// GET PAID TRANSACTIONS "GET REQUEST" ------------------------------------------------------------------------------------------------------
-        //[HttpGet]
-        //public async Task<IActionResult> PaidTransactions()
-        //{
-        //    var transactions = await _transactionRepository.GetTransactions();               // get Transactions from Database
-        //    var model = new AccountManager();
-
-        //    foreach (var transaction in transactions)                                        // populate AccountManager Transactions List
-        //    {
-        //        if (transaction.isPaymentComplete == true)
-        //        {
-        //            model.Transactions?.Add(transaction);
-        //        }
-        //    }
-
-        //    if (model.Transactions?.Count == 0 || model.Transactions == null) return RedirectToAction("NoPaymentsComplete", "Administration");
-
-        //    return View(model);                                                             // Pass AccountManager to View
-        //}
-
-
-        //// GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
-        //[HttpPost]
-        //public async Task<IActionResult> PaidTransactions(AccountManager model)
-        //{
-
-        //    for (int i = 0; i < model.Transactions?.Count; i++)
-        //    {
-        //        if (model.Transactions[i].isPaymentComplete == false)
-        //        {
-        //            _transactionRepository.UpdateTransaction(model.Transactions[i]);            // Update transactions
-        //        }
-
-        //        if (i < (model.Transactions.Count - 1)) continue;                           // If iteration is not complete
-
-        //        else
-        //        {
-        //            _transactionRepository.Save();
-        //        }
-        //    }
-
-        //    return RedirectToAction("UpdateRecorded", "Administration");
-        //}
 
 
 

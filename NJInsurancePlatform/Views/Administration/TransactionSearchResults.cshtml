@@ -21,11 +21,14 @@
 
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].TransactionMUID"></label>
-                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].TransactionMUID">
+                            <input readonly style="width:55%;border:none;text-align:right" asp-for="@Model.Transactions[i].TransactionMUID" value="@Model.Transactions[i].TransactionMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Policies[i].NameOfPolicy"></label>
                             <input readonly style="width:55%;border:none;text-align:right;font-size:30px;"  asp-for="@Model.Policies[i].NameOfPolicy">
+
+                            <!--Policy Number For POST-->
+                            <input hidden style="width:55%;border:none;text-align:right;font-size:30px;"  asp-for="@Model.Transactions[i].PolicyMUID" value="@Model.Transactions[i].PolicyMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].FirstName"></label>
@@ -34,16 +37,19 @@
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.ApplicationUsers[i].LastName"></label>
                             <input readonly style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.ApplicationUsers[i].LastName">
+
+                            <!--Customer Number For POST-->
+                            <input hidden style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].CustomerMUID" value="@Model.Transactions[i].CustomerMUID">
                         </div>
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentAmount"></label>
-                            <input style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].PaymentAmount">
+                            <input style="width:55%;border:none;text-align:right;font-size:30px;" asp-for="@Model.Transactions[i].PaymentAmount" value="@Model.Transactions[i].PaymentAmount">
                         </div>
                         <span asp-validation-for="@Model.Transactions[i].PaymentAmount"></span>
 
                         <div class="unpaid-content-value">
                             <label class="unpaid-content-name" asp-for="@Model.Transactions[i].PaymentDate"></label>
-                            <input placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
+                            <input  placeholder="Enter Date" style="width:55%;border:none;text-align:right;" asp-for="@Model.Transactions[i].PaymentDate">
                         </div>
                         <span asp-validation-for="@Model.Transactions[i].PaymentDate"></span>
 
@@ -55,9 +61,6 @@
                             </label>
                         </div>
                         <div class="unpaid-button-div">
-@*                            <span>
-                                <label class="btn waves-effect #283593 indigo darken-3" asp-for="@Model.Transactions[i].isPaymentComplete">Update Payment</label>
-                            </span>*@
                                 <button class="btn waves-effect #283593 indigo darken-3" type="submit" style="width:50%;border-radius:30px;height:60px;font-size:30px;">Submit</button>
                         </div>
                     </label>
@@ -67,6 +70,8 @@
                 {
                     <div style="width:100%;text-align:center;">
                         <h3>No Records Found</h3>
+                        <span style="font-size:20px;"><a href="/Administration/SearchAllTransactions">Go Back To Search</a></span>
+
                     </div>
                 }
             </div>
@@ -79,9 +84,3 @@
         </div>
     </div>
 </form>
-
-
-
-
-
-
