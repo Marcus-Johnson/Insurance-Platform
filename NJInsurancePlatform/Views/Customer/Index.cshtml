@@ -1,4 +1,7 @@
-﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
+﻿Vustomer/Index
+
+
+@model NJInsurancePlatform.Models.CustomerHomePageVieModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +16,7 @@
     </span>
     <span class="weather-right">
         <h4>Current Balance</h4>
-        <h6>$183.12</h6>
+        <h6>@Model.Policies[0].PolicyTotalAmount</h6>
     </span>
 </div>
 
@@ -26,12 +29,21 @@
             <ul class="tabs" id="tabs-swipe-demo">
                 @for(int i = 0; i < Model.Policies?.Count; i++)
                 {
-                   <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                }
+                        @if (Model.Policies[i]?.Pending == true)
+                        {
+                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
+                        } else{
+                            <li>no active policies</li>
+                        }
+                    }
 
                 </ul>
-                @for(int i = 0; i < Model.Policies?.Count; i++)
+                @for (int i = 0; i < Model.Policies?.Count; i++)
                 {
+                    @if (Model.Policies[i]?.Pending == true)
+                    {
+
+                    
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
                             <!--COLUMN 1-->
@@ -40,71 +52,72 @@
                                     <span><b>Policy Number</b></span>
                                     <span>@Model.Policies[i]?.PolicyMUID</span>
                                 </div>
-                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                        <span><b>Name of Policy</b></span>
-                                        <span>@Model.Policies[i]?.NameOfPolicy</span>
-                                 </div>
-                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Name of Policy</b></span>
-                                          <span>@Model.Policies[i]?.NameOfPolicy</span>
-                                 </div>
-                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Deductible</b></span>
-                                          <span>@Model.Policies[i]?.Deductible</span>
-                                 </div>
-                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Out of Pocket Limit</b></span>
-                                          <span>@Model.Policies[i]?.OutOfPocketLimit</span>
-                                 </div>
-                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                           <span><b>Annual Limit of Coverage</b></span>
-                                           <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
-                                  </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Name of Policy</b></span>
+                                    <span>@Model.Policies[i]?.NameOfPolicy</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Name of Policy</b></span>
+                                    <span>@Model.Policies[i]?.NameOfPolicy</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Deductible</b></span>
+                                    <span>@Model.Policies[i]?.Deductible</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Out of Pocket Limit</b></span>
+                                    <span>@Model.Policies[i]?.OutOfPocketLimit</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Annual Limit of Coverage</b></span>
+                                    <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>                             
+                                </div>
 
-                               
-                                  <!--MAKE A CLAIM BUTTON-->
-                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
 
-                                  <!--MAKE A PAYMENT BUTTON-->
-                                    <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment" asp-action="MakePayment">Make a Payment</a>
-                                  
+                                <!--MAKE A CLAIM BUTTON-->
+                                <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
+
+                                <!--MAKE A PAYMENT BUTTON-->
+                                <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment" asp-action="MakePayment">Make a Payment</a>
+
                             </div>
 
-                                  <!--COLUMN 2-->
-                                  <div class="col s4">
-                                  <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Policy Payment is Due</b></span>
-                                          <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
-                                  </div>
-                                  <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Policy Total Amount</b></span>
-                                          <span>@Model.Policies[i]?.PolicyTotalAmount</span>
-                                  </div>
-                                  <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Policy Paid Off Amount</b></span>
-                                          <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
-                                  </div>
-                                  <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Policy Start Date</b></span>
-                                          <span>@Model.Policies[i]?.PolicyStart_Date</span>
-                                  </div>
-                                  <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                          <span><b>Policy End Date</b></span>
-                                          <span>@Model.Policies[i]?.PolicyEnd_Date</span>
-                                  </div>
-                                  </div>
-                              </div>
-                          </div>               
+                            <!--COLUMN 2-->
+                            <div class="col s4">
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Policy Payment is Due</b></span>
+                                    <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Policy Total Amount</b></span>
+                                    <span>@Model.Policies[i]?.PolicyTotalAmount</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Policy Paid Off Amount</b></span>
+                                    <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Policy Start Date</b></span>
+                                    <span>@Model.Policies[i]?.PolicyStart_Date</span>
+                                </div>
+                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                    <span><b>Policy End Date</b></span>
+                                    <span>@Model.Policies[i]?.PolicyEnd_Date</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 }
+            }
             }
 
             <!--IF THERE ARE NO ACTIVE POLICIES-->
-            @if(Model.Policies.Count == 0 || Model.Policies == null)
+            @*@if(Model.Policies.Count == 0 || Model.Policies == null)
             {
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
                 </div>
-            }
+            }*@
         </div>
 
                 </div>
@@ -211,5 +224,12 @@
 
     <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
 </div>
+
+
+
+customerController
+
+
+  Pending = true,
 
 
