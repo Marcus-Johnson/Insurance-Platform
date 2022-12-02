@@ -15,6 +15,9 @@
     background: linear-gradient(90deg, rgba(40,53,147,1) 36%, rgba(40,176,251,0.7267951858477766) 100%);
 }
 
+.welcome-left {
+}
+
 .weather-right {
     text-align: right;
 }

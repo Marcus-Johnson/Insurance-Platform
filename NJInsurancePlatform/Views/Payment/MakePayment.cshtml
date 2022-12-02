@@ -17,17 +17,17 @@
             <h5 class="col s4 right">@DateTime.Now.ToString("hh:mm tt")</h5>
         </div>
     <ul class="collapsible" style="width: 90%">
-            <li class="active">
+            <li class="">
                 <div class="collapsible-header"><i class="material-icons">credit_card</i>Credit Card Payment</div>
                 <div class="collapsible-body">
                     <div class="row">
-                        <form class="col s12">
+                        <form class="col s12" method="post" asp-controller="Payment" asp-action="MakePayment">
 
                             <!-- Paid Date Label/Input-->
                             <div class="row">
                                 <div class="col s6">
                                     <h6>Paid Date</h6>
-                                    <input asp-for="@Model.Payment.PaidDate" type="text" class="validate">
+                                    <input asp-for="@Model.Payment.PaidDate" type="text" class="validate" placeholder="@DateTime.Now">
                                 </div>
                            
                             <!-- Amount Label/Input-->
@@ -116,28 +116,74 @@
                                 </div>
                             </div>
 
+
+                        @*The Below Items are sending Policy items to the backend, but hides them from customer view in this form.*@
+
+                    <input asp-for="@Model.Policy.PolicyMUID" value="@Model.Policy.PolicyMUID" type="text" readonly hidden placeholder="@Model.Policy.PolicyMUID" />
+                    <input asp-for="@Model.Policy.ProductMUID" value="@Model.Policy.ProductMUID" type="text" readonly hidden placeholder="@Model.Policy.ProductMUID" />
+                    <input asp-for="@Model.Policy.CustomerMUID" value="@Model.Policy.CustomerMUID" type="text" readonly hidden placeholder="@Model.Policy.CustomerMUID" />
+                    <input asp-for="@Model.Policy.NameOfPolicy" value="@Model.Policy.NameOfPolicy" type="text" readonly hidden placeholder="@Model.Policy.NameOfPolicy" />
+                    <input asp-for="@Model.Policy.PolicyOwner" value="@Model.Policy.PolicyOwner" type="text" readonly hidden placeholder="@Model.Policy.PolicyOwner" />
+                    <input asp-for="@Model.Policy.Deductible" value="@Model.Policy.Deductible" type="text" readonly hidden placeholder="@Model.Policy.Deductible" />
+                    <input asp-for="@Model.Policy.OutOfPocketLimit" value="@Model.Policy.OutOfPocketLimit" type="text" readonly hidden placeholder="@Model.Policy.OutOfPocketLimit" />
+                    <input asp-for="@Model.Policy.AnnualLimitOfCoverage" value="@Model.Policy.AnnualLimitOfCoverage" type="text" readonly hidden placeholder="@Model.Policy.AnnualLimitOfCoverage" />
+                    <input asp-for="@Model.Policy.PolicyPaymentisDue" value="@Model.Policy.PolicyPaymentisDue" type="text" readonly hidden placeholder="@Model.Policy.PolicyPaymentisDue" />
+                    <input asp-for="@Model.Policy.PolicyTotalAmount" value="@Model.Policy.PolicyTotalAmount" type="text" readonly hidden placeholder="@Model.Policy.PolicyTotalAmount" />
+                    <input asp-for="@Model.Policy.PolicyPaidOffAmount" value="@Model.Policy.PolicyPaidOffAmount" type="text" readonly hidden placeholder="@Model.Policy.PolicyPaidOffAmount" />
+                    <input asp-for="@Model.Policy.PolicyStart_Date" value="@Model.Policy.PolicyStart_Date" type="text" readonly hidden placeholder="@Model.Policy.PolicyStart_Date" />
+                    <input asp-for="@Model.Policy.PolicyEnd_Date" value="@Model.Policy.PolicyEnd_Date" type="text" readonly hidden placeholder="@Model.Policy.PolicyEnd_Date" />
+                    <input asp-for="@Model.Policy.Pending" value="@Model.Policy.Pending" type="text" readonly hidden placeholder="@Model.Policy.Pending" />
+
+
+                            @*The Below Items are sending Bill items to the backend, but hides them from customer view in this form.*@
+
+                    <input asp-for="@Model.Bill.BillMUID" value="@Model.Bill.BillMUID" type="text" readonly hidden placeholder="@Model.Bill.BillMUID" />
+                    <input asp-for="@Model.Bill.PolicyMUID" value="@Model.Bill.PolicyMUID" type="text" readonly hidden placeholder="@Model.Bill.PolicyMUID" />
+                    <input asp-for="@Model.Bill.PolicyDueDate" value="@Model.Bill.PolicyDueDate" type="text" readonly hidden placeholder="@Model.Bill.PolicyDueDate" />
+                    <input asp-for="@Model.Bill.MinimumPayment" value="@Model.Bill.MinimumPayment" type="text" readonly hidden placeholder="@Model.Bill.MinimumPayment" />
+                    <input asp-for="@Model.Bill.CreatedDate" value="@Model.Bill.CreatedDate" type="text" readonly hidden placeholder="@Model.Bill.CreatedDate" />
+                    <input asp-for="@Model.Bill.Balance" value="@Model.Bill.Balance" type="text" readonly hidden placeholder="@Model.Bill.Balance" />
+                    <input asp-for="@Model.Bill.Status" value="@Model.Bill.Status" type="text" readonly hidden placeholder="@Model.Bill.Status" />
+
+
+
+                            @*The Below Items are sending payment items to the backend, but hides them from customer view in this form.*@
+
+
+                    <input asp-for="@Model.Payment.BillMUID" value="@Model.Payment.BillMUID" type="text" readonly hidden placeholder="@Model.Payment.BillMUID" />
+                    <input asp-for="@Model.Payment.AccountNumber" value="123456789" type="text" readonly hidden placeholder="123456789" />
+                    <input asp-for="@Model.Payment.AdditionalInfo" value="No Additional Info to provide" type="text" readonly hidden placeholder="No Additional Info to provide" />
+                    <input asp-for="@Model.Payment.BankName" value="Commerce Bank" type="text" readonly hidden placeholder="Commerce Bank" />
+                    <input asp-for="@Model.Payment.CheckImage" value="N/A" type="text" readonly hidden placeholder="N/A" />
+                    <input asp-for="@Model.Payment.CheckNumber" value="1983" type="text" readonly hidden placeholder="1983" />
+                    <input asp-for="@Model.Payment.PaymentMethod" value="card" type="text" readonly hidden placeholder="Card" />
+                    <input asp-for="@Model.Payment.RoutingNumber" value="987654321" type="text" readonly hidden placeholder="987654321" />
+
+
                             <!-- Debit or Credit Radio Button-->
                                 <label>
-                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Credit" type="radio" checked/>
+                                    <input asp-for="@Model.Payment.DebitOrCredit" value="Credit" type="radio" checked placeholder="Credit"/>
                                     <span>Credit</span>
                                 </label>
                                 <label>
-                                    <input asp-for="@Model.Payment.DebitOrCredit" name="payMethod" value="Debit" type="radio" />
+                                    <input asp-for="@Model.Payment.DebitOrCredit" value="Debit" type="radio" placeholder="Debit"/>
                                     <span>Debit</span>
                                 </label>
 
                             <!-- Confirm Payment Button-->
-                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                            @*<a class="col s10 btn-large" id="btn">Confirm Payment</a>*@
+                            <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Confirm Payment</button>
+
                         </form>
                     </div>
                 </div>
             </li>
         <li>
-            <li class="">
+            <li class="active">
                 <div class="collapsible-header"><i class="material-icons">account_balance</i>Bank Payment</div>
                 <div class="collapsible-body">
                     <div class="row">
-                        <form class="col s12">
+                                               <form class="col s12" method="post" asp-controller="Payment" asp-action="MakePayment">
 
                             <!-- Bank Name Label/Input-->
                             <div class="row">
@@ -183,14 +229,14 @@
                                 <div class="col s5">
                                     <h6>Check Number</h6>
                                     <label class="truncate">Enter check number as displayed on check</label>
-                                    <input asp-for="@Model.Payment.RoutingNumber" type="number" class="validate">
+                                    <input asp-for="@Model.Payment.CheckNumber" type="number" class="validate">
                                 </div>
 
                             <!-- Check Image Label/Input-->
                                 <div class="col s5">
                                     <h6>Check Image</h6>
                                     <label class="truncate">Provide check image below</label>
-                                    <input asp-for="@Model.Payment.RoutingNumber" type="text" class="validate">
+                                    <input asp-for="@Model.Payment.CheckImage" type="text" class="validate">
                                 </div>
                             </div>
 
@@ -215,7 +261,51 @@
                                     <label for="password">Password</label>
                                 </div>
                             </div>
-                            <a class="col s10 btn-large" id="btn">Confirm Payment</a>
+                            <input asp-for="@Model.Policy.PolicyMUID" value="@Model.Policy.PolicyMUID" type="text" readonly hidden placeholder="@Model.Policy.PolicyMUID" />
+                            <input asp-for="@Model.Policy.ProductMUID" value="@Model.Policy.ProductMUID" type="text" readonly hidden placeholder="@Model.Policy.ProductMUID" />
+                            <input asp-for="@Model.Policy.CustomerMUID" value="@Model.Policy.CustomerMUID" type="text" readonly hidden placeholder="@Model.Policy.CustomerMUID" />
+                            <input asp-for="@Model.Policy.NameOfPolicy" value="@Model.Policy.NameOfPolicy" type="text" readonly hidden placeholder="@Model.Policy.NameOfPolicy" />
+                            <input asp-for="@Model.Policy.PolicyOwner" value="@Model.Policy.PolicyOwner" type="text" readonly hidden placeholder="@Model.Policy.PolicyOwner" />
+                            <input asp-for="@Model.Policy.Deductible" value="@Model.Policy.Deductible" type="text" readonly hidden placeholder="@Model.Policy.Deductible" />
+                            <input asp-for="@Model.Policy.OutOfPocketLimit" value="@Model.Policy.OutOfPocketLimit" type="text" readonly hidden placeholder="@Model.Policy.OutOfPocketLimit" />
+                            <input asp-for="@Model.Policy.AnnualLimitOfCoverage" value="@Model.Policy.AnnualLimitOfCoverage" type="text" readonly hidden placeholder="@Model.Policy.AnnualLimitOfCoverage" />
+                            <input asp-for="@Model.Policy.PolicyPaymentisDue" value="@Model.Policy.PolicyPaymentisDue" type="text" readonly hidden placeholder="@Model.Policy.PolicyPaymentisDue" />
+                            <input asp-for="@Model.Policy.PolicyTotalAmount" value="@Model.Policy.PolicyTotalAmount" type="text" readonly hidden placeholder="@Model.Policy.PolicyTotalAmount" />
+                            <input asp-for="@Model.Policy.PolicyPaidOffAmount" value="@Model.Policy.PolicyPaidOffAmount" type="text" readonly hidden placeholder="@Model.Policy.PolicyPaidOffAmount" />
+                            <input asp-for="@Model.Policy.PolicyStart_Date" value="@Model.Policy.PolicyStart_Date" type="text" readonly hidden placeholder="@Model.Policy.PolicyStart_Date" />
+                            <input asp-for="@Model.Policy.PolicyEnd_Date" value="@Model.Policy.PolicyEnd_Date" type="text" readonly hidden placeholder="@Model.Policy.PolicyEnd_Date" />
+                            <input asp-for="@Model.Policy.Pending" value="@Model.Policy.Pending" type="text" readonly hidden placeholder="@Model.Policy.Pending" />
+
+
+                                @*The Below Items are sending Bill items to the backend, but hides them from customer view in this form.*@
+
+                            <input asp-for="@Model.Bill.BillMUID" value="@Model.Bill.BillMUID" type="text" readonly hidden placeholder="@Model.Bill.BillMUID" />
+                            <input asp-for="@Model.Bill.PolicyMUID" value="@Model.Bill.PolicyMUID" type="text" readonly hidden placeholder="@Model.Bill.PolicyMUID" />
+                            <input asp-for="@Model.Bill.PolicyDueDate" value="@Model.Bill.PolicyDueDate" type="text" readonly hidden placeholder="@Model.Bill.PolicyDueDate" />
+                            <input asp-for="@Model.Bill.MinimumPayment" value="@Model.Bill.MinimumPayment" type="text" readonly hidden placeholder="@Model.Bill.MinimumPayment" />
+                            <input asp-for="@Model.Bill.CreatedDate" value="@Model.Bill.CreatedDate" type="text" readonly hidden placeholder="@Model.Bill.CreatedDate" />
+                            <input asp-for="@Model.Bill.Balance" value="@Model.Bill.Balance" type="text" readonly hidden placeholder="@Model.Bill.Balance" />
+                            <input asp-for="@Model.Bill.Status" value="@Model.Bill.Status" type="text" readonly hidden placeholder="@Model.Bill.Status" />
+
+
+
+                                @*The Below Items are sending payment items to the backend, but hides them from customer view in this form.*@
+
+
+                            <input asp-for="@Model.Payment.BillMUID" value="@Model.Payment.BillMUID" type="text" readonly hidden placeholder="@Model.Payment.BillMUID" />
+                            <input asp-for="@Model.Payment.PaymentMethod" value="Bank" type="text" readonly hidden placeholder="Bank" />
+                            <input asp-for="@Model.Payment.PaidDate" value=@DateTime.Now type="text" readonly hidden placeholder=@DateTime.Now />
+                            <input asp-for="@Model.Payment.Amount" value="@Model.Bill.MinimumPayment" type="text" readonly hidden placeholder="@Model.Bill.MinimumPayment" />
+                            <input asp-for="@Model.Payment.PayerLastName" value="@Model.ApplicationUser.LastName" type="text" readonly hidden placeholder="@Model.ApplicationUser.LastName" />
+                            <input asp-for="@Model.Payment.PayerFirstName" value="@Model.ApplicationUser.FirstName" type="text" readonly hidden placeholder="@Model.ApplicationUser.FirstName" />
+                            <input asp-for="@Model.Payment.CardNumber" value="1234123456785678" type="text" readonly hidden placeholder="1234123456785678" />
+                            <input asp-for="@Model.Payment.ZipCode" value="90210" type="text" readonly hidden placeholder="90210" />
+                            <input asp-for="@Model.Payment.CVV" value="1233" type="text" readonly hidden placeholder="1233" />
+                            <input asp-for="@Model.Payment.CardExpireDate" value=@DateTime.Now type="text" readonly hidden placeholder=@DateTime.Now/>
+                            <input asp-for="@Model.Payment.DebitOrCredit" value="Bank" type="text" readonly hidden placeholder="Bank" />
+
+                            <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Confirm Payment</button>
+
                         </form>
                     </div>
                 </div>

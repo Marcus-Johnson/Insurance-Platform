@@ -20,7 +20,13 @@ namespace NJInsurancePlatform.Models
 
         [ScaffoldColumn(false)]
         [Required(ErrorMessage = "Missing field: Sender MUID")]
-        public Guid SenderMUID { get; set; }
+        public Guid SenderMUID { get; set; }        
+        
+        [Required(ErrorMessage = "Missing field: First Name")]
+        public string FirstName { get; set; }        
+        
+        [Required(ErrorMessage = "Missing field: Last Name")]
+        public string LastName { get; set; }
 
         [Required(ErrorMessage = "Missing field: Message")]
         [StringLength(140)]

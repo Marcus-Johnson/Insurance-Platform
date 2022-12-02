@@ -93,98 +93,7 @@ namespace NJInsurancePlatform.Data
             var prod3 = Guid.NewGuid();
             var prod4 = Guid.NewGuid();
 
-            ////Seed "Admin" Role
-            //builder.Entity<IdentityRole>().HasData(new IdentityRole
-            //{
-            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-            //    Name = "Admin",
-            //    NormalizedName = "ADMIN"
-            //});
-
-            ////Seed "Customer" Role
-            //builder.Entity<IdentityRole>().HasData(new IdentityRole
-            //{
-            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-            //    Name = "Customer",
-            //    NormalizedName = "CUSTOMER"
-            //});
-
-            ////Seed "Beneficiary" Role
-            //builder.Entity<IdentityRole>().HasData(new IdentityRole
-            //{
-            //    Id = "2c5e174e-3b0e-446f-86af-483d56fd7212", // primary key
-            //    Name = "Beneficiary",
-            //    NormalizedName = "BENEFICIARY",
-            //});
-
-
-
-
-            ////Seed the "admin" User to AspNetUsers table
-            //builder.Entity<ApplicationUser>().HasData(
-            //    new ApplicationUser
-            //    {
-            //        Id = "8e445865-a24d-4543-a6c6-9443d048cdb9", // primary key
-            //        UserName = "admin",
-            //        EmailAddress = "admin",
-            //        NormalizedUserName = "ADMIN",
-            //        PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-            //    }
-            //);
-
-            ////Beneficiary
-            //builder.Entity<ApplicationUser>().HasData(
-            //   new ApplicationUser
-            //   {
-            //       Id = "8e445865-a24d-4543-a6c6-9443d048cdb8", // primary key
-            //       UserName = "beneficiary",
-            //       EmailAddress = "beneficiary",
-            //       NormalizedUserName = "BENEFICIARY",
-            //       PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-            //   }
-            //);
-
-            ////Customer
-            //builder.Entity<ApplicationUser>().HasData(
-            //   new ApplicationUser
-            //   {
-            //       Id = "8e445865-a24d-4543-a6c6-9443d048cdb7", // primary key
-            //       UserName = "customer",
-            //       EmailAddress = "customer",
-            //       NormalizedUserName = "CUSTOMER",
-            //       PasswordHash = hasher.HashPassword(null, "Password123@")  // Initial admin password
-            //   }
-            //);
-
-
-
-            ////Seeding the relation between our user and role to AspNetUserRoles table
-            ////Admin
-            //builder.Entity<IdentityUserRole<string>>().HasData(
-            //    new IdentityUserRole<string>
-            //    {
-            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb9"
-            //    }
-            //);
-
-            ////Beneficiary
-            //builder.Entity<IdentityUserRole<string>>().HasData(
-            //    new IdentityUserRole<string>
-            //    {
-            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7212",
-            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb8"
-            //    }
-            //);
-
-            ////Customer
-            //builder.Entity<IdentityUserRole<string>>().HasData(
-            //    new IdentityUserRole<string>
-            //    {
-            //        RoleId = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-            //        UserId = "8e445865-a24d-4543-a6c6-9443d048cdb7"
-            //    }
-            //);
+          
 
             // Products
             builder.Entity<Product>().HasData(
@@ -228,7 +137,7 @@ namespace NJInsurancePlatform.Data
                 new Product
                 {
                     ProductMUID = prod4,
-                    ProductName = "Empoyee Individual",
+                    ProductName = "Employee Individual Health",
                     Description = "Bupka ladna velnup halstus",
                     Price = 1200.98,
                     Deductible = 160.69,
@@ -293,13 +202,13 @@ namespace NJInsurancePlatform.Data
                  PolicyMUID = pol4,
                  ProductMUID = prod4,
                  CustomerMUID = cust4,
-                 NameOfPolicy = "Eye Emarald",
+                 NameOfPolicy = "Employee Individual Health",
                  PolicyOwner = "Leona wilson",
-                 Deductible = 100.25,
-                 OutOfPocketLimit = 999.99,
+                 Deductible = 500.98,
+                 OutOfPocketLimit = 2099.99,
                  AnnualLimitOfCoverage = 14999.99,
                  PolicyPaymentisDue = false,
-                 PolicyTotalAmount = 35000,
+                 PolicyTotalAmount = 150000,
                  PolicyPaidOffAmount = 0,
                  PolicyStart_Date = DateTime.Now,
                  PolicyEnd_Date = DateTime.Now,
@@ -518,24 +427,30 @@ namespace NJInsurancePlatform.Data
                 {
                     GroupRoomMessageMUID = groupMes1,
                     GroupRoomMUID = group1,
-                    SenderMUID = groupSend1,
-                    Message = "Hello, And Welcome",
+                    SenderMUID = cust1,
+                    Message = "Hello, How Are you?",
+                    FirstName = "Patrick",
+                    LastName = "Leon",
                     CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
                     GroupRoomMessageMUID = groupMes2,
                     GroupRoomMUID = group2,
-                    SenderMUID = groupSend2,
-                    Message = "yes, How Can I Help you?",
+                    SenderMUID = cust2,
+                    Message = "Good Morning!",
+                    FirstName = "Eric",
+                    LastName = "Daley",
                     CreatedDate = DateTime.Now
                 },
                 new GroupRoomMessage
                 {
                     GroupRoomMessageMUID = groupMes3,
                     GroupRoomMUID = group3,
-                    SenderMUID = groupSend2,
+                    SenderMUID = cust3,
                     Message = "I have a question About My Policy",
+                    FirstName = "Nikosi",
+                    LastName = "Thom",
                     CreatedDate = DateTime.Now
 
                 },
@@ -543,8 +458,10 @@ namespace NJInsurancePlatform.Data
                 {
                     GroupRoomMessageMUID = groupMes4,
                     GroupRoomMUID = group4,
-                    SenderMUID = groupSend4,
+                    SenderMUID = cust4,
                     Message = "Sure, What would you like to know?",
+                    FirstName = "Leona",
+                    LastName = "Wilson",
                     CreatedDate = DateTime.Now
 
                 }
