@@ -122,7 +122,7 @@ namespace NJInsurancePlatform.Controllers
             var identityUser = User.Identity?.Name;
             var user = await _userManager.FindByNameAsync(identityUser);
             var roomMessages = await _iGroupRoomMessageRepository.GetMessages();
-            var messageByRoomID = roomMessages.FindAll(m => m.GroupRoomMUID.ToString() == Id);
+            var messageByRoomID = roomMessages.FindAll(m => m.GroupRoomMUID.ToString() == Id);  // Assign All Columns Within This Room ID
             var allRooms = await _roomRepository.GetGroupRooms();
             var roomName = allRooms.FirstOrDefault(n => n.GroupMUID.ToString() == Id);
 
@@ -160,6 +160,8 @@ namespace NJInsurancePlatform.Controllers
                     GroupRoomMUID = model.groupRoom.GroupMUID,
                     SenderMUID = (Guid)user.CustomerMUID,
                     Message = model.groupRoomMessage.Message,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
                     CreatedDate = DateTime.Now
                 };
 
