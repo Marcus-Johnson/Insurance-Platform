@@ -51,7 +51,7 @@ namespace NJInsurancePlatform.Interfaces
 
         public void Save()
         {
-            _databaseContext.SaveChanges();
+             _databaseContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)

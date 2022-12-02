@@ -30,14 +30,13 @@ body {
 main {
     padding-bottom: 50px;
     width:100%;
-    padding:30px;
+    padding:0px;
 
 }
 
 footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    position: fixed;
+    bottom: 0px;
     width: 100%;
 }
 
