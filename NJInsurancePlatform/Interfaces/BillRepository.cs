@@ -49,9 +49,9 @@ namespace NJInsurancePlatform.Interfaces
             }
         }
 
-        public async void Save()
+        public void Save()
         {
-            await _databaseContext.SaveChangesAsync();
+            _databaseContext.SaveChanges();
         }
 
         protected virtual void Dispose(bool disposing)

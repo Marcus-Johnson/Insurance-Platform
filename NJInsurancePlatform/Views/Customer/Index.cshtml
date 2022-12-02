@@ -1,4 +1,7 @@
-﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
+﻿Vustomer/Index
+
+
+@model NJInsurancePlatform.Models.CustomerHomePageVieModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -14,7 +17,7 @@
     </span>
     <span class="weather-right">
         <h4>Current Balance</h4>
-        <h6>$183.12</h6>
+        <h6>@Model.Policies[0].PolicyTotalAmount</h6>
     </span>
 </div>
 
@@ -39,7 +42,6 @@
                 {
                     if (Model.Policies[i].Pending != false)
                     {
-
                     <div id="@($"swipe-{i}")" class="col s12">
                         <div class="row">
                             <!--COLUMN 1-->
@@ -113,7 +115,7 @@
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
                 </div>
-            }
+            }*@
         </div>
 
                 </div>
@@ -181,7 +183,7 @@
                         <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
                         <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
                         <td style="text-align:center">@Model.Transactions[i].PaymentDate</td> 
-                        <td style="text-align:center">@Model.PolicyNames?[i]</td>
+                        @*<td style="text-align:center">@Model.PolicyNames?[i]</td>*@
                     </tr>     
                 }
             }
@@ -220,5 +222,12 @@
 
     <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
 </div>
+
+
+
+customerController
+
+
+  Pending = true,
 
 
