@@ -101,7 +101,7 @@ namespace NJInsurancePlatform.Controllers
                 PolicyPaymentisDue = true,
                 PolicyTotalAmount = model.Product.PolicyTotalAmount,
                 PolicyPaidOffAmount = 0,
-                Pending = true,
+                Pending = false,
             };
 
             policyRepository.InsertPolicy(policy);
