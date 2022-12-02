@@ -118,6 +118,7 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<ActionResult> PopulateMessages(string Id)
         {
+
             var identityUser = User.Identity?.Name;
             var user = await _userManager.FindByNameAsync(identityUser);
             var roomMessages = await _iGroupRoomMessageRepository.GetMessages();
