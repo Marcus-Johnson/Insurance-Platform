@@ -4,10 +4,10 @@
     ViewData["Title"] = "Create an Account";
 
     //Gender Options
-    string[] genders = {"Female", "Male", "Other" };
+    string[] genders = { "Female", "Male", "Other" };
 
     //Primary Account Holder Options
-    bool[] bools = { true, false};
+    bool[] bools = { true, false };
 }
 <!--CSS-->
 <style>
@@ -20,137 +20,144 @@
     nav {
         display: none;
     }
+
+
 </style>
 
 
-<div class="indigo lighten-1" style="margin-top:-2rem; margin-bottom: 1rem; padding: 1rem; width:100vw">
-    <h3 class="header center white-text">@ViewData["Title"]</h3>
-</div>
-
 <div class="container">
+    <form method="post" class="col s12">
+        <div asp-validation-summary="All" style="color:red;"></div>
 
-    <div class="row">
+        <ul class="collapsible popout">
+            <!-- Personal Information -->
+            <li class="active">
+                <div class="collapsible-header"><i class="material-icons">contact_page</i>Personal Information</div>
+                <div class="collapsible-body">
 
-        <div class="row" style="border: 2px solid; border-radius: 10px">
+                    <div class="row" style="margin: 10px">
+                        <div class="input-field col s6">
+                            <label asp-for="FirstName">First Name</label>
+                            <input asp-for="FirstName" type="text" class="validate">
+                            <span asp-validation-for="FirstName" style="color:red"></span>
+                        </div>
 
-            <form method="post" class="col s12">
-                <div asp-validation-summary="All" style="color:red;"></div>
-                <div class="row" style="margin: 10px">
-                    <div class="input-field col s12">
-                        <label asp-for="FirstName">First Name</label>
-                        <input asp-for="FirstName" type="text" class="validate">
-                        <span asp-validation-for="FirstName" style="color:red"></span>
-                    </div>
+                        <div class="input-field col s6">
+                            <label asp-for="LastName">Last Name</label>
+                            <input asp-for="LastName" type="text" class="validate">
+                            <span asp-validation-for="LastName" style="color:red"></span>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="LastName">Last Name</label>
-                        <input asp-for="LastName" type="text" class="validate">
-                        <span asp-validation-for="LastName" style="color:red"></span>                 
-                    </div>
+                        <div class="input-field col s6">
+                            <label asp-for="DOB">Date of Birth</label>
+                            <input type="text" asp-for="DOB" id="DOB" type="text" class="validate">
+                            <span asp-validation-for="DOB" style="color:red"></span>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="DOB">Date of Birth</label>
-                        <input type="text" asp-for="DOB" id="DOB" type="text" class="validate">
-                        <span asp-validation-for="DOB" style="color:red"></span>                 
-                    </div>
+                        <div class="input-field col s6">
+                            <label asp-for="SSN">Social Security</label>
+                            <input type="text" asp-for="SSN" class="validate">
+                            <span asp-validation-for="SSN" style="color:red"></span>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="UserName">Email Address</label>
-                        <input type="email" asp-for="UserName" class="validate">
-                        <span asp-validation-for="UserName" style="color:red"></span>                                  
-                    </div>
+                        <div class="input-field col s6">
+                            <label asp-for="LicenseNumber">License Number</label>
+                            <input asp-for="LicenseNumber" type="text" class="validate">
+                            <span asp-validation-for="LicenseNumber" style="color:red"></span>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="PasswordHash">Password</label>
-                        <input asp-for="PasswordHash" type="password" class="validate">
-                        <span asp-validation-for="PasswordHash" style="color:red"></span>                                  
-                    </div>
+                        <div class="input-field col s6">
+                            <label asp-for="PasswordHash">Password</label>
+                            <input asp-for="PasswordHash" type="password" class="validate">
+                            <span asp-validation-for="PasswordHash" style="color:red"></span>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="PhoneNumber">Phone Number</label>
-                        <input type="number" asp-for="PhoneNumber" class="validate">
-                        <span asp-validation-for="PhoneNumber" style="color:red"></span>                                  
-                    </div>
+                        <div class="input-field col s6">
+                            <label class="unpaid-content-name" asp-for="Gender"></label><br /><br />
+                            <div style="display:flex;align-items:center;justify-content:flex-start;">
+                                @for (int i = 0; i < genders.Count(); i++)
+                                {
+                                    <label>
+                                        <input type="radio" asp-for="Gender" value="@genders[i]" />
+                                        <span>@genders[i]</span>&nbsp; &nbsp; &nbsp;
+                                    </label>
+                                }
+                                <span asp-validation-for="Gender" style="color:red"></span>
+                            </div>
+                        </div>
 
-                    <div class="input-field col s12">
-                        <label asp-for="SSN">Social Security</label>
-                        <input type="text" asp-for="SSN" class="validate">
-                        <span asp-validation-for="SSN" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="LicenseNumber">License Number</label>
-                        <input asp-for="LicenseNumber" type="text" class="validate">
-                        <span asp-validation-for="LicenseNumber" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label class="unpaid-content-name" asp-for="Gender"></label><br /><br />
-                        <div style="display:flex;align-items:center;justify-content:flex-start;">
-                            @for(int i = 0; i < genders.Count(); i++)
-                            {
-                            <label>
-                               <input type="radio" asp-for="Gender"  value="@genders[i]" /> 
-                               <span>@genders[i]</span>&nbsp; &nbsp; &nbsp;
-                            </label>                              
-                            }
-                        <span asp-validation-for="Gender" style="color:red"></span>                                  
+                        <div class="input-field col s6">
+                            <label class="unpaid-content-name" asp-for="IsPrimaryPolicyHolder"></label><br /><br />
+                            <div style="display:flex;align-items:center;justify-content:flex-start;">
+                                @for (int i = 0; i < bools.Count(); i++)
+                                {
+                                    <label>
+                                        <input type="radio" asp-for="IsPrimaryPolicyHolder" value="@bools[i]" />
+                                        <span>@bools[i]</span>&nbsp; &nbsp; &nbsp;
+                                    </label>
+                                }
+                                <span asp-validation-for="IsPrimaryPolicyHolder" style="color:red"></span>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="CurrentAddress">Address</label>
-                        <input asp-for="CurrentAddress" type="text" class="validate">
-                        <span asp-validation-for="CurrentAddress" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <input asp-for="CurrentCity" type="text" class="validate">
-                        <label asp-for="CurrentCity">City</label>
-                        <span asp-validation-for="CurrentCity" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="CurrentState">State</label>
-                        <input asp-for="CurrentState" type="text" class="validate">
-                        <span asp-validation-for="CurrentState" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="CurrentZipcode">Zip Code</label>
-                        <input asp-for="CurrentZipcode" type="text" class="validate">
-                        <span asp-validation-for="CurrentZipcode" style="color:red"></span>                                  
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label asp-for="CurrentEmployer">Current Employer</label>
-                        <input asp-for="CurrentEmployer" type="text" class="validate">
-                        <span asp-validation-for="CurrentEmployer" style="color:red"></span>  
-                        
-                        <!-- CREATED DATE-->
-                        <input hidden type="text" asp-for="CreatedDate" value="@DateTime.Now"/>
-
-                    </div>
-
-                    <div class="input-field col s12">
-                        <label class="unpaid-content-name" asp-for="IsPrimaryPolicyHolder"></label><br /><br />
-                        <div style="display:flex;align-items:center;justify-content:flex-start;">
-                            @for(int i = 0; i < bools.Count(); i++)
-                            {
-                            <label>
-                               <input type="radio" asp-for="IsPrimaryPolicyHolder"  value="@bools[i]" /> 
-                               <span>@bools[i]</span>&nbsp; &nbsp; &nbsp;
-                            </label>                              
-                            }
-                        <span asp-validation-for="IsPrimaryPolicyHolder" style="color:red"></span>                                  
-                        </div>
-                    </div>
-
-                    <button type="submit" class="waves-effect waves-light btn" id="btn">Sign Up</button>
-                    <a asp-controller="Home" asp-action="Login">or Login</a>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
+            </li>
+
+            <!-- Contact Information -->
+            <li>
+                <div class="collapsible-header"><i class="material-icons">contact_mail</i>Contact Information</div>
+                <div class="collapsible-body">
+                    <div class="row" style="margin: 10px">
+                        
+                        <div class="input-field col s6">
+                            <label asp-for="UserName">Email Address</label>
+                            <input type="email" asp-for="UserName" class="validate">
+                            <span asp-validation-for="UserName" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <label asp-for="PhoneNumber">Phone Number</label>
+                            <input type="number" asp-for="PhoneNumber" class="validate">
+                            <span asp-validation-for="PhoneNumber" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label asp-for="CurrentAddress">Address</label>
+                            <input asp-for="CurrentAddress" type="text" class="validate">
+                            <span asp-validation-for="CurrentAddress" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <input asp-for="CurrentCity" type="text" class="validate">
+                            <label asp-for="CurrentCity">City</label>
+                            <span asp-validation-for="CurrentCity" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <label asp-for="CurrentState">State</label>
+                            <input asp-for="CurrentState" type="text" class="validate">
+                            <span asp-validation-for="CurrentState" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s4">
+                            <label asp-for="CurrentZipcode">Zip Code</label>
+                            <input asp-for="CurrentZipcode" type="text" class="validate">
+                            <span asp-validation-for="CurrentZipcode" style="color:red"></span>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <label asp-for="CurrentEmployer">Current Employer</label>
+                            <input asp-for="CurrentEmployer" type="text" class="validate">
+                            <span asp-validation-for="CurrentEmployer" style="color:red"></span>
+
+                            <!-- CREATED DATE-->
+                            <input hidden type="text" asp-for="CreatedDate" value="@DateTime.Now" />
+                        </div>
+                        <button type="submit" class="waves-effect waves-light btn" id="btn">Sign Up</button>
+                        <a asp-controller="Home" asp-action="Login">or Login</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </form>
 </div>

@@ -1,19 +1,33 @@
 ﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
-
+@using Weather.ApiWrapper;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    var weatherWrapper = new WeatherApi();
 
+    var result = await weatherWrapper.GetResult();
+
+    var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+    var weatherJson = JsonSerializer.Deserialize<Root>(result, options);
+}
 @*<-- User welcome & Weather-->*@
-<div class="welcome-container">
+<div class="welcome-container" style="clear:right">
     <span class="welcome-left">
 
-        <h3>Welcome @User.Identity.Name</h3>
-        <h6 class="time">@DateTime.Now.ToString("hh:mm tt")</h6>
+        <h4 class="white-text">Welcome @User.Identity.Name</h4>
+        <h6 class="white-text">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
-        <h4>Current Balance</h4>
-        <h6>$183.12</h6>
+        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
+        <div style="position: relative; float:left; padding: 10px">
+        <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
+        <p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
+        
+        </div>
     </span>
 </div>
 
