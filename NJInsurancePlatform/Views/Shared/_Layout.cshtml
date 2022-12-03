@@ -1,9 +1,14 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
 
 @*@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
-*@
+@{
+    var identityUser = User.Identity.Name;
+    var applicationUser = await userManager.FindByNameAsync(identityUser);
+
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +48,8 @@
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {
-@*                                <span>@Model.ApplicationUser.FirstName</span>
-*@                            }
+                                <span>@applicationUser.FirstName</span>
+                           }
                             else
                             {
                                 <span>My Profile</span>
