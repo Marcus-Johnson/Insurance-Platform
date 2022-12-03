@@ -1,0 +1,29 @@
+﻿
+footer {
+    display: none;
+}
+
+.sent-message-content-current {
+    width: fit-content;
+    border: 1px solid silver;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    border-top-right-radius: 30px;
+    padding: 10px 50px 10px 50px;
+    background-color: dimgrey;
+    box-shadow: 3px 3px 3px rgba(5, 5, 5, .3);
+    color: white;
+}
+
+.sent-message-content-other {
+    width: fit-content;
+    border: 1px solid silver;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px 50px 10px 50px;
+    background-color: #1976D2;
+    box-shadow: 3px 3px 3px rgba(5, 5, 5, .3);
+    color: white;
+}
