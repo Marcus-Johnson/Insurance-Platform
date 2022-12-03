@@ -3,13 +3,14 @@
 @inject SignInManager<ApplicationUser> signInManager;
 @inject UserManager<ApplicationUser> userManager;
 
-@*@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
-*@
-
 @{
-    var identityUser = User.Identity.Name;
-    var applicationUser = await userManager.FindByNameAsync(identityUser);
+    ApplicationUser applicationUser = new ApplicationUser();
 
+    if(User.Identity.Name != null)
+    {
+        var identityUser = User.Identity.Name;
+        applicationUser = await userManager.FindByNameAsync(identityUser);        
+    }
 }
 
 <!DOCTYPE html>
