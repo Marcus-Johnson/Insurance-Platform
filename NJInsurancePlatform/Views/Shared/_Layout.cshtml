@@ -2,8 +2,8 @@
 
 @inject SignInManager<ApplicationUser> signInManager;
 
-@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
-
+@*@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
+*@
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +43,8 @@
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {
-                                <span>@Model.ApplicationUser.FirstName</span>
-                            }
+@*                                <span>@Model.ApplicationUser.FirstName</span>
+*@                            }
                             else
                             {
                                 <span>My Profile</span>

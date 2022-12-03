@@ -7,11 +7,12 @@
     var RoomName = TempData["RoomName"];
 
 }
-<style>
-    footer {
-        display: none;
-    }
-</style>
+
+<header>
+    <link rel="stylesheet" href="~/css/Message.css" />
+</header>
+
+
 <form method="post" asp-controller="GroupRoom">
 <div class="row" id="border" style="height: 70vh; width: 95vw">
 
@@ -35,35 +36,55 @@
         <h4 class="center indigo-text">@RoomName</h4>
 
         <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
-            @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
+              @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
             {
-                <div class="individual-message-container" style="display:flex;justify-content:center;">
+               if(Model.groupRoomMessages[i].FirstName == Model.applicationUser.FirstName)
+               {
+                    <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;width:100%;">
 
-                    <div class="sent-message-content" style="width:fit-content; border:1px solid silver;border-radius:80px;padding:10px 50px 10px 50px;background-color:#1976D2;color:white">
-
-                        <div class="sender-firstname">
-                            <span style="font-size:25px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                        <div style="display:flex;flex-direction:column;">
+                            <!--NAME DIV-->
+                            <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
+                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                            </div>
+                            <!--MESSAGE DIV-->
+                            <div class="sent-message-content-current">
+                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                            </div>
+                            <!--CREATED DATE DIV-->
+                            <div class="message-date-created" style="display:flex;justify-content:center;">
+                                <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
+                            </div>
                         </div>
 
-                        <p style="font-size:18px;line-height:.7;">
-                            <span style="font-size:40px">@Model.groupRoomMessages[i].Message</span>
-                        </p>
-
-                        <div class="message-date-created">
-                            <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
-                        </div>
                     </div>
+               }                 
+               
+               if(Model.groupRoomMessages[i].FirstName != Model.applicationUser.FirstName)
+               {
+                    <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;width:100%;">
 
+                        <div style="display:flex;flex-direction:column;">
+                            <!--NAME DIV-->
+                            <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
+                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                            </div>
+                            <!--MESSAGE DIV-->
+                            <div class="sent-message-content-other">
+                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                            </div>
+                            <!--CREATED DATE DIV-->
+                            <div class="message-date-created" style="display:flex;justify-content:center;">
+                                <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
+                            </div>
+                            </div>
 
-                </div>
+                    </div>
+               }  
 
-
-@*                <p class="right indigo lighten-5" id="messages">
-                    The overflow property specifies whether to clip
-                    content or to add scrollbars when an element's
-                    content is too big to fit in a specified area.
-                </p>*@
             }
+
+
         </div>
 
         <div id="message-box">
