@@ -4,8 +4,6 @@
 @inject UserManager<ApplicationUser> userManager;
 
 @*@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
-*@
-
 @{
     var identityUser = User.Identity.Name;
     var applicationUser = await userManager.FindByNameAsync(identityUser);
