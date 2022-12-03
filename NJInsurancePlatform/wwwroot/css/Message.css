@@ -10,7 +10,7 @@ footer {
     border-bottom-left-radius: 40px;
     border-top-right-radius: 30px;
     padding: 10px 50px 10px 50px;
-    background-color: #1976D2;
+    background-color: dimgrey;
     box-shadow: 3px 3px 3px rgba(5, 5, 5, .3);
     color: white;
 }
