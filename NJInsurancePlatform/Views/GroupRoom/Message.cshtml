@@ -1,17 +1,13 @@
 ﻿@using System.Diagnostics
 @model NJInsurancePlatform.Models.MessagesViewModel
+
 @{
     ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     var RoomID = TempData["RoomId"];
     var RoomName = TempData["RoomName"];
-
 }
-
-<header>
-    <link rel="stylesheet" href="~/css/Message.css" />
-</header>
-
 
 <form method="post" asp-controller="GroupRoom">
 <div class="row" id="border" style="height: 70vh; width: 95vw">
@@ -38,6 +34,7 @@
         <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
               @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
             {
+
                if(Model.groupRoomMessages[i].FirstName == Model.applicationUser.FirstName)
                {
                     <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;width:100%;">
@@ -78,7 +75,6 @@
                                 <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
                             </div>
                             </div>
-
                     </div>
                }  
 
@@ -138,4 +134,12 @@
             <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
         </form>
     </div>
-</div>
+
+<script>
+    //$('#messages-wrapper').scrollTop($('#messages-wrapper')[0].scrollHeight);
+
+var element = document.getElementById('messages-wrapper');
+element.scrollTop = element.scrollHeight;
+
+console.log(element.scrollTop)
+</script>
