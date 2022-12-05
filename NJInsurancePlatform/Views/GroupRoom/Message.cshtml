@@ -1,19 +1,16 @@
 ﻿@using System.Diagnostics
 @model NJInsurancePlatform.Models.MessagesViewModel
+
 @{
     ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
     var RoomID = TempData["RoomId"];
     var RoomName = TempData["RoomName"];
-
 }
-<style>
-    footer {
-        display: none;
-    }
-</style>
+
 <form method="post" asp-controller="GroupRoom">
-<div class="row" id="border" style="height: 70vh; width: 95vw">
+<div class="row" id="border" style="height: 65vh; width: 95vw">
 
     <div class="col s3" style="height: 93%">
         <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
@@ -35,35 +32,55 @@
         <h4 class="center indigo-text">@RoomName</h4>
 
         <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
-            @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
+              @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
             {
-                <div class="individual-message-container" style="display:flex;justify-content:center;">
 
-                    <div class="sent-message-content" style="width:fit-content; border:1px solid silver;border-radius:80px;padding:10px 50px 10px 50px;background-color:#1976D2;color:white">
+               if(Model.groupRoomMessages[i].FirstName == Model.applicationUser.FirstName)
+               {
+                    <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;width:100%;">
 
-                        <div class="sender-firstname">
-                            <span style="font-size:25px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                        <div style="display:flex;flex-direction:column;">
+                            <!--NAME DIV-->
+                            <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
+                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                            </div>
+                            <!--MESSAGE DIV-->
+                            <div class="sent-message-content-current">
+                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                            </div>
+                            <!--CREATED DATE DIV-->
+                            <div class="message-date-created" style="display:flex;justify-content:center;">
+                                <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
+                            </div>
                         </div>
 
-                        <p style="font-size:18px;line-height:.7;">
-                            <span style="font-size:40px">@Model.groupRoomMessages[i].Message</span>
-                        </p>
-
-                        <div class="message-date-created">
-                            <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
-                        </div>
                     </div>
+               }                 
+               
+               if(Model.groupRoomMessages[i].FirstName != Model.applicationUser.FirstName)
+               {
+                    <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;width:100%;">
 
+                        <div style="display:flex;flex-direction:column;">
+                            <!--NAME DIV-->
+                            <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
+                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                            </div>
+                            <!--MESSAGE DIV-->
+                            <div class="sent-message-content-other">
+                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                            </div>
+                            <!--CREATED DATE DIV-->
+                            <div class="message-date-created" style="display:flex;justify-content:center;">
+                                <span style="font-size:13px">@Model.groupRoomMessages[i].CreatedDate</span>
+                            </div>
+                            </div>
+                    </div>
+               }  
 
-                </div>
-
-
-@*                <p class="right indigo lighten-5" id="messages">
-                    The overflow property specifies whether to clip
-                    content or to add scrollbars when an element's
-                    content is too big to fit in a specified area.
-                </p>*@
             }
+
+
         </div>
 
         <div id="message-box">
@@ -75,7 +92,7 @@
             @if(RoomName != null)
             {
             <div class="input-field" id="message-input">
-                <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height: 100%"></textarea>
+                <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height:100%;font-size:30px"></textarea>
                 <label asp-for="@Model.groupRoomMessage.Message">Message</label>
             </div>
             <div id="button-wrapper">
@@ -117,4 +134,13 @@
             <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
         </form>
     </div>
-</div>
+
+<script>
+    //$('#messages-wrapper').scrollTop($('#messages-wrapper')[0].scrollHeight);
+
+var element = document.getElementById('messages-wrapper');
+element.scrollTop = element.scrollHeight;
+
+console.log(element.scrollTop)
+</script>
+

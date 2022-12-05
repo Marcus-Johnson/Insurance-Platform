@@ -1,9 +1,17 @@
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
 
-@model NJInsurancePlatform.Models.CustomerHomePageVieModel;
+@{
+    ApplicationUser applicationUser = new ApplicationUser();
 
+    if(User.Identity.Name != null)
+    {
+        var identityUser = User.Identity.Name;
+        applicationUser = await userManager.FindByNameAsync(identityUser);        
+    }
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/weatherAPI.css" />
+    <link rel="stylesheet" href="~/css/Message.css" />
     <link rel="stylesheet" href="~/NJInsurancePlatform.styles.css" /> <!-- CSS Isolation Global Link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 </head>
@@ -43,8 +52,8 @@
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {
-                                <span>@Model.ApplicationUser.FirstName</span>
-                            }
+                                <span>@applicationUser.FirstName</span>
+                           }
                             else
                             {
                                 <span>My Profile</span>
@@ -196,6 +205,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/js/Message.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
