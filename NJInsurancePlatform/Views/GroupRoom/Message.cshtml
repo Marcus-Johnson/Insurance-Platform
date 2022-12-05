@@ -10,7 +10,7 @@
 }
 
 <form method="post" asp-controller="GroupRoom">
-<div class="row" id="border" style="height: 70vh; width: 95vw">
+<div class="row" id="border" style="height: 65vh; width: 95vw">
 
     <div class="col s3" style="height: 93%">
         <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
@@ -92,7 +92,7 @@
             @if(RoomName != null)
             {
             <div class="input-field" id="message-input">
-                <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height: 100%"></textarea>
+                <textarea type="text" required asp-for="@Model.groupRoomMessage.Message" id="message-textarea" class="materialize-textarea"style="height:100%;font-size:30px"></textarea>
                 <label asp-for="@Model.groupRoomMessage.Message">Message</label>
             </div>
             <div id="button-wrapper">
@@ -143,3 +143,4 @@ element.scrollTop = element.scrollHeight;
 
 console.log(element.scrollTop)
 </script>
+
