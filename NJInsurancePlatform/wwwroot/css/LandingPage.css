@@ -5,7 +5,7 @@
     justify-content:center;
     font-family:sans-serif;
     width:100%;
-    height:100%;
+    height:90%;
     position:absolute;
     top:60px;
     left:0px;
@@ -23,10 +23,9 @@
         "content"
 }
 
-.landingpage-header{
-    grid-area:header;
-    background-color:dodgerblue;
-
+.landingpage-header {
+    grid-area: header;
+    background-color: #1072ba;
 }
 
 .landingpage-header-content{
@@ -35,13 +34,13 @@
     align-items:center;
     padding-left:3%;
     padding-right:3%;
-    border:3px solid black;
+    border-bottom:3px solid black;
     width:100%;
     height:100%;
 }
 
 @font-face {
-    font-family: "Helvetica Neue";
+    font-family: "Helvetica";
     font-weight: 100;
     src: url(helveticaneue-ultrathin.woff);
 }
@@ -70,15 +69,76 @@
 }
 
 .landingpage-content-left{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
     width:50%;
-    border:1px solid black;
+    padding-top:3%;
+/*    border:1px solid black;
+*/}
+
+.landingpage-content-left-header-begin {
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: -4px;
+    color:orangered;
 }
 
-.landingpage-content-right{
-    display:flex;
-    align-items:center;
-    width:50%;
-    background-image:url('/images/family_and_doctor.png');
-    background-repeat:no-repeat;
-    border:1px solid black;
+.landingpage-content-left-header-end {
+    font-size: 60px;
+    font-weight: 700;
+    letter-spacing: -4px;
+    color: #1072ba;
 }
+
+.landingpage-content-left-content{
+    font-family:Verdana;
+    font-size:30px;
+    font-weight:500;
+}
+
+.landingpage-content-left-bullet-points-container{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    padding-bottom:5%;
+/*    border:1px solid black;
+*/
+}
+
+.landingpage-content-left-bullet-points {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 30px;
+    font-weight: 600;
+    color: #1072ba;
+}
+
+.landingpage-content-left-button-container{
+    width:100%;
+    height:20%;
+/*    border:1px solid black;
+*/}
+
+.landingpage-content-left-button{
+    width:400px;
+    height:70px;
+    font-size:40px;
+    font-weight:600;
+    color:white;
+    border:1px solid black;
+    background-color:orange;
+    box-shadow:3px 3px 3px rgba(5, 5, 5, .3);
+}
+
+.landingpage-content-right {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    background-image: url('/images/family-and-doctor-left.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+/*    border: 1px solid black;
+*/}
