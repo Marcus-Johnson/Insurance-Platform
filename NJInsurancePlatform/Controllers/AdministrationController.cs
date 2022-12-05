@@ -76,6 +76,7 @@ namespace NJInsurancePlatform.Controllers
         public async Task<IActionResult> EditRole(string Id)
         {
             var role = await roleManager.FindByIdAsync(Id);
+            System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>> RoleName" + role.Name);
 
             if (role == null)
             {
@@ -88,7 +89,6 @@ namespace NJInsurancePlatform.Controllers
                 Id = role.Id,
                 RoleName = role.Name,
             };
-
             // Because we iterating Registerd Users As Well As Roles, We Need To enable "Multiple Results" ---> Add "MultipleActiveResultSets=true" To Connect String
             foreach (var user in userManager.Users)                                                       // Loop through Registered "Users"
             {
@@ -163,15 +163,15 @@ namespace NJInsurancePlatform.Controllers
 
         // EDIT USER ROLES "GET REQUEST" ------------------------------------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> EditUsersInRole(string roleId)                                       // Search role by id
+        public async Task<IActionResult> EditUsersInRole(string Id)                                       // Search role by id
         {
-            ViewBag.roleId = roleId;                                                                          // store roleId in "ViewBag" To acces in the view
+            ViewBag.roleId = Id;                                                                          // store roleId in "ViewBag" To acces in the view
             
-            var role = await roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(Id);
 
             if(role == null)
             {
-                ViewBag.ErrorMessage = $"Role with id of {roleId} NOT FOUND";
+                ViewBag.ErrorMessage = $"Role with id of {Id} NOT FOUND";
             }
 
             var model = new List<UserRoleViewModel>();                                                        // instantiate a list of "UserRoleViewModel" Objects
@@ -201,14 +201,14 @@ namespace NJInsurancePlatform.Controllers
 
         // EDIT USER ROLES "POST REQUEST" ----------------------------------------------------------------------------------------
         [HttpPost]                                                                                            // when submit is clicked from "EditUsersInRole" View Model, the full list of iterated objects is passed
-        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string roleId)        // Note: "string roleId" Parameter is coming from the url
+        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string Id)        // Note: "string roleId" Parameter is coming from the url
 
         {
-            var role = await roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(Id);
 
             if(role == null)
             {
-                ViewBag.ErrorMessage = $"Role with Id {roleId} Cannot BE FOUND";
+                ViewBag.ErrorMessage = $"Role with Id {Id} Cannot BE FOUND";
                 return View("NotFound");
             }
 
