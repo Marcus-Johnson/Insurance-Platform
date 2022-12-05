@@ -5,7 +5,7 @@
     @*Use View Bag To Get Id Number*@
 }
 
-<form class="col s12" method="post" action="#">
+<form class="col s12" method="post" asp-controller="Administration" asp-action="EditUsersInRole">
     <div>
         <div>
             @for (int i = 0; i < Model.Count; i++)
@@ -24,8 +24,10 @@
         </div>
         <div>
             <button class="btn waves-effect waves-light" type="submit">Update</button>
-            <button class="btn waves-effect waves-light red" asp-action="EditRole" asp-route-Id="@roleId">Cancel</button>
-        </div>
+            <a class="btn waves-effect waves-light red" asp-controller="Administration" asp-action="EditRole" asp-route-Id="@roleId">Cancel</a>
+
+@*            <a class="btn waves-effect waves-light red" asp-controller="Administration" asp-action="EditRole" asp-route-Id="@roleId">Cancel</a>
+*@        </div>
     </div>
 
 </form>
