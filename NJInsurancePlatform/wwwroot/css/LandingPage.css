@@ -1,0 +1,84 @@
+﻿.landingpage-container{
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: minmax(70px, auto);
+    justify-content:center;
+    font-family:sans-serif;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:60px;
+    left:0px;
+    z-index: -6;
+    grid-template-areas:
+        "header"
+        "content"
+        "content"
+        "content"
+        "content"
+        "content"
+        "content"
+        "content"
+        "content"
+        "content"
+}
+
+.landingpage-header{
+    grid-area:header;
+    background-color:dodgerblue;
+
+}
+
+.landingpage-header-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding-left:3%;
+    padding-right:3%;
+    border:3px solid black;
+    width:100%;
+    height:100%;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    font-weight: 100;
+    src: url(helveticaneue-ultrathin.woff);
+}
+
+.landingpage-left-title{
+    font-size: 50px;
+    font-weight:900;
+    letter-spacing:-2px;
+    color:white;
+}
+
+.landingpage-right-title{
+    font-family:'Helvetica Neue';
+    font-size: 50px;
+    font-weight: lighter;
+    letter-spacing:-2px;
+    color:white;
+}
+
+.landingpage-content{
+    grid-area:content;
+    display:flex;
+    height:100%;
+    padding-left:3%;
+    padding-right:3%;
+}
+
+.landingpage-content-left{
+    width:50%;
+    border:1px solid black;
+}
+
+.landingpage-content-right{
+    display:flex;
+    align-items:center;
+    width:50%;
+    background-image:url('/images/family_and_doctor.png');
+    background-repeat:no-repeat;
+    border:1px solid black;
+}
