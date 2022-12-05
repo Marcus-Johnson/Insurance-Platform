@@ -1,26 +1,54 @@
-﻿.landingpage-container{
-    display:grid;
-    grid-template-columns: 1fr;
+.landingpage-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     grid-auto-rows: minmax(70px, auto);
-    justify-content:center;
-    font-family:sans-serif;
-    width:100%;
-    height:90%;
-    position:absolute;
-    top:60px;
-    left:0px;
+    justify-content: center;
+    font-family: sans-serif;
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    top: 60px;
+    left: 0px;
     z-index: -6;
     grid-template-areas:
-        "header"
-        "content"
-        "content"
-        "content"
-        "content"
-        "content"
-        "content"
-        "content"
-        "content"
-        "content"
+        "header header"
+        "content content"
+        "content content"
+        "content content"
+        "content content"
+        "content content"
+        "content content"
+        "content content"
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .landingpage-content-right {
+        display: none !important;
+    }
+    .landingpage-header {
+        display: none !important;
+    }
+    .landingpage-content-left{
+        width:100% !important;
+    }      
+    .landingpage-container{
+        height:40% !important;
+        width:80% !important;
+    }
+    .landingpage-content-left-header-begin {
+        font-size: 40px !important;
+    }    
+    .landingpage-content-left-header-end{
+        font-size:40px !important;
+    }
+    .landingpage-content-left-button{
+        width:60% !important;
+        font-size:20px !important;
+    }
+    .landingpage-content-left-bullet-points{
+        font-size:20px !important;
+    }
 }
 
 .landingpage-header {
