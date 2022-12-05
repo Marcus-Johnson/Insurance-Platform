@@ -3,6 +3,10 @@ footer {
     display: none;
 }
 
+#messages-wrapper{
+
+}
+
 .sent-message-content-current {
     width: fit-content;
     border: 1px solid silver;
