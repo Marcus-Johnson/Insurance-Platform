@@ -175,37 +175,44 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string Id)                                       // Search role by id
         {
-            ViewBag.roleId = Id;                                                                          // store roleId in "ViewBag" To acces in the view
-            
-            var role = await roleManager.FindByIdAsync(Id);
-
-            if(role == null)
+            if (Id != null)
             {
-                ViewBag.ErrorMessage = $"Role with id of {Id} NOT FOUND";
-            }
+                ViewBag.roleId = Id;                                                                          // store roleId in "ViewBag" To acces in the view
 
-            var model = new List<UserRoleViewModel>();                                                        // instantiate a list of "UserRoleViewModel" Objects
+                var role = await roleManager.FindByIdAsync(Id);
 
-            foreach(var user in userManager.Users)                                                            // create "UserRoleViewModel" Object for each user
-            {
-                var userRoleViewModel = new UserRoleViewModel
+                if (role == null)
                 {
-                    Userid = user.Id,
-                    userName = user.UserName,
-                };
-
-                if(await userManager.IsInRoleAsync(user, role.Name))                                          // access if user is in role
-                {
-                    userRoleViewModel.IsSelected = true;
-                }
-                else
-                {
-                    userRoleViewModel.IsSelected = false;
+                    ViewBag.ErrorMessage = $"Role with id of {Id} NOT FOUND";
                 }
 
-                model.Add(userRoleViewModel);                                                                 // after "IsSelected" status is accessed, add to "model" list.
+                var model = new List<UserRoleViewModel>();                                                        // instantiate a list of "UserRoleViewModel" Objects
+
+                foreach (var user in userManager.Users)                                                            // create "UserRoleViewModel" Object for each user
+                {
+                    var userRoleViewModel = new UserRoleViewModel
+                    {
+                        Userid = user.Id,
+                        userName = user.UserName,
+                    };
+
+                    if (await userManager.IsInRoleAsync(user, role.Name))                                          // access if user is in role
+                    {
+                        userRoleViewModel.IsSelected = true;
+                    }
+                    else
+                    {
+                        userRoleViewModel.IsSelected = false;
+                    }
+
+                    model.Add(userRoleViewModel);                                                                 // after "IsSelected" status is accessed, add to "model" list.
+                }
+                return View(model);
+            } else
+            {
+                return RedirectToAction("Index", "Home");                                          //If Nothing is selected, redirect to current role Edit page View
             }
-            return View(model);                                                                               // pass "model" list to the view to display "checked" or "unchecked"
+            // pass "model" list to the view to display "checked" or "unchecked"
         }
 
 
