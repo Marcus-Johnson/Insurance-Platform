@@ -54,6 +54,12 @@ namespace NJInsurancePlatform.Controllers
                 Bill = getBillbyID,
             };
 
+            // If No Bill Exists Redirect To index
+            if(paymentViewModel.Bill == null)
+            {
+                return RedirectToAction("Index", "Customer");
+            }
+
             return View(paymentViewModel);
         }
 
