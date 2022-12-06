@@ -49,7 +49,7 @@ namespace NJInsurancePlatform.Models
         [DisplayName("Current City")]
         public string? CurrentCity { get; set; }
 
-        [StringLength(20)]
+        [StringLength(10)]
         [DisplayName("Current Zipcode")]
         public string? CurrentZipcode { get; set; }
 

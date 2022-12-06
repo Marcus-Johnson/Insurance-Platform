@@ -21,10 +21,11 @@ namespace NJInsurancePlatform.Controllers
         private readonly IProductRepository productRepository;
         private readonly ICustomerRepository customerRepository;
         private readonly iClaimRepository ClaimRepository;
+        private readonly iBillRepository BillRepository;
 
         public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
             IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository, 
-            ICustomerRepository customerRepository, iClaimRepository ClaimRepository)
+            ICustomerRepository customerRepository, iClaimRepository ClaimRepository, iBillRepository billRepository)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -33,31 +34,42 @@ namespace NJInsurancePlatform.Controllers
             this.productRepository = productRepository;
             this.customerRepository = customerRepository;
             this.ClaimRepository = ClaimRepository;
+            this.BillRepository = billRepository;
         }
 
 
         public async Task<IActionResult> Index()
         {
 
+            var allBills = await BillRepository.GetBills();                                         // Get Policies
             var allPolicies = await policyRepository.GetPolicies();                                         // Get Policies
             var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
             var findPolicyByCustomerMUID = allPolicies.FindAll(p => p.CustomerMUID == user.CustomerMUID);   //Find All policies With That CustomerMUID
             var allTransactions = await transactionRepository.GetTransactions();
             var findTransactionByCustomerMUID = allTransactions.FindAll(t => t.CustomerMUID == user.CustomerMUID);
-            
+
             CustomerHomePageVieModel customerHomePageVieModel = new CustomerHomePageVieModel();
 
             // Add Policies To Customer List Items
-            foreach(var policy in findPolicyByCustomerMUID)
+            foreach (var policy in findPolicyByCustomerMUID)
             {
+                foreach (var bill in allBills)
+                {
+                    if (bill.PolicyMUID == policy.PolicyMUID)
+                    {
+                        customerHomePageVieModel.Bills.Add(bill);
+                    }
+                }
                 customerHomePageVieModel.Policies?.Add(policy);
                 customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
 
             }
+
             customerHomePageVieModel.ApplicationUser = user;
+
             // Add Transactions To customer List Items
-            foreach(var transaction in findTransactionByCustomerMUID)
+            foreach (var transaction in findTransactionByCustomerMUID)
             {
                 customerHomePageVieModel.Transactions?.Add(transaction);
             }
