@@ -266,7 +266,7 @@ namespace NJInsurancePlatform.Data
                     MinimumPayment = 123.99,
                     CreatedDate = DateTime.Now,
                     Balance = 799.34,
-                    Status = "status",
+                    Status = "unpaid",
                 },
                 new Bill
                 {
@@ -276,7 +276,7 @@ namespace NJInsurancePlatform.Data
                     MinimumPayment = 283.99,
                     CreatedDate = DateTime.Now,
                     Balance = 509.34,
-                    Status = "status",
+                    Status = "unpaid",
                 },
                 new Bill
                 {
@@ -286,7 +286,7 @@ namespace NJInsurancePlatform.Data
                     MinimumPayment = 129.09,
                     CreatedDate = DateTime.Now,
                     Balance = 109.34,
-                    Status = "status",
+                    Status = "unpaid",
                 },
                 new Bill
                 {
@@ -296,7 +296,7 @@ namespace NJInsurancePlatform.Data
                     MinimumPayment = 449.09,
                     CreatedDate = DateTime.Now,
                     Balance = 278.34,
-                    Status = "status",
+                    Status = "unpaid",
                 }
             );
 
