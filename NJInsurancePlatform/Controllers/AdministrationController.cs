@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
+using System.Data;
 using System.Diagnostics;
 
 namespace NJInsurancePlatform.Controllers
@@ -79,25 +80,35 @@ namespace NJInsurancePlatform.Controllers
 
             if (role == null)
             {
-                ViewBag.ErrorMessage = $"the role with id {Id} was not found";
-                return View("notfound");
-            }
+                var role = await roleManager.FindByIdAsync(Id);
+                System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>> RoleName" + role.Name);
 
-            var model = new EditRoleModelView()        
-            {
-                Id = role.Id,
-                RoleName = role.Name,
-            };
-            // Because we iterating Registerd Users As Well As Roles, We Need To enable "Multiple Results" ---> Add "MultipleActiveResultSets=true" To Connect String
-            foreach (var user in userManager.Users)                                                       // Loop through Registered "Users"
-            {
-
-                if (await userManager.IsInRoleAsync(user, role.Name))                                     //  Check if 'user' is assigned to given 'role'
+                if (role == null)
                 {
-                    model.Users.Add(user.UserName);                                                       // Add user to the "EditRoleModel.Users" collection
-                }   
+                    ViewBag.ErrorMessage = $"the role with id {Id} was not found";
+                    return View("notfound");
+                }
+
+                var model = new EditRoleModelView()
+                {
+                    Id = role.Id,
+                    RoleName = role.Name,
+                };
+                // Because we iterating Registerd Users As Well As Roles, We Need To enable "Multiple Results" ---> Add "MultipleActiveResultSets=true" To Connect String
+                foreach (var user in userManager.Users)                                                       // Loop through Registered "Users"
+                {
+
+                    if (await userManager.IsInRoleAsync(user, role.Name))                                     //  Check if 'user' is assigned to given 'role'
+                    {
+                        model.Users.Add(user.UserName);                                                       // Add user to the "EditRoleModel.Users" collection
+                    }
+                }
+                return View(model);
+            } else
+            {
+                return RedirectToAction("Index", "Home");                                          //If Nothing is selected, redirect to current role Edit page View
             }
-            return View(model);
+
         }
 
 
