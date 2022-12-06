@@ -5,7 +5,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
 {
     public interface iBillRepository : IDisposable
     {
-        Task<IEnumerable<Bill>> GetBills();
+        Task<List<Bill>> GetBills();
 
         Task<Bill> GetBillsByID(Guid BillMUID);
 
