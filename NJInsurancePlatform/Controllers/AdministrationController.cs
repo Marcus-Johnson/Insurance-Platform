@@ -76,7 +76,9 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string Id)
         {
-            if (Id!=null)
+            var role = await roleManager.FindByIdAsync(Id);
+
+            if (role == null)
             {
                 var role = await roleManager.FindByIdAsync(Id);
                 System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>>>>> RoleName" + role.Name);

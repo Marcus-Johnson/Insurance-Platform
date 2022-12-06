@@ -7,6 +7,8 @@
         public List<Beneficiary>? Beneficiaries { get; set; }
         public List<string>? PolicyNames  { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
+        public List<Claim> Claims { get; set; }
+        public Claim Claim { get; set; }
         public CustomerHomePageVieModel()
         {
             this.Policies = new List<Policy>();
@@ -14,6 +16,7 @@
             this.PolicyNames = new List<string>();
             this.Beneficiaries = new List<Beneficiary>();
             this.ApplicationUser = new ApplicationUser();
+            this.Claims = new List<Claim>();
         }
         public string? ClaimUserDescription { get; set; }
     }
