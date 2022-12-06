@@ -48,7 +48,7 @@ namespace NJInsurancePlatform.Models
 
         [Required(ErrorMessage = "Missing - Zip Code")]
         [RegularExpression("^[0-9]*$")]
-        [StringLength(5)]
+        [StringLength(10)]
         [DisplayName("Zip Code")]
         public string? ZipCode { get; set; }
 
