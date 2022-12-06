@@ -81,7 +81,7 @@
                                     </div>
 
                                     <!--MAKE A CLAIM BUTTON-->
-                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1">Make a Claim</button>
+                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="@($"#modal{i}")">Make a Claim</button>
 
                                     <!--MAKE A PAYMENT BUTTON-->
                                     <a class="waves-effect waves-light btn btn-large white" id="btn" href="/Payment/MakePayment">Make a Payment</a>
@@ -128,9 +128,14 @@
     </div>
 </section>
 
+    @for (int i = 0; i < Model.Policies.Count; i++)
+    {
+        
+    
 <div>
     <!-- Modal Structure -->
-    <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
+
+    <div id="@($"modal{i}")" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
         <form method="post" asp-controller="Customer" asp-action="CreateClaim">
             <div class="modal-content">
                 <div class="row">
@@ -143,10 +148,18 @@
                     </ul>
                     <br />
                     commented out above is the dropdown*@
-                    <input readonly placeholder="@Model.Policies[0].PolicyMUID" type="text" asp-for="@Model.Policies[0].PolicyMUID">
+
+@*                    <input readonly placeholder="@Model.Policies[0].PolicyMUID" type="text" asp-for="@Model.Policies[0].PolicyMUID">
                     <label for="PolicyMUID">Policy ID</label>
                     <input readonly placeholder="@Model.Policies[0].CustomerMUID" type="text" asp-for="@Model.Policies[0].CustomerMUID" />
-                    <label for="CustomerMUID">Customer MUID</label>
+                    <label for="CustomerMUID">Customer MUID</label>   *@                 
+
+                    <input readonly value="@Model.Policies[i].PolicyMUID" type="text" asp-for="@Model.Claim.PolicyMUID" style="font-size:20px;color:#83888e;">
+                    <label asp-for="@Model.Claim.PolicyMUID">Policy ID</label>
+                    <input readonly value="@Model.Policies[i].CustomerMUID" type="text" asp-for="@Model.Claim.CustomerMUID" style="font-size:20px;color:#83888e;"/>
+                    <label asp-for="@Model.Claim.CustomerMUID">Customer MUID</label>                        
+                    
+
                     @*<input readonly placeholder=@Guid.NewGuid() type="text" for="ClaimMUID" />
                     <label for="ClaimMUID">Claim MUID</label>*@
                 </div>
@@ -155,8 +168,8 @@
                     <label for="DateOfClaim">Date of Claim</label>*@
                 </div>
                 <div class="row">
-                    <input placeholder="Description" type="text" asp-for="ClaimUserDescription">
-                    <label for="ClaimUserDescription">Description</label>
+                    <input required placeholder="Description" type="text" asp-for="@Model.Claim.ClaimUserDescription" style="font-size:20px;color:white;">
+                    <label asp-for="@Model.Claim.ClaimUserDescription">Description</label>
                 </div>
             </div>
             <button type="submit" class="waves-effect waves-light btn" id="btn">Submit</button>
@@ -165,7 +178,7 @@
     </div>
 </div>
 
-
+}
 
 <!-- Transactions Table -->
 <div class="row">

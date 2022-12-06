@@ -135,17 +135,38 @@ namespace NJInsurancePlatform.Controllers
         {
             return View();
         }
+        
+        // PREVIOUS CODE
+        //[HttpPost]
+        //public IActionResult CreateClaim(CustomerHomePageVieModel model)
+        //{
+        //    var claim = new Claim
+        //    {
+        //        ClaimMUID = Guid.NewGuid(),
+        //        PolicyMUID = model.Policies[0].PolicyMUID.ToString(),
+        //        CustomerMUID = model.Policies[0].CustomerMUID.ToString(),
+        //        ClaimUserDescription = model.ClaimUserDescription,
+        //        DateOfClaim = DateTime.Now
+        //    };
 
+        //    ClaimRepository.InsertClaim(claim);
+        //    ClaimRepository.Save();
+        //    return RedirectToAction("Index", "Home");
 
+        //}        
+        
+
+        // NEW CODE
         [HttpPost]
         public IActionResult CreateClaim(CustomerHomePageVieModel model)
         {
+
             var claim = new Claim
             {
                 ClaimMUID = Guid.NewGuid(),
-                PolicyMUID = model.Policies[0].PolicyMUID.ToString(),
-                CustomerMUID = model.Policies[0].CustomerMUID.ToString(),
-                ClaimUserDescription = model.ClaimUserDescription,
+                PolicyMUID = model.Claim.PolicyMUID.ToString(),
+                CustomerMUID = model.Claim.CustomerMUID.ToString(),
+                ClaimUserDescription = model.Claim.ClaimUserDescription,
                 DateOfClaim = DateTime.Now
             };
 

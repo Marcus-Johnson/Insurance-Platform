@@ -15,7 +15,7 @@
     <div class="col s3" style="height: 93%">
         <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
      
-
+        <!--Group Rooms-->
         <div class="collection" style="height: 92%; overflow: auto">
             @for (int i = 0; i < Model.groupRooms?.Count; i++)
             {
@@ -31,10 +31,11 @@
     <div class="col s9" style="height: 94%; width: 75%">
         <h4 class="center indigo-text">@RoomName</h4>
 
+        <!--Messages By Selected Room-->
         <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
               @for (int i = 0; i < Model.groupRoomMessages.Count; i++)
             {
-
+               <!--Messege Position Dependent on current User-->
                if(Model.groupRoomMessages[i].FirstName == Model.applicationUser.FirstName)
                {
                     <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-end;width:100%;">
@@ -57,6 +58,7 @@
                     </div>
                }                 
                
+               <!--Messege Position Dependent on current User-->
                if(Model.groupRoomMessages[i].FirstName != Model.applicationUser.FirstName)
                {
                     <div class="individual-message-container" style="display:flex;flex-direction:column;justify-content:center;align-items:flex-start;width:100%;">
@@ -83,12 +85,13 @@
 
         </div>
 
+        <!--Message is Sent To database With These Attributes-->
         <div id="message-box">
             <input type="text" hidden readonly asp-for="@Model.groupRoomMessage.GroupRoomMessageMUID" value="@Guid.NewGuid()"/>
             <input type="text" hidden readonly asp-for="@Model.groupRoom.GroupMUID" value="@RoomID"/>
             <input type="text" hidden readonly asp-for="@Model.groupRoomMessage.SenderMUID" />
 
-
+            <!--Display Send Button If Room is Selected-->
             @if(RoomName != null)
             {
             <div class="input-field" id="message-input">
@@ -113,7 +116,7 @@
 </div>
 </form>
 
-    <!-- Modal Structure -->
+    <!-- Modal Structure To Add Group Room -->
     <div id="modal1" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
         <form method="post" asp-controller="GroupRoom" asp-action="CreateGroup">
             <div class="modal-content">
@@ -136,7 +139,7 @@
     </div>
 
 <script>
-    //$('#messages-wrapper').scrollTop($('#messages-wrapper')[0].scrollHeight);
+//$('#messages-wrapper').scrollTop($('#messages-wrapper')[0].scrollHeight);
 
 var element = document.getElementById('messages-wrapper');
 element.scrollTop = element.scrollHeight;
