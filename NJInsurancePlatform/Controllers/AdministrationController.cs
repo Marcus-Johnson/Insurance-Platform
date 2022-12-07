@@ -10,7 +10,7 @@ namespace NJInsurancePlatform.Controllers
 {
 
     //[Authorize(Roles = "Admin")] // NEED TO CREAT ROLE THEN RENABLE
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public partial class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -29,6 +29,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         // CREATE ROLES "GET REQUEST"
+        [Authorize(Roles = "Admin")]
         [HttpGet]                                                                                         // Routes user to create Role login (If Authorized)
         public IActionResult CreateRole()
         {
@@ -36,6 +37,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         // GET ROLES "POST REQUEST" ------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpPost]                                                                                        // Post to database
         public async Task <IActionResult> CreateRole(CreateRoleViewModel model)                           // Binding did not work in this context
         {
@@ -61,8 +63,9 @@ namespace NJInsurancePlatform.Controllers
             return View(model);
         }
 
-        
+
         // GET ROLES "GET REQUEST" --------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         //[Authorize(Roles = "Admin")]
         public IActionResult GetRoles()                                                                   // Method to get all roles
@@ -105,6 +108,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // EDIT ROLES "POST REQUEST" ----------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleModelView model)
         {
@@ -135,6 +139,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // DELETE ROLES "GET REQUEST" ---------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> DeleteRole(string id)
         {
@@ -164,6 +169,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // EDIT USER ROLES "GET REQUEST" ------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string Id)                                       // Search role by id
         {
@@ -209,6 +215,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // EDIT USER ROLES "POST REQUEST" ----------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpPost]                                                                                            // when submit is clicked from "EditUsersInRole" View Model, the full list of iterated objects is passed
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel> model, string Id)        // Note: "string roleId" Parameter is coming from the url
 
