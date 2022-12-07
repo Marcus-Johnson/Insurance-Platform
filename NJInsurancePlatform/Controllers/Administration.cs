@@ -10,6 +10,7 @@ namespace NJInsurancePlatform.Controllers
     public partial class AdministrationController
     {
         // GET PAID TRANSACTIONS "GET REQUEST" ------------------------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> SearchAllTransactions()
         {
@@ -18,6 +19,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> TransactionSearch(string keywords, bool ispaid, bool getall)
         {
@@ -121,6 +123,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> UpdateTransactionStatus(AllTransactionsViewModel model)
         {
