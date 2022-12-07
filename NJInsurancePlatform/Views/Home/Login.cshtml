@@ -1,6 +1,6 @@
 ﻿@model NJInsurancePlatform.Models.LoginViewModel
 @{
-    ViewData["Title"] = "User Login";
+    //ViewData["Title"] = "User Login";
 }
 
 <style>
@@ -22,9 +22,9 @@
     .login-container{
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        padding-top: 5%;
+        padding-top: 2%;
     }
     .login-input-row{
         display:flex;
@@ -48,6 +48,7 @@
 
 
 <div class="login-container">
+    <div style="font-size:30px;font-weight:700;color:#1072ba">LOGIN</div>
     <div class="login-box">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>

@@ -77,6 +77,7 @@ namespace NJInsurancePlatform.Controllers
         [HttpGet]
         public async Task<IActionResult> EditRole(string Id)
         {
+            if (Id == null) return Content("RETURN TO EDIT ROLES DASHBOARD AND CLICK ON A ROLE TO EDIT");
             var role = await roleManager.FindByIdAsync(Id);
 
             if (role == null)

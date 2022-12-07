@@ -7,26 +7,30 @@
 @{
     var weatherWrapper = new WeatherApi();
 
-    var result = await weatherWrapper.GetResult();
+    //var result = await weatherWrapper.GetResult();   // RENABLE FOR WEATHER API
 
     var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-    var weatherJson = JsonSerializer.Deserialize<Root>(result, options);
+    //var weatherJson = JsonSerializer.Deserialize<Root>(result, options);
 }
 @*<-- User welcome & Weather-->*@
-<div class="welcome-container" style="clear:right">
+<div class="welcome-container" style="clear:right; padding-left:2rem;">
     <span class="welcome-left">
         <h4 class="white-text">Welcome, @Model.ApplicationUser.FirstName</h4>
         <h6 class="white-text">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
     <span class="weather-right">
-        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
-        <div style="position: relative; float:left; padding: 10px">
-            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
-            <p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
-        </div>
+        @*RE-ENABLE BELOW FOR WEATHER API*@
+@*        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
+*@        <div style="position: relative; float:left; padding: 10px">
+@*            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
+*@            
+@*<p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
+*@
+        @*RE-ENABLE ABOVE FOR WEATHER API*@
+</div>
     </span>
 </div>
 
@@ -147,34 +151,16 @@
     <div id="@($"modal{i}")" class="modal bottom-sheet" style="padding:1rem; background: rgba(10, 50, 100, 0.7)">
         <form method="post" asp-controller="Customer" asp-action="CreateClaim">
             <div class="modal-content">
-                <div class="row">
-                    @*<a style="width:25%; margin: 1%; border-radius: 40px;color:purple; font-weight:600" class='dropdown-trigger btn btn-large white waves-effect waves-light' href='#' data-target='dropdown1'>My Policies  ^</a>
-                    <ul id='dropdown1' class='dropdown-content'>
-                    <label asp-for="PolicyMUID" hidden></label>
-                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID"/>6B29FC40-CA47-1067-B31D-00DD010662DA</li>
-                    <li class="divider" tabindex="-1"></li>
-                    <li asp-for="PolicyMUID"><input readonly type="text" asp-for="PolicyMUID" />6B29FC40-CA47-1067-B31D-4MJ7F5HG7JNM</li>
-                    </ul>
-                    <br />
-                    commented out above is the dropdown*@
-
-@*                    <input readonly placeholder="@Model.Policies[0].PolicyMUID" type="text" asp-for="@Model.Policies[0].PolicyMUID">
-                    <label for="PolicyMUID">Policy ID</label>
-                    <input readonly placeholder="@Model.Policies[0].CustomerMUID" type="text" asp-for="@Model.Policies[0].CustomerMUID" />
-                    <label for="CustomerMUID">Customer MUID</label>   *@                 
+                <div class="row">              
 
                     <input readonly value="@Model.Policies[i].PolicyMUID" type="text" asp-for="@Model.Claim.PolicyMUID" style="font-size:20px;color:#83888e;">
                     <label asp-for="@Model.Claim.PolicyMUID">Policy ID</label>
                     <input readonly value="@Model.Policies[i].CustomerMUID" type="text" asp-for="@Model.Claim.CustomerMUID" style="font-size:20px;color:#83888e;"/>
                     <label asp-for="@Model.Claim.CustomerMUID">Customer MUID</label>                        
                     
-
-                    @*<input readonly placeholder=@Guid.NewGuid() type="text" for="ClaimMUID" />
-                    <label for="ClaimMUID">Claim MUID</label>*@
                 </div>
                 <div class="row">
-                    @*<input readonly placeholder=@DateTime.Now.ToString() type="text" for="DateOfClaim">
-                    <label for="DateOfClaim">Date of Claim</label>*@
+
                 </div>
                 <div class="row">
                     <input required placeholder="Description" type="text" asp-for="@Model.Claim.ClaimUserDescription" style="font-size:20px;color:white;">
@@ -200,7 +186,7 @@
                 <th style="text-align:center">Payment Amount</th>
                 <th style="text-align:center">Payment complete</th>
                 <th style="text-align:center">Payment Date</th>
-                <th style="text-align:center">Policy MUID</th>
+                <th style="text-align:center">Policy Name</th>
             </tr>
         </thead>
         <tbody>
@@ -213,7 +199,7 @@
                         <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
                         <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
                         <td style="text-align:center">@Model.Transactions[i].PaymentDate</td>
-                        @*<td style="text-align:center">@Model.PolicyNames?[i]</td>*@
+                        <td style="text-align:center">@Model.PolicyNames?[i]</td>
                     </tr>
                 }
             }
@@ -238,9 +224,15 @@
     }
 </div>
 
+<div style="padding-right:2rem">
 
 <!-- Dropdown Trigger -->
 <a class='dropdown-trigger btn' id="btn" href='#' data-target='beneficiaries-dropdown'>View All Beneficiaries</a>
+
+    <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
+    <a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>
+    <a href="/Home/FAQ" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">FAQ</a>
+    <a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>
 
 <!-- Dropdown Structure -->
 <ul id='beneficiaries-dropdown' class='dropdown-content'>
@@ -250,11 +242,11 @@
 </ul>
 
 
-<a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
-<a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>
+
 
 <div class="fixed-action-btn">
     <a class="btn-floating btn-large indigo" asp-controller="Home" asp-action="Message" target="">
         <i class="large material-icons">chat</i>
     </a>
+</div>
 </div>
