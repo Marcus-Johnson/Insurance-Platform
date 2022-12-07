@@ -1,0 +1,44 @@
+﻿body {
+    overflow-x: hidden;
+}
+
+.FAQSearchContainer {
+    color: white;
+    background-color: #5c6bc0;
+    font-family: 'Lucida Sans';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    margin-top: -25px;
+}
+
+#searchBar {
+    background-color: white;
+    width: 1500px;
+    border-radius: 10px;
+    text-indent: 10px;
+}
+
+::-webkit-input-placeholder {
+    text-indent: 10px;
+}
+
+:-moz-placeholder {
+    text-indent: 10px;
+}
+
+.qAndAContainer {
+    margin-top: 20px;
+}
+
+.collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: 'Lucida Sans';
+}
+
+.collapsible-body span {
+    font-family: 'Franklin Gothic Medium';
+}
