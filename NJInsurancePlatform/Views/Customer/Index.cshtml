@@ -39,6 +39,8 @@
                 <ul class="tabs" id="tabs-swipe-demo">
                     @for (int i = 0; i < Model.Policies?.Count; i++)
                     {
+                        <!--SHOW SWIPE LABEL-->
+
                         if (Model.Policies[i].Pending == false)
                         {
                             <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
@@ -49,6 +51,7 @@
                 </ul>
                 @for (int i = 0; i < Model.Policies?.Count; i++)
                 {
+                    <!--SHOW SWIPE BODY-->
                     if (Model.Policies[i].Pending == false)
                     {
                         <div id="@($"swipe-{i}")" class="col s12">
@@ -59,10 +62,7 @@
                                         <span><b>Policy Number</b></span>
                                         <span>@Model.Policies[i]?.PolicyMUID</span>
                                     </div>
-                                @*    <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                        <span><b>Name of Policy</b></span>
-                                        <span>@Model.Policies[i]?.NameOfPolicy</span>
-                                    </div>*@
+
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Name of Policy</b></span>
                                         <span>@Model.Policies[i]?.NameOfPolicy</span>
@@ -82,12 +82,20 @@
 
                                     <!--MAKE A CLAIM BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="@($"#modal{i}")">Make a Claim</button>
-
-                                    @if(Model.Bills.Count != 0 && Model.Bills[i].Status != "Paid")
+                                    @if(Model.Bills != null)
                                     {
-                                        <!--MAKE A PAYMENT BUTTON-->
-                                        <a class="waves-effect waves-light btn btn-large white" id="btn" href="/Payment/MakePayment">Make a Payment</a>
-                                    }                                    </div>
+                                        for(int j = 0; j < Model.Bills.Count; j++)
+                                        {
+                                            if(Model.Bills[j].Status != "Paid")
+                                            {
+                                            <!--MAKE A PAYMENT BUTTON-->
+                                            <a class="waves-effect waves-light btn btn-large white" id="btn" href="/Payment/MakePayment">Make a Payment</a>
+                                              
+                                            }
+                                                                                    }                                           
+                                    }
+                         
+                                    </div>
 
                                 <!--COLUMN 2-->
                                 <div class="col s4">
