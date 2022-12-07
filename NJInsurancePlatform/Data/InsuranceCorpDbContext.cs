@@ -159,11 +159,12 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     OutOfPocketLimit = 999.99,
                     AnnualLimitOfCoverage = 14999.99,
-                    PolicyPaymentisDue = true,
+                    PolicyPaymentisDue = false,
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
                     PolicyEnd_Date = DateTime.Now,
+                    Pending = false,
                 },
                 new Policy
                 {
@@ -175,11 +176,13 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     OutOfPocketLimit = 999.99,
                     AnnualLimitOfCoverage = 14999.99,
-                    PolicyPaymentisDue = true,
+                    PolicyPaymentisDue = false,
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
                     PolicyEnd_Date = DateTime.Now,
+                    Pending = false,
+
                 },
                 new Policy
                 {
@@ -191,11 +194,13 @@ namespace NJInsurancePlatform.Data
                     Deductible = 100.25,
                     OutOfPocketLimit = 999.99,
                     AnnualLimitOfCoverage = 14999.99,
-                    PolicyPaymentisDue = true,
+                    PolicyPaymentisDue = false,
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
                     PolicyEnd_Date = DateTime.Now,
+                    Pending = false,
+
                 },
              new Policy
              {
@@ -207,11 +212,13 @@ namespace NJInsurancePlatform.Data
                  Deductible = 500.98,
                  OutOfPocketLimit = 2099.99,
                  AnnualLimitOfCoverage = 14999.99,
-                 PolicyPaymentisDue = true,
+                 PolicyPaymentisDue = false,
                  PolicyTotalAmount = 150000,
                  PolicyPaidOffAmount = 0,
                  PolicyStart_Date = DateTime.Now,
                  PolicyEnd_Date = DateTime.Now,
+                 Pending = false,
+
              }
             );
 
