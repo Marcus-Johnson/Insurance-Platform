@@ -34,11 +34,11 @@ main {
 
 /* Footer Positioning */
 footer {
-    position: absolute;
+    position: fixed;
     left: 0;
     bottom: 0;
+    height:3.5rem;
     width: 100%;
-    overflow:hidden;
 }
 
 /* Global Border Style */
