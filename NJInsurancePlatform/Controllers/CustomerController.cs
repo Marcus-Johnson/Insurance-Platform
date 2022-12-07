@@ -56,6 +56,7 @@ namespace NJInsurancePlatform.Controllers
             {
                 foreach (var bill in allBills)
                 {
+
                     if (bill.PolicyMUID == policy.PolicyMUID)
                     {
                         customerHomePageVieModel.Bills.Add(bill);
@@ -115,7 +116,7 @@ namespace NJInsurancePlatform.Controllers
                 PolicyPaymentisDue = true,
                 PolicyTotalAmount = model.Product.PolicyTotalAmount,
                 PolicyPaidOffAmount = 0,
-                Pending = false,
+                Pending = true,
             };
 
             policyRepository.InsertPolicy(policy);
@@ -146,26 +147,7 @@ namespace NJInsurancePlatform.Controllers
         public IActionResult MyPage()
         {
             return View();
-        }
-        
-        // PREVIOUS CODE
-        //[HttpPost]
-        //public IActionResult CreateClaim(CustomerHomePageVieModel model)
-        //{
-        //    var claim = new Claim
-        //    {
-        //        ClaimMUID = Guid.NewGuid(),
-        //        PolicyMUID = model.Policies[0].PolicyMUID.ToString(),
-        //        CustomerMUID = model.Policies[0].CustomerMUID.ToString(),
-        //        ClaimUserDescription = model.ClaimUserDescription,
-        //        DateOfClaim = DateTime.Now
-        //    };
-
-        //    ClaimRepository.InsertClaim(claim);
-        //    ClaimRepository.Save();
-        //    return RedirectToAction("Index", "Home");
-
-        //}        
+        }    
         
 
         // NEW CODE

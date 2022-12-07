@@ -85,7 +85,7 @@ namespace NJInsurancePlatform.Controllers
                 PolicyPaidOffAmount = policy.PolicyPaidOffAmount,
                 PolicyStart_Date = policy.PolicyStart_Date,
                 PolicyEnd_Date = policy.PolicyEnd_Date,
-                Pending = true,
+                Pending = false,
             };
             PolicyRepository.UpdatePolicy(updatedPolicy);
             PolicyRepository.Save();

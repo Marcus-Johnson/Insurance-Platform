@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Policy Request";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var pending = false;
 }
 @model List<NJInsurancePlatform.Models.Policy>
 @*@model< Policy>*@
@@ -28,8 +29,10 @@
 
             @foreach (var policy in Model)
             {
-                @if (policy.Pending == false || policy.Pending == null)
+                @if (policy.Pending == true || policy.Pending == null)
                 {
+                    pending = true;
+
                     @*@model Policy;*@
 
                     <form method="post" asp-controller="Policy" asp-action="PolicyRequest" style="margin:1%; margin-left: 12%; margin-top: 2%; padding: 1%; width: 80%; align-items: center; justify-content: center; border: 1px solid #58585b; background-color: floralwhite; border-radius: 5%; box-shadow: 2px 2px #58585b;">
@@ -55,7 +58,14 @@
                         <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Request</button>
                     </form>
                 }
+   
             }
+             @if (pending == false)
+                {
+                    <div style="display:flex;justify-content:center;width:100%;">
+                        <h3>No Pending Policies</h3>
+                    </div>
+                }
 
         </div>
     </div>
