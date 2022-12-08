@@ -1,24 +1,33 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<IdentityRole>
 @{
-    ViewData["Title"] = "All Current Roles";
+    //ViewData["Title"] = "All Current Roles";
 }
+<div style="display:flex;justify-content:space-between;padding-left:2%;padding-bottom:10px;padding-right:3%;">
+    <a class="btn waves-effect waves-light #12b259" style="width:auto" asp-action="CreateRole" asp-controller="Administration">Add New</a>
+    <a href="/Home/CreateFAQ" class="btn waves-effect waves-light #12b259" style="width:auto">Create FAQ</a>
+    <a href="/policy/policyRequest" style="font-size:20px;" class="btn waves-effect waves-light #12b259">Approve Policy Requests</a> 
+    <a style="font-size:20px;" href="/Administration/SearchAllTransactions" class="btn waves-effect waves-light #12b259">Approve Transactions</a> 
+</div>
+
+
+<div style="display:flex;flex-wrap:wrap; justify-content:space-around;width:100%;border-bottom:1px solid gray;border-top:1px solid gray;height:65vh;padding-top:10px;">
 
 @if (Model.Any())
 {
-    <a class="" style="width:auto" asp-action="CreateRole" asp-controller="Administration">Add New</a>
     foreach(var role in Model)
     {
-        <div class="card mb-3">
+        <div class="card mb-3" style="padding:30px;text-align:center; height:150px;">
             <div class="card-header">
-                Role Id: @role.Id
-            </div>
+                   
+@*                Role Id: @role.Id
+*@            </div>
             <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
+                <h6 class="card-title">Role: <b>@role.Name</b></h6>
             </div>
             <div class="card-footer">
                 <a class="btn btn-primary" asp-controller="Administration" asp-action="EditRole" asp-route-Id="@role.Id">Edit</a>
-                <button class="btn waves-effect waves-light red" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id">DELETE</button>
+                <a class="btn waves-effect waves-light red" asp-controller="Administration" asp-action="DeleteRole" asp-route-id="@role.Id">DELETE</a>
             </div>
         </div>
     }
@@ -36,9 +45,9 @@ else{
 
     </div>
 }
+</div>
 
 <div style="display:flex;justify-content:space-between;align-items:center; width:100%;padding-left:20%;padding-right:20%;">
-    <a href="/policy/policyRequest" style="font-size:20px;" class="btn btn-primary">Approve Policy Requests</a> 
-    <a style="font-size:20px;" href="/Administration/SearchAllTransactions" class="btn btn-primary">Approve Transactions</a> 
+
 </div>
 

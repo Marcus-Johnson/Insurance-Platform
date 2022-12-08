@@ -32,7 +32,10 @@
     <header>
         <!-- Drop Down for Policies-->
         <ul id="PoliciesDropdown" class="dropdown-content">
-            <li><a href="/Payment/Details">Policy Payment Details</a></li>
+@*            <li><a href="/Payment/MakePayment">Make a Payment</a></li>
+*@            <li><a href="/Home/FAQ">FAQ</a></li>
+            <li><a href="/GroupRoom/Message">Group Rooms</a></li>
+            <li><a href="/Policy/GetProducts">Request A Policy</a></li>
         </ul>
 
         <!-- MOBILE Main Sidenav-->
@@ -61,17 +64,21 @@
         </ul>
 
         <!--Main Navbar-->
-        <nav class="nav-extended indigo darken-3">
-            <div class="nav-wrapper">
-                <a href="/Home/Index" class="brand-logo">Insurance<img class="responsive-img left" src="~/images/Gx-Icon-White.png" style="height:40px; margin-top:12px; margin-right: 10px"></a>
+        <nav class="nav-extended indigo darken-3" width:100vw;overflow-x:hidden;>
+            <div class="nav-wrapper" style="padding-left:2rem;">
+                <a href="/Home/Index" class="brand-logo">Insurance<img class="responsive-img left" src="~/images/Gx-Icon-White.png" style="height:40px; margin-top:12px;"></a>
                 <a href="#" data-target="main-sidenav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/Home/Index">Home</a></li>
 
-                    <!-- Dropdown Trigger -->
-                    @*<li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">Policies<i class="material-icons right">arrow_drop_down</i></a></li>*@
-                    <li>
+                    <!--If Logged In Show Show Navigation Options-->
+                    @if(User.Identity.Name != null && !User.IsInRole("Admin"))
+                    {
+                     <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">navigate site<i class="material-icons right">arrow_drop_down</i></a></li>  
+                    }
+                      <li>
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {
