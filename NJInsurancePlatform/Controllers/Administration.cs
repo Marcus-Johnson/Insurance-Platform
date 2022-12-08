@@ -43,8 +43,12 @@ namespace NJInsurancePlatform.Controllers
                             // exclude beneficiaries and check for "isPaymentComplete" status"
                             if (user.CustomerMUID == transaction.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && user.BeneficiaryMUID == null)
                             {
+                                var allreadyThere = allTransactionsViewModel.Transactions.Exists(t=> t.TransactionMUID == transaction.TransactionMUID);
+                                if(allreadyThere != true)
+                                {
+                                    allTransactionsViewModel.Transactions.Add(transaction);
+                                }
                                 allTransactionsViewModel.ApplicationUsers.Add(user);
-                                allTransactionsViewModel.Transactions.Add(transaction);
                                 allTransactionsViewModel.Policies.Add(policy);
                             }
                         }
@@ -67,8 +71,12 @@ namespace NJInsurancePlatform.Controllers
                             // exclude beneficiaries and check for "isPaymentComplete" status"
                             if (user.CustomerMUID == transaction.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && transaction.isPaymentComplete == ispaid && user.BeneficiaryMUID == null)
                             {
+                                var allreadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == transaction.TransactionMUID);
+                                if (allreadyThere != true)
+                                {
+                                    allTransactionsViewModel.Transactions.Add(transaction);
+                                }
                                 allTransactionsViewModel.ApplicationUsers.Add(user);
-                                allTransactionsViewModel.Transactions.Add(transaction);
                                 allTransactionsViewModel.Policies.Add(policy);
                             }
                         }
@@ -104,8 +112,12 @@ namespace NJInsurancePlatform.Controllers
                             {
                                 if (transaction.CustomerMUID == user.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && transaction.isPaymentComplete == ispaid)
                                 {
+                                    var allreadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == transaction.TransactionMUID);
+                                    if (allreadyThere != true)
+                                    {
+                                        allTransactionsViewModel.Transactions.Add(transaction);
+                                    }
                                     allTransactionsViewModel.ApplicationUsers.Add(user);
-                                    allTransactionsViewModel.Transactions.Add(transaction);
                                     allTransactionsViewModel.Policies.Add(policy);
 
                                 }

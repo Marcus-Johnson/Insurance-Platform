@@ -83,12 +83,12 @@
                             @if (signInManager.IsSignedIn(User))
                             {
                                 <span>@applicationUser.FirstName</span>
-                            }
-                            @if(User.IsInRole("Admin"))
+                            }                           
+                            @if (User.IsInRole("Admin"))
                             {
                                 <span>@applicationUser.UserName</span>
-                            }                            
-                            else
+                            }
+                            @if(User.Identity.Name == null)
                             {
                                 <span>My Profile</span>
                             }
