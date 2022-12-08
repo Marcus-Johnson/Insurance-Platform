@@ -104,10 +104,10 @@ input {
     top: 20px;
 }
 
-#ccsingle svg {
-    width: 100px;
-    max-height: 60px;
-}
+    #ccsingle svg {
+        width: 100px;
+        max-height: 60px;
+    }
 
 .creditcard svg#cardfront,
 .creditcard svg#cardback {
@@ -117,7 +117,7 @@ input {
     border-radius: 22px;
 }
 
-#generatecard{
+#generatecard {
     cursor: pointer;
     float: right;
     font-size: 12px;
@@ -126,7 +126,7 @@ input {
     background-color: #909090;
     border-radius: 4px;
     cursor: pointer;
-    float:right;
+    float: right;
 }
 
 /* CHANGEABLE CARD ELEMENTS */
@@ -334,23 +334,23 @@ input {
     cursor: pointer;
 }
 
-.creditcard .front,
-.creditcard .back {
-    position: absolute;
-    width: 100%;
-    max-width: 400px;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    color: #47525d;
-}
+    .creditcard .front,
+    .creditcard .back {
+        position: absolute;
+        width: 100%;
+        max-width: 400px;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+        color: #47525d;
+    }
 
-.creditcard .back {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
+    .creditcard .back {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
 
-.creditcard.flipped {
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
+    .creditcard.flipped {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }

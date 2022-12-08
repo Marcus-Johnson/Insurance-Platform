@@ -1,8 +1,7 @@
-﻿.productRequestBody{
-    display:flex;
-    justify-content:center;
-    width:100%;
-
+﻿.productRequestBody {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .productRequestContainer {
@@ -29,18 +28,18 @@
 .productRequestHeader {
     grid-area: header;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 37px;
     font-weight: 600;
     color: black;
-
     box-shadow: 4px 4px 4px rgba(5, 5, 5, .3);
 }
-.productRequestPolicyRequestID{
-    display:flex;
-    justify-content:center;
+
+.productRequestPolicyRequestID {
+    display: flex;
+    justify-content: center;
     width: 70%;
 }
 
@@ -56,10 +55,11 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 50%;
-    padding-top:30px;
+    padding-top: 30px;
     padding-left: 35px;
     padding-right: 35px;
 }
+
 .productRequestPolicyInfoColumn2 {
     display: flex;
     flex-direction: column;
@@ -72,10 +72,10 @@
     border-left: 1px solid silver;
 }
 
-.productRequestPolicyInfoColumnTitle{
+.productRequestPolicyInfoColumnTitle {
     font-weight: 600;
     font-size: 28px;
-    padding-bottom:10px;
+    padding-bottom: 10px;
 }
 
 .productRequestPolicyInfoColumnInfo {
@@ -85,22 +85,21 @@
     width: 100%;
 }
 
-.productRequestPolicyInfoColumnInfoItem{
-    display:flex;
-    flex-direction:row;
-    justify-content:space-between;
+.productRequestPolicyInfoColumnInfoItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+.productRequestInfoLabel {
+    font-size: 20px;
 }
-.productRequestInfoLabel{
-    font-size:20px;
-}
-.productRequestFooter{
-    grid-area:footer;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+
+.productRequestFooter {
+    grid-area: footer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-right: 45px;
-    border-top:1px solid silver;
+    border-top: 1px solid silver;
 }
-
-

@@ -24,9 +24,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/weatherAPI.css" />
-    <link rel="stylesheet" href="~/css/Message.css" />
-    <link rel="stylesheet" href="~/css/LandingPage.css" />
     <link rel="stylesheet" href="~/NJInsurancePlatform.styles.css" /> <!-- CSS Isolation Global Link-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 </head>
@@ -39,6 +36,31 @@
 *@            <li><a href="/Home/FAQ">FAQ</a></li>
             <li><a href="/GroupRoom/Message">Group Rooms</a></li>
             <li><a href="/Policy/GetProducts">Request A Policy</a></li>
+        </ul>
+
+        <!-- MOBILE Main Sidenav-->
+        <ul class="sidenav" id="main-sidenav">
+            <li><a class="subheader"><i class="material-icons">policy</i>Policies</a></li>
+            <li class="divider"></li>
+            <li><a class="black-text" asp-controller="Customer" asp-action="Details">Policy Details</a></li>
+            <li><a class="black-text" asp-controller="Payment" asp-action="Details">Policy Payment Details</a></li>
+            <li class="divider"></li>
+        </ul>
+
+        <!-- MOBILE Profile Sidenav-->
+        <ul class="sidenav" id="profile-sidenav">
+            <li class="divider"></li>
+            <ul class="collapsible side-nav">
+                <li class="center">
+                    <div class="collapsible-header"><i class="material-icons">account_circle</i>My Profile</div>
+                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="SignUp">Signup</a></div>
+                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="Login">Login</a></div>
+                </li>
+            </ul>
+            <li class="divider"></li>
+            <li>
+                <a class="dark-toggle" href="#" onclick="DarkMode()"><i class="material-icons right">brightness_4</i> Toggle Dark Mode</a>
+            </li>
         </ul>
 
         <!--Main Navbar-->
@@ -134,6 +156,19 @@
             }
 
             <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var elems = document.querySelectorAll('.collapsible');
+                    M.Collapsible.init(elems);
+                });
+
+                document.addEventListener('DOMContentLoaded', function () {
+                const MainSidenav = document.querySelectorAll('.sidenav');
+                const ProfileSidenav = document.querySelectorAll('#profile-sidenav')
+                
+                M.Sidenav.init(MainSidenav);
+                M.Sidenav.init(ProfileSidenav, { 'edge': 'right' });
+                });
+
                 //this script below adds event listener for the Modal
                 document.addEventListener('DOMContentLoaded', function () {
                     const tabs = document.querySelectorAll('.tabs');
@@ -159,32 +194,6 @@
                 <h3 class="center">@ViewData["Title"]</h3>
             </div>
         }
-
-        <!-- MOBILE Main Sidenav-->
-        <ul class="sidenav" id="main-sidenav">
-            <li><a class="subheader"><i class="material-icons">policy</i>Policies</a></li>
-            <li class="divider"></li>
-            <li><a class="black-text" asp-controller="Policy" asp-action="PolicyDetails">Policy Details</a></li>
-            <li><a class="black-text" asp-controller="Payment" asp-action="Details">Policy Payment Details</a></li>
-            <li class="divider"></li>
-
-        </ul>
-
-        <!-- MOBILE Profile Sidenav-->
-        <ul class="sidenav" id="profile-sidenav">
-            <li class="divider"></li>
-            <ul class="collapsible side-nav">
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">account_circle</i>My Profile</div>
-                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="Register">Test Register</a></div>
-                    <div class="collapsible-body"><a class="black-text" asp-area="" asp-controller="Home" asp-action="Login">Test Login</a></div>
-                </li>
-            </ul>
-            <li class="divider"></li>
-            <li>
-                <a class="dark-toggle" href="#" onclick="DarkMode()"><i class="material-icons right">brightness_4</i> Toggle Dark Mode</a>
-            </li>
-        </ul>
     </header>
     <main>
         <div style="padding-top:25px">
