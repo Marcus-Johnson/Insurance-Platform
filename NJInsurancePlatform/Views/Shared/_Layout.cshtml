@@ -83,7 +83,11 @@
                             @if (signInManager.IsSignedIn(User))
                             {
                                 <span>@applicationUser.FirstName</span>
-                           }
+                            }
+                            @if(User.IsInRole("Admin"))
+                            {
+                                <span>@applicationUser.UserName</span>
+                            }                            
                             else
                             {
                                 <span>My Profile</span>
@@ -215,7 +219,7 @@
     <footer class="page-footer indigo darken-3">
         <div class="container">
             &copy; 2022 Gx Insurance
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <a class="grey-text text-lighten-4 right" href="/Home/FAQ">FAQ</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
