@@ -10,8 +10,7 @@ namespace NJInsurancePlatform.Controllers
 {
 
     //[Authorize(Roles = "Customer")]
-    [AllowAnonymous] // WHILE DEVELOPING
-
+    //[AllowAnonymous] // WHILE DEVELOPING
     public class PaymentController : Controller
     {
 
@@ -32,11 +31,13 @@ namespace NJInsurancePlatform.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
         [HttpGet]
         public async Task<IActionResult> MakePayment()
         {

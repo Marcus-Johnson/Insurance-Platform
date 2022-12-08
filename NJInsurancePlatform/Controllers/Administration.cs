@@ -177,27 +177,9 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
-        // ALL PAYMENTS COMPLETE "GET REQUEST" ---------------------------------------------------------------------------------------------------------
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult AllPaymentsComplete()
-        {
-            return View();
-        }
-
-
-        // ALL PAYMENTS COMPLETE "GET REQUEST" ---------------------------------------------------------------------------------------------------------
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult NoPaymentsComplete()
-        {
-            return View();
-        }
-
-
         // COMPLETE PAYMENT RECORDED "GET REQUEST" ---------------------------------------------------------------------------------------------------------
         [HttpGet]
-        [AllowAnonymous]
+        [Authorize(Roles ="Admin")]
         public IActionResult UpdateRecorded()
         {
             return View();

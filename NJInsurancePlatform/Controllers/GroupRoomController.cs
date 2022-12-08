@@ -13,7 +13,6 @@ using NJInsurancePlatform.InterfaceImplementation;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [AllowAnonymous]
     public class GroupRoomController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -28,6 +27,8 @@ namespace NJInsurancePlatform.Controllers
             _signInManager = signInManager;
         }
 
+
+        [Authorize(Roles = "Customer, Pending, Beneficiary, Admin")]
         [HttpPost]
         public async Task<IActionResult> AddGroupRoom(GroupRoom model)
         {
@@ -62,6 +63,7 @@ namespace NJInsurancePlatform.Controllers
         }
 
         // Route To Create Group View
+        [Authorize(Roles = "Customer, Beneficiary, Pending, Admin")]
         [HttpGet]
         public async Task<ActionResult> Message()
         {
@@ -115,6 +117,7 @@ namespace NJInsurancePlatform.Controllers
 
 
         // Populate Field with Messages in Selected Group
+        [Authorize(Roles = "Customer, Beneficiary, Admin")]
         [HttpGet]
         public async Task<ActionResult> PopulateMessages(string Id)
         {
