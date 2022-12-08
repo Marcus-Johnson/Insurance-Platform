@@ -7,13 +7,13 @@
 @{
     var weatherWrapper = new WeatherApi();
 
-    //var result = await weatherWrapper.GetResult();   // RENABLE FOR WEATHER API
+    //var result = await weatherWrapper.GetResult();   // REENABLE FOR WEATHER API
 
     var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-    //var weatherJson = JsonSerializer.Deserialize<Root>(result, options);
+    //var weatherJson = JsonSerializer.Deserialize<Root>(result, options);  // REENABLE FOR WEATHER API
 }
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container" style="clear:right; padding-left:2rem;">
@@ -46,7 +46,7 @@
                         <!--SHOW SWIPE LABEL-->
                         if (Model.Policies[i].Pending == false)
                         {
-                            <li class="tab col s3"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
+                            <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
                             found = true;
                         }
                     }
@@ -229,10 +229,10 @@
 <!-- Dropdown Trigger -->
 <a class='dropdown-trigger btn' id="btn" href='#' data-target='beneficiaries-dropdown'>View All Beneficiaries</a>
 
-    <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
+@*    <a href="/Policy/GetProducts" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Request A Policy</a>
     <a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>
     <a href="/Home/FAQ" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">FAQ</a>
-    <a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>
+    <a href="/GroupRoom/Message" class="waves-effect waves-light btn right" id="btn" style="margin-bottom: 30px">Group Room</a>*@
 
 <!-- Dropdown Structure -->
 <ul id='beneficiaries-dropdown' class='dropdown-content'>

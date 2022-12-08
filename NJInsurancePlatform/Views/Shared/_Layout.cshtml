@@ -35,7 +35,10 @@
     <header>
         <!-- Drop Down for Policies-->
         <ul id="PoliciesDropdown" class="dropdown-content">
-            <li><a href="/Payment/Details">Policy Payment Details</a></li>
+@*            <li><a href="/Payment/MakePayment">Make a Payment</a></li>
+*@            <li><a href="/Home/FAQ">FAQ</a></li>
+            <li><a href="/GroupRoom/Message">Group Rooms</a></li>
+            <li><a href="/Policy/GetProducts">Request A Policy</a></li>
         </ul>
 
         <!--Main Navbar-->
@@ -47,9 +50,13 @@
                 <ul class="right hide-on-med-and-down">
                     <li><a href="/Home/Index">Home</a></li>
 
-                    <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">Policies<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li>
+                    <!--If Logged In Show Show Navigation Options-->
+                    @if(User.Identity.Name != null && !User.IsInRole("Admin"))
+                    {
+                     <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-target="PoliciesDropdown">navigate site<i class="material-icons right">arrow_drop_down</i></a></li>  
+                    }
+                      <li>
                         <a class="dropdown-trigger" href="#!" data-target="MyProfileDropdown">
                             @if (signInManager.IsSignedIn(User))
                             {

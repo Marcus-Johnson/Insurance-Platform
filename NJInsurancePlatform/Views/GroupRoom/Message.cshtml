@@ -2,7 +2,7 @@
 @model NJInsurancePlatform.Models.MessagesViewModel
 
 @{
-    ViewData["Title"] = "Messages";
+    //ViewData["Title"] = "Messages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var RoomID = TempData["RoomId"];
@@ -10,10 +10,9 @@
 }
 
 <form method="post" asp-controller="GroupRoom">
-<div class="row" id="border" style="height: 65vh; width: 95vw">
+<div class="row" id="border" style="height: 65vh; width: 95vw;border:1px solid silver;box-shadow:3px 3px 3px rgba(5,5,5,.3);">
 
     <div class="col s3" style="height: 93%">
-        <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1"><i class="material-icons left">add</i>Add Group</button>
      
         <!--Group Rooms-->
         <div class="collection" style="height: 92%; overflow: auto">
@@ -29,7 +28,9 @@
     </div>
 
     <div class="col s9" style="height: 94%; width: 75%">
-        <h4 class="center indigo-text">@RoomName</h4>
+        <div style="display:flex;justify-content:center;">
+            <span class="center indigo-text" style="font-size:20px;font-weight:600">@RoomName</span>
+        </div>
 
         <!--Messages By Selected Room-->
         <div id="messages-wrapper" style="display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding-left:10%;" >
@@ -43,11 +44,11 @@
                         <div style="display:flex;flex-direction:column;">
                             <!--NAME DIV-->
                             <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
-                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                                <span  style="font-size:15px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
                             </div>
                             <!--MESSAGE DIV-->
                             <div class="sent-message-content-current">
-                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                                <span style="font-size:20px">@Model.groupRoomMessages[i].Message</span>
                             </div>
                             <!--CREATED DATE DIV-->
                             <div class="message-date-created" style="display:flex;justify-content:center;">
@@ -66,11 +67,11 @@
                         <div style="display:flex;flex-direction:column;">
                             <!--NAME DIV-->
                             <div class="sender-firstname" name="@Model.groupRoomMessages[i].FirstName" style="padding-left:20px;width:50%;">
-                                <span  style="font-size:20px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
+                                <span  style="font-size:15px;font-weight:500;">@Model.groupRoomMessages[i].FirstName</span>
                             </div>
                             <!--MESSAGE DIV-->
                             <div class="sent-message-content-other">
-                                <span style="font-size:30px">@Model.groupRoomMessages[i].Message</span>
+                                <span style="font-size:20px">@Model.groupRoomMessages[i].Message</span>
                             </div>
                             <!--CREATED DATE DIV-->
                             <div class="message-date-created" style="display:flex;justify-content:center;">
@@ -81,7 +82,6 @@
                }  
 
             }
-
 
         </div>
 
@@ -100,20 +100,23 @@
             </div>
             <div id="button-wrapper">
 
-                <div class="file-field input-field">
+@*                <div class="file-field input-field">
                     <div class="btn-floating indigo">
                         <input type="file">
                         <i class="material-icons">attach_file</i>
                     </div>
-                </div>
+                </div>*@
                 <button type="submit" asp-action="CreateMessage" class="btn-floating waves-effect waves-light right indigo"><i class="material-icons">send</i></button>
             </div>                    
             }
 
 
         </div>
+
     </div>
+
 </div>
+
 </form>
 
     <!-- Modal Structure To Add Group Room -->
@@ -137,10 +140,10 @@
             <a href="#!" class="modal-close waves-effect waves-black white-text btn-flat">Close out</a>
         </form>
     </div>
+   <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="#modal1" style="position:absolute;left:3%;top:77vh;font-size:12px;"><i class="material-icons left">add</i>Add Group</button>
+
 
 <script>
-//$('#messages-wrapper').scrollTop($('#messages-wrapper')[0].scrollHeight);
-
 var element = document.getElementById('messages-wrapper');
 element.scrollTop = element.scrollHeight;
 

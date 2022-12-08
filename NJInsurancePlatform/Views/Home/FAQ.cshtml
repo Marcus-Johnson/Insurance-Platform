@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Frequently Asked Questions";
+    //ViewData["Title"] = "Frequently Asked Questions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<NJInsurancePlatform.Models.Faq>
@@ -11,14 +11,19 @@
     }
 
     .FAQSearchContainer {
-        color: white;
+        display:flex;
+        justify-content:center;
+        align-items:flex-start;
+        padding-top:0px;
+        margin-top:0px;
+/*        color: white;
         background-color: #5c6bc0;
         font-family: 'Lucida Sans';
         display: flex;
         justify-content: center;
         align-items: center;
         height: 10vh;
-        margin-top: -25px;
+        margin-top: -25px;*/
     }
 
     #searchBar {
@@ -37,8 +42,10 @@
     }
 
     .qAndAContainer {
-        margin-top: 20px;
-    }
+        padding-left:2%;
+        padding-right:3%;
+/*        margin-top: 20px;
+*/    }
     .collapsible-header{
         display: flex;
         justify-content: space-between;
@@ -53,9 +60,11 @@
 
 </style>
 
-  <div class="FAQSearchContainer">
-          <input type="text" id="searchBar" placeholder="Search" />
-  </div>
+
+  <div class="FAQSearchContainer" style="width:100%">
+      <span style="font-size:30px;font-weight:600;letter-spacing:2px;color:#1072ba">Frequently Asked Questions</span>
+@*          <input type="text" id="searchBar" placeholder="Search" />
+*@  </div>
   <div class="qAndAContainer">
         <div class="row">
             <div class="col s6">
@@ -93,7 +102,10 @@
                                 <input readonly type="text" asp-for="@faq.Question" placeholder="@faq.Question" />
                                 <input readonly hidden type="text" asp-for="@faq.Answer" placeholder="@faq.Answer" />
                                 <input readonly hidden type="text" asp-for="@faq.FaqMUID" placeholder="@faq.FaqMUID" />
-                                <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Delete FAQ</button>
+                                @if(User.IsInRole("Admin"))
+                                {
+                                    <button style="color:white; background-color: #1072ba; margin-left: 2%; box-shadow: 1px 1px #00294d" type="submit" class="policyButton">Delete FAQ</button>
+                                }
 
                             </div>
                         </form>

@@ -40,6 +40,7 @@ namespace NJInsurancePlatform.Controllers
 
         public async Task<IActionResult> Index()
         {
+            if (User.IsInRole("Admin")) return RedirectToAction("GetRoles", "Administration");
 
             var allBills = await BillRepository.GetBills();                                         // Get Policies
             var allPolicies = await policyRepository.GetPolicies();                                         // Get Policies
