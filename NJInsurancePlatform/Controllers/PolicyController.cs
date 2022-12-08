@@ -11,7 +11,6 @@ using System.Diagnostics;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [AllowAnonymous]
     public class PolicyController : Controller
     {
         private readonly IPolicyRepository PolicyRepository;
@@ -27,15 +26,20 @@ namespace NJInsurancePlatform.Controllers
             this.customerRepository = customerRepository;
         }
 
-
+        [Authorize(Roles = "Customer, Beneficiary, Pending")]
+        [HttpGet]
         public IActionResult PolicyDetails()
         {
+            if (User.Identity.Name == null) return RedirectToAction("AccessDenied", "Administration");
             return View();
         }
 
-        
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
         public async Task<IActionResult> PolicyRequest()
         {
+            if (User.Identity.Name == null) return RedirectToAction("AccessDenied", "Administration");
             //var pol = await PolicyRepository.GetPolicies();
             //IEnumerable<Policy> pol2 = pol.ToList();
             //return View(pol2);
@@ -50,9 +54,12 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
         [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
+            if (User.Identity.Name == null) return RedirectToAction("AccessDenied", "Administration");
+
             var getProducts = await ProductRepository.GetPolicies();
 
             List<Product> products = new List<Product>();
@@ -66,6 +73,7 @@ namespace NJInsurancePlatform.Controllers
         }        
         
         
+
         [HttpPost]
         public async Task<IActionResult> PolicyRequest(Policy policy)
         {
@@ -91,11 +99,15 @@ namespace NJInsurancePlatform.Controllers
             PolicyRepository.Save();
             return RedirectToAction("PolicyRequest");
         }
+
         protected override void Dispose(bool disposing)
         {
             PolicyRepository.Dispose();
             base.Dispose(disposing);
          }
+
+
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
         [HttpPost]
         public async Task<IActionResult> GetProducts(List<Product> model)
         {

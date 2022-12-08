@@ -8,6 +8,7 @@ using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -144,7 +145,6 @@ namespace NJInsurancePlatform.Controllers
 
             }
             //// If user forgot password
-            //if()
             return View(model);
         }
 
