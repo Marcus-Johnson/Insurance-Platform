@@ -5,9 +5,9 @@
     justify-content: start;
     align-content: center;
     font-family: sans-serif;
-    position:absolute;
+    position: absolute;
     top: 150px;
-    width:100%;
+    width: 100%;
     z-index: -6;
     grid-template-areas:
         "content"
@@ -67,7 +67,7 @@
     align-items: center;
     width: 50%;
     height: 50px;
-    border-bottom:1px solid silver;
+    border-bottom: 1px solid silver;
 }
 
 .unpaid-content-name {
