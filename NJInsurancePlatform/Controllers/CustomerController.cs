@@ -9,7 +9,7 @@ using NJInsurancePlatform.Interfaces;
 
 namespace NJInsurancePlatform.Controllers
 {
-    [AllowAnonymous]
+    //[AllowAnonymous]
     public class CustomerController : Controller
     {
         //private readonly ILogger<HomeController> _logger;
@@ -36,6 +36,7 @@ namespace NJInsurancePlatform.Controllers
             this.ClaimRepository = ClaimRepository;
             this.BillRepository = billRepository;
         }
+
 
 
         public async Task<IActionResult> Index()
@@ -79,7 +80,7 @@ namespace NJInsurancePlatform.Controllers
             return View(customerHomePageVieModel);
         }
 
-
+        [Authorize(Roles ="Customer, Pending, Beneficiary")]
         [HttpGet]
         public async Task<ActionResult> CustomerPolicyRequest(string Id)                                     
         {            
@@ -127,11 +128,15 @@ namespace NJInsurancePlatform.Controllers
         }
 
 
+        [Authorize(Roles ="Customer, Beneficiary")]
+        [HttpGet]
         public IActionResult Details()
         {
             return View();
         }
 
+
+        [Authorize(Roles = "Customer, Beneficiary")]
         [HttpGet]
         public IActionResult Claim()
         {
@@ -148,10 +153,11 @@ namespace NJInsurancePlatform.Controllers
         public IActionResult MyPage()
         {
             return View();
-        }    
-        
+        }
+
 
         // NEW CODE
+        [Authorize(Roles = "Customer, Beneficiary")]
         [HttpPost]
         public IActionResult CreateClaim(CustomerHomePageVieModel model)
         {
