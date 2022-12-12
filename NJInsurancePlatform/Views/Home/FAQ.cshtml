@@ -109,9 +109,9 @@
                 <div class="col s6">
                     <ul class="collapsible">
                         @foreach(var faq in Model){
-                        <li>
+                        <li style="background:grey">
                             <form method="post" asp-controller="Home" asp-action="FAQ">
-                                <div class="collapsible-header">
+                                <div class="collapsible-header" style="color:black; background: green;">
                                     <input readonly type="text" asp-for="@faq.Question" placeholder="@faq.Question" />
                                     <input readonly hidden type="text" asp-for="@faq.Answer" placeholder="@faq.Answer" />
                                     <input readonly hidden type="text" asp-for="@faq.FaqMUID" placeholder="@faq.FaqMUID" />
