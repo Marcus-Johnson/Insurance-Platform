@@ -2,7 +2,7 @@
 @using Weather.ApiWrapper;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var found = false;
+    var found = true;
 }
 @{
     var weatherWrapper = new WeatherApi();
@@ -48,7 +48,7 @@
                         if (Model.Policies[i].Pending == false)
                         {
                             <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                            found = true;
+                            found = false;
                         }
                     }
 
@@ -131,7 +131,7 @@
             }
 
             <!--IF THERE ARE NO ACTIVE POLICIES-->
-            @if (found == false)
+            @if (found == true)
             {
                 <div style="text-align:center">
                     <h2>You Have No Active Policies</h2>
@@ -187,8 +187,8 @@
                 <th style="text-align:center">Payment Amount</th>
                 <th style="text-align:center">Payment complete</th>
                 <th style="text-align:center">Payment Date</th>
-                <th style="text-align:center">Policy Name</th>
-            </tr>
+@*                <th style="text-align:center">Policy Name</th>
+*@            </tr>
         </thead>
         <tbody>
 
@@ -200,8 +200,8 @@
                         <td style="text-align:center">@Model.Transactions[i].PaymentAmount</td>
                         <td style="text-align:center">@Model.Transactions[i].isPaymentComplete</td>
                         <td style="text-align:center">@Model.Transactions[i].PaymentDate</td>
-                        <td style="text-align:center">@Model.PolicyNames?[i]</td>
-                    </tr>
+@*                        <td style="text-align:center">@Model.PolicyNames?[i]</td>
+*@                    </tr>
                 }
             }
             else
