@@ -11,7 +11,6 @@ html {
 html {
   position: relative;
   min-height: 100%;
-  overflow-x:hidden;
 }
 
 body {
@@ -45,9 +44,7 @@ footer {
     left: 0;
     bottom: 0;
     height:3.5rem;
-    width: 100vw;
-    overflow-x:hidden;
-
+    width: 100%;
 }
 
 /* Global Border Style */

@@ -126,6 +126,29 @@ namespace NJInsurancePlatform.Controllers
             };
             TransactionRepository.InsertTransaction(newTransaction);
             TransactionRepository.Save();
+
+            //Set Policy Payment Status to False
+            Policy updatePolicy = new Policy
+            {
+                PolicyMUID = model.Policy.PolicyMUID,
+                ProductMUID = model.Policy.ProductMUID,
+                CustomerMUID = model.Policy.CustomerMUID,
+                NameOfPolicy = model.Policy.NameOfPolicy,
+                PolicyOwner = model.Policy.PolicyOwner,
+                Deductible = model.Policy.Deductible,
+                OutOfPocketLimit = model.Policy.OutOfPocketLimit,
+                AnnualLimitOfCoverage = model.Policy.AnnualLimitOfCoverage,
+                PolicyPaymentisDue = false,
+                PolicyTotalAmount = model.Policy.PolicyTotalAmount,
+                PolicyPaidOffAmount = model.Policy.PolicyPaidOffAmount,
+                PolicyStart_Date = model.Policy.PolicyStart_Date,
+                PolicyEnd_Date = model.Policy.PolicyEnd_Date,
+                Pending = false,
+            };
+            PolicyRepository.UpdatePolicy(updatePolicy);
+            PolicyRepository.Save();
+            Thread.Sleep(5000);
+
             return RedirectToAction("Index", "Customer");
         }
 

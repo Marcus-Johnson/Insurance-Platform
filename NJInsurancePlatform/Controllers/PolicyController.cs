@@ -88,7 +88,7 @@ namespace NJInsurancePlatform.Controllers
                 Deductible = policy.Deductible,
                 OutOfPocketLimit = policy.OutOfPocketLimit,
                 AnnualLimitOfCoverage = policy.AnnualLimitOfCoverage,
-                PolicyPaymentisDue = policy.PolicyPaymentisDue,
+                PolicyPaymentisDue = true,
                 PolicyTotalAmount = policy.PolicyTotalAmount,
                 PolicyPaidOffAmount = policy.PolicyPaidOffAmount,
                 PolicyStart_Date = policy.PolicyStart_Date,

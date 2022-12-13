@@ -87,12 +87,14 @@ namespace NJInsurancePlatform.Controllers
                 // If Creation is Successful
                 if (result.Succeeded)
                 {
+                    // Add To Pending On Sign Up
+                    await userManager.AddToRoleAsync(user, "Pending");
+
                     // Sign allow access. in "(isPersistent: false)" Means remove Cookie On sign out
                     await signInManager.SignInAsync(user, isPersistent: false);
 
-                    if (!User.IsInRole("Customer")){
-                        await userManager.AddToRoleAsync(user, "Pending");
-                    }
+                    //if (!User.IsInRole("Customer")){
+                    //}
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -134,8 +136,10 @@ namespace NJInsurancePlatform.Controllers
 
                     // If Admin Signs In, Redirect To Roles Page
                     if (await userManager.IsInRoleAsync(user, "Admin")) return RedirectToAction("GetRoles", "Administration");
-                    if (await userManager.IsInRoleAsync(user, "Beneficiary")) return RedirectToAction("Index", "Customer");
-                    if (await userManager.IsInRoleAsync(user, "Customer")) return RedirectToAction("Index", "Customer");
+                    //if (await userManager.IsInRoleAsync(user, "Beneficiary")) return RedirectToAction("Index", "Customer");
+                    //if (await userManager.IsInRoleAsync(user, "Customer")) return RedirectToAction("Index", "Customer");
+                    //if (await userManager.IsInRoleAsync(user, "Pending")) return RedirectToAction("Index", "Customer");
+
                     return RedirectToAction("Index", "Customer");
                 }
 
