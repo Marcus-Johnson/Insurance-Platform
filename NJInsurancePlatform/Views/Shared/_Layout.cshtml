@@ -30,6 +30,7 @@
 <body>
 
     <header>
+        @if(@ViewData["Title"] != "User Login"){
         <!-- Drop Down for Policies-->
         <ul id="PoliciesDropdown" class="dropdown-content">
 @*            <li><a href="/Payment/MakePayment">Make a Payment</a></li>
@@ -197,6 +198,7 @@
             <div class="white indigo-text" style="padding:1px">
                 <h3 class="center">@ViewData["Title"]</h3>
             </div>
+        }
         }
     </header>
     <main>
