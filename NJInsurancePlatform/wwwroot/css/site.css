@@ -27,6 +27,12 @@ body {
     background: -moz-radial-gradient(bottom left, #42464B, #110040);
     background: radial-gradient(to top right, #42464B, #110040);
 }
+.dark-mode li div {
+        background-color: #110040;
+    }
+.dark-mode div ul li form div input {
+    color: white;
+}
 
 main {
     width: 100vw;
