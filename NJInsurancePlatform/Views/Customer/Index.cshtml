@@ -47,7 +47,7 @@
 
                         if (Model.Policies[i].Pending == false)
                         {
-                            <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
+                            <li class="tab col s3" styles="background-color:#27aae1"><a style="color:slategrey; font-weight: bold;"href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
                             found = false;
                         }
                     }

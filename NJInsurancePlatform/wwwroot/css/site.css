@@ -32,6 +32,25 @@ body {
 .dark-mode div ul li form div input {
     color: white;
 }
+.dark-mode section div div ul {
+   background-color: #110040;
+   color: white;
+}
+.dark-mode section div div ul li {
+   background-color: #110040;
+   color: white;
+}
+.dark-mode section div div ul li a {
+   color: white;
+}
+/*.darkmode .tabs {
+    background-color: #110040;
+    color: white;
+}
+.darkmode .tab {
+    background-color: #110040;
+    color: white;*/
+}
 
 main {
     width: 100vw;
