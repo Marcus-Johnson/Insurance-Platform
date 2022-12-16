@@ -13,7 +13,7 @@
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-    var weatherJson = JsonSerializer.Deserialize<Root>(result, options);  // REENABLE FOR WEATHER API
+   var weatherJson = JsonSerializer.Deserialize<Root>(result, options);  // REENABLE FOR WEATHER API
 }
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container" style="clear:right; padding-left:2rem;padding-right:2rem;">
@@ -21,21 +21,22 @@
         <h4 class="white-text">Welcome, @Model.ApplicationUser.FirstName</h4>
         <h6 class="white-text">@DateTime.Now.ToString("hh:mm tt")</h6>
     </span>
-    <span class="weather-right">
+    <div class="weather-right">
         @*RE-ENABLE BELOW FOR WEATHER API*@
-        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
+        <img style="block-size:8em; float:right" src="/images/weather/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
         <div style="position: relative; float:left; padding: 10px">
-            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
+        <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
             
 <p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
 
         @*RE-ENABLE ABOVE FOR WEATHER API*@
 </div>
-    </span>
+    </div>
 </div>
 
 <!-- Tabs for each policy -->
-<section class="policy-tab">
+<div class="flex-center">
+<section class="policy-tab" id="border">
     <div class="row">
         <div class="col s12">
             @if (Model.Policies != null || Model.Policies.Count != 0)
@@ -129,19 +130,47 @@
                     }
                 }
             }
-
+            
             <!--IF THERE ARE NO ACTIVE POLICIES-->
             @if (found == true)
             {
-                <div style="text-align:center">
-                    <h2>You Have No Active Policies</h2>
-                </div>
+               <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+               <style>
+                   .tabs {
+                       display: none;
+                   }
+                    #border {
+                        border: none
+                    }
+                </style>
+
+                    <div class="image-container">
+                        <div class="image-flip">
+                            <div class="image-front">
+                                <svg viewBox="0 0 500 500" style="position: absolute; left: -3em; top: -1em">
+                                    <path style="fill: transparent" id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
+                                    <text class="image-text font-effect-shadow-multiple">
+                                        <textPath xlink:href="#curve">
+                                            No Active Policy
+                                        </textPath>
+                                    </text>
+                                </svg>
+                                <img style=" width: 100%; border-radius: 3rem" src="~/images/sunset-beach.jpg" />
+                            </div>
+                            <div class="image-back" style="background-color: ">
+                                <h1>How to Request a Policy</h1>
+                                <p>To request a policy you can go to the request a policy page</p>
+                                <p>You can also ask to speak to an account manager so that they can add the policy for you</p>
+                            </div>
+                        </div>
+                    </div>
+                
             }
         </div>
 
     </div>
 </section>
-
+</div>
     @for (int i = 0; i < Model.Policies.Count; i++)
     {
         

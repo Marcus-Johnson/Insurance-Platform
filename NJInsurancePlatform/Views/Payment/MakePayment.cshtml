@@ -13,7 +13,7 @@
     <div class="col s7">
 
         <div class="row">
-            <img class="col s4" style="height: 3em" src="~/images/GalaxE-Solutions.svg" />
+            <img class="col s4" style="height: 3em" src="~/images/galaxe/GalaxE-Solutions.svg" />
             <h5 class="col s4 right">@DateTime.Now.ToString("hh:mm tt")</h5>
         </div>
     <ul class="collapsible" style="width: 90%">
@@ -59,7 +59,7 @@
 
                             <div class="row">
                                 <div class="input-field col s10">
-                                    <img src="/images/mc_symbol.svg" class="material-icons prefix" />
+                                    <img src="/images/payment/mc_symbol.svg" class="material-icons prefix" />
                                     <input asp-for="@Model.Payment.CardNumber" placeholder="2412 - 7512 - 3412 - 3456" type="text" class="validate">
                                     <i class="material-icons prefix right">verified</i>
                                 </div>
@@ -338,9 +338,9 @@
                 <div class="cc-holder">
                     <b>@Model.ApplicationUser.FirstName @Model.ApplicationUser.LastName</b>
                     <p>**** 3456</p>
-                    <p>12/22</p>
+                    <p>@Model.Payment.CardExpireDate.Month.ToString("00")/@Model.Payment.CardExpireDate.Year.ToString("00")</p>
                 </div>
-                <img class="right" style="height: 50px; position: relative" src="~/images/mc_symbol.svg" />
+                <img class="right" style="height: 50px; position: relative" src="~/images/payment/mc_symbol.svg" />
             </div>
         </div>
         <div class="row">
@@ -367,11 +367,21 @@
                 </div>
             
         </div>
-
         <div class="row">
             <div class="col s8">
                 <label>You have to Pay</label>
-                <h5>@Model.Bill.MinimumPayment<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right"><i class="material-icons">receipt_long</i></a></h5>
+                <h5>@Model.Bill.MinimumPayment<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right modal-trigger" href="#receipt-modal"><i class="material-icons">receipt_long</i></a></h5>
+                
+                <!-- Modal Receipt -->
+                <div id="receipt-modal" class="modal">
+                    <div class="modal-content">
+                        <h4>Payment Receipt</h4>
+                        <p>Transaction information for payment</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
