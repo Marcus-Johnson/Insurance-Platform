@@ -1,8 +1,4 @@
-﻿#PolicyList {
-    border: 3px solid;
-}
-
-.center-align {
+﻿.center-align {
     background-color: #8080807f;
 }
 
@@ -23,8 +19,6 @@
 }
 
 .policy-tab {
-    border: 2px solid #58585b;
-    border-radius: 10px;
     margin: 25px 70px 75px;
     padding: 0;
     box-sizing: border-box;
@@ -56,3 +50,54 @@
     .tabs .tab a:hover {
         color: #1072ba;
     }
+
+.image-container {
+    background-color: transparent;
+    text-align: center;
+    height: 700px;
+    width: 900px;
+    min-width: 350px;
+    perspective: 1000px;
+}
+
+.image-text {
+    fill: white;
+    font-family: 'Give You Glory', cursive;
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 5px;
+    word-spacing: 20px;
+    text-shadow: #474747 5px 5px 2px;
+}
+
+.image-flip {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.image-container:hover .image-flip {
+    transform: rotateY(180deg);
+}
+
+.image-front, .image-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.image-front {
+    
+    color: black;
+}
+
+.image-back {
+    background-color: black;
+    color: white;
+    transform: rotateY(180deg);
+    text-align: left;
+}

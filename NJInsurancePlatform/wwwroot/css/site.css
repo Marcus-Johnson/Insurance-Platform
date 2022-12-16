@@ -81,3 +81,10 @@ footer {
     color: midnightblue;
     font-weight: 700;
 }
+
+/* Global Center Style*/
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
