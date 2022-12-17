@@ -148,6 +148,7 @@ namespace NJInsurancePlatform.Controllers
 
 
             }
+
             //// If user forgot password
             return View(model);
         }
@@ -202,7 +203,7 @@ namespace NJInsurancePlatform.Controllers
             {
                 faqs.Add(faq);
             };
-            System.Diagnostics.Debug.WriteLine(faqs);
+            //System.Diagnostics.Debug.WriteLine(faqs);
             return View(faqs);
         }
 

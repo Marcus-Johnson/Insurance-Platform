@@ -21,6 +21,20 @@
                 <div class="productRequestPolicyInfoColumnInfo">
                     <div hidden class="productRequestPolicyInfoColumnInfoItem">
                         <div>
+
+                            <input hidden type="text" readonly asp-for="@Model.Customer.Id"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.UserName"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.Gender"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.PasswordHash"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.NormalizedUserName"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.Active"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.CreatedDate"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.IsPrimaryPolicyHolder"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.LicenseNumber"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.SSN"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.CurrentEmployer"/>
+                            <input hidden type="text" readonly asp-for="@Model.Customer.LicenseNumber"/>
+
                             <label hidden  asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
                         </div>
                         <div style="font-size:9px">

@@ -10,6 +10,10 @@ namespace NJInsurancePlatform.Models
         [ScaffoldColumn(false)]
         public Guid BillMUID { get; set; }
 
+        [ForeignKey("CustomerMUID")]
+        [ScaffoldColumn(false)]
+        public virtual Guid CustomerMUID { get; set; }        
+        
         [ForeignKey("PolicyMUID")]
         [ScaffoldColumn(false)]
         public virtual Guid PolicyMUID { get; set; }

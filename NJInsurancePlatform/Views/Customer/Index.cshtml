@@ -61,7 +61,7 @@
                         <div id="@($"swipe-{i}")" class="col s12">
                             <div class="row">
                                 <!--COLUMN 1-->
-                                <div class="col s6">
+                                <div class="col s6" style="width:40%">
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Number</b></span>
                                         <span>@Model.Policies[i]?.PolicyMUID</span>
@@ -86,23 +86,19 @@
 
                                     <!--MAKE A CLAIM BUTTON-->
                                     <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="@($"#modal{i}")">Make a Claim</button>
+                                   
                                     @if(Model.Bills != null)
                                     {
-                                        for(int j = 0; j < Model.Bills.Count; j++)
-                                        {
-                                            if(Model.Bills[j].Status != "Paid")
-                                            {
-                                            <!--MAKE A PAYMENT BUTTON-->
-                                            <a class="waves-effect waves-light btn btn-large white" id="btn" href="/Payment/MakePayment">Make a Payment</a>
-                                              
-                                            }
-                                                                                    }                                           
+
+                                           <!--MAKE A PAYMENT BUTTON-->
+                                           <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment"  asp-action="MakePayment" asp-route-policyId="@Model.Policies[i].PolicyMUID" asp-route-billId="@Model.Bills[i].BillMUID">Make a Payment</a>
+
                                     }
                          
                                     </div>
 
                                 <!--COLUMN 2-->
-                                <div class="col s4">
+                                <div class="col s6" style="width:30%">
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Payment is Due</b></span>
                                         <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
@@ -123,7 +119,49 @@
                                         <span><b>Policy End Date</b></span>
                                         <span>@Model.Policies[i]?.PolicyEnd_Date</span>
                                     </div>
-                                </div>
+                                </div>                               
+                                
+                                <!--COLUMN 3 SHOWING CURRENT BILL-->
+                                    @if(Model.Bills != null)
+                                    {
+
+                                        @if(Model.Bills[i].Status == "Due")
+                                        {
+                                         <div class="col s4" style="width:30%">
+                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                                <span style="font-size:20px;"><b>Current  Bill</b></span><br/>
+                                            </div>                                    
+                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                                <span><b>Due Date</b></span>
+                                                <span>@Model.Bills[i]?.PolicyDueDate</span>
+                                            </div>
+
+                                            <!--If there is an overpayment-->
+                                            @if(Model.Bills[i].Balance < 0)
+                                            {
+                                                var surplus = Model.Bills[i].Balance * -1;
+
+                                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                                <span><b>You Currently Have a Surplus Of</b></span>
+                                                <span>@surplus</span>
+                                            </div>   
+                                            } 
+                                        
+                                            <!--If No OverPayment-->
+                                            @if(Model.Bills[i].Balance >= 0)
+                                            {
+                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                                <span><b>Your Balance</b></span>
+                                                <span>@Model.Bills[i]?.Balance</span>
+                                            </div>   
+                                            }                                       
+                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
+                                                <span><b>MinimumPayment</b></span>
+                                                <span>@Model.Bills[i]?.MinimumPayment</span>
+                                            </div>
+                                        </div> 
+                                        }                                        
+                                }               
                             </div>
                         </div>
                     }

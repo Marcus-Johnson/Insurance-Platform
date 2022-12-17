@@ -32,13 +32,22 @@ namespace NJInsurancePlatform.Data
         public DbSet<PolicyRequest> PolicyRequests { get; set; }
         public DbSet<Product> Products { get; set; }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer("Server=GFTHF-PF12QJ7D;Initial Catalog=InsuranceCorp;MultipleActiveResultSets=True;User Id=sa;Password=Galaxy@123");
+        //}
+
+        // show
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Server=GFTHF-PF12QJ7D;Initial Catalog=InsuranceCorp;MultipleActiveResultSets=True;User Id=sa;Password=Galaxy@123");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            //builder.Entity<IdentityUser>().HasKey(user => new {user.Id, user.UserName});
+
             // "PasswordHasher" to has "admin" user password before seeding
             var hasher = new PasswordHasher<ApplicationUser>();
             base.OnModelCreating(builder);
@@ -163,7 +172,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
                 },
                 new Policy
@@ -180,7 +189,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
 
                 },
@@ -198,7 +207,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
 
                 },
@@ -216,7 +225,7 @@ namespace NJInsurancePlatform.Data
                  PolicyTotalAmount = 150000,
                  PolicyPaidOffAmount = 0,
                  PolicyStart_Date = DateTime.Now,
-                 PolicyEnd_Date = DateTime.Now,
+                 PolicyEnd_Date = DateTime.Now.AddDays(364),
                  Pending = false,
 
              }
@@ -268,6 +277,7 @@ namespace NJInsurancePlatform.Data
                 new Bill
                 {
                     BillMUID = bill1,
+                    CustomerMUID = cust1,
                     PolicyMUID = pol1,
                     PolicyDueDate = DateTime.Now,
                     MinimumPayment = 123.99,
@@ -278,6 +288,7 @@ namespace NJInsurancePlatform.Data
                 new Bill
                 {
                     BillMUID = bill2,
+                    CustomerMUID = cust2,
                     PolicyMUID = pol2,
                     PolicyDueDate = DateTime.Now,
                     MinimumPayment = 283.99,
@@ -288,6 +299,7 @@ namespace NJInsurancePlatform.Data
                 new Bill
                 {
                     BillMUID = bill3,
+                    CustomerMUID = cust3,
                     PolicyMUID = pol3,
                     PolicyDueDate = DateTime.Now,
                     MinimumPayment = 129.09,
@@ -298,6 +310,7 @@ namespace NJInsurancePlatform.Data
                 new Bill
                 {
                     BillMUID = bill4,
+                    CustomerMUID = cust4,
                     PolicyMUID = pol4,
                     PolicyDueDate = DateTime.Now,
                     MinimumPayment = 449.09,
