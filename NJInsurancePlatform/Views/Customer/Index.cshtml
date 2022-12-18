@@ -5,15 +5,15 @@
     var found = true;
 }
 @{
-    var weatherWrapper = new WeatherApi();
+    //var weatherWrapper = new WeatherApi();
 
-    var result = await weatherWrapper.GetResult();   // REENABLE FOR WEATHER API
+    //var result = await weatherWrapper.GetResult();   // REENABLE FOR WEATHER API
 
     var options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
-    var weatherJson = JsonSerializer.Deserialize<Root>(result, options);  // REENABLE FOR WEATHER API
+    //var weatherJson = JsonSerializer.Deserialize<Root>(result, options);  // REENABLE FOR WEATHER API
 }
 @*<-- User welcome & Weather-->*@
 <div class="welcome-container" style="clear:right; padding-left:2rem;padding-right:2rem;">
@@ -23,12 +23,12 @@
     </span>
     <span class="weather-right">
         @*RE-ENABLE BELOW FOR WEATHER API*@
-        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
-        <div style="position: relative; float:left; padding: 10px">
-            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
-            
-<p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
-
+@*        <img style="block-size:125px; float:right" src="/images/@string.Concat(@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString()).ToLower().Replace(" ","_") + ".svg")" />
+*@        <div style="position: relative; float:left; padding: 10px">
+@*            <h5 class="white-text">@weatherJson.Data.Timelines[0].Intervals[0].Values.Temperature<span class="symbol">&#176;</span> F</h5>
+*@            
+@*<p class="left white-text">@WeatherCodeHelper.GetWeatherCode(weatherJson.Data.Timelines[0].Intervals[0].Values.WeatherCode.ToString())</p>
+*@
         @*RE-ENABLE ABOVE FOR WEATHER API*@
 </div>
     </span>
@@ -89,11 +89,17 @@
                                    
                                     @if(Model.Bills != null)
                                     {
+                                        @for (int j = 0; j < Model.Bills.Count; j++)
+                                        {
+                                            @if (Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID)
+                                            {
 
-                                           <!--MAKE A PAYMENT BUTTON-->
-                                           <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment"  asp-action="MakePayment" asp-route-policyId="@Model.Policies[i].PolicyMUID" asp-route-billId="@Model.Bills[i].BillMUID">Make a Payment</a>
+                                                <!--MAKE A PAYMENT BUTTON-->
+                                                <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment"  asp-action="MakePayment" asp-route-policyId="@Model.Policies[i].PolicyMUID" asp-route-billId="@Model.Bills[j].BillMUID">Make a Payment</a>
+                                            }
+                                        }
 
-                                    }
+                        }
                          
                                     </div>
 
@@ -124,8 +130,9 @@
                                 <!--COLUMN 3 SHOWING CURRENT BILL-->
                                     @if(Model.Bills != null)
                                     {
-
-                                        @if(Model.Bills[i].Status == "Due")
+                                    @for(int j = 0; j < Model.Bills.Count; j++)
+                                    {
+                                        @if(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID)
                                         {
                                          <div class="col s4" style="width:30%">
                                             <div style="display:flex;flex-direction:column;padding-bottom:5px;">
@@ -133,13 +140,13 @@
                                             </div>                                    
                                             <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                                 <span><b>Due Date</b></span>
-                                                <span>@Model.Bills[i]?.PolicyDueDate</span>
+                                                <span>@Model.Bills[j]?.PolicyDueDate</span>
                                             </div>
 
                                             <!--If there is an overpayment-->
-                                            @if(Model.Bills[i].Balance < 0)
+                                            @if(Model.Bills[j].Balance < 0)
                                             {
-                                                var surplus = Model.Bills[i].Balance * -1;
+                                                var surplus = Model.Bills[j].Balance * -1;
 
                                                 <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                                 <span><b>You Currently Have a Surplus Of</b></span>
@@ -148,19 +155,20 @@
                                             } 
                                         
                                             <!--If No OverPayment-->
-                                            @if(Model.Bills[i].Balance >= 0)
+                                            @if(Model.Bills[j].Balance >= 0)
                                             {
                                             <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                                 <span><b>Your Balance</b></span>
-                                                <span>@Model.Bills[i]?.Balance</span>
+                                                <span>@Model.Bills[j]?.Balance</span>
                                             </div>   
                                             }                                       
                                             <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                                 <span><b>MinimumPayment</b></span>
-                                                <span>@Model.Bills[i]?.MinimumPayment</span>
+                                                <span>@Model.Bills[j]?.MinimumPayment</span>
                                             </div>
-                                        </div> 
-                                        }                                        
+                                          </div> 
+                                        }   
+                                    }                                        
                                 }               
                             </div>
                         </div>
