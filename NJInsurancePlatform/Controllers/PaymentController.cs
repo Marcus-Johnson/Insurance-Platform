@@ -168,7 +168,6 @@ namespace NJInsurancePlatform.Controllers
             TransactionRepository.InsertTransaction(newTransaction);
             TransactionRepository.Save();
 
-
             // BELOW NEEDS TO BE MOVED TO TRANSACTION APPROVAL CONTROLLER /////////////////////////////////////
             // Pull From Transactions Again After Updates Have Been Made
             var allTransactons = await TransactionRepository.GetTransactions();
@@ -205,6 +204,7 @@ namespace NJInsurancePlatform.Controllers
             PolicyRepository.UpdatePolicy(updatePolicy);
             PolicyRepository.Save();
             Thread.Sleep(5000);
+            
             // MOVE TO TRANSACTION APPROVAL CONTROLLER ////////////////////////////////////////////////////////////////
 
             return RedirectToAction("Index", "Customer");

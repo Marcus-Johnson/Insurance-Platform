@@ -14,11 +14,11 @@
 
             @foreach (var product in Model)
             {
-                <form style="width:35%;">
+                <form style="width:35%;" style="justify-content: center;">
                     <button class="policyButton" asp-controller="Customer" asp-action="CustomerPolicyRequest" asp-route-Id="@product.ProductMUID" style="width:100%;box-shadow:4px 4px 4px rgba(5,5,5,.3)">
-                        <input readonly asp-for="@product.ProductName" />
-                        <h5>@product.ProductName</h5>
-                        <hr size="1" width="90%" />
+                        <input readonly style="align-content:center; justify-content: center; text-align: center;" asp-for="@product.ProductName" />
+                        @*<h5>@product.ProductName</h5>*@
+                        @*<hr size="1" width="90%" />*@
                         <p HTML.DisplayFor("@product.Price") style="margin-bottom: 5%; padding: 2%;"><b>Policy total:</b>&nbsp;&nbsp; $@product.Price</p>
                         <p HTML.DisplayFor("@product.AnnualLimitOfCoverage") style="margin-bottom: 5%; padding: 2%;"><b>Policy Paid off Amount:</b>&nbsp;&nbsp; $@product.AnnualLimitOfCoverage</p>
                         <p HTML.DisplayFor("@product.Deductible") style="margin-bottom: 5%; padding: 2%;"><b>Policy Deductible:</b>&nbsp;&nbsp; $@product.Deductible</p>

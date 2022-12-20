@@ -26,6 +26,31 @@ body {
     background: -moz-radial-gradient(bottom left, #42464B, #110040);
     background: radial-gradient(to top right, #42464B, #110040);
 }
+.dark-mode li div {
+        background-color: #110040;
+    }
+.dark-mode div ul li form div input {
+    color: white;
+}
+.dark-mode section div div ul {
+   background-color: #110040;
+   color: white;
+}
+.dark-mode section div div ul li {
+   background-color: #110040;
+   color: white;
+}
+.dark-mode section div div ul li a {
+   color: white;
+}
+/*.darkmode .tabs {
+    background-color: #110040;
+    color: white;
+}
+.darkmode .tab {
+    background-color: #110040;
+    color: white;*/
+}
 
 main {
     width: 100vw;
@@ -55,4 +80,11 @@ footer {
     background-color: white;
     color: midnightblue;
     font-weight: 700;
+}
+
+/* Global Center Style*/
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
