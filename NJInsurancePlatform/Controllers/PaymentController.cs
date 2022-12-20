@@ -19,14 +19,16 @@ namespace NJInsurancePlatform.Controllers
         private readonly ITransactionRepository TransactionRepository;
         private readonly iBillRepository BillRepository;
         private readonly IPaymentRepository PaymentRepository;
+        private readonly IProductRepository _productRepository;
         private readonly UserManager<ApplicationUser> userManager;
 
-        public PaymentController(ILogger<PaymentController> logger, IPolicyRepository PolicyRepository, ITransactionRepository TransactionRepository, iBillRepository BillRepository, IPaymentRepository PaymentRepository, UserManager<ApplicationUser> userManager)
+        public PaymentController(IProductRepository productRepository, ILogger<PaymentController> logger, IPolicyRepository PolicyRepository, ITransactionRepository TransactionRepository, iBillRepository BillRepository, IPaymentRepository PaymentRepository, UserManager<ApplicationUser> userManager)
         {
             this.PolicyRepository = PolicyRepository;
             this.TransactionRepository = TransactionRepository;
             this.BillRepository = BillRepository;
             this.PaymentRepository = PaymentRepository;
+            this._productRepository = productRepository;
             this.userManager = userManager;
             _logger = logger;
         }
@@ -39,24 +41,27 @@ namespace NJInsurancePlatform.Controllers
 
         [Authorize(Roles = "Customer, Pending, Beneficiary")]
         [HttpGet]
-        public async Task<IActionResult> MakePayment()
+        public async Task<IActionResult> MakePayment(Guid policyId, Guid billId)
         {
-            var policy = await PolicyRepository.GetPolicies();
+
+            var allPolicies = await PolicyRepository.GetPolicies();
             var identityUser = User.Identity.Name;
             var user = await userManager.FindByNameAsync(identityUser);
-            Policy getPolicy = policy.FirstOrDefault(p => p.CustomerMUID == user.CustomerMUID);
+            Policy getPolicy = allPolicies.FirstOrDefault(p => p.PolicyMUID == policyId);
             var Bills = await BillRepository.GetBills();
-            Bill getBillbyID = Bills.FirstOrDefault(b => b.PolicyMUID == user.PolicyMUID);
-            
-            PaymentViewModel paymentViewModel = new PaymentViewModel() 
-            { 
+            Bill getBillbyID = Bills.FirstOrDefault(b => b.BillMUID == billId);
+            var userBills = Bills.FindAll(b => b.CustomerMUID == user.CustomerMUID);
+
+            PaymentViewModel paymentViewModel = new PaymentViewModel()
+            {
                 Policy = getPolicy,
                 ApplicationUser = user,
                 Bill = getBillbyID,
+                Bills = userBills,
             };
 
             // If No Bill Exists Redirect To index
-            if(paymentViewModel.Bill == null)
+            if (paymentViewModel.Bill == null)
             {
                 return RedirectToAction("Index", "Customer");
             }
@@ -66,9 +71,16 @@ namespace NJInsurancePlatform.Controllers
 
 
         [HttpPost]
-        public IActionResult MakePayment(PaymentViewModel model)
+        public async Task<IActionResult> MakePayment(PaymentViewModel model)
         {
-            System.Diagnostics.Debug.WriteLine(model);
+            var products = await _productRepository.GetPolicies();
+            var currentProduct = products.FirstOrDefault(p => p.ProductMUID == model.Policy.ProductMUID);
+            var minimumPayment = (decimal)currentProduct.Price / 12;
+            var minimumPaymentRound = Decimal.Round(minimumPayment, 2);
+            var identityUser = User.Identity.Name;
+            var user = await userManager.FindByNameAsync(identityUser);
+            var totalPayments = 0;
+
             Payment newPayment = new Payment()
             {
                 PaymentMUID = Guid.NewGuid(),
@@ -92,25 +104,54 @@ namespace NJInsurancePlatform.Controllers
                 AdditionalInfo = model.Payment.AdditionalInfo,
                 CreatedDate = model.Payment.CreatedDate,
             };
-            System.Diagnostics.Debug.WriteLine(newPayment);
+            //System.Diagnostics.Debug.WriteLine(newPayment);
 
             PaymentRepository.InsertPayment(newPayment);
             PaymentRepository.Save();
             Thread.Sleep(5000);
 
-            Bill newBill = new Bill()
+            var currentBalance = Math.Round(model.Bill.Balance, 2);
+            var currentPayment = Math.Round(model.Payment.Amount, 2);
+
+            // Update Current Bill
+            Bill currentBill = new Bill()
             {
                 BillMUID = model.Bill.BillMUID,
+                CustomerMUID = (Guid)user.CustomerMUID,
                 PolicyMUID = model.Policy.PolicyMUID,
                 PolicyDueDate = model.Bill.PolicyDueDate,
-                MinimumPayment = model.Bill.MinimumPayment,
+                MinimumPayment = (double)minimumPaymentRound,
                 CreatedDate = DateTime.Now,
-                Balance = model.Bill.Balance,
+                Balance = currentBalance - currentPayment,
                 Status = "Paid",
             };
-            System.Diagnostics.Debug.WriteLine(newBill);
+            //System.Diagnostics.Debug.WriteLine(newBill);
 
-            BillRepository.UpdateBill(newBill);
+            BillRepository.UpdateBill(currentBill);
+            BillRepository.Save();
+            Thread.Sleep(5000);
+
+            // 
+            var allBills = await BillRepository.GetBills();
+            var updatedBill = allBills.FirstOrDefault(b => b.BillMUID == model.Bill.BillMUID);
+            var balance = updatedBill.Balance;
+            var roundedBalance = Math.Round(balance, 2);
+
+            // Create new Bill With Pending Status For Future Payments
+            Bill newBill = new Bill()
+            {
+                BillMUID = Guid.NewGuid(),
+                CustomerMUID = (Guid)user.CustomerMUID,
+                PolicyMUID = model.Policy.PolicyMUID,
+                PolicyDueDate = model.Bill.PolicyDueDate.AddDays(30),
+                MinimumPayment = (double)minimumPaymentRound,
+                CreatedDate = DateTime.Now,
+                Balance = roundedBalance,
+                Status = "Due",
+            };
+            //System.Diagnostics.Debug.WriteLine(newBill);
+
+            BillRepository.InsertBill(newBill);
             BillRepository.Save();
             Thread.Sleep(5000);
 
@@ -127,7 +168,23 @@ namespace NJInsurancePlatform.Controllers
             TransactionRepository.InsertTransaction(newTransaction);
             TransactionRepository.Save();
 
-            //Set Policy Payment Status to False
+
+            // BELOW NEEDS TO BE MOVED TO TRANSACTION APPROVAL CONTROLLER /////////////////////////////////////
+            // Pull From Transactions Again After Updates Have Been Made
+            var allTransactons = await TransactionRepository.GetTransactions();
+
+            // Get Total Payments made From Transactions
+            foreach (var transaction in allTransactons)
+            {
+                if (transaction.CustomerMUID == user.CustomerMUID && transaction.PolicyMUID == model.Policy.PolicyMUID)
+                {
+                    totalPayments += (int)transaction.PaymentAmount;
+                }
+            }
+
+            // BELOW NEEDS TO BE MOVED TO TRANSACTION APPROVAL CONTROLLER
+            // Set Policy Payment Due Status to False
+            // Update Policy Paid Off Amount
             Policy updatePolicy = new Policy
             {
                 PolicyMUID = model.Policy.PolicyMUID,
@@ -140,7 +197,7 @@ namespace NJInsurancePlatform.Controllers
                 AnnualLimitOfCoverage = model.Policy.AnnualLimitOfCoverage,
                 PolicyPaymentisDue = false,
                 PolicyTotalAmount = model.Policy.PolicyTotalAmount,
-                PolicyPaidOffAmount = model.Policy.PolicyPaidOffAmount,
+                PolicyPaidOffAmount = totalPayments,
                 PolicyStart_Date = model.Policy.PolicyStart_Date,
                 PolicyEnd_Date = model.Policy.PolicyEnd_Date,
                 Pending = false,
@@ -148,6 +205,7 @@ namespace NJInsurancePlatform.Controllers
             PolicyRepository.UpdatePolicy(updatePolicy);
             PolicyRepository.Save();
             Thread.Sleep(5000);
+            // MOVE TO TRANSACTION APPROVAL CONTROLLER ////////////////////////////////////////////////////////////////
 
             return RedirectToAction("Index", "Customer");
         }

@@ -33,53 +33,97 @@ namespace NJInsurancePlatform.Controllers
             // retreive all records based on check status
             if (keywords == null && ispaid == false && getall == true)
             {
-                foreach (var user in allUsers)
-                {
-                    foreach (var transaction in allTransactions)
-                    {
-                        foreach (var policy in allPolicies)
-                        {
 
-                            // exclude beneficiaries and check for "isPaymentComplete" status"
-                            if (user.CustomerMUID == transaction.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && user.BeneficiaryMUID == null)
-                            {
-                                var allreadyThere = allTransactionsViewModel.Transactions.Exists(t=> t.TransactionMUID == transaction.TransactionMUID);
-                                if(allreadyThere != true)
-                                {
-                                    allTransactionsViewModel.Transactions.Add(transaction);
-                                }
-                                allTransactionsViewModel.ApplicationUsers.Add(user);
-                                allTransactionsViewModel.Policies.Add(policy);
-                            }
+                for (int i = 0; i < allTransactions.Count; i++)
+                {
+                    // is transaction already present in the list?
+                    var transactionAllReadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == allTransactions[i].TransactionMUID);
+
+                    if (allTransactions[i].isPaymentComplete == true || allTransactions[i].isPaymentComplete == false)
+                    {
+                        // if not present in the list, add it.    
+                        if (!transactionAllReadyThere)
+                        {
+                            // Match Policies, and Transactions by MUID numbers
+                            var userByTransaction = allUsers.FirstOrDefault(u => u.CustomerMUID == allTransactions[i].CustomerMUID && u.BeneficiaryMUID == null && u.FirstName != null);
+                            var policyByTransaction = allPolicies.FirstOrDefault(p => p.PolicyMUID == allTransactions[i].PolicyMUID);
+
+                            // insert items into corresponding index locations in there respective lists
+                            allTransactionsViewModel.Policies.Insert(i, policyByTransaction);
+                            allTransactionsViewModel.ApplicationUsers.Insert(i, userByTransaction);
+                            allTransactionsViewModel.Transactions.Insert(i, allTransactions[i]);
+
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + findUserById.FirstName + " ApplicationUser # " + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + policyByTransaction.PolicyOwner + " Policy Owner " + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + policyByTransaction.PolicyMUID + " Policy Number " + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + allTransactions[i].PolicyMUID + " Policy Number# " + i);
+
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + allTransactionsViewModel.ApplicationUsers[i].FirstName + " ApplicationUser # " + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + allTransactionsViewModel.Policies[i].PolicyOwner + " Policy Name " + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + allTransactionsViewModel.Policies[i].PolicyMUID + " Policy Number From Policy" + i);
+                            //System.Diagnostics.Debug.WriteLine(">>>>>>>>>>>>>>>> " + allTransactions[i].PolicyMUID + " Policy Number From Transaction " + i);
+
                         }
+
                     }
+
                 }
 
                 return View("TransactionSearchResults", allTransactionsViewModel);
             }
 
-            // if user input is Blank, retreive all records based on check status
-            if (keywords == null)
+
+
+            // Return Only Paid transactions
+            if (keywords == null && ispaid == true && getall == false)
             {
-                foreach (var user in allUsers)
-                {
-                    foreach (var transaction in allTransactions)
-                    {
-                        foreach (var policy in allPolicies)
-                        {
+                // Filter only paid transactions
+                var onlyPaidTransactions = allTransactions.Where(t => t.isPaymentComplete == true).ToList();
 
-                            // exclude beneficiaries and check for "isPaymentComplete" status"
-                            if (user.CustomerMUID == transaction.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && transaction.isPaymentComplete == ispaid && user.BeneficiaryMUID == null)
-                            {
-                                var allreadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == transaction.TransactionMUID);
-                                if (allreadyThere != true)
-                                {
-                                    allTransactionsViewModel.Transactions.Add(transaction);
-                                }
-                                allTransactionsViewModel.ApplicationUsers.Add(user);
-                                allTransactionsViewModel.Policies.Add(policy);
-                            }
-                        }
+                for (int i = 0; i < onlyPaidTransactions.Count; i++)
+                {
+                    // is transaction already present in the list?
+                    var transactionAllReadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == onlyPaidTransactions[i].TransactionMUID);
+
+                    // if not present in the list, add it.    
+                    if (!transactionAllReadyThere)
+                    {
+                        // Match Policies, and Transactions by MUID numbers
+                        var userByTransaction = allUsers.FirstOrDefault(u => u.CustomerMUID == onlyPaidTransactions[i].CustomerMUID && u.BeneficiaryMUID == null && u.FirstName != null);
+                        var policyByTransaction = allPolicies.FirstOrDefault(p => p.PolicyMUID == onlyPaidTransactions[i].PolicyMUID);
+
+                        // insert items into corresponding index locations in there respective lists
+                        allTransactionsViewModel.Policies.Insert(i, policyByTransaction);
+                        allTransactionsViewModel.ApplicationUsers.Insert(i, userByTransaction);
+                        allTransactionsViewModel.Transactions.Insert(i, onlyPaidTransactions[i]);
+                    }
+                }
+
+                return View("TransactionSearchResults", allTransactionsViewModel);
+            }
+
+            // Return Unpaid transactions
+            if (keywords == null && ispaid == false && getall == false)
+            {
+                // Filter only paid transactions
+                var UnPaidTransactions = allTransactions.Where(t => t.isPaymentComplete == false).ToList();
+
+                for (int i = 0; i < UnPaidTransactions.Count; i++)
+                {
+                    // is transaction already present in the list?
+                    var transactionAllReadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == UnPaidTransactions[i].TransactionMUID);
+
+                    // if not present in the list, add it.    
+                    if (!transactionAllReadyThere)
+                    {
+                        // Match Policies, and Transactions by MUID numbers
+                        var userByTransaction = allUsers.FirstOrDefault(u => u.CustomerMUID == UnPaidTransactions[i].CustomerMUID && u.BeneficiaryMUID == null && u.FirstName != null);
+                        var policyByTransaction = allPolicies.FirstOrDefault(p => p.PolicyMUID == UnPaidTransactions[i].PolicyMUID);
+
+                        // insert items into corresponding index locations in there respective lists
+                        allTransactionsViewModel.Policies.Insert(i, policyByTransaction);
+                        allTransactionsViewModel.ApplicationUsers.Insert(i, userByTransaction);
+                        allTransactionsViewModel.Transactions.Insert(i, UnPaidTransactions[i]);
                     }
                 }
 
@@ -87,51 +131,60 @@ namespace NJInsurancePlatform.Controllers
             }
 
 
-            // if user input is not blank
+
             else if (keywords != null)
             {
+                string[] inputKeywords = keywords.Split(new string[] { ",", " " }, StringSplitOptions.RemoveEmptyEntries);         // Create An array from input fields
 
-                // Validate user input Search Input
-                foreach (var user in allUsers)
+                List<ApplicationUser> matchingUsers = new List<ApplicationUser>();
+
+                for (int i = 0; i < inputKeywords.Count(); i++)          // Loop through keywords array
                 {
-                    // remove all white space and to lowercase variables
-                    var keywordsNOspace = String.Concat(keywords.Where(c => !Char.IsWhiteSpace(c))).ToLower();
-                    var firstLast = user.FirstName + user.LastName;
-                    var firstLastLowerCase = firstLast.ToLower();
+                    var matchingUser = allUsers.FirstOrDefault(u => u.FirstName.ToLower() == inputKeywords[i].ToLower() || u.LastName.ToLower() == inputKeywords[i].ToLower());       // If match is found
 
-                    // only get users with a first and last name
-                    if (user.FirstName != null && user.FirstName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
-                        user.LastName != null && user.LastName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
-                        user.FirstName != null && user.LastName != null && keywordsNOspace == firstLastLowerCase)
+                    if (matchingUser != null)
                     {
-                        //allTransactionsViewModel.ApplicationUsers.Add(user);
+                        var userAlreadyInList = allTransactionsViewModel.ApplicationUsers.Exists(u => u.CustomerMUID == matchingUser.CustomerMUID);                    // Check If user is On The List
 
-                        foreach (var transaction in allTransactions)
+                        if (!userAlreadyInList)
                         {
-                            foreach (var policy in allPolicies)
-                            {
-                                if (transaction.CustomerMUID == user.CustomerMUID && policy.CustomerMUID == user.CustomerMUID && transaction.isPaymentComplete == ispaid)
-                                {
-                                    var allreadyThere = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == transaction.TransactionMUID);
-                                    if (allreadyThere != true)
-                                    {
-                                        allTransactionsViewModel.Transactions.Add(transaction);
-                                    }
-                                    allTransactionsViewModel.ApplicationUsers.Add(user);
-                                    allTransactionsViewModel.Policies.Add(policy);
+                            matchingUsers.Add(matchingUser);
+                        }
+                    }
 
-                                }
-                            }
+                }
+
+                // Now that we have some possible matches, loop through array to find matching transactions
+                for (int i = 0; i < matchingUsers.Count; i++)
+                {
+                    // Iterate Through All Transactions For each User To find a Match
+                    for (int j = 0; j < allTransactions.Count; j++)
+                    {
+                        var transactionAlreadyInList = allTransactionsViewModel.Transactions.Exists(t => t.TransactionMUID == allTransactions[j].TransactionMUID);
+
+                        if (allTransactions[j].CustomerMUID == matchingUsers[i].CustomerMUID && !transactionAlreadyInList)
+                        {
+                            // Now that we found transactions that match this customer, we can find the policies that match this transaction
+                            var findPolicyByTransaction = allPolicies.FirstOrDefault(p => p.PolicyMUID == allTransactions[j].PolicyMUID);
+
+                            allTransactionsViewModel.ApplicationUsers.Add(matchingUsers[i]);
+                            allTransactionsViewModel.Policies.Add(findPolicyByTransaction);
+                            allTransactionsViewModel.Transactions.Add(allTransactions[j]);
 
                         }
 
                     }
+
                 }
 
             }
+            //        var keywordsNOspace = String.Concat(keywords.Where(c => !Char.IsWhiteSpace(c))).ToLower();
+            //        if (user.FirstName != null && user.FirstName.Contains(keywords, StringComparison.OrdinalIgnoreCase) ||
+
 
             return View("TransactionSearchResults", allTransactionsViewModel);
         }
+
 
 
         // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
 using NJInsurancePlatform.Models;
-
+using NJInsurancePlatform.Data;
 using Microsoft.AspNetCore.Authorization;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Interfaces;
@@ -23,8 +23,8 @@ namespace NJInsurancePlatform.Controllers
         private readonly iClaimRepository ClaimRepository;
         private readonly iBillRepository BillRepository;
 
-        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
-            IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository, 
+        public CustomerController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            IPolicyRepository policyRepository, ITransactionRepository transactionRepository, IProductRepository productRepository,
             ICustomerRepository customerRepository, iClaimRepository ClaimRepository, iBillRepository billRepository)
         {
             this.userManager = userManager;
@@ -51,21 +51,30 @@ namespace NJInsurancePlatform.Controllers
             var allTransactions = await transactionRepository.GetTransactions();
             var findTransactionByCustomerMUID = allTransactions.FindAll(t => t.CustomerMUID == user.CustomerMUID);
 
+
+
             CustomerHomePageVieModel customerHomePageVieModel = new CustomerHomePageVieModel();
 
             // Add Policies To Customer List Items
-            foreach (var policy in findPolicyByCustomerMUID)
+            foreach (var bill in allBills)
             {
-                foreach (var bill in allBills)
+                foreach (var policy in findPolicyByCustomerMUID)
                 {
+                    var billAllReadyThere = customerHomePageVieModel.Bills.Exists(b => b.BillMUID == bill.BillMUID);
+                    var policyAllReadyThere = customerHomePageVieModel.Policies.Exists(p => p.PolicyMUID == policy.PolicyMUID);
 
-                    if (bill.PolicyMUID == policy.PolicyMUID)
+                    if (bill.PolicyMUID == policy.PolicyMUID && !billAllReadyThere)
                     {
                         customerHomePageVieModel.Bills.Add(bill);
+
+                    }
+                    if (!policyAllReadyThere)
+                    {
+                        customerHomePageVieModel.Policies?.Add(policy);
+
                     }
                 }
-                customerHomePageVieModel.Policies?.Add(policy);
-                customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
+                //customerHomePageVieModel.PolicyNames?.Add(policy?.NameOfPolicy);
 
             }
 
@@ -74,17 +83,23 @@ namespace NJInsurancePlatform.Controllers
             // Add Transactions To customer List Items
             foreach (var transaction in findTransactionByCustomerMUID)
             {
-                customerHomePageVieModel.Transactions?.Add(transaction);
+                var transactionAllreadyThere = customerHomePageVieModel.Transactions.Exists(t => t.TransactionMUID == transaction.TransactionMUID);
+
+                if (!transactionAllreadyThere)
+                {
+                    customerHomePageVieModel.Transactions?.Add(transaction);
+                }
             }
 
             return View(customerHomePageVieModel);
         }
 
-        [Authorize(Roles ="Customer, Pending, Beneficiary")]
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
         [HttpGet]
-        public async Task<ActionResult> CustomerPolicyRequest(string Id)                                     
-        {            
+        public async Task<ActionResult> CustomerPolicyRequest(string Id)
+        {
             var allProducts = await productRepository.GetPolicies();                                        // Get Products
+            var allBills = await BillRepository.GetBills();
             var identityUserName = User.Identity?.Name;                                                     // Get Identity of User Signed Ub
             var user = await userManager.FindByNameAsync(identityUserName);                                 //Find User By Identity
             var product = allProducts.FirstOrDefault(p => p.ProductMUID.ToString() == Id);                  //Find Product Clicked On
@@ -96,18 +111,42 @@ namespace NJInsurancePlatform.Controllers
                 Customer = user,
             };
 
+            // Get Bill that matches Customer
+            foreach (var bill in allBills)
+            {
+                var billExists = customerRequestView.Bills.Exists(b => b.BillMUID == bill.BillMUID);
+
+                if (bill.CustomerMUID == user.CustomerMUID && !billExists)
+                {
+                    customerRequestView.Bills.Add(bill);
+                }
+            }
+
             return View(customerRequestView);
-        }        
-        
-        
+        }
+
+
         [HttpPost]
-        public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)                                     
+        public async Task<ActionResult> CustomerPolicyRequest(CustomerPolicyRequestViewModel model)
         {
             var customerMUID = new Guid(model.Customer.CustomerMUID.ToString());
+            var policyMUID = Guid.NewGuid();
+            var minimumPayment = (decimal)model.Product.Price / 12;   // price of product divided by 12 installments
+            var roundedPayment = Decimal.Round(minimumPayment, 2);    // rounded 
+            //Decimal existingMinimumPayment = (decimal)model.Bill.MinimumPayment;
 
-            Policy policy = new Policy()
+
+            // Reuse Entity Already Being Tracked By The DbContext
+            var user = await userManager.FindByIdAsync(model.Customer.Id);
+            var allBills = await BillRepository.GetBills();
+            var userBills = allBills.FindAll(b => b.CustomerMUID == user.CustomerMUID);
+            var userBillsCount = userBills.Count();
+
+
+            Policy newPolicy = new Policy()
             {
-                PolicyMUID = Guid.NewGuid(),
+                //PolicyMUID = Guid.NewGuid(),
+                PolicyMUID = policyMUID,
                 ProductMUID = model.Product.ProductMUID,
                 CustomerMUID = customerMUID,
                 NameOfPolicy = model.Product.ProductName,
@@ -118,17 +157,53 @@ namespace NJInsurancePlatform.Controllers
                 PolicyPaymentisDue = true,
                 PolicyTotalAmount = model.Product.PolicyTotalAmount,
                 PolicyPaidOffAmount = 0,
+                PolicyStart_Date = DateTime.Now,
+                PolicyEnd_Date = DateTime.Now.AddDays(365),
                 Pending = true,
             };
 
-            policyRepository.InsertPolicy(policy);
+            // Insert and Save
+            policyRepository.InsertPolicy(newPolicy);
             policyRepository.Save();
+
+
+            // BELOW SHOULD BE ADDED TO POLICY REQUEST CONTROLLER /////////////////////////////
+            // Create a new bill on policy request with a status of DUE
+            Bill newBill = new Bill()
+            {
+                BillMUID = Guid.NewGuid(),
+                PolicyMUID = policyMUID,
+                CustomerMUID = customerMUID,
+                PolicyDueDate = DateTime.Now,
+                MinimumPayment = (double)roundedPayment,
+                CreatedDate = DateTime.Now,
+                Balance = (double)model.Product.Price,
+                Status = "Due",
+            };
+
+            BillRepository.InsertBill(newBill);
+            BillRepository.Save();
+
+
+            //else
+            //{
+            //    // Else, Update The Balance
+            //    model.Bill.MinimumPayment = existingMinimumPayment + roundedPayment;
+            //    model.Bill.Balance = ((double)model.Bill.Balance + (double)model.Product.Price);
+
+            //    BillRepository.UpdateBill(model.Bill);
+            //    BillRepository.Save();
+            //}
+
+
+            //user.PolicyMUID = policyMUID;
+            //var result = await userManager.UpdateAsync(user);
 
             return RedirectToAction("Index", "Customer");
         }
 
 
-        [Authorize(Roles ="Customer, Beneficiary")]
+        [Authorize(Roles = "Customer, Beneficiary")]
         [HttpGet]
         public IActionResult Details()
         {
@@ -173,6 +248,7 @@ namespace NJInsurancePlatform.Controllers
 
             ClaimRepository.InsertClaim(claim);
             ClaimRepository.Save();
+
             return RedirectToAction("Index", "Home");
 
         }

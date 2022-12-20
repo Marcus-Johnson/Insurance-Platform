@@ -93,7 +93,6 @@ namespace NJInsurancePlatform.Data
             var prod3 = Guid.NewGuid();
             var prod4 = Guid.NewGuid();
 
-          
 
             // Products
             builder.Entity<Product>().HasData(
@@ -163,7 +162,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
                 },
                 new Policy
@@ -180,7 +179,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
 
                 },
@@ -198,7 +197,7 @@ namespace NJInsurancePlatform.Data
                     PolicyTotalAmount = 35000,
                     PolicyPaidOffAmount = 0,
                     PolicyStart_Date = DateTime.Now,
-                    PolicyEnd_Date = DateTime.Now,
+                    PolicyEnd_Date = DateTime.Now.AddDays(364),
                     Pending = false,
 
                 },
@@ -216,7 +215,7 @@ namespace NJInsurancePlatform.Data
                  PolicyTotalAmount = 150000,
                  PolicyPaidOffAmount = 0,
                  PolicyStart_Date = DateTime.Now,
-                 PolicyEnd_Date = DateTime.Now,
+                 PolicyEnd_Date = DateTime.Now.AddDays(364),
                  Pending = false,
 
              }
@@ -231,7 +230,7 @@ namespace NJInsurancePlatform.Data
                     CustomerMUID = cust1,
                     PolicyMUID = pol1,
                     isPaymentComplete = true,
-                    PaymentAmount = 1199.78,
+                    PaymentAmount = 195.25,
                     PaymentDate = DateTime.Now,
                 },
                 new Transaction
@@ -240,7 +239,7 @@ namespace NJInsurancePlatform.Data
                     CustomerMUID = cust2,
                     PolicyMUID = pol2,
                     isPaymentComplete = true,
-                    PaymentAmount = 2109.78,
+                    PaymentAmount = 278.58,
                     PaymentDate = DateTime.Now,
                 },
                 new Transaction
@@ -249,7 +248,7 @@ namespace NJInsurancePlatform.Data
                     CustomerMUID = cust3,
                     PolicyMUID = pol3,
                     isPaymentComplete = false,
-                    PaymentAmount = 109.08,
+                    PaymentAmount = 65.75,
                     PaymentDate = DateTime.Now,
                 },
                 new Transaction
@@ -258,7 +257,7 @@ namespace NJInsurancePlatform.Data
                     CustomerMUID = cust4,
                     PolicyMUID = pol4,
                     isPaymentComplete = false,
-                    PaymentAmount = 189.05,
+                    PaymentAmount = 100.08,
                     PaymentDate = DateTime.Now,
                 }
             );
@@ -268,45 +267,48 @@ namespace NJInsurancePlatform.Data
                 new Bill
                 {
                     BillMUID = bill1,
+                    CustomerMUID = cust1,
                     PolicyMUID = pol1,
                     PolicyDueDate = DateTime.Now,
-                    MinimumPayment = 123.99,
+                    MinimumPayment = 195.25,
                     CreatedDate = DateTime.Now,
-                    Balance = 799.34,
+                    Balance = 2147.75,
                     Status = "Due",
                 },
                 new Bill
                 {
                     BillMUID = bill2,
+                    CustomerMUID = cust2,
                     PolicyMUID = pol2,
                     PolicyDueDate = DateTime.Now,
-                    MinimumPayment = 283.99,
+                    MinimumPayment = 278.58,
                     CreatedDate = DateTime.Now,
-                    Balance = 509.34,
+                    Balance = 3064.41,
                     Status = "Due",
                 },
                 new Bill
                 {
                     BillMUID = bill3,
+                    CustomerMUID = cust3,
                     PolicyMUID = pol3,
                     PolicyDueDate = DateTime.Now,
-                    MinimumPayment = 129.09,
+                    MinimumPayment = 65.75,
                     CreatedDate = DateTime.Now,
-                    Balance = 109.34,
+                    Balance = 723.25,
                     Status = "Due",
                 },
                 new Bill
                 {
                     BillMUID = bill4,
+                    CustomerMUID = cust4,
                     PolicyMUID = pol4,
                     PolicyDueDate = DateTime.Now,
-                    MinimumPayment = 449.09,
+                    MinimumPayment = 100.08,
                     CreatedDate = DateTime.Now,
-                    Balance = 278.34,
+                    Balance = 1100.90,
                     Status = "Due",
                 }
             );
-
             // Payment
             builder.Entity<Payment>().HasData(
                 new Payment
@@ -532,8 +534,8 @@ namespace NJInsurancePlatform.Data
                     Gender = "male",
                     CreatedDate = DateTime.Now,
                     Active = true,
-                    UserName = "Pato",
-                    NormalizedUserName = "PATO",
+                    UserName = "PatrickL@mymail",
+                    NormalizedUserName = "PATRICKL@MYMAIL",
                     PasswordHash = hasher.HashPassword(null, "Password123@")
 
                 },
