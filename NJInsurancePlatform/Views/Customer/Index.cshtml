@@ -1,8 +1,14 @@
 ﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
 @using Weather.ApiWrapper;
+@using Microsoft.AspNetCore.Html;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Mvc.Razor;
+@using System.Web;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var found = true;
+    bool testing = true;
+    HtmlContentBuilder htmlContentBuilder = new HtmlContentBuilder();
 }
 @{
     var weatherWrapper = new WeatherApi();
@@ -42,8 +48,24 @@
                 <ul class="tabs" id="tabs-swipe-demo">
                     @for (int i = 0; i < Model.Policies?.Count; i++)
                     {
+                        <!--Swipe Labels-->
+                        @(Model.Policies[i].Pending ?
+                        htmlContentBuilder.AppendFormat(
+                           "<li class='tab col s3' styles='background-color:#27aae1'>" +
+                               $"<a href='#swipe-{i}'>{Model.Policies[i]?.NameOfPolicy} (PENDING)</a>" +
+                           "</li>"
+                          )
+                        :
+                        htmlContentBuilder.AppendFormat(
+                           "<li class='tab col s3' styles='background-color:#27aae1'>" +
+                               $"<a href='#swipe-{i}'>{Model.Policies[i]?.NameOfPolicy}</a>" +
+                           "</li>"))
+
+                        found = false;
+
+
                         <!--SHOW SWIPE LABEL-->
-                        @if(Model.Policies[i].Pending == true)
+                        @*@if(Model.Policies[i].Pending == true)
                         {
                             <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy (PENDING)</a></li>
 
@@ -54,7 +76,7 @@
                             
                         }
 
-                            found = false;
+                            found = false;*@
                     }
 
                 </ul>
@@ -81,43 +103,38 @@
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Out of Pocket Limit</b></span>
                                         <span>$@Model.Policies[i]?.OutOfPocketLimit</span>
-                                    </div>
+                                    </div>0
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Annual Limit of Coverage</b></span>
                                         <span>$@Model.Policies[i]?.AnnualLimitOfCoverage</span>
                                     </div>
 
-                                     @if (Model.Policies[i].Pending == true)
-                                     {
-                                    <!--MAKE A CLAIM BUTTON DISABLED-->
-                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn">PENDING</button>
-                                     }
-                                    else{
-                                    <!--MAKE A CLAIM BUTTON-->
-                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="@($"#modal{i}")">Make a Claim</button>
-                                    }
 
+                                    <!--<Make a Claim Button -->
+                                    @(Model.Policies[i].Pending? 
+                                    htmlContentBuilder.AppendFormat("<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn'>PENDING</button>")
+                                        :
+                                    htmlContentBuilder.AppendFormat($"<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn' href='#modal{i}')'>Make a Claim</button>")
+                                    )
+                                   
 
                                    
                                     @if(Model.Bills != null)
                                     {
                                         @for (int j = 0; j < Model.Bills.Count; j++)
                                         {
-                                            @if (Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID)
-                                            {
-                                                 @if (Model.Policies[i].Pending == true)
-                                                 {
-                                                <!--MAKE A PAYMENT BUTTON DISABLED-->
-                                                <a class="waves-effect waves-light btn btn-large white" id="btn">PENDING</a>
 
-                                                 }
-                                                else{
-                                                <!--MAKE A PAYMENT BUTTON-->
-                                                <a class="waves-effect waves-light btn btn-large white" id="btn" asp-controller="Payment"  asp-action="MakePayment" asp-route-policyId="@Model.Policies[i].PolicyMUID" asp-route-billId="@Model.Bills[j].BillMUID">Make a Payment</a>
+                                            @(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID?
 
-                                                }
-
-                                            }
+                                                // Make Payment Button
+                                                (Model.Policies[i].Pending? 
+                                                htmlContentBuilder.AppendFormat("<a class='waves-effect waves-light btn btn-large white' id='btn'>PENDING</a>")
+                                                    :
+                                                htmlContentBuilder.AppendFormat($"<a class='waves-effect waves-light btn btn-large white' id='btn'  href='Payment/MakePaymnt/{Model.Policies[i].PolicyMUID}/{Model.Bills[j].BillMUID}'>Make a Payment</a>")
+                                               )
+                                               :
+                                               ""
+                                            )
                                         }
 
                                     }

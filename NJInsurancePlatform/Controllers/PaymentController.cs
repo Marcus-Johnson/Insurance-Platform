@@ -39,8 +39,9 @@ namespace NJInsurancePlatform.Controllers
             return View();
         }
 
+
         [Authorize(Roles = "Customer, Pending, Beneficiary")]
-        [HttpGet]
+        [HttpGet("{Payment}/{MakePayment}/{policyId}/{billId}")]
         public async Task<IActionResult> MakePayment(Guid policyId, Guid billId)
         {
 
@@ -69,8 +70,9 @@ namespace NJInsurancePlatform.Controllers
             return View(paymentViewModel);
         }
 
+        [Authorize(Roles = "Customer, Pending, Beneficiary")]
+        [HttpPost("{Payment}/{MakePayment}/{policyId}/{billId}")]
 
-        [HttpPost]
         public async Task<IActionResult> MakePayment(PaymentViewModel model)
         {
             var products = await _productRepository.GetPolicies();
