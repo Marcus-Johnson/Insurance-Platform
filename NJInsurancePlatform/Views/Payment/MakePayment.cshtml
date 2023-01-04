@@ -370,7 +370,7 @@
         <div class="row">
             <div class="col s8">
                 <label>You have to Pay</label>
-                <h5>@Model.Bill.MinimumPayment<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right modal-trigger" href="#receipt-modal"><i class="material-icons">receipt_long</i></a></h5>
+                <h5>$@(Model.Bill.MinimumPayment > Model.Bill.Balance? Model.Bill.Balance : Model.Bill.MinimumPayment)<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right modal-trigger" href="#receipt-modal"><i class="material-icons">receipt_long</i></a></h5>
                 
                 <!-- Modal Receipt -->
                 <div id="receipt-modal" class="modal">
