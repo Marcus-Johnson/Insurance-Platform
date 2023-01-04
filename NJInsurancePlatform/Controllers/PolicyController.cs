@@ -46,7 +46,7 @@ namespace NJInsurancePlatform.Controllers
 
             var getPolicies = await PolicyRepository.GetPolicies();
             List<Policy> policies = new List<Policy>();
-            foreach(var policy in getPolicies)
+            foreach (var policy in getPolicies)
             {
                 policies.Add(policy);
             }
@@ -70,13 +70,15 @@ namespace NJInsurancePlatform.Controllers
             };
 
             return View(products);
-        }        
-        
-        
+        }
+
+
 
         [HttpPost]
         public async Task<IActionResult> PolicyRequest(Policy policy)
         {
+
+
             Policy updatedPolicy = new Policy()
             {
                 PolicyMUID = policy.PolicyMUID,
@@ -97,14 +99,33 @@ namespace NJInsurancePlatform.Controllers
             };
             PolicyRepository.UpdatePolicy(updatedPolicy);
             PolicyRepository.Save();
+
             return RedirectToAction("PolicyRequest");
         }
+
+
+        // If No Bill Exists, create a new bill
+        //if(model.Bill == null)
+        //{
+        //    Bill newBill = new Bill()
+        //    {
+        //        BillMUID = Guid.NewGuid(),
+        //        PolicyMUID = policyMUID,
+        //        PolicyDueDate = DateTime.Now,
+        //        MinimumPayment = (double)roundedPayment,
+        //        CreatedDate = DateTime.Now,
+        //        Balance = (double)model.Product.Price,
+        //        Status = "Due",
+        //    };
+
+        //    BillRepository.InsertBill(newBill);
+        //    BillRepository.Save();
 
         protected override void Dispose(bool disposing)
         {
             PolicyRepository.Dispose();
             base.Dispose(disposing);
-         }
+        }
 
 
         [Authorize(Roles = "Customer, Pending, Beneficiary")]

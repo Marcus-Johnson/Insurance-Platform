@@ -1,8 +1,13 @@
 ﻿@model NJInsurancePlatform.Models.CustomerHomePageVieModel
 @using Weather.ApiWrapper;
+@using Microsoft.AspNetCore.Html;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+@using Microsoft.AspNetCore.Mvc.Razor;
+@using System.Web;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var found = true;
+    HtmlContentBuilder htmlContentBuilder = new HtmlContentBuilder();
 }
 @{
     var weatherWrapper = new WeatherApi();
@@ -34,9 +39,7 @@
     </div>
 </div>
 
-<!-- Tabs for each policy -->
-<div class="flex-center">
-<section class="policy-tab" id="border">
+<section class="policy-tab">
     <div class="row">
         <div class="col s12">
             @if (Model.Policies != null || Model.Policies.Count != 0)
@@ -44,25 +47,31 @@
                 <ul class="tabs" id="tabs-swipe-demo">
                     @for (int i = 0; i < Model.Policies?.Count; i++)
                     {
-                        <!--SHOW SWIPE LABEL-->
+                        <!--Swipe Labels-->
+                        @(Model.Policies[i].Pending ?
+                        htmlContentBuilder.AppendFormat(
+                           "<li class='tab col s3' styles='background-color:#27aae1'>" +
+                               $"<a href='#swipe-{i}'>{Model.Policies[i]?.NameOfPolicy} (PENDING)</a>" +
+                           "</li>"
+                          )
+                        :
+                        htmlContentBuilder.AppendFormat(
+                           "<li class='tab col s3' styles='background-color:#27aae1'>" +
+                               $"<a href='#swipe-{i}'>{Model.Policies[i]?.NameOfPolicy}</a>" +
+                           "</li>"))
 
-                        if (Model.Policies[i].Pending == false)
-                        {
-                            <li class="tab col s3" styles="background-color:#27aae1"><a style="color:slategrey; font-weight: bold;"href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                            found = false;
-                        }
+                        found = false;
                     }
 
                 </ul>
                 @for (int i = 0; i < Model.Policies?.Count; i++)
                 {
                     <!--SHOW SWIPE BODY-->
-                    if (Model.Policies[i].Pending == false)
-                    {
                         <div id="@($"swipe-{i}")" class="col s12">
                             <div class="row">
-                                <!--COLUMN 1-->
-                                <div class="col s6">
+                            <!--COLUMN 1-->
+                                <div class="col s6" style="width:40%">
+                                    <br>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Number</b></span>
                                         <span>@Model.Policies[i]?.PolicyMUID</span>
@@ -74,47 +83,64 @@
                                     </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Deductible</b></span>
-                                        <span>@Model.Policies[i]?.Deductible</span>
+                                        <span>$@Model.Policies[i]?.Deductible</span>
                                     </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Out of Pocket Limit</b></span>
-                                        <span>@Model.Policies[i]?.OutOfPocketLimit</span>
-                                    </div>
+                                        <span>$@Model.Policies[i]?.OutOfPocketLimit</span>
+                                    </div>0
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Annual Limit of Coverage</b></span>
-                                        <span>@Model.Policies[i]?.AnnualLimitOfCoverage</span>
+                                        <span>$@Model.Policies[i]?.AnnualLimitOfCoverage</span>
                                     </div>
 
-                                    <!--MAKE A CLAIM BUTTON-->
-                                    <button class="waves-effect waves-light btn btn-large white modal-trigger" id="btn" href="@($"#modal{i}")">Make a Claim</button>
+
+                                    <!--<Make a Claim Button -->
+                                    @(Model.Policies[i].Pending? 
+
+                                    htmlContentBuilder.AppendFormat("<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn'>PENDING</button>")
+                                        :
+                                    htmlContentBuilder.AppendFormat($"<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn' href='#modal{i}')'>Make a Claim</button>")
+                                    )
+                                   
+
+                                   
                                     @if(Model.Bills != null)
                                     {
-                                        for(int j = 0; j < Model.Bills.Count; j++)
+                                        @for (int j = 0; j < Model.Bills.Count; j++)
                                         {
-                                            if(Model.Bills[j].Status != "Paid")
-                                            {
-                                            <!--MAKE A PAYMENT BUTTON-->
-                                            <a class="waves-effect waves-light btn btn-large white" id="btn" href="/Payment/MakePayment">Make a Payment</a>
-                                              
-                                            }
-                                                                                    }                                           
+
+                                            @(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID?
+
+                                                // Make Payment Button
+                                                (Model.Policies[i].Pending? 
+                                                htmlContentBuilder.AppendFormat("<a class='waves-effect waves-light btn btn-large white' id='btn'>PENDING</a>")
+                                                    :
+                                                htmlContentBuilder.AppendFormat($"<a class='waves-effect waves-light btn btn-large white' id='btn'  href='Payment/MakePaymnt/{Model.Policies[i].PolicyMUID}/{Model.Bills[j].BillMUID}'>Make a Payment</a>")
+                                               )
+                                               :
+                                               ""
+                                            )
+                                        }
+
                                     }
                          
-                                    </div>
+                                </div>
 
                                 <!--COLUMN 2-->
-                                <div class="col s4">
+                                <div class="col s6" style="width:30%">
+                                    <br>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Payment is Due</b></span>
                                         <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
                                     </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Total Amount</b></span>
-                                        <span>@Model.Policies[i]?.PolicyTotalAmount</span>
+                                        <span>$@Model.Policies[i]?.PolicyTotalAmount</span>
                                     </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Paid Off Amount</b></span>
-                                        <span>@Model.Policies[i]?.PolicyPaidOffAmount</span>
+                                        <span>$@Model.Policies[i]?.PolicyPaidOffAmount</span>
                                     </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Start Date</b></span>
@@ -124,55 +150,73 @@
                                         <span><b>Policy End Date</b></span>
                                         <span>@Model.Policies[i]?.PolicyEnd_Date</span>
                                     </div>
-                                </div>
+                                </div>                               
+                                
+                                <!--COLUMN 3 SHOWING CURRENT BILL-->
+                                    @if(Model.Bills != null)
+                                    {
+                                    @for(int j = 0; j < Model.Bills.Count; j++)
+                                    {
+                                        @(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID?
+                                        
+                                            (Model.Policies[i].Pending? 
+                                            htmlContentBuilder.AppendFormat(
+                                                "<div class='col s4' style='width:30%'>" +
+                                                    "<br>" +
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>POLICY IS CURRENTLY PENDING</b></span><br/>" +
+                                                    "</div>" +                                   
+                                                "</div>"
+                                                )
+                                            :
+                                            htmlContentBuilder.AppendFormat(
+                                                "<div class='col s4' style='width:30%'>" +
+                                                    "<br>" +
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>CURRENT BILL</b></span><br/>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>Due Date</b></span>" +
+                                                        $"<span style='font-size:20px;'>{Model.Bills[j]?.PolicyDueDate}</span>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        $"<span style='font-size:20px;'><b>{(Model.Bills[j].Balance < 0 ? "You Have a Surplus" : "Current Balance")}</b></span>" +
+                                                        $"<span style='font-size:20px;'>${(Model.Bills[j].Balance < 0 ? Model.Bills[j].Balance * -1 : Model.Bills[j].Balance)}</span>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        $"<span style='font-size:20px;'><b>{(Model.Bills[j].Balance < 0 ? "Refund Amount" : "Minimum Payment")}</b></span>" +
+
+                                                        "<!--If balance is less than minimum payment, pay balance, else pay minimum-->" +
+                                                        $"<span style='font-size:20px;'>${(Model.Bills[j].Balance < 0 ? Model.Bills[j].Balance * -1 : (Model.Bills[j].Balance < Model.Bills[j].MinimumPayment ? Model.Bills[j].Balance : Model.Bills[j].MinimumPayment))}</span>" +
+                                                    "</div>" +                                   
+                                                "</div>"
+                                                )
+                                            )
+                                        : 
+                                        "" 
+                                        )
+                                    }                                        
+                                }               
                             </div>
                         </div>
-                    }
+
                 }
             }
-            
+
             <!--IF THERE ARE NO ACTIVE POLICIES-->
             @if (found == true)
             {
-               <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
-               <style>
-                   .tabs {
-                       display: none;
-                   }
-                    #border {
-                        border: none
-                    }
-                </style>
-
-                    <div class="image-container">
-                        <div class="image-flip">
-                            <div class="image-front">
-                                <svg viewBox="0 0 500 500" style="position: absolute; left: -3em; top: -1em">
-                                    <path style="fill: transparent" id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
-                                    <text class="image-text font-effect-shadow-multiple">
-                                        <textPath xlink:href="#curve">
-                                            No Active Policy
-                                        </textPath>
-                                    </text>
-                                </svg>
-                                <img style=" width: 100%; border-radius: 3rem" src="~/images/sunset-beach.jpg" />
-                            </div>
-                            <div class="image-back" style="background-color: ">
-                                <h1>How to Request a Policy</h1>
-                                <p>To request a policy you can go to the request a policy page</p>
-                                <p>You can also ask to speak to an account manager so that they can add the policy for you</p>
-                            </div>
-                        </div>
-                    </div>
-                
+                <div style="text-align:center">
+                    <h2>You Have No Active Policies</h2>
+                </div>
             }
         </div>
 
     </div>
-</section>
-</div>
-    @for (int i = 0; i < Model.Policies.Count; i++)
-    {
+</section>    
+
+@for (int i = 0; i < Model.Policies.Count; i++)
+{
         
     
 <div>

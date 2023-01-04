@@ -24,6 +24,7 @@
                             <label hidden  asp-for="@Model.Product.ProductMUID" class="productRequestInfoLabel"></label>
                         </div>
                         <div style="font-size:9px">
+                            <input hidden type="text"  style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Customer.Id" />
                             <input hidden type="text"  style="border:none;height:100%;font-size:20px;" readonly asp-for="@Model.Product.ProductMUID"  placeholder="@Model.Product.ProductMUID"/>
                         </div>
                     </div>                       

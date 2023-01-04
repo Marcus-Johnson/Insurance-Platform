@@ -9,13 +9,13 @@ namespace NJInsurancePlatform.Interfaces
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
-        
+
         public BillRepository(InsuranceCorpDbContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
 
-        public async Task<IEnumerable<Bill>> GetBills()
+        public async Task<List<Bill>> GetBills()
         {
             return await _databaseContext.Bills.ToListAsync();
         }
@@ -41,7 +41,7 @@ namespace NJInsurancePlatform.Interfaces
         {
             try
             {
-                 _databaseContext.Update(bill);
+                _databaseContext.Update(bill);
             }
             catch (DbUpdateConcurrencyException)
             {
