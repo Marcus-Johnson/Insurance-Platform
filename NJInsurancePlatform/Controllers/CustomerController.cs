@@ -184,21 +184,6 @@ namespace NJInsurancePlatform.Controllers
             BillRepository.InsertBill(newBill);
             BillRepository.Save();
 
-
-            //else
-            //{
-            //    // Else, Update The Balance
-            //    model.Bill.MinimumPayment = existingMinimumPayment + roundedPayment;
-            //    model.Bill.Balance = ((double)model.Bill.Balance + (double)model.Product.Price);
-
-            //    BillRepository.UpdateBill(model.Bill);
-            //    BillRepository.Save();
-            //}
-
-
-            //user.PolicyMUID = policyMUID;
-            //var result = await userManager.UpdateAsync(user);
-
             return RedirectToAction("Index", "Customer");
         }
 

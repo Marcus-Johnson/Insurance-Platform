@@ -7,7 +7,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var found = true;
-    bool testing = true;
     HtmlContentBuilder htmlContentBuilder = new HtmlContentBuilder();
 }
 @{
@@ -62,21 +61,6 @@
                            "</li>"))
 
                         found = false;
-
-
-                        <!--SHOW SWIPE LABEL-->
-                        @*@if(Model.Policies[i].Pending == true)
-                        {
-                            <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy (PENDING)</a></li>
-
-                        }
-                        else
-                        {
-                            <li class="tab col s3" styles="background-color:#27aae1"><a href="@($"#swipe-{i}")">@Model.Policies[i]?.NameOfPolicy</a></li>
-                            
-                        }
-
-                            found = false;*@
                     }
 
                 </ul>
@@ -87,6 +71,7 @@
                             <div class="row">
                             <!--COLUMN 1-->
                                 <div class="col s6" style="width:40%">
+                                    <br>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Number</b></span>
                                         <span>@Model.Policies[i]?.PolicyMUID</span>
@@ -112,6 +97,7 @@
 
                                     <!--<Make a Claim Button -->
                                     @(Model.Policies[i].Pending? 
+
                                     htmlContentBuilder.AppendFormat("<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn'>PENDING</button>")
                                         :
                                     htmlContentBuilder.AppendFormat($"<button class='waves-effect waves-light btn btn-large white modal-trigger' id='btn' href='#modal{i}')'>Make a Claim</button>")
@@ -143,6 +129,7 @@
 
                                 <!--COLUMN 2-->
                                 <div class="col s6" style="width:30%">
+                                    <br>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Policy Payment is Due</b></span>
                                         <span>@Model.Policies[i]?.PolicyPaymentisDue</span>
@@ -170,54 +157,44 @@
                                     {
                                     @for(int j = 0; j < Model.Bills.Count; j++)
                                     {
-                                        @if(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID)
-                                        {
-                                            @if(Model.Policies[i].Pending == true)
-                                            {
-                                            <div class="col s4" style="width:30%">
-                                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                    <span style="font-size:20px;"><b>POLICY IS CURRENTLY PENDING</b></span><br/>
-                                                </div>                                    
-                                            </div> 
-                                        }
-                                        else
-                                        {
-                                        <div class="col s4" style="width:30%">
-                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                <span style="font-size:20px;"><b>YOUR CURRENT BILL</b></span><br/>
-                                            </div>                                    
-                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                <span><b>Due Date</b></span>
-                                                <span>@Model.Bills[j]?.PolicyDueDate</span>
-                                            </div>
-
-                                            <!--If there is an overpayment-->
-                                            @if(Model.Bills[j].Balance < 0)
-                                            {
-                                                var surplus = Model.Bills[j].Balance * -1;
-
-                                                <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                <span><b>You Currently Have a Surplus Of</b></span>
-                                                <span>$@surplus</span>
-                                            </div>   
-                                            } 
+                                        @(Model.Bills[j].Status == "Due" && Model.Bills[j].PolicyMUID == Model.Policies[i].PolicyMUID?
                                         
-                                            <!--If No OverPayment-->
-                                            @if(Model.Bills[j].Balance >= 0)
-                                            {
-                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                <span><b>Your Balance</b></span>
-                                                <span>$@Model.Bills[j]?.Balance</span>
-                                            </div>   
-                                            }                                       
-                                            <div style="display:flex;flex-direction:column;padding-bottom:5px;">
-                                                <span><b>MinimumPayment</b></span>
-                                                <span>$@Model.Bills[j]?.MinimumPayment</span>
-                                            </div>
-                                          </div>                                             
-                                        }
+                                            (Model.Policies[i].Pending? 
+                                            htmlContentBuilder.AppendFormat(
+                                                "<div class='col s4' style='width:30%'>" +
+                                                    "<br>" +
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>POLICY IS CURRENTLY PENDING</b></span><br/>" +
+                                                    "</div>" +                                   
+                                                "</div>"
+                                                )
+                                            :
+                                            htmlContentBuilder.AppendFormat(
+                                                "<div class='col s4' style='width:30%'>" +
+                                                    "<br>" +
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>CURRENT BILL</b></span><br/>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        "<span style='font-size:20px;'><b>Due Date</b></span>" +
+                                                        $"<span style='font-size:20px;'>{Model.Bills[j]?.PolicyDueDate}</span>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        $"<span style='font-size:20px;'><b>{(Model.Bills[j].Balance < 0 ? "You Have a Surplus" : "Current Balance")}</b></span>" +
+                                                        $"<span style='font-size:20px;'>${(Model.Bills[j].Balance < 0 ? Model.Bills[j].Balance * -1 : Model.Bills[j].Balance)}</span>" +
+                                                    "</div>" +                                                       
+                                                    "<div style='display:flex;flex-direction:column;padding-bottom:5px;'>" +
+                                                        $"<span style='font-size:20px;'><b>{(Model.Bills[j].Balance < 0 ? "Refund Amount" : "Minimum Payment")}</b></span>" +
 
-                                        }   
+                                                        "<!--If balance is less than minimum payment, pay balance, else pay minimum-->" +
+                                                        $"<span style='font-size:20px;'>${(Model.Bills[j].Balance < 0 ? Model.Bills[j].Balance * -1 : (Model.Bills[j].Balance < Model.Bills[j].MinimumPayment ? Model.Bills[j].Balance : Model.Bills[j].MinimumPayment))}</span>" +
+                                                    "</div>" +                                   
+                                                "</div>"
+                                                )
+                                            )
+                                        : 
+                                        "" 
+                                        )
                                     }                                        
                                 }               
                             </div>
