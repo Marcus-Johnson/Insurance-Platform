@@ -8,7 +8,7 @@
         M.Collapsible.init(collapsible);
     });
 </script>
-
+<div>
 <div class="row">
     <div class="col s7">
 
@@ -352,25 +352,25 @@
                 <b>Name of Policy</b> <br />
                 @Model.Policy.NameOfPolicy<br />
                 <b>Deductible</b> <br />
-                @Model.Policy.Deductible <br />
+                $@Model.Policy.Deductible <br />
                 <b>Out of Pocket Limit</b> <br />
-                @Model.Policy.OutOfPocketLimit <br />
+                $@Model.Policy.OutOfPocketLimit <br />
                 </div>
 
                 <div class="flow-text col s6">
                 <b>Annual Limit Coverage</b> <br />
-                @Model.Policy.AnnualLimitOfCoverage <br />
+                $@Model.Policy.AnnualLimitOfCoverage <br />
                 <b>Policy Payment is Due</b> <br />
                 @Model.Policy.PolicyPaymentisDue <br />
                 <b>Policy Total Amount</b> <br />
-                @Model.Policy.PolicyTotalAmount
+                $@Model.Policy.PolicyTotalAmount
                 </div>
             
         </div>
         <div class="row">
             <div class="col s8">
                 <label>You have to Pay</label>
-                <h5>@Model.Bill.MinimumPayment<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right modal-trigger" href="#receipt-modal"><i class="material-icons">receipt_long</i></a></h5>
+                <h5>$@(Model.Bill.MinimumPayment > Model.Bill.Balance? Model.Bill.Balance : Model.Bill.MinimumPayment)<span style="font-size: 14px"> USD</span><a class="btn-floating waves-effect waves-light indigo right modal-trigger" href="#receipt-modal"><i class="material-icons">receipt_long</i></a></h5>
                 
                 <!-- Modal Receipt -->
                 <div id="receipt-modal" class="modal">
@@ -385,4 +385,10 @@
             </div>
         </div>
     </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
 </div>

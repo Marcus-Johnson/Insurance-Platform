@@ -88,6 +88,9 @@ namespace NJInsurancePlatform.Controllers
                 if (!transactionAllreadyThere)
                 {
                     customerHomePageVieModel.Transactions?.Add(transaction);
+
+                    customerHomePageVieModel.Transactions?.Sort((x, y) => DateTime.Compare(x.PaymentDate, y.PaymentDate));
+
                 }
             }
 

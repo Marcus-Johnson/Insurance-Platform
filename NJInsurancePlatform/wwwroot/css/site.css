@@ -64,6 +64,7 @@ footer {
     bottom: 0;
     height:3.5rem;
     width: 100%;
+    z-index: 3;
 }
 
 /* Global Border Style */

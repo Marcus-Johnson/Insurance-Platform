@@ -88,7 +88,7 @@
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Out of Pocket Limit</b></span>
                                         <span>$@Model.Policies[i]?.OutOfPocketLimit</span>
-                                    </div>0
+                                    </div>
                                     <div style="display:flex;flex-direction:column;padding-bottom:5px;">
                                         <span><b>Annual Limit of Coverage</b></span>
                                         <span>$@Model.Policies[i]?.AnnualLimitOfCoverage</span>
@@ -288,6 +288,11 @@
 
         </tbody>
     </table>
+    <br />
+    <br />
+    <br />
+
+
 
     <!--IF THERE ARE NO TRANSACTIONS-->
     @if (Model.Transactions.Count == 0 || Model.Transactions == null)
@@ -296,6 +301,10 @@
             <h3>You Have No Transactions</h3>
         </div>
     }
+    <br />
+    <br />
+    <br />
+    <br />
 </div>
 
 <div style="padding-right:2rem">
