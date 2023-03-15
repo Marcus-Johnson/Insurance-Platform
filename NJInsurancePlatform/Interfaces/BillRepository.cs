@@ -1,74 +1,56 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
-using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 using NJInsurancePlatform.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace NJInsurancePlatform.Interfaces
+namespace NJInsurancePlatform.InterfaceImplementations
 {
-    public class BillRepository : iBillRepository, IDisposable
+    public class BillRepository : IBillRepository, IDisposable
     {
-        private readonly InsuranceCorpDbContext _databaseContext;
-        private bool disposed = false;
+        private readonly InsuranceCorpDbContext _dbContext;
 
-        public BillRepository(InsuranceCorpDbContext databaseContext)
+        public BillRepository(InsuranceCorpDbContext dbContext)
         {
-            _databaseContext = databaseContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<List<Bill>> GetBills()
+        public async Task<IEnumerable<Bill>> GetAllBillsAsync()
         {
-            return await _databaseContext.Bills.ToListAsync();
+            return await _dbContext.Bills?.ToListAsync();
         }
 
-        public async Task<Bill> GetBillsByID(Guid BillMUID)
+        public async Task<Bill> GetBillByIdAsync(Guid billId)
         {
-            var bill = await _databaseContext.Bills.FindAsync(BillMUID);
-            return bill;
+            return await _dbContext.Bills?.FindAsync(billId);
         }
 
-        public async void InsertBill(Bill bill)
+        public async Task AddBillAsync(Bill bill)
         {
-            await _databaseContext.Bills.AddAsync(bill);
+            await _dbContext.Bills?.AddAsync(bill);
         }
 
-        public async void DeleteBill(Guid bill)
+        public void RemoveBill(Bill bill)
         {
-            var billRemove = _databaseContext.Bills.FirstOrDefault(p => p.BillMUID == bill);
-            _databaseContext.Bills.Remove(billRemove);
+            _dbContext.Bills?.Remove(bill);
         }
 
-        public async void UpdateBill(Bill bill)
+        public void UpdateBill(Bill bill)
         {
-            try
-            {
-                _databaseContext.Update(bill);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+            _dbContext?.Update(bill);
         }
 
-        public void Save()
+        public async Task SaveChangesAsync()
         {
-            _databaseContext.SaveChanges();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _databaseContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            await _dbContext?.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            _dbContext?.Dispose();
             GC.SuppressFinalize(this);
         }
     }
