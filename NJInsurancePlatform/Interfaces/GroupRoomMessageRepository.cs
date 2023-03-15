@@ -10,62 +10,39 @@ namespace NJInsurancePlatform.Interfaces
     public class GroupRoomMessageRepository : iGroupRoomMessageRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
-        private bool disposed = false;
+        private bool disposed;
 
         public GroupRoomMessageRepository(InsuranceCorpDbContext databaseContext)
         {
-            _databaseContext = databaseContext;
+            _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
         }
 
         public async Task<List<GroupRoomMessage>> GetMessages()
-        {
-            return _databaseContext.GroupRoomMessages.ToList();
-        }
+            => await _databaseContext.GroupRoomMessages.ToListAsync();
 
         public async Task<GroupRoomMessage> GetMessagesByID(Guid GroupRoomMessageMUID)
+            => await _databaseContext.GroupRoomMessages.FindAsync(GroupRoomMessageMUID);
+
+        public async Task InsertMessage(GroupRoomMessage groupRoomMessages)
+            => await _databaseContext.GroupRoomMessages.AddAsync(groupRoomMessages ?? throw new ArgumentNullException(nameof(groupRoomMessages)));
+
+        public async Task DeleteMessage(Guid MessageMUID)
         {
-            var message = await _databaseContext.GroupRoomMessages.FindAsync(GroupRoomMessageMUID);
-            return message;
+            var messageRemove = await _databaseContext.GroupRoomMessages.FirstOrDefaultAsync(m => m.GroupRoomMessageMUID == MessageMUID);
+            _databaseContext.GroupRoomMessages.Remove(messageRemove != null ? messageRemove : throw new ArgumentNullException(nameof(messageRemove)));
         }
 
-        public async void InsertMessage(GroupRoomMessage groupRoomMessages)
-        {
-            await _databaseContext.GroupRoomMessages.AddAsync(groupRoomMessages);
-        }
+        public async Task UpdateMessage(GroupRoomMessage groupRoomMessages)
+            => _databaseContext.Update(groupRoomMessages ?? throw new ArgumentNullException(nameof(groupRoomMessages)));
 
-        public async void DeleteMessage(Guid MessageMUID)
-        {
-            var messageRemove = _databaseContext.GroupRoomMessages.FirstOrDefault(m => m.GroupRoomMessageMUID == MessageMUID);
-            _databaseContext.GroupRoomMessages.Remove(messageRemove);
-        }
-
-        public async void UpdateMessage(GroupRoomMessage groupRoomMessages)
-        {
-            try
-            {
-                _databaseContext.Update(groupRoomMessages);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-        }
-
-        public async void Save()
-        {
-            _databaseContext.SaveChanges();
-        }
+        public async Task Save()
+            => await _databaseContext.SaveChangesAsync();
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _databaseContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            if (disposed) return;
+            if (disposing) _databaseContext.Dispose();
+            disposed = true;
         }
 
         public void Dispose()
