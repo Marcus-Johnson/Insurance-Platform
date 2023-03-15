@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
@@ -10,33 +10,23 @@ namespace NJInsurancePlatform.Interfaces
     public class PolicyRepository : IPolicyRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
-        private bool disposed = false;
+        private bool disposed;
+
         public PolicyRepository(InsuranceCorpDbContext databaseContext)
         {
-            this._databaseContext = databaseContext;
-            this.disposed = false;
+            _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
         }
 
         public async Task<List<Policy>> GetPolicies()
-        {
-            return _databaseContext.Policies.ToList();
-        }
+            => await _databaseContext.Policies.ToListAsync();
 
-        //public async Task<Customer> GetPoliciesByID(Guid PolicyMUID)
-        //{
-        //    var customer = await _databaseContext.Customers.FindAsync(PolicyMUID);
-        //    return customer;
-        //}
+        public async Task InsertPolicy(Policy policy)
+            => await _databaseContext.Policies.AddAsync(policy ?? throw new ArgumentNullException(nameof(policy)));
 
-        public async void InsertPolicy(Policy policy)
+        public async Task DeletePolicy(Guid PolicyMUID)
         {
-            await _databaseContext.Policies.AddAsync(policy);
-        }
-
-        public async void DeletePolicy(Guid PolicyMUID)
-        {
-            var policyRemove = _databaseContext.Policies.FirstOrDefault(p => p.PolicyMUID == PolicyMUID);
-            _databaseContext.Policies.Remove(policyRemove);
+            var policyRemove = await _databaseContext.Policies.FirstOrDefaultAsync(p => p.PolicyMUID == PolicyMUID);
+            _databaseContext.Policies.Remove(policyRemove != null ? policyRemove : throw new ArgumentNullException(nameof(policyRemove)));
         }
 
         public async Task UpdatePolicy(Policy policy)
@@ -45,7 +35,7 @@ namespace NJInsurancePlatform.Interfaces
             {
                 Debug.WriteLine("trying");
 
-               _databaseContext.Policies.Update(policy);
+                _databaseContext.Update(policy ?? throw new ArgumentNullException(nameof(policy)));
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -54,21 +44,14 @@ namespace NJInsurancePlatform.Interfaces
             }
         }
 
-        public void Save()
-        {
-            _databaseContext.SaveChanges();
-        }
+        public async Task Save()
+            => await _databaseContext.SaveChangesAsync();
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _databaseContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            if (disposed) return;
+            if (disposing) _databaseContext.Dispose();
+            disposed = true;
         }
 
         public void Dispose()
