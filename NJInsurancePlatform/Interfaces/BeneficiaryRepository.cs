@@ -1,76 +1,56 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
-using NJInsurancePlatform.InterfaceImplementation;
+using NJInsurancePlatform.Interfaces;
 using NJInsurancePlatform.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace NJInsurancePlatform.Interfaces
+namespace NJInsurancePlatform.InterfaceImplementations
 {
-    public class BeneficiaryRepository : iBeneficiaryRepository, IDisposable
-
+    public class BeneficiaryRepository : IBeneficiaryRepository, IDisposable
     {
-        private readonly InsuranceCorpDbContext _databaseContext;
-        private bool disposed = false;
+        private readonly InsuranceCorpDbContext _dbContext;
 
-        public BeneficiaryRepository(InsuranceCorpDbContext databaseContext)
+        public BeneficiaryRepository(InsuranceCorpDbContext dbContext)
         {
-            _databaseContext = databaseContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public async Task<IEnumerable<Beneficiary>> GetBeneficiaries()
+        public async Task<IEnumerable<Beneficiary>> GetAllBeneficiariesAsync()
         {
-            return _databaseContext.Beneficiaries.ToList();
+            return await _dbContext.Beneficiaries?.ToListAsync();
         }
 
-        public async Task<Customer> GetBeneficiariesByID(Guid CustomerMUID)
+        public async Task<Customer> GetBeneficiaryByIdAsync(Guid beneficiaryId)
         {
-            var customer = await _databaseContext.Customers.FindAsync(CustomerMUID);
-            return customer;
+            return await _dbContext.Customers?.FindAsync(beneficiaryId);
         }
 
-        public async void InsertBeneficiary(Beneficiary beneficiary)
+        public async Task AddBeneficiaryAsync(Beneficiary beneficiary)
         {
-            await _databaseContext.Beneficiaries.AddAsync(beneficiary);
+            await _dbContext.Beneficiaries?.AddAsync(beneficiary);
         }
 
-        public async void DeleteBeneficiary(Guid BeneficiaryMUID)
+        public void RemoveBeneficiary(Beneficiary beneficiary)
         {
-            var BeneficiaryRemove = _databaseContext.Beneficiaries.FirstOrDefault(p => p.BeneficiaryMUID == BeneficiaryMUID);
-            _databaseContext.Beneficiaries.Remove(BeneficiaryRemove);
+            _dbContext.Beneficiaries?.Remove(beneficiary);
         }
 
-        public async void UpdateBeneficiary(Beneficiary beneficiary)
+        public void UpdateBeneficiary(Beneficiary beneficiary)
         {
-            try
-            {
-                _databaseContext.Update(beneficiary);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
+            _dbContext?.Update(beneficiary);
         }
 
-        public async void Save()
+        public async Task SaveChangesAsync()
         {
-            await _databaseContext.SaveChangesAsync();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _databaseContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            await _dbContext?.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            _dbContext?.Dispose();
             GC.SuppressFinalize(this);
         }
     }
