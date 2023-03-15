@@ -1,77 +1,56 @@
-﻿using NJInsurancePlatform.Models;
+using NJInsurancePlatform.Models;
 using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using System;
 using NJInsurancePlatform.InterfaceImplementation;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class ClaimRepository : iClaimRepository, IDisposable
+    public class ClaimRepository : IClaimRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _dbContext;
-        private bool disposed = false;
 
         public ClaimRepository(InsuranceCorpDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-
-        public async Task<IEnumerable<Claim>> GetClaims()
+        public async Task<IEnumerable<Claim>> GetAllClaimsAsync()
         {
-            return await _dbContext.Claims.ToListAsync();
+            return await _dbContext.Claims?.ToListAsync();
         }
 
-
-        public async Task<Claim> GetClaimsByID(Guid ClaimMUID)
+        public async Task<Claim> GetClaimByIdAsync(Guid claimId)
         {
-            var claim = await _dbContext.Claims.FindAsync(ClaimMUID);
-            return claim;
+            return await _dbContext.Claims?.FindAsync(claimId);
         }
 
-        public async void InsertClaim(Claim claim)
+        public async Task AddClaimAsync(Claim claim)
         {
-            await _dbContext.Claims.AddAsync(claim);
+            await _dbContext.Claims?.AddAsync(claim);
         }
 
-        public async void DeleteClaim(Guid GroupMUID)
+        public void RemoveClaim(Claim claim)
         {
-            var claim = await _dbContext.Claims.FirstOrDefaultAsync(p => p.ClaimMUID == GroupMUID);
-            _dbContext.Claims.Remove(claim);
+            _dbContext.Claims?.Remove(claim);
         }
 
-        public async void UpdateClaim(Claim claim)
+        public void UpdateClaim(Claim claim)
         {
-            try
-            {
-                _dbContext.Update(claim);
-            }
-            catch
-            {
-                throw;
-            }
+            _dbContext?.Update(claim);
         }
 
-        public void Save()
+        public async Task SaveChangesAsync()
         {
-            _dbContext.SaveChanges();
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _dbContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            await _dbContext?.SaveChangesAsync();
         }
 
         public void Dispose()
         {
-            Dispose(true);
+            _dbContext?.Dispose();
             GC.SuppressFinalize(this);
         }
     }
