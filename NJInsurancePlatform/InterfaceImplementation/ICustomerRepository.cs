@@ -7,6 +7,7 @@ namespace NJInsurancePlatform.InterfaceImplementation
     {
         Task<IEnumerable<Customer>> GetCustomer();
         Task<Customer> GetCustomerById(Guid CustomerMUID);
+        
         void InsertCustomer(Customer customer);
         void DeleteCustomer(Guid CustomerMUID);
         void UpdateCustomer(Customer customer);
