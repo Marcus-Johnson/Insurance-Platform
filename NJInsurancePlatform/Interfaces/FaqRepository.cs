@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
@@ -9,64 +9,39 @@ namespace NJInsurancePlatform.Interfaces
     public class FaqRepository : iFaqRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
-        private bool disposed = false;
+        private bool disposed;
 
         public FaqRepository(InsuranceCorpDbContext _databaseContent)
         {
-            this._databaseContext = _databaseContent;
-            //this.disposed = disposed;
+            this._databaseContext = _databaseContent ?? throw new ArgumentNullException(nameof(_databaseContent));
         }
 
         public async Task<IEnumerable<Faq>> GetFaqs()
-        {
-            return _databaseContext.Faqs.ToList();
-        }
+            => await _databaseContext.Faqs.ToListAsync();
         
         public async Task<Faq> GetFaqsByID(Guid FaqMUID)
+            => await _databaseContext.Faqs.FindAsync(FaqMUID);
+        
+        public async Task InsertFaq(Faq faq)
+            => await _databaseContext.Faqs.AddAsync(faq ?? throw new ArgumentNullException(nameof(faq)));
+        
+        public async Task DeleteFaq(Guid FaqMUID)
         {
-            var faq = await _databaseContext.Faqs.FindAsync(FaqMUID);
-            return faq;
+            var faqRemove = await _databaseContext.Faqs.FirstOrDefaultAsync(p => p.FaqMUID == FaqMUID);
+            _databaseContext.Faqs.Remove(faqRemove != null ? faqRemove : throw new ArgumentNullException(nameof(faqRemove)));
         }
         
-        public async void InsertFaq(Faq faq)
-        {
-            await _databaseContext.Faqs.AddAsync(faq);
-        }
-        
-        public async void DeleteFaq(Guid FaqMUID)
-        {
-            var faqRemove = _databaseContext.Faqs.FirstOrDefault(p => p.FaqMUID == FaqMUID);
-            _databaseContext.Faqs.Remove(faqRemove);
-            //_databaseContext.SaveChanges();
-        }
-        
-        public async void UpdateFaq(Faq faq)
-        {
-            try
-            {
-                 _databaseContext.Update(faq);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-        }
-        
-        public async void Save()
-        {
-            _databaseContext.SaveChanges();
-        }
+        public async Task UpdateFaq(Faq faq)
+            => _databaseContext.Update(faq ?? throw new ArgumentNullException(nameof(faq)));
+
+        public async Task Save()
+            => await _databaseContext.SaveChangesAsync();
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    _databaseContext.Dispose();
-                }
-            }
-            this.disposed = true;
+            if (disposed) return;
+            if (disposing) _databaseContext.Dispose();
+            disposed = true;
         }
 
         public void Dispose()
