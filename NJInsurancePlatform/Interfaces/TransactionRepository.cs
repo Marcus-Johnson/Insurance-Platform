@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
@@ -6,53 +6,41 @@ using System;
 
 namespace NJInsurancePlatform.Interfaces
 {
-    public class TransactionRepository : ITransactionRepository, IDisposable
+    public class RoomRepository : iRoomRepository, IDisposable
     {
         private readonly InsuranceCorpDbContext _databaseContext;
         private bool disposed = false;
 
-        public TransactionRepository(InsuranceCorpDbContext databaseContext)
+        public RoomRepository(InsuranceCorpDbContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
-        public async Task<List<Transaction>> GetTransactions()
+        
+        public async Task<List<GroupRoom>> GetGroupRooms() => await _databaseContext.GroupRooms.ToListAsync();
+        
+        public async Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID) => await _databaseContext.GroupRooms.FindAsync(GroupMUID);
+        
+        public async void InsertGroupRoom(GroupRoom groupRoom) => await _databaseContext.GroupRooms.AddAsync(groupRoom);
+        
+        public async void DeleteGroupRoom(Guid GroupMUID)
         {
-            return await _databaseContext.Transactions.ToListAsync();
+            var groupRoom = await _databaseContext.GroupRooms.FindAsync(GroupMUID);
+            _databaseContext.GroupRooms.Remove(groupRoom);
         }
-
-        public async Task<Transaction> GetTransactionsByID(Guid TransactionMUID)
-        {
-            var transaction = await _databaseContext.Transactions.FindAsync(TransactionMUID);
-            return transaction;
-        }
-
-        public async void InsertTransaction(Transaction transaction)
-        {
-            await _databaseContext.Transactions.AddAsync(transaction);
-        }
-
-        public async void DeleteTransaction(Guid TransactionMUID)
-        {
-            var removeTransaction = await _databaseContext.Transactions.FirstOrDefaultAsync(p => p.TransactionMUID == TransactionMUID);
-            _databaseContext.Transactions.Remove(removeTransaction);
-        }
-
-        public async void UpdateTransaction(Transaction transaction)
+        
+        public async void UpdateGroupRoom(GroupRoom groupRoom)
         {
             try
             {
-                _databaseContext.Update(transaction);
+                 _databaseContext.Update(groupRoom);
             }
             catch (DbUpdateConcurrencyException)
             {
                 throw;
             }
         }
-
-        public void Save()
-        {
-             _databaseContext.SaveChanges();
-        }
+        
+        public async void Save() => await _databaseContext.SaveChangesAsync();
 
         protected virtual void Dispose(bool disposing)
         {
