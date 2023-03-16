@@ -1,35 +1,28 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace NJInsurancePlatform.Models
 {
     public class AccountManager
     {
-        public List<Transaction>? Transactions { get; set; }
-        public AccountManager()
-        {
-            this.Transactions = new List<Transaction>();
-        }
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
 
         [Key]
         [ScaffoldColumn(false)]
-        public Guid? AccountManagerMUID { get; set; }
+        public Guid AccountManagerMUID { get; set; }
 
         [DisplayName("First Name")]
         [Required(ErrorMessage = "Missing - First Name")]
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [DisplayName("Last Name")]
         [Required(ErrorMessage = "Missing - Last Name")]
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
 
         [DisplayName("Gender")]
         [Required(ErrorMessage = "Missing - Gender")]
-        public string? Gender { get; set; }
+        public string Gender { get; set; }
 
         [DisplayName("Created Date")]
         [Required(ErrorMessage = "Missing - Created Date")]
@@ -37,11 +30,10 @@ namespace NJInsurancePlatform.Models
 
         [DisplayName("List of Customer MUIDs")]
         [Required(ErrorMessage = "Missing - List of Customer MUIDs")]
-        public IEnumerable<Customer>? ListOfCustomerMUIDs { get; set; }
+        public IEnumerable<Customer> ListOfCustomerMUIDs { get; set; }
 
         [DisplayName("Active")]
         [Required(ErrorMessage = "Missing - Active")]
         public bool Active { get; set; }
-
     }
 }
