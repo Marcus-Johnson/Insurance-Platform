@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using NJInsurancePlatform.Data;
 using NJInsurancePlatform.InterfaceImplementation;
 using NJInsurancePlatform.Models;
@@ -16,26 +16,16 @@ namespace NJInsurancePlatform.Interfaces
             _databaseContext = databaseContext;
         }
         
-        public async Task<List<GroupRoom>> GetGroupRooms()
-        {
-            return _databaseContext.GroupRooms.ToList();
-        }
+        public async Task<List<GroupRoom>> GetGroupRooms() => await _databaseContext.GroupRooms.ToListAsync();
         
-        public async Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID)
-        {
-            var groupRoom = await _databaseContext.GroupRooms.FindAsync(GroupMUID);
-            return groupRoom;
-        }
+        public async Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID) => await _databaseContext.GroupRooms.FindAsync(GroupMUID);
         
-        public async void InsertGroupRoom(GroupRoom groupRoom)
-        {
-            await _databaseContext.GroupRooms.AddAsync(groupRoom);
-        }
+        public async void InsertGroupRoom(GroupRoom groupRoom) => await _databaseContext.GroupRooms.AddAsync(groupRoom);
         
         public async void DeleteGroupRoom(Guid GroupMUID)
         {
-            var groupRoomRemove = _databaseContext.GroupRooms.FirstOrDefault(p => p.GroupMUID == GroupMUID);
-            _databaseContext.GroupRooms.Remove(groupRoomRemove);
+            var groupRoom = await _databaseContext.GroupRooms.FindAsync(GroupMUID);
+            _databaseContext.GroupRooms.Remove(groupRoom);
         }
         
         public async void UpdateGroupRoom(GroupRoom groupRoom)
@@ -50,10 +40,7 @@ namespace NJInsurancePlatform.Interfaces
             }
         }
         
-        public  void Save()
-        {
-             _databaseContext.SaveChanges();
-        }
+        public async void Save() => await _databaseContext.SaveChangesAsync();
 
         protected virtual void Dispose(bool disposing)
         {
