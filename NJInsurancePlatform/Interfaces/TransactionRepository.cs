@@ -16,11 +16,14 @@ namespace NJInsurancePlatform.Interfaces
             _databaseContext = databaseContext;
         }
         
-        public async Task<List<GroupRoom>> GetGroupRooms() => await _databaseContext.GroupRooms.ToListAsync();
+        public async Task<List<GroupRoom>> GetGroupRooms() 
+            => await _databaseContext.GroupRooms.ToListAsync();
         
-        public async Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID) => await _databaseContext.GroupRooms.FindAsync(GroupMUID);
+        public async Task<GroupRoom> GetGroupRoomsByID(Guid GroupMUID) 
+            => await _databaseContext.GroupRooms.FindAsync(GroupMUID);
         
-        public async void InsertGroupRoom(GroupRoom groupRoom) => await _databaseContext.GroupRooms.AddAsync(groupRoom);
+        public async void InsertGroupRoom(GroupRoom groupRoom) 
+            => await _databaseContext.GroupRooms.AddAsync(groupRoom);
         
         public async void DeleteGroupRoom(Guid GroupMUID)
         {
