@@ -27,7 +27,7 @@ namespace NJInsurancePlatform.Controllers
             var allTransactions = await _transactionRepository.GetTransactions();
             var allPolicies = await _policyRepository.GetPolicies();
 
-            var allTransactionsViewModel = new AllTransactionsViewModel();
+            var TransactionSummaryViewModel = new TransactionSummaryViewModel();
 
 
             // retreive all records based on check status
@@ -190,7 +190,7 @@ namespace NJInsurancePlatform.Controllers
         // GET PAID TRANSACTIONS "GET POST" ------------------------------------------------------------------------------------------------------
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> UpdateTransactionStatus(AllTransactionsViewModel model)
+        public async Task<IActionResult> UpdateTransactionStatus(TransactionSummaryViewModel model)
         {
             for (int i = 0; i < model.Transactions?.Count; i++)
             {
